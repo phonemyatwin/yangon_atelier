@@ -86,7 +86,7 @@
             <div class="flex items-center gap-6">
                 <a href="privacy.php" class="hover:text-stone-400 transition-colors">Privacy Policy</a>
                 <a href="terms.php" class="hover:text-stone-400 transition-colors">Terms of Service</a>
-                <a href="#" class="hover:text-stone-400 transition-colors">Care Instructions</a>
+                <a href="care.php" class="hover:text-stone-400 transition-colors">Care Instructions</a>
                 <a href="admin/index.php" class="text-stone-400 hover:text-white transition-colors flex items-center gap-1">
                     <i class="ri-shield-keyhole-line"></i> Atelier Portal
                 </a>

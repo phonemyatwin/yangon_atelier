@@ -186,6 +186,13 @@
                             Guaranteed against timber warping or joinery separation under residential use.
                         </div>
                     </div>
+                    <div class="flex items-start gap-3">
+                        <i class="ri-sparkling-line text-base text-amber-800 flex-shrink-0 mt-0.5"></i>
+                        <div>
+                            <strong class="text-stone-900 block">Artisan Stewardship &amp; Maintenance</strong>
+                            Learn how to nurture natural timbers and fine fabrics in our <a href="care.php" class="text-amber-900 underline font-medium hover:text-stone-900">Care Guide</a>.
+                        </div>
+                    </div>
                 </div>
 
             </div>
