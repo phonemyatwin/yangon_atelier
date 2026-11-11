@@ -105,7 +105,7 @@
 
                     <!-- Terms agreement note -->
                     <p class="text-[11px] text-stone-500 pt-1 leading-relaxed">
-                        By creating an account, you agree to our <a href="#" class="underline hover:text-amber-900">Terms of Service</a> and acknowledge our <a href="#" class="underline hover:text-amber-900">Privacy Policy</a>.
+                        By creating an account, you agree to our <a href="#" class="underline hover:text-amber-900">Terms of Service</a> and acknowledge our <a href="privacy.php" class="underline hover:text-amber-900">Privacy Policy</a>.
                     </p>
 
                     <!-- Submit Button -->

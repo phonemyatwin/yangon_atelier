@@ -84,7 +84,7 @@
         <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-stone-500 gap-4">
             <p>&copy; <?php echo date("Y"); ?> FurnishMe Atelier. All rights reserved.</p>
             <div class="flex items-center gap-6">
-                <a href="#" class="hover:text-stone-400 transition-colors">Privacy Policy</a>
+                <a href="privacy.php" class="hover:text-stone-400 transition-colors">Privacy Policy</a>
                 <a href="#" class="hover:text-stone-400 transition-colors">Terms of Service</a>
                 <a href="#" class="hover:text-stone-400 transition-colors">Care Instructions</a>
                 <a href="admin/index.php" class="text-stone-400 hover:text-white transition-colors flex items-center gap-1">
