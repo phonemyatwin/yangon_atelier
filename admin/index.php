@@ -39,7 +39,7 @@
                         Admin Email
                     </label>
                     <div class="relative">
-                        <i class="ri-mail-line absolute left-4 top-1/2 -translate-y-1/2 text-stone-500 text-base"></i>
+                        <i class="ri-mail-line absolute left-4 top-1/2 -translate-y-1/2 text-[#8C7D6B] text-base"></i>
                         <input type="email" id="email" name="email" required placeholder="admin@furnishme.com" value="admin@gmail.com" class="w-full pl-11 pr-4 py-3 bg-[#1E1A16] border border-[#3A3229] rounded-xl text-white text-sm placeholder-stone-500 focus:outline-none focus:ring-1 focus:ring-[#CBA57F] focus:border-[#CBA57F] transition-all">
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                         Password
                     </label>
                     <div class="relative">
-                        <i class="ri-lock-2-line absolute left-4 top-1/2 -translate-y-1/2 text-stone-500 text-base"></i>
+                        <i class="ri-lock-2-line absolute left-4 top-1/2 -translate-y-1/2 text-[#8C7D6B] text-base"></i>
                         <input type="password" id="password" name="password" required placeholder="••••••••" value="password" class="w-full pl-11 pr-11 py-3 bg-[#1E1A16] border border-[#3A3229] rounded-xl text-white text-sm placeholder-stone-500 focus:outline-none focus:ring-1 focus:ring-[#CBA57F] focus:border-[#CBA57F] transition-all">
                     </div>
                 </div>

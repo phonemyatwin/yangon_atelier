@@ -4,23 +4,28 @@
 
 @layer base {
   body {
-    @apply bg-[#F5EFE6] text-stone-900 antialiased font-sans selection:bg-amber-800 selection:text-white;
+    @apply bg-[#0D0B09] text-[#EDE4D7] antialiased font-sans selection:bg-[#C5A059] selection:text-[#0D0B09];
   }
 }
 
 @layer utilities {
-  /* Warm tactile luxury card */
+  /* Grand Manor Estate Card */
   .atelier-card {
-    @apply bg-[#FCFAF7] border border-[#E2D8C9] rounded-3xl transition-all duration-300;
+    @apply bg-[#15120F] border border-[#2A231C] rounded-3xl transition-all duration-300;
   }
   
-  /* Elevated hover elevation */
+  /* Elevated gold hover elevation */
   .atelier-card-hover {
-    @apply hover:border-[#B58245] hover:shadow-[0_16px_36px_-8px_rgba(40,30,20,0.12)];
+    @apply hover:border-[#C5A059] hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.85),0_0_24px_rgba(197,160,89,0.12)];
   }
 
-  /* Deep smoked walnut button */
+  /* Gilded antique gold button */
+  .btn-gold {
+    @apply bg-[#C5A059] hover:bg-[#D4AF37] text-[#0D0B09] font-semibold transition-all duration-200 shadow-md hover:shadow-[#C5A059]/25;
+  }
+
+  /* Dark timber button */
   .btn-espresso {
-    @apply bg-[#1A1613] hover:bg-[#7C4E26] text-[#F7F3EC] transition-colors duration-200 shadow-xs;
+    @apply bg-[#1D1914] hover:bg-[#C5A059] text-[#FAF6EE] hover:text-[#0D0B09] border border-[#3A3026] hover:border-[#C5A059] transition-all duration-200;
   }
 }

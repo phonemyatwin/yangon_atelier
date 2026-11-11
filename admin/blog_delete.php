@@ -12,7 +12,7 @@
     <?php include "components/css.php"; ?>
 </head>
 
-<body class="bg-[#F5EFE6] text-stone-900 font-sans antialiased selection:bg-amber-800 selection:text-white">
+<body class="bg-[#0D0B09] text-[#EDE4D7] font-sans antialiased selection:bg-[#C5A059] selection:text-[#0D0B09]">
     <div class="min-h-screen flex">
         <?php include "components/sidebar.php"; ?>
 
@@ -24,16 +24,16 @@
                 <!-- Heading -->
                 <div class="flex items-center justify-between">
                     <div>
-                        <div class="flex items-center gap-2 text-xs text-stone-500 mb-1">
-                            <a href="dashboard.php" class="hover:text-stone-900">Dashboard</a>
+                        <div class="flex items-center gap-2 text-xs text-[#8C7D6B] mb-1">
+                            <a href="dashboard.php" class="hover:text-[#FAF6EE]">Dashboard</a>
                             <span>/</span>
-                            <a href="blog.php" class="hover:text-stone-900">Journal</a>
+                            <a href="blog.php" class="hover:text-[#FAF6EE]">Journal</a>
                             <span>/</span>
                             <span class="text-rose-600 font-medium">Delete</span>
                         </div>
-                        <h2 class="font-serif text-2xl sm:text-3xl font-medium text-stone-900">Confirm Article Deletion</h2>
+                        <h2 class="font-serif text-2xl sm:text-3xl font-medium text-[#FAF6EE]">Confirm Article Deletion</h2>
                     </div>
-                    <a href="blog.php" class="px-4 py-2 rounded-xl border border-[#E2D8C9] text-xs font-medium text-stone-700 hover:bg-white transition-colors">
+                    <a href="blog.php" class="px-4 py-2 rounded-xl border border-[#2A231C] text-xs font-medium text-[#D6C8B4] hover:bg-white transition-colors">
                         Cancel
                     </a>
                 </div>
@@ -52,21 +52,21 @@
 
                     <!-- Article Details Summary -->
                     <!-- [PHP_BACKEND_HOOK: Query blog details by ID for deletion confirmation (SELECT * FROM blogs WHERE id = :id)] -->
-                    <div class="border border-[#E2D8C9] rounded-2xl p-5 mb-8 flex items-center gap-5">
-                        <div class="w-24 h-16 rounded-xl bg-[#EFE8DD] border border-[#E2D8C9] overflow-hidden flex-shrink-0">
+                    <div class="border border-[#2A231C] rounded-2xl p-5 mb-8 flex items-center gap-5">
+                        <div class="w-24 h-16 rounded-xl bg-[#0D0B09] border border-[#2A231C] overflow-hidden flex-shrink-0">
                             <img src="../images/blog-minimalist-spaces.jpg" alt="Article cover" class="w-full h-full object-cover">
                         </div>
                         <div class="space-y-1 text-xs">
                             <span class="text-stone-400 font-mono">Article #1</span>
-                            <h4 class="font-serif text-base font-medium text-stone-900">The Philosophy of Wabi-Sabi in Modern Interiors</h4>
-                            <p class="text-stone-500">Author: <strong class="text-stone-800">admin</strong> • Published: <strong>May 21, 2026</strong></p>
+                            <h4 class="font-serif text-base font-medium text-[#FAF6EE]">The Philosophy of Wabi-Sabi in Modern Interiors</h4>
+                            <p class="text-[#8C7D6B]">Author: <strong class="text-[#FAF6EE]">admin</strong> • Published: <strong>May 21, 2026</strong></p>
                         </div>
                     </div>
 
                     <!-- [PHP_BACKEND_HOOK: Blog deletion handler. POST method, unlink image file if exists, execute DELETE FROM blogs WHERE id = :id] -->
-                    <form method="POST" class="flex items-center justify-end gap-3 pt-4 border-t border-[#E2D8C9]">
+                    <form method="POST" class="flex items-center justify-end gap-3 pt-4 border-t border-[#2A231C]">
                         <input type="hidden" name="id" value="1">
-                        <a href="blog.php" class="px-5 py-2.5 rounded-xl border border-[#E2D8C9] text-xs font-medium text-stone-700 hover:bg-[#F5EFE6] transition-colors">
+                        <a href="blog.php" class="px-5 py-2.5 rounded-xl border border-[#2A231C] text-xs font-medium text-[#D6C8B4] hover:bg-[#0D0B09] transition-colors">
                             Cancel
                         </a>
                         <button type="submit" name="delete" class="px-5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-medium transition-colors shadow-xs flex items-center gap-2">

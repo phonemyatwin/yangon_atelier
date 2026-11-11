@@ -12,7 +12,7 @@
     <?php include "components/css.php"; ?>
 </head>
 
-<body class="bg-[#F5EFE6] text-stone-900 font-sans antialiased selection:bg-amber-800 selection:text-white">
+<body class="bg-[#0D0B09] text-[#EDE4D7] font-sans antialiased selection:bg-[#C5A059] selection:text-[#0D0B09]">
     <div class="min-h-screen flex">
         <?php include "components/sidebar.php"; ?>
 
@@ -24,77 +24,77 @@
                 <!-- Heading -->
                 <div class="flex items-center justify-between">
                     <div>
-                        <div class="flex items-center gap-2 text-xs text-stone-500 mb-1">
-                            <a href="dashboard.php" class="hover:text-stone-900">Dashboard</a>
+                        <div class="flex items-center gap-2 text-xs text-[#8C7D6B] mb-1">
+                            <a href="dashboard.php" class="hover:text-[#FAF6EE]">Dashboard</a>
                             <span>/</span>
-                            <a href="blog.php" class="hover:text-stone-900">Journal</a>
+                            <a href="blog.php" class="hover:text-[#FAF6EE]">Journal</a>
                             <span>/</span>
-                            <span class="text-stone-800 font-medium">Edit Article</span>
+                            <span class="text-[#FAF6EE] font-medium">Edit Article</span>
                         </div>
-                        <h2 class="font-serif text-2xl sm:text-3xl font-medium text-stone-900">Edit Journal Article</h2>
+                        <h2 class="font-serif text-2xl sm:text-3xl font-medium text-[#FAF6EE]">Edit Journal Article</h2>
                     </div>
-                    <a href="blog.php" class="px-4 py-2 rounded-xl border border-[#E2D8C9] text-xs font-medium text-stone-700 hover:bg-white transition-colors">
+                    <a href="blog.php" class="px-4 py-2 rounded-xl border border-[#2A231C] text-xs font-medium text-[#D6C8B4] hover:bg-white transition-colors">
                         Back to List
                     </a>
                 </div>
 
                 <!-- Form Card -->
-                <div class="bg-[#FCFAF7] rounded-3xl border border-[#E2D8C9] p-6 sm:p-10 shadow-xs">
+                <div class="bg-[#161310] rounded-3xl border border-[#2A231C] p-6 sm:p-10 shadow-xs">
                     <!-- [PHP_BACKEND_HOOK: Blog update handler. Method: POST, enctype="multipart/form-data". Optional cover image upload, UPDATE blogs SET title = :title, author = :author, content = :content WHERE id = :id] -->
                     <form method="POST" enctype="multipart/form-data" class="space-y-6">
                         <input type="hidden" name="id" value="1">
 
                         <!-- Title -->
                         <div class="space-y-1.5">
-                            <label for="title" class="block text-xs font-semibold uppercase tracking-wider text-stone-700">
+                            <label for="title" class="block text-xs font-semibold uppercase tracking-wider text-[#D6C8B4]">
                                 Article Title <span class="text-rose-600">*</span>
                             </label>
-                            <input type="text" id="title" name="title" required value="The Philosophy of Wabi-Sabi in Modern Interiors" class="w-full px-4 py-3 bg-[#F5EFE6] border border-[#E2D8C9] rounded-xl text-stone-900 text-sm placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#7C4E26] focus:border-amber-900 transition-all">
+                            <input type="text" id="title" name="title" required value="The Philosophy of Wabi-Sabi in Modern Interiors" class="w-full px-4 py-3 bg-[#0D0B09] border border-[#2A231C] rounded-xl text-[#FAF6EE] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-2 focus:ring-[#C5A059] focus:border-[#C5A059] transition-all">
                         </div>
 
                         <!-- Author -->
                         <div class="space-y-1.5">
-                            <label for="author" class="block text-xs font-semibold uppercase tracking-wider text-stone-700">
+                            <label for="author" class="block text-xs font-semibold uppercase tracking-wider text-[#D6C8B4]">
                                 Author Byline <span class="text-rose-600">*</span>
                             </label>
                             <div class="relative">
                                 <i class="ri-user-line absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 text-base"></i>
-                                <input type="text" id="author" name="author" required value="admin" class="w-full pl-11 pr-4 py-3 bg-[#F5EFE6] border border-[#E2D8C9] rounded-xl text-stone-900 text-sm placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#7C4E26] focus:border-amber-900 transition-all">
+                                <input type="text" id="author" name="author" required value="admin" class="w-full pl-11 pr-4 py-3 bg-[#0D0B09] border border-[#2A231C] rounded-xl text-[#FAF6EE] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-2 focus:ring-[#C5A059] focus:border-[#C5A059] transition-all">
                             </div>
                         </div>
 
                         <!-- Current Image & Replace -->
                         <div class="space-y-1.5">
-                            <label class="block text-xs font-semibold uppercase tracking-wider text-stone-700">
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-[#D6C8B4]">
                                 Current Cover Visual &amp; Replacement
                             </label>
-                            <div class="flex flex-col sm:flex-row items-center gap-6 p-4 rounded-2xl bg-[#F5EFE6] border border-[#E2D8C9]">
-                                <div class="w-32 h-20 rounded-xl bg-[#FCFAF7] border border-[#E2D8C9] overflow-hidden flex-shrink-0">
+                            <div class="flex flex-col sm:flex-row items-center gap-6 p-4 rounded-2xl bg-[#0D0B09] border border-[#2A231C]">
+                                <div class="w-32 h-20 rounded-xl bg-[#161310] border border-[#2A231C] overflow-hidden flex-shrink-0">
                                     <!-- [PHP_BACKEND_HOOK: Display current blog post cover image] -->
                                     <img id="blog-preview" src="../images/blog-minimalist-spaces.jpg" alt="Cover visual" class="w-full h-full object-cover">
                                 </div>
                                 <div class="flex-1 space-y-1 text-center sm:text-left">
-                                    <span class="text-xs font-medium text-stone-800 block">Replace Cover (Optional)</span>
+                                    <span class="text-xs font-medium text-[#FAF6EE] block">Replace Cover (Optional)</span>
                                     <span class="text-[11px] text-stone-400 block">Leave empty to keep the current photograph.</span>
-                                    <input type="file" id="image" name="image" accept="image/*" data-preview-target="blog-preview" class="mt-2 text-xs text-stone-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-medium file:bg-stone-900 file:text-white hover:file:bg-amber-900 file:cursor-pointer cursor-pointer">
+                                    <input type="file" id="image" name="image" accept="image/*" data-preview-target="blog-preview" class="mt-2 text-xs text-[#8C7D6B] file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-medium file:bg-stone-900 file:text-white hover:file:bg-amber-900 file:cursor-pointer cursor-pointer">
                                 </div>
                             </div>
                         </div>
 
                         <!-- Content -->
                         <div class="space-y-1.5">
-                            <label for="content" class="block text-xs font-semibold uppercase tracking-wider text-stone-700">
+                            <label for="content" class="block text-xs font-semibold uppercase tracking-wider text-[#D6C8B4]">
                                 Article Content &amp; Essay Text <span class="text-rose-600">*</span>
                             </label>
-                            <textarea id="content" name="content" rows="8" required class="w-full p-4 bg-[#F5EFE6] border border-[#E2D8C9] rounded-xl text-stone-900 text-sm placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#7C4E26] focus:border-amber-900 transition-all">In an era saturated by industrial high-gloss surfaces, clinical lines, and the constant digital flicker of notifications, our domestic environments have frequently sacrificed soul for sterile uniformity. Japanese philosophy offers an enduring antidote through the worldview of wabi-sabi...</textarea>
+                            <textarea id="content" name="content" rows="8" required class="w-full p-4 bg-[#0D0B09] border border-[#2A231C] rounded-xl text-[#FAF6EE] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-2 focus:ring-[#C5A059] focus:border-[#C5A059] transition-all">In an era saturated by industrial high-gloss surfaces, clinical lines, and the constant digital flicker of notifications, our domestic environments have frequently sacrificed soul for sterile uniformity. Japanese philosophy offers an enduring antidote through the worldview of wabi-sabi...</textarea>
                         </div>
 
                         <!-- Form Actions -->
-                        <div class="pt-4 border-t border-[#E2D8C9] flex items-center justify-end gap-3">
-                            <a href="blog.php" class="px-5 py-3 rounded-xl border border-[#E2D8C9] text-xs font-medium text-stone-700 hover:bg-[#F5EFE6] transition-colors">
+                        <div class="pt-4 border-t border-[#2A231C] flex items-center justify-end gap-3">
+                            <a href="blog.php" class="px-5 py-3 rounded-xl border border-[#2A231C] text-xs font-medium text-[#D6C8B4] hover:bg-[#0D0B09] transition-colors">
                                 Cancel
                             </a>
-                            <button type="submit" name="update" class="px-6 py-3 rounded-xl bg-[#1A1613] hover:bg-[#7C4E26] text-[#F7F3EC] text-xs font-medium transition-colors shadow-xs flex items-center gap-2">
+                            <button type="submit" name="update" class="px-6 py-3 rounded-xl bg-[#C5A059] hover:bg-[#D4AF37] text-[#0D0B09] font-semibold text-xs font-medium transition-colors shadow-xs flex items-center gap-2">
                                 <i class="ri-save-line text-sm"></i>
                                 <span>Save Changes</span>
                             </button>

@@ -12,7 +12,7 @@
     <?php include "components/css.php"; ?>
 </head>
 
-<body class="bg-[#F5EFE6] text-stone-900 font-sans antialiased selection:bg-amber-800 selection:text-white">
+<body class="bg-[#0D0B09] text-[#EDE4D7] font-sans antialiased selection:bg-[#C5A059] selection:text-[#0D0B09]">
     <div class="min-h-screen flex">
         <?php include "components/sidebar.php"; ?>
 
@@ -24,28 +24,28 @@
                 <!-- Page Action Header -->
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
-                        <div class="flex items-center gap-2 text-xs text-stone-500 mb-1">
-                            <a href="dashboard.php" class="hover:text-stone-900">Dashboard</a>
+                        <div class="flex items-center gap-2 text-xs text-[#8C7D6B] mb-1">
+                            <a href="dashboard.php" class="hover:text-[#FAF6EE]">Dashboard</a>
                             <span>/</span>
-                            <span class="text-stone-800 font-medium">Users</span>
+                            <span class="text-[#FAF6EE] font-medium">Users</span>
                         </div>
-                        <h2 class="font-serif text-2xl sm:text-3xl font-medium text-stone-900">Registered Accounts</h2>
+                        <h2 class="font-serif text-2xl sm:text-3xl font-medium text-[#FAF6EE]">Registered Accounts</h2>
                     </div>
-                    <a href="user_create.php" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#1A1613] hover:bg-[#7C4E26] text-[#F7F3EC] text-xs font-medium transition-colors shadow-xs">
+                    <a href="user_create.php" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#C5A059] hover:bg-[#D4AF37] text-[#0D0B09] font-semibold text-xs font-medium transition-colors shadow-xs">
                         <i class="ri-user-add-line text-base"></i>
                         <span>Add New User</span>
                     </a>
                 </div>
 
                 <!-- Table Card -->
-                <div class="bg-[#FCFAF7] rounded-3xl border border-[#E2D8C9] overflow-hidden shadow-xs">
-                    <div class="p-5 border-b border-[#E2D8C9] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                        <div class="text-xs text-stone-500">
+                <div class="bg-[#161310] rounded-3xl border border-[#2A231C] overflow-hidden shadow-xs">
+                    <div class="p-5 border-b border-[#2A231C] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div class="text-xs text-[#8C7D6B]">
                             Showing registered accounts
                         </div>
                         <div class="relative sm:w-64">
                             <i class="ri-search-line absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 text-xs"></i>
-                            <input type="text" placeholder="Search users by name or email..." class="w-full pl-8 pr-3 py-1.5 bg-[#F5EFE6] border border-[#E2D8C9] rounded-lg text-xs placeholder-stone-400 focus:outline-none focus:ring-1 focus:ring-[#7C4E26]">
+                            <input type="text" placeholder="Search users by name or email..." class="w-full pl-8 pr-3 py-1.5 bg-[#0D0B09] border border-[#2A231C] rounded-lg text-xs placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#C5A059]">
                         </div>
                     </div>
 
@@ -53,7 +53,7 @@
                     <div class="overflow-x-auto">
                         <table class="w-full text-left border-collapse text-xs">
                             <thead>
-                                <tr class="bg-[#F5EFE6] border-b border-[#E2D8C9] text-stone-500 uppercase tracking-wider font-semibold">
+                                <tr class="bg-[#0D0B09] border-b border-[#2A231C] text-[#8C7D6B] uppercase tracking-wider font-semibold">
                                     <th class="py-3.5 px-6">ID</th>
                                     <th class="py-3.5 px-6">User Profile</th>
                                     <th class="py-3.5 px-6">Email Address</th>
@@ -61,8 +61,8 @@
                                     <th class="py-3.5 px-6 text-right">Actions</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-[#E2D8C9] text-stone-700 font-medium">
-                                <tr class="hover:bg-[#F5EFE6]/60 transition-colors">
+                            <tbody class="divide-y divide-[#E2D8C9] text-[#D6C8B4] font-medium">
+                                <tr class="hover:bg-[#161310] transition-colors">
                                     <td class="py-4 px-6 text-stone-400">#1</td>
                                     <td class="py-4 px-6">
                                         <div class="flex items-center gap-3">
@@ -70,12 +70,12 @@
                                                 AD
                                             </span>
                                             <div>
-                                                <span class="font-semibold text-stone-900 block text-sm">admin</span>
-                                                <span class="text-[10px] text-[#7C4E26] font-medium uppercase tracking-wider">Super Administrator</span>
+                                                <span class="font-semibold text-[#FAF6EE] block text-sm">admin</span>
+                                                <span class="text-[10px] text-[#C5A059] font-medium uppercase tracking-wider">Super Administrator</span>
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="py-4 px-6 text-stone-600 font-mono text-xs">admin@gmail.com</td>
+                                    <td class="py-4 px-6 text-[#8C7D6B] font-mono text-xs">admin@gmail.com</td>
                                     <td class="py-4 px-6">
                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
                                             Verified Active
@@ -83,7 +83,7 @@
                                     </td>
                                     <td class="py-4 px-6 text-right">
                                         <div class="inline-flex items-center gap-2">
-                                            <a href="user_update.php?id=1" class="px-2.5 py-1 rounded-lg border border-[#E2D8C9] hover:bg-[#EFE8DD] text-stone-700 transition-colors flex items-center gap-1">
+                                            <a href="user_update.php?id=1" class="px-2.5 py-1 rounded-lg border border-[#2A231C] hover:bg-[#0D0B09] text-[#D6C8B4] transition-colors flex items-center gap-1">
                                                 <i class="ri-pencil-line"></i> Edit
                                             </a>
                                             <a href="user_delete.php?id=1" class="px-2.5 py-1 rounded-lg border border-rose-200 hover:bg-rose-50 text-rose-600 transition-colors flex items-center gap-1">

@@ -3,7 +3,7 @@
     <div>
         <!-- Brand Header -->
         <div class="h-20 flex items-center gap-3 px-6 border-b border-[#26201A]">
-            <span class="w-9 h-9 rounded-xl bg-[#CBA57F] text-[#14120F] flex items-center justify-center font-serif text-lg font-semibold shadow-xs">
+            <span class="w-9 h-9 rounded-xl bg-[#C5A059] text-[#0D0B09] font-bold flex items-center justify-center font-serif text-lg font-semibold shadow-xs">
                 F
             </span>
             <div class="flex flex-col">
@@ -76,7 +76,7 @@
     <!-- Sidebar Footer -->
     <div class="p-4 border-t border-[#26201A] text-[11px] text-[#9E8E7C]">
         <p>FurnishMe Atelier v2.4</p>
-        <p class="text-stone-500 mt-0.5">Admin Control Panel</p>
+        <p class="text-[#8C7D6B] mt-0.5">Admin Control Panel</p>
     </div>
 </aside>
 

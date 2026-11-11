@@ -29,26 +29,26 @@ function showToast(message, type = "info") {
     "pointer-events-auto flex items-center gap-3 px-5 py-3.5 rounded-xl shadow-lg border text-sm font-medium transition-all duration-300 transform translate-y-4 opacity-0";
 
   let iconClass = "ri-information-line";
-  let styleClasses = "bg-white text-stone-900 border-stone-200 shadow-stone-200/50";
+  let styleClasses = "bg-[#181512] text-[#FAF6EE] border-[#2A231C] shadow-2xl";
 
   if (type === "success") {
-    iconClass = "ri-checkbox-circle-line text-emerald-600";
-    styleClasses = "bg-white text-stone-900 border-emerald-200";
+    iconClass = "ri-checkbox-circle-line text-[#52D288]";
+    styleClasses = "bg-[#181512] text-[#FAF6EE] border-[#1E4D32] shadow-2xl";
   } else if (type === "error") {
-    iconClass = "ri-error-warning-line text-rose-600";
-    styleClasses = "bg-white text-stone-900 border-rose-200";
+    iconClass = "ri-error-warning-line text-rose-500";
+    styleClasses = "bg-[#181512] text-[#FAF6EE] border-rose-900/60 shadow-2xl";
   } else if (type === "warning") {
-    iconClass = "ri-alert-line text-amber-600";
-    styleClasses = "bg-white text-stone-900 border-amber-200";
+    iconClass = "ri-alert-line text-[#E5A95A]";
+    styleClasses = "bg-[#181512] text-[#FAF6EE] border-[#87642A] shadow-2xl";
   } else {
-    iconClass = "ri-information-line text-stone-700";
+    iconClass = "ri-information-line text-[#C5A059]";
   }
 
   toast.className += " " + styleClasses;
   toast.innerHTML = `
     <i class="${iconClass} text-lg flex-shrink-0"></i>
     <span class="flex-1">${message}</span>
-    <button type="button" aria-label="Close" class="text-stone-400 hover:text-stone-700 transition-colors ml-2" onclick="this.parentElement.remove()">
+    <button type="button" aria-label="Close" class="text-[#8C7D6B] hover:text-[#FAF6EE] transition-colors ml-2" onclick="this.parentElement.remove()">
       <i class="ri-close-line text-base"></i>
     </button>
   `;
@@ -212,11 +212,11 @@ document.addEventListener("DOMContentLoaded", () => {
         if (src) {
           mainProductImg.src = src;
           thumbBtns.forEach((b) => {
-            b.classList.remove("border-2", "border-stone-900");
-            b.classList.add("border", "border-stone-200");
+            b.classList.remove("border-2", "border-[#C5A059]");
+            b.classList.add("border", "border-[#2A231C]");
           });
-          btn.classList.remove("border", "border-stone-200");
-          btn.classList.add("border-2", "border-stone-900");
+          btn.classList.remove("border", "border-[#2A231C]");
+          btn.classList.add("border-2", "border-[#C5A059]");
         }
       });
     });
@@ -259,10 +259,10 @@ function showSlide(slideIndex) {
 
   dots.forEach((dot, idx) => {
     if (idx === currentSlide) {
-      dot.classList.add("bg-[#CBA57F]", "w-8");
-      dot.classList.remove("bg-white/40", "w-2.5", "w-2", "bg-stone-900", "bg-stone-300");
+      dot.classList.add("bg-[#C5A059]", "w-8");
+      dot.classList.remove("bg-white/40", "w-2.5", "w-2", "bg-stone-900", "bg-stone-300", "bg-[#CBA57F]");
     } else {
-      dot.classList.remove("bg-[#CBA57F]", "bg-white", "w-8", "bg-stone-900");
+      dot.classList.remove("bg-[#C5A059]", "bg-[#CBA57F]", "bg-white", "w-8", "bg-stone-900");
       dot.classList.add("bg-white/40", "w-2.5");
     }
   });
