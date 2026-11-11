@@ -6,10 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop Atelier Furniture | FurnishMe</title>
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico?v=2">
-    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png?v=2">
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png?v=2">
-    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png?v=2">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>
 
@@ -945,18 +942,9 @@
             <p class="text-xs text-[#8C7D6B] mt-1">Try adjusting your category filter or search keywords.</p>
         </div>
 
-        <!-- PAGINATION MOCKUP -->
+        <!-- PAGINATION CONTROLS -->
         <!-- [PHP_BACKEND_HOOK: Dynamic pagination links (e.g. for page 1..N based on total item count and limit)] -->
-        <div class="mt-16 flex items-center justify-center gap-2 text-sm">
-            <button type="button" disabled class="w-10 h-10 rounded-xl border border-[#2A231C] text-[#665849] flex items-center justify-center cursor-not-allowed">
-                <i class="ri-arrow-left-s-line text-lg"></i>
-            </button>
-            <span class="w-10 h-10 rounded-xl bg-[#C5A059] text-[#0D0B09] flex items-center justify-center font-semibold">1</span>
-            <a href="shop.php?page=2" class="w-10 h-10 rounded-xl border border-[#2A231C] text-[#D6C8B4] hover:bg-[#1D1914] hover:text-[#FAF6EE] flex items-center justify-center font-medium transition-colors">2</a>
-            <a href="shop.php?page=2" class="w-10 h-10 rounded-xl border border-[#2A231C] text-[#D6C8B4] hover:bg-[#1D1914] hover:text-[#FAF6EE] flex items-center justify-center font-medium transition-colors">
-                <i class="ri-arrow-right-s-line text-lg"></i>
-            </a>
-        </div>
+        <div id="catalog-pagination" class="mt-16 flex items-center justify-center gap-2 text-sm flex-wrap"></div>
     </main>
 
     <?php include "components/footer.php"; ?>
@@ -970,33 +958,120 @@
             const productGrid = document.getElementById("product-grid");
             const countEl = document.getElementById("product-count");
             const noResults = document.getElementById("no-results");
+            const paginationEl = document.getElementById("catalog-pagination");
 
             if (!productGrid) return;
             const cards = Array.from(productGrid.querySelectorAll(".product-card"));
 
+            // Refined pagination limit (8 curated pieces per page to prevent card clutter)
+            const ITEMS_PER_PAGE = 8;
             let currentCategory = "all";
             let searchQuery = "";
+            let currentPage = 1;
+            let filteredCards = [...cards];
+
+            function renderPagination(totalPages) {
+                if (!paginationEl) return;
+                paginationEl.innerHTML = "";
+                if (totalPages <= 1) return;
+
+                // Previous page button
+                const prevBtn = document.createElement("button");
+                prevBtn.type = "button";
+                prevBtn.setAttribute("aria-label", "Previous Page");
+                prevBtn.className = `w-10 h-10 rounded-xl border border-[#2A231C] flex items-center justify-center transition-colors ${
+                    currentPage === 1 ? "text-[#665849] cursor-not-allowed opacity-40" : "text-[#D6C8B4] hover:bg-[#1D1914] hover:text-[#FAF6EE] cursor-pointer"
+                }`;
+                prevBtn.innerHTML = '<i class="ri-arrow-left-s-line text-lg"></i>';
+                if (currentPage > 1) {
+                    prevBtn.addEventListener("click", () => {
+                        currentPage--;
+                        updateView();
+                        productGrid.scrollIntoView({ behavior: "smooth", block: "start" });
+                    });
+                }
+                paginationEl.appendChild(prevBtn);
+
+                // Numeric page buttons
+                for (let i = 1; i <= totalPages; i++) {
+                    const pageBtn = document.createElement("button");
+                    pageBtn.type = "button";
+                    pageBtn.textContent = i;
+                    if (i === currentPage) {
+                        pageBtn.className = "w-10 h-10 rounded-xl bg-[#C5A059] text-[#0D0B09] flex items-center justify-center font-semibold shadow-md";
+                    } else {
+                        pageBtn.className = "w-10 h-10 rounded-xl border border-[#2A231C] text-[#D6C8B4] hover:bg-[#1D1914] hover:text-[#FAF6EE] flex items-center justify-center font-medium transition-colors cursor-pointer";
+                        pageBtn.addEventListener("click", () => {
+                            currentPage = i;
+                            updateView();
+                            productGrid.scrollIntoView({ behavior: "smooth", block: "start" });
+                        });
+                    }
+                    paginationEl.appendChild(pageBtn);
+                }
+
+                // Next page button
+                const nextBtn = document.createElement("button");
+                nextBtn.type = "button";
+                nextBtn.setAttribute("aria-label", "Next Page");
+                nextBtn.className = `w-10 h-10 rounded-xl border border-[#2A231C] flex items-center justify-center transition-colors ${
+                    currentPage === totalPages ? "text-[#665849] cursor-not-allowed opacity-40" : "text-[#D6C8B4] hover:bg-[#1D1914] hover:text-[#FAF6EE] cursor-pointer"
+                }`;
+                nextBtn.innerHTML = '<i class="ri-arrow-right-s-line text-lg"></i>';
+                if (currentPage < totalPages) {
+                    nextBtn.addEventListener("click", () => {
+                        currentPage++;
+                        updateView();
+                        productGrid.scrollIntoView({ behavior: "smooth", block: "start" });
+                    });
+                }
+                paginationEl.appendChild(nextBtn);
+            }
+
+            function updateView() {
+                const total = filteredCards.length;
+                const totalPages = Math.ceil(total / ITEMS_PER_PAGE);
+
+                if (currentPage > totalPages && totalPages > 0) currentPage = totalPages;
+                if (currentPage < 1) currentPage = 1;
+
+                const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+                const endIndex = startIndex + ITEMS_PER_PAGE;
+
+                cards.forEach(card => card.style.display = "none");
+
+                filteredCards.slice(startIndex, endIndex).forEach(card => {
+                    card.style.display = "";
+                });
+
+                if (countEl) {
+                    if (total === 0) {
+                        countEl.textContent = "0";
+                    } else {
+                        const displayStart = startIndex + 1;
+                        const displayEnd = Math.min(endIndex, total);
+                        countEl.textContent = `${displayStart}–${displayEnd} of ${total}`;
+                    }
+                }
+
+                if (noResults) {
+                    noResults.classList.toggle("hidden", total > 0);
+                }
+
+                renderPagination(totalPages);
+            }
 
             function applyFilters() {
-                let visibleCount = 0;
-                cards.forEach(card => {
+                filteredCards = cards.filter(card => {
                     const cardCat = card.dataset.category;
                     const cardName = card.dataset.name || "";
                     const matchesCat = (currentCategory === "all" || cardCat === currentCategory);
                     const matchesSearch = (!searchQuery || cardName.includes(searchQuery));
-
-                    if (matchesCat && matchesSearch) {
-                        card.style.display = "";
-                        visibleCount++;
-                    } else {
-                        card.style.display = "none";
-                    }
+                    return matchesCat && matchesSearch;
                 });
 
-                if (countEl) countEl.textContent = visibleCount;
-                if (noResults) {
-                    noResults.classList.toggle("hidden", visibleCount > 0);
-                }
+                currentPage = 1;
+                updateView();
             }
 
             filterBtns.forEach(btn => {
@@ -1020,7 +1095,7 @@
             if (sortSelect) {
                 sortSelect.addEventListener("change", (e) => {
                     const val = e.target.value;
-                    const sorted = [...cards].sort((a, b) => {
+                    cards.sort((a, b) => {
                         const priceA = parseInt(a.dataset.price, 10) || 0;
                         const priceB = parseInt(b.dataset.price, 10) || 0;
                         const nameA = a.dataset.name || "";
@@ -1029,12 +1104,15 @@
                         if (val === "price_asc") return priceA - priceB;
                         if (val === "price_desc") return priceB - priceA;
                         if (val === "name_asc") return nameA.localeCompare(nameB);
-                        return parseInt(a.dataset.id || "0", 10) - parseInt(b.dataset.id || "0", 10);
+                        return 0;
                     });
-                    sorted.forEach(c => productGrid.appendChild(c));
+                    cards.forEach(c => productGrid.appendChild(c));
                     applyFilters();
                 });
             }
+
+            // Initial view initialization
+            applyFilters();
         });
     </script>
 </body>
