@@ -186,7 +186,7 @@
             <div class="w-full h-96 sm:h-[450px] rounded-3xl overflow-hidden border border-stone-200 shadow-sm bg-stone-100">
                 <iframe class="w-full h-full border-0"
                     src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3818.839551851325!2d96.16721207535012!3d16.834313983961668!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTbCsDUwJzAzLjUiTiA5NsKwMTAnMTEuMiJF!5e0!3m2!1sen!2sch!4v1794417196576!5m2!1sen!2sch"
-                    allowfullscreen="" loading="lazy"></src=>
+                    allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
     </main>
