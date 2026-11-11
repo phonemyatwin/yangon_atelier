@@ -22,10 +22,134 @@
     <section class="relative bg-stone-950 text-white overflow-hidden">
         <div class="relative min-h-[620px] lg:min-h-[720px] flex items-center">
             
-            <!-- Slide 1 (Active by default) -->
+            <!-- Slide 1: Heirloom Private Library Suite (Active by default) -->
             <div class="hero-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-100 z-10">
                 <div class="absolute inset-0">
-                    <img src="images/hero-slide-1.jpg" alt="Minimalist Living Interior" class="w-full h-full object-cover brightness-[0.78]" loading="eager">
+                    <img src="images/hero-luxury-suite.jpg" alt="Heirloom Private Library Suite" class="w-full h-full object-cover brightness-[0.78]" loading="eager">
+                    <div class="absolute inset-0 bg-gradient-to-r from-stone-950/95 via-stone-950/60 to-transparent"></div>
+                </div>
+                <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex items-center py-20">
+                    <div class="max-w-2xl space-y-6">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-xs tracking-wider uppercase font-medium text-[#CBA57F]">
+                            <span class="w-2 h-2 rounded-full bg-[#CBA57F]"></span>
+                            <span>Grand Manor Edition</span>
+                        </div>
+                        <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal tracking-tight text-[#FAF6F0] leading-[1.12]">
+                            The Quiet Grandeur of Heritage Living.
+                        </h1>
+                        <p class="text-base sm:text-lg text-stone-300 font-normal leading-relaxed">
+                            Hand-rubbed walnut paneling, bespoke tufted daybeds, and sculpted reading illumination curated for distinguished domestic estates.
+                        </p>
+                        <div class="flex flex-wrap items-center gap-4 pt-4">
+                            <a href="shop.php" class="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-[#FAF6F0] hover:bg-[#CBA57F] text-[#14120F] font-semibold text-sm transition-all shadow-xl hover:shadow-2xl">
+                                <span>Explore Collection</span>
+                                <i class="ri-arrow-right-line"></i>
+                            </a>
+                            <a href="contact.php" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 backdrop-blur-md text-[#FAF6F0] border border-white/20 text-sm font-medium transition-colors">
+                                <span>Showroom Concierge</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2: Chateau Grand Hearth -->
+            <div class="hero-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 pointer-events-none z-0">
+                <div class="absolute inset-0">
+                    <img src="images/hero-chateau-salon.jpg" alt="Chateau Grand Hearth Salon" class="w-full h-full object-cover brightness-[0.78]" loading="lazy">
+                    <div class="absolute inset-0 bg-gradient-to-r from-stone-950/95 via-stone-950/60 to-transparent"></div>
+                </div>
+                <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex items-center py-20">
+                    <div class="max-w-2xl space-y-6">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-xs tracking-wider uppercase font-medium text-emerald-300">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                            <span>Historic Craft Traditions</span>
+                        </div>
+                        <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal tracking-tight text-[#FAF6F0] leading-[1.12]">
+                            Monumental Hearth, Hand-Planed Beams.
+                        </h2>
+                        <p class="text-base sm:text-lg text-stone-300 font-normal leading-relaxed">
+                            Ancient timber joinery traditions resurrected with deep-buttoned leather wingbacks and authentic stone proportions.
+                        </p>
+                        <div class="flex flex-wrap items-center gap-4 pt-4">
+                            <a href="shop.php?category=sofas" class="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-[#FAF6F0] hover:bg-[#CBA57F] text-[#14120F] font-semibold text-sm transition-all shadow-xl hover:shadow-2xl">
+                                <span>Discover Living Pieces</span>
+                                <i class="ri-arrow-right-line"></i>
+                            </a>
+                            <a href="about.php" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 backdrop-blur-md text-[#FAF6F0] border border-white/20 text-sm font-medium transition-colors">
+                                <span>Atelier Philosophy</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: Gilded Drawing Room -->
+            <div class="hero-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 pointer-events-none z-0">
+                <div class="absolute inset-0">
+                    <img src="images/hero-gilded-salon.jpg" alt="Gilded Estate Drawing Room" class="w-full h-full object-cover brightness-[0.78]" loading="lazy">
+                    <div class="absolute inset-0 bg-gradient-to-r from-stone-950/95 via-stone-950/60 to-transparent"></div>
+                </div>
+                <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex items-center py-20">
+                    <div class="max-w-2xl space-y-6">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-xs tracking-wider uppercase font-medium text-[#CBA57F]">
+                            <span class="w-2 h-2 rounded-full bg-[#CBA57F]"></span>
+                            <span>Ceremonial Salon</span>
+                        </div>
+                        <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal tracking-tight text-[#FAF6F0] leading-[1.12]">
+                            The Splendor of Aristocratic Domesticity.
+                        </h2>
+                        <p class="text-base sm:text-lg text-stone-300 font-normal leading-relaxed">
+                            Carved consoles, burnished leather seating, and hand-finished bronze chandeliers capturing the majestic romance of royal chambers.
+                        </p>
+                        <div class="flex flex-wrap items-center gap-4 pt-4">
+                            <a href="shop.php" class="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-[#FAF6F0] hover:bg-[#CBA57F] text-[#14120F] font-semibold text-sm transition-all shadow-xl hover:shadow-2xl">
+                                <span>View Signature Pieces</span>
+                                <i class="ri-arrow-right-line"></i>
+                            </a>
+                            <a href="contact.php" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 backdrop-blur-md text-[#FAF6F0] border border-white/20 text-sm font-medium transition-colors">
+                                <span>Private Commissions</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4: Executive Estate Study -->
+            <div class="hero-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 pointer-events-none z-0">
+                <div class="absolute inset-0">
+                    <img src="images/hero-estate-study.jpg" alt="Executive Estate Study & Salon" class="w-full h-full object-cover brightness-[0.78]" loading="lazy">
+                    <div class="absolute inset-0 bg-gradient-to-r from-stone-950/95 via-stone-950/60 to-transparent"></div>
+                </div>
+                <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex items-center py-20">
+                    <div class="max-w-2xl space-y-6">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-xs tracking-wider uppercase font-medium text-amber-200">
+                            <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+                            <span>Executive Study</span>
+                        </div>
+                        <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal tracking-tight text-[#FAF6F0] leading-[1.12]">
+                            Architectural Harmony &amp; Timeless Focus.
+                        </h2>
+                        <p class="text-base sm:text-lg text-stone-300 font-normal leading-relaxed">
+                            Stained glass daylight illuminating carved walnut writing desks and woven damask armchairs engineered for contemplative grace.
+                        </p>
+                        <div class="flex flex-wrap items-center gap-4 pt-4">
+                            <a href="shop.php?category=workspace" class="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-[#FAF6F0] hover:bg-[#CBA57F] text-[#14120F] font-semibold text-sm transition-all shadow-xl hover:shadow-2xl">
+                                <span>Explore Workspace</span>
+                                <i class="ri-arrow-right-line"></i>
+                            </a>
+                            <a href="team.php" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 backdrop-blur-md text-[#FAF6F0] border border-white/20 text-sm font-medium transition-colors">
+                                <span>Design Collective</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5: Minimalist Living Interior -->
+            <div class="hero-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 pointer-events-none z-0">
+                <div class="absolute inset-0">
+                    <img src="images/hero-slide-1.jpg" alt="Minimalist Living Interior" class="w-full h-full object-cover brightness-[0.78]" loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-r from-stone-950/90 via-stone-950/50 to-transparent"></div>
                 </div>
                 <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex items-center py-20">
@@ -34,9 +158,9 @@
                             <span class="w-2 h-2 rounded-full bg-amber-400"></span>
                             <span>Autumn Atelier Edition</span>
                         </div>
-                        <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal tracking-tight text-white leading-[1.12]">
+                        <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal tracking-tight text-white leading-[1.12]">
                             The Art of Quiet, Tactile Living.
-                        </h1>
+                        </h2>
                         <p class="text-base sm:text-lg text-stone-300 font-normal leading-relaxed">
                             Experience sculpted silhouettes, solid certified timber, and textured woven textiles handcrafted for mindful domestic sanctuaries.
                         </p>
@@ -53,7 +177,7 @@
                 </div>
             </div>
 
-            <!-- Slide 2 -->
+            <!-- Slide 6: Warm Dining Room Interior -->
             <div class="hero-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 pointer-events-none z-0">
                 <div class="absolute inset-0">
                     <img src="images/hero-slide-2.jpg" alt="Warm Dining Room Interior" class="w-full h-full object-cover brightness-[0.78]" loading="lazy">
@@ -84,7 +208,7 @@
                 </div>
             </div>
 
-            <!-- Slide 3 -->
+            <!-- Slide 7: Master Bedroom Sanctuary -->
             <div class="hero-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 pointer-events-none z-0">
                 <div class="absolute inset-0">
                     <img src="images/hero-slide-3.jpg" alt="Master Bedroom Sanctuary" class="w-full h-full object-cover brightness-[0.78]" loading="lazy">
@@ -120,11 +244,15 @@
         <!-- Slider Controls -->
         <div class="absolute bottom-8 left-0 right-0 z-20">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-                <!-- Dots / Indicators -->
+                <!-- Dots / Indicators (7 slides) -->
                 <div class="flex items-center gap-2.5">
-                    <button type="button" aria-label="Slide 1" onclick="showSlide(0)" class="hero-dot h-2 w-8 rounded-full bg-white transition-all"></button>
-                    <button type="button" aria-label="Slide 2" onclick="showSlide(1)" class="hero-dot h-2 w-2 rounded-full bg-white/40 hover:bg-white/70 transition-all"></button>
-                    <button type="button" aria-label="Slide 3" onclick="showSlide(2)" class="hero-dot h-2 w-2 rounded-full bg-white/40 hover:bg-white/70 transition-all"></button>
+                    <button type="button" aria-label="Slide 1" onclick="showSlide(0)" class="hero-dot h-2 w-8 rounded-full bg-[#CBA57F] transition-all"></button>
+                    <button type="button" aria-label="Slide 2" onclick="showSlide(1)" class="hero-dot h-2 w-2.5 rounded-full bg-white/40 hover:bg-white/70 transition-all"></button>
+                    <button type="button" aria-label="Slide 3" onclick="showSlide(2)" class="hero-dot h-2 w-2.5 rounded-full bg-white/40 hover:bg-white/70 transition-all"></button>
+                    <button type="button" aria-label="Slide 4" onclick="showSlide(3)" class="hero-dot h-2 w-2.5 rounded-full bg-white/40 hover:bg-white/70 transition-all"></button>
+                    <button type="button" aria-label="Slide 5" onclick="showSlide(4)" class="hero-dot h-2 w-2.5 rounded-full bg-white/40 hover:bg-white/70 transition-all"></button>
+                    <button type="button" aria-label="Slide 6" onclick="showSlide(5)" class="hero-dot h-2 w-2.5 rounded-full bg-white/40 hover:bg-white/70 transition-all"></button>
+                    <button type="button" aria-label="Slide 7" onclick="showSlide(6)" class="hero-dot h-2 w-2.5 rounded-full bg-white/40 hover:bg-white/70 transition-all"></button>
                 </div>
 
                 <!-- Navigation Arrow Buttons -->

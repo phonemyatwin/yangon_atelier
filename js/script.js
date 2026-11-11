@@ -259,11 +259,11 @@ function showSlide(slideIndex) {
 
   dots.forEach((dot, idx) => {
     if (idx === currentSlide) {
-      dot.classList.add("bg-stone-900", "w-8");
-      dot.classList.remove("bg-stone-300", "w-2.5");
+      dot.classList.add("bg-[#CBA57F]", "w-8");
+      dot.classList.remove("bg-white/40", "w-2.5", "w-2", "bg-stone-900", "bg-stone-300");
     } else {
-      dot.classList.remove("bg-stone-900", "w-8");
-      dot.classList.add("bg-stone-300", "w-2.5");
+      dot.classList.remove("bg-[#CBA57F]", "bg-white", "w-8", "bg-stone-900");
+      dot.classList.add("bg-white/40", "w-2.5");
     }
   });
 }
