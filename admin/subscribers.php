@@ -9,7 +9,7 @@
     <?php include "components/css.php"; ?>
 </head>
 
-<body class="bg-[#FAF8F5] text-stone-900 font-sans antialiased selection:bg-amber-100 selection:text-amber-900">
+<body class="bg-[#FAFAFA] text-zinc-900 font-sans antialiased selection:bg-zinc-900 selection:text-white">
     <div class="min-h-screen flex">
         <?php include "components/sidebar.php"; ?>
 
@@ -21,24 +21,24 @@
                 <!-- Page Header -->
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
-                        <div class="flex items-center gap-2 text-xs text-stone-500 mb-1">
-                            <a href="dashboard.php" class="hover:text-stone-900">Dashboard</a>
+                        <div class="flex items-center gap-2 text-xs text-zinc-500 mb-1">
+                            <a href="dashboard.php" class="hover:text-zinc-900">Dashboard</a>
                             <span>/</span>
-                            <span class="text-stone-800 font-medium">Subscribers</span>
+                            <span class="text-zinc-800 font-medium">Subscribers</span>
                         </div>
-                        <h2 class="font-serif text-2xl sm:text-3xl font-medium text-stone-900">Journal Newsletter Subscribers</h2>
+                        <h2 class="font-serif text-2xl sm:text-3xl font-medium text-zinc-900">Journal Newsletter Subscribers</h2>
                     </div>
                 </div>
 
                 <!-- Table Card -->
-                <div class="bg-white rounded-3xl border border-stone-200 overflow-hidden shadow-xs">
-                    <div class="p-5 border-b border-stone-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                        <div class="text-xs text-stone-500">
+                <div class="bg-white rounded-3xl border border-zinc-200 overflow-hidden shadow-xs">
+                    <div class="p-5 border-b border-zinc-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div class="text-xs text-zinc-500">
                             Showing verified email subscribers
                         </div>
                         <div class="relative sm:w-64">
-                            <i class="ri-search-line absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 text-xs"></i>
-                            <input type="text" placeholder="Filter subscribers by email..." class="w-full pl-8 pr-3 py-1.5 bg-stone-50 border border-stone-200 rounded-lg text-xs placeholder-stone-400 focus:outline-none focus:ring-1 focus:ring-stone-800">
+                            <i class="ri-search-line absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 text-xs"></i>
+                            <input type="text" placeholder="Filter subscribers by email..." class="w-full pl-8 pr-3 py-1.5 bg-zinc-50 border border-zinc-200 rounded-lg text-xs placeholder-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-800">
                         </div>
                     </div>
 
@@ -46,7 +46,7 @@
                     <div class="overflow-x-auto">
                         <table class="w-full text-left border-collapse text-xs">
                             <thead>
-                                <tr class="bg-stone-50/80 border-b border-stone-200/80 text-stone-500 uppercase tracking-wider font-semibold">
+                                <tr class="bg-zinc-50/80 border-b border-zinc-200/80 text-zinc-500 uppercase tracking-wider font-semibold">
                                     <th class="py-3.5 px-6">ID</th>
                                     <th class="py-3.5 px-6">Subscriber Email</th>
                                     <th class="py-3.5 px-6">Subscription Date</th>
@@ -54,13 +54,13 @@
                                     <th class="py-3.5 px-6 text-right">Actions</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-stone-100 text-stone-700 font-medium">
+                            <tbody class="divide-y divide-zinc-100 text-zinc-700 font-medium">
                                 
                                 <!-- Sub 1 -->
-                                <tr class="hover:bg-stone-50/60 transition-colors">
-                                    <td class="py-4 px-6 text-stone-400">#1</td>
-                                    <td class="py-4 px-6 font-mono text-stone-900 text-xs font-semibold">aungmin@gmail.com</td>
-                                    <td class="py-4 px-6 text-stone-500">2026-11-01</td>
+                                <tr class="hover:bg-zinc-50/60 transition-colors">
+                                    <td class="py-4 px-6 text-zinc-400">#1</td>
+                                    <td class="py-4 px-6 font-mono text-zinc-900 text-xs font-semibold">aungmin@gmail.com</td>
+                                    <td class="py-4 px-6 text-zinc-500">2026-11-01</td>
                                     <td class="py-4 px-6">
                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
                                             Subscribed
@@ -74,10 +74,10 @@
                                 </tr>
 
                                 <!-- Sub 2 -->
-                                <tr class="hover:bg-stone-50/60 transition-colors">
-                                    <td class="py-4 px-6 text-stone-400">#2</td>
-                                    <td class="py-4 px-6 font-mono text-stone-900 text-xs font-semibold">susu@gmail.com</td>
-                                    <td class="py-4 px-6 text-stone-500">2026-11-02</td>
+                                <tr class="hover:bg-zinc-50/60 transition-colors">
+                                    <td class="py-4 px-6 text-zinc-400">#2</td>
+                                    <td class="py-4 px-6 font-mono text-zinc-900 text-xs font-semibold">susu@gmail.com</td>
+                                    <td class="py-4 px-6 text-zinc-500">2026-11-02</td>
                                     <td class="py-4 px-6">
                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
                                             Subscribed
@@ -91,10 +91,10 @@
                                 </tr>
 
                                 <!-- Sub 3 -->
-                                <tr class="hover:bg-stone-50/60 transition-colors">
-                                    <td class="py-4 px-6 text-stone-400">#3</td>
-                                    <td class="py-4 px-6 font-mono text-stone-900 text-xs font-semibold">koko@gmail.com</td>
-                                    <td class="py-4 px-6 text-stone-500">2026-11-03</td>
+                                <tr class="hover:bg-zinc-50/60 transition-colors">
+                                    <td class="py-4 px-6 text-zinc-400">#3</td>
+                                    <td class="py-4 px-6 font-mono text-zinc-900 text-xs font-semibold">koko@gmail.com</td>
+                                    <td class="py-4 px-6 text-zinc-500">2026-11-03</td>
                                     <td class="py-4 px-6">
                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
                                             Subscribed

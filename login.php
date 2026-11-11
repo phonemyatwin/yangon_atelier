@@ -10,27 +10,27 @@
     <?php include "components/css.php"; ?>
 </head>
 
-<body class="bg-[#FAF8F5] text-stone-900 font-sans selection:bg-amber-100 selection:text-amber-900 min-h-screen flex flex-col justify-between">
+<body class="bg-[#FAFAFA] text-zinc-900 font-sans selection:bg-zinc-900 selection:text-white min-h-screen flex flex-col justify-between">
     <?php include "components/header.php"; ?>
     <?php include "components/navbar.php"; ?>
 
     <!-- MAIN AUTH SECTION -->
     <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20 w-full flex-1 flex items-center justify-center">
-        <div class="w-full bg-white rounded-3xl border border-stone-200 shadow-sm overflow-hidden grid grid-cols-1 md:grid-cols-12">
+        <div class="w-full bg-white rounded-3xl border border-zinc-200 shadow-sm overflow-hidden grid grid-cols-1 md:grid-cols-12">
             
             <!-- Left Column: Visual Illustration & Brand Note -->
-            <div class="md:col-span-5 bg-[#F2ECE4] p-8 sm:p-10 flex flex-col justify-between items-center text-center border-b md:border-b-0 md:border-r border-stone-200">
+            <div class="md:col-span-5 bg-zinc-100/70 p-8 sm:p-10 flex flex-col justify-between items-center text-center border-b md:border-b-0 md:border-r border-zinc-200">
                 <div class="w-full text-left">
-                    <span class="text-xs uppercase tracking-[0.2em] text-stone-500 font-semibold block mb-1">Client Sanctuary</span>
-                    <h2 class="font-serif text-2xl font-medium text-stone-900">Welcome Back</h2>
+                    <span class="text-xs uppercase tracking-[0.2em] text-zinc-500 font-semibold block mb-1">Client Sanctuary</span>
+                    <h2 class="font-serif text-2xl font-normal text-zinc-900">Welcome Back</h2>
                 </div>
                 
                 <div class="my-8 max-w-xs flex items-center justify-center">
                     <img src="images/auth-login.svg" alt="Client sign in illustration" width="300" height="300" class="max-h-60 w-auto object-contain drop-shadow-sm" loading="lazy">
                 </div>
 
-                <div class="text-left w-full border-t border-stone-300/60 pt-4">
-                    <p class="text-xs text-stone-600 leading-relaxed">
+                <div class="text-left w-full border-t border-zinc-200 pt-4">
+                    <p class="text-xs text-zinc-600 leading-relaxed">
                         Access saved architectural selections, track commission timelines, and view bespoke proposals.
                     </p>
                 </div>
@@ -39,9 +39,9 @@
             <!-- Right Column: Sign In Form -->
             <div class="md:col-span-7 p-8 sm:p-12 flex flex-col justify-center">
                 <div class="mb-8">
-                    <span class="text-xs uppercase tracking-widest text-stone-400 font-semibold block mb-1">Account Authentication</span>
-                    <h1 class="font-serif text-3xl font-medium text-stone-900">Sign in to FurnishMe</h1>
-                    <p class="text-xs text-stone-500 mt-1">Please enter your verified email and password.</p>
+                    <span class="text-xs uppercase tracking-widest text-zinc-400 font-semibold block mb-1">Account Authentication</span>
+                    <h1 class="font-serif text-3xl font-normal text-zinc-900">Sign in to FurnishMe</h1>
+                    <p class="text-xs text-zinc-500 mt-1">Please enter your verified email and password.</p>
                 </div>
 
                 <!-- [PHP_BACKEND_HOOK: Authentication handler. POST method, CSRF verification, password_verify against users table, session initiation] -->
@@ -49,27 +49,27 @@
                     
                     <!-- Email Field -->
                     <div class="space-y-1.5">
-                        <label for="email" class="block text-xs font-semibold uppercase tracking-wider text-stone-700">
+                        <label for="email" class="block text-xs font-semibold uppercase tracking-wider text-zinc-700">
                             Email Address <span class="text-rose-600">*</span>
                         </label>
                         <div class="relative">
-                            <i class="ri-mail-line absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 text-base"></i>
-                            <input type="email" id="email" name="email" required placeholder="client@example.com" class="w-full pl-11 pr-4 py-3 bg-stone-50 border border-stone-200 rounded-xl text-stone-900 text-sm placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-stone-800 focus:border-stone-800 transition-all">
+                            <i class="ri-mail-line absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 text-base"></i>
+                            <input type="email" id="email" name="email" required placeholder="client@example.com" class="w-full pl-11 pr-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl text-zinc-900 text-sm placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-zinc-900 transition-all">
                         </div>
                     </div>
 
                     <!-- Password Field with Toggle -->
                     <div class="space-y-1.5">
                         <div class="flex items-center justify-between">
-                            <label for="password" class="block text-xs font-semibold uppercase tracking-wider text-stone-700">
+                            <label for="password" class="block text-xs font-semibold uppercase tracking-wider text-zinc-700">
                                 Password <span class="text-rose-600">*</span>
                             </label>
-                            <a href="#" class="text-xs text-stone-500 hover:text-stone-900 transition-colors">Forgot password?</a>
+                            <a href="#" class="text-xs text-zinc-500 hover:text-zinc-900 transition-colors">Forgot password?</a>
                         </div>
                         <div class="relative">
-                            <i class="ri-lock-2-line absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 text-base"></i>
-                            <input type="password" id="password" name="password" required placeholder="Enter your password" class="w-full pl-11 pr-11 py-3 bg-stone-50 border border-stone-200 rounded-xl text-stone-900 text-sm placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-stone-800 focus:border-stone-800 transition-all">
-                            <button type="button" data-toggle-password="password" aria-label="Toggle password visibility" class="absolute right-3.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-700 transition-colors">
+                            <i class="ri-lock-2-line absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 text-base"></i>
+                            <input type="password" id="password" name="password" required placeholder="Enter your password" class="w-full pl-11 pr-11 py-3 bg-zinc-50 border border-zinc-200 rounded-xl text-zinc-900 text-sm placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-zinc-900 transition-all">
+                            <button type="button" data-toggle-password="password" aria-label="Toggle password visibility" class="absolute right-3.5 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-700 transition-colors">
                                 <i class="ri-eye-line text-base"></i>
                             </button>
                         </div>
@@ -77,22 +77,22 @@
 
                     <!-- Remember Me Option -->
                     <div class="flex items-center justify-between text-xs pt-1">
-                        <label class="flex items-center gap-2 text-stone-600 cursor-pointer select-none" for="remember-me">
-                            <input type="checkbox" name="remember" id="remember-me" class="rounded border-stone-300 text-stone-800 focus:ring-stone-800 w-4 h-4">
+                        <label class="flex items-center gap-2 text-zinc-600 cursor-pointer select-none" for="remember-me">
+                            <input type="checkbox" name="remember" id="remember-me" class="rounded border-zinc-300 text-zinc-900 focus:ring-zinc-900 w-4 h-4">
                             <span>Keep me signed in on this device</span>
                         </label>
                     </div>
 
                     <!-- Submit Button -->
-                    <button type="submit" name="login" class="w-full py-3.5 px-6 rounded-xl bg-stone-900 hover:bg-amber-950 text-stone-50 font-medium text-sm transition-all shadow-sm hover:shadow flex items-center justify-center gap-2">
+                    <button type="submit" name="login" class="w-full py-3.5 px-6 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white font-medium text-sm transition-all shadow-sm hover:shadow flex items-center justify-center gap-2">
                         <span>Sign In</span>
                         <i class="ri-arrow-right-line text-base"></i>
                     </button>
 
                     <!-- Link to Register -->
-                    <p class="text-center text-xs text-stone-500 pt-2">
+                    <p class="text-center text-xs text-zinc-500 pt-2">
                         New to FurnishMe Atelier? 
-                        <a href="register.php" class="font-semibold text-stone-900 hover:underline">Create an account</a>
+                        <a href="register.php" class="font-semibold text-zinc-900 hover:underline">Create an account</a>
                     </p>
                 </form>
             </div>

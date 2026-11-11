@@ -29,26 +29,26 @@ function showToast(message, type = "info") {
     "pointer-events-auto flex items-center gap-3 px-5 py-3.5 rounded-xl shadow-lg border text-sm font-medium transition-all duration-300 transform translate-y-4 opacity-0";
 
   let iconClass = "ri-information-line";
-  let styleClasses = "bg-white text-stone-900 border-stone-200 shadow-stone-200/50";
+  let styleClasses = "bg-white text-zinc-900 border-zinc-200 shadow-zinc-200/50";
 
   if (type === "success") {
     iconClass = "ri-checkbox-circle-line text-emerald-600";
-    styleClasses = "bg-white text-stone-900 border-emerald-200";
+    styleClasses = "bg-white text-zinc-900 border-emerald-200";
   } else if (type === "error") {
     iconClass = "ri-error-warning-line text-rose-600";
-    styleClasses = "bg-white text-stone-900 border-rose-200";
+    styleClasses = "bg-white text-zinc-900 border-rose-200";
   } else if (type === "warning") {
     iconClass = "ri-alert-line text-amber-600";
-    styleClasses = "bg-white text-stone-900 border-amber-200";
+    styleClasses = "bg-white text-zinc-900 border-amber-200";
   } else {
-    iconClass = "ri-information-line text-stone-700";
+    iconClass = "ri-information-line text-zinc-700";
   }
 
   toast.className += " " + styleClasses;
   toast.innerHTML = `
     <i class="${iconClass} text-lg flex-shrink-0"></i>
     <span class="flex-1">${message}</span>
-    <button type="button" aria-label="Close" class="text-stone-400 hover:text-stone-700 transition-colors ml-2" onclick="this.parentElement.remove()">
+    <button type="button" aria-label="Close" class="text-zinc-400 hover:text-zinc-700 transition-colors ml-2" onclick="this.parentElement.remove()">
       <i class="ri-close-line text-base"></i>
     </button>
   `;

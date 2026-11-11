@@ -11,13 +11,19 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        canvas: '#FAF8F5',
+        canvas: '#FAFAFA',
         surface: '#FFFFFF',
-        sand: '#F2ECE4',
-        walnut: {
-          800: '#2C221E',
-          900: '#1C1512',
-        }
+        sand: '#F4F4F5',
+        brand: {
+          50: '#FBF8F5',
+          100: '#F5ECE3',
+          200: '#EBD8C5',
+          700: '#8A5832',
+          800: '#5A3820',
+          900: '#2A1A0E',
+          950: '#150D07',
+        },
+        obsidian: '#121214',
       },
       fontFamily: {
         sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],

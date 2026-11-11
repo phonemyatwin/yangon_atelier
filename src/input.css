@@ -4,6 +4,6 @@
 
 @layer base {
   body {
-    @apply bg-[#FAF8F5] text-stone-900 antialiased font-sans;
+    @apply bg-[#FAFAFA] text-zinc-900 antialiased font-sans selection:bg-zinc-900 selection:text-white;
   }
 }

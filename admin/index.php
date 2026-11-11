@@ -10,7 +10,7 @@
     <?php include "components/css.php"; ?>
 </head>
 
-<body class="bg-[#1C1512] text-stone-100 font-sans min-h-screen flex items-center justify-center p-4 selection:bg-amber-800 selection:text-white">
+<body class="bg-zinc-950 text-zinc-100 font-sans min-h-screen flex items-center justify-center p-4 selection:bg-zinc-800 selection:text-white antialiased">
     <div class="w-full max-w-md">
         <!-- Brand Header -->
         <div class="text-center mb-8">
@@ -18,56 +18,56 @@
                 F
             </div>
             <h1 class="font-serif text-2xl sm:text-3xl font-medium tracking-tight text-white">FurnishMe Atelier</h1>
-            <p class="text-xs text-stone-400 uppercase tracking-[0.2em] mt-1.5 font-medium">Administrative Gateway</p>
+            <p class="text-xs text-zinc-400 uppercase tracking-[0.2em] mt-1.5 font-medium">Administrative Gateway</p>
         </div>
 
         <!-- Auth Card -->
-        <div class="bg-stone-900/90 backdrop-blur-lg border border-stone-800 rounded-3xl p-8 sm:p-10 shadow-2xl">
+        <div class="bg-zinc-900/90 backdrop-blur-lg border border-zinc-800 rounded-3xl p-8 sm:p-10 shadow-2xl">
             <div class="mb-6">
                 <h2 class="text-lg font-medium text-white">Sign In to Workspace</h2>
-                <p class="text-xs text-stone-400 mt-1">Enter your administrator credentials to manage products, editorial, and clients.</p>
+                <p class="text-xs text-zinc-400 mt-1">Enter your administrator credentials to manage products, editorial, and clients.</p>
             </div>
 
             <!-- [PHP_BACKEND_HOOK: Admin authentication handler. POST method, CSRF verification, password_verify against admin users, set $_SESSION['admin_user']] -->
             <form action="dashboard.php" method="POST" class="space-y-5">
                 <!-- Email -->
                 <div class="space-y-1.5">
-                    <label for="email" class="block text-xs font-semibold uppercase tracking-wider text-stone-300">
+                    <label for="email" class="block text-xs font-semibold uppercase tracking-wider text-zinc-300">
                         Admin Email
                     </label>
                     <div class="relative">
-                        <i class="ri-mail-line absolute left-4 top-1/2 -translate-y-1/2 text-stone-500 text-base"></i>
-                        <input type="email" id="email" name="email" required placeholder="admin@furnishme.com" value="admin@gmail.com" class="w-full pl-11 pr-4 py-3 bg-stone-800/80 border border-stone-700 rounded-xl text-white text-sm placeholder-stone-500 focus:outline-none focus:ring-2 focus:ring-amber-700 focus:border-amber-700 transition-all">
+                        <i class="ri-mail-line absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 text-base"></i>
+                        <input type="email" id="email" name="email" required placeholder="admin@furnishme.com" value="admin@gmail.com" class="w-full pl-11 pr-4 py-3 bg-zinc-800/80 border border-zinc-700 rounded-xl text-white text-sm placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-500 focus:border-zinc-500 transition-all">
                     </div>
                 </div>
 
                 <!-- Password -->
                 <div class="space-y-1.5">
-                    <label for="password" class="block text-xs font-semibold uppercase tracking-wider text-stone-300">
+                    <label for="password" class="block text-xs font-semibold uppercase tracking-wider text-zinc-300">
                         Password
                     </label>
                     <div class="relative">
-                        <i class="ri-lock-2-line absolute left-4 top-1/2 -translate-y-1/2 text-stone-500 text-base"></i>
-                        <input type="password" id="password" name="password" required placeholder="••••••••" value="password" class="w-full pl-11 pr-11 py-3 bg-stone-800/80 border border-stone-700 rounded-xl text-white text-sm placeholder-stone-500 focus:outline-none focus:ring-2 focus:ring-amber-700 focus:border-amber-700 transition-all">
+                        <i class="ri-lock-2-line absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500 text-base"></i>
+                        <input type="password" id="password" name="password" required placeholder="••••••••" value="password" class="w-full pl-11 pr-11 py-3 bg-zinc-800/80 border border-zinc-700 rounded-xl text-white text-sm placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-500 focus:border-zinc-500 transition-all">
                     </div>
                 </div>
 
                 <!-- Submit Button -->
-                <button type="submit" name="admin_login" class="w-full py-3.5 px-6 rounded-xl bg-amber-800 hover:bg-amber-700 text-white font-medium text-sm transition-all shadow-lg flex items-center justify-center gap-2 mt-2">
+                <button type="submit" name="admin_login" class="w-full py-3.5 px-6 rounded-xl bg-white hover:bg-zinc-200 text-zinc-950 font-medium text-sm transition-all shadow-lg flex items-center justify-center gap-2 mt-2">
                     <i class="ri-login-circle-line text-lg"></i>
                     <span>Access Dashboard</span>
                 </button>
             </form>
 
-            <div class="mt-8 pt-6 border-t border-stone-800 text-center">
-                <a href="../index.php" class="text-xs text-stone-400 hover:text-stone-200 transition-colors inline-flex items-center gap-1.5">
+            <div class="mt-8 pt-6 border-t border-zinc-800 text-center">
+                <a href="../index.php" class="text-xs text-zinc-400 hover:text-zinc-200 transition-colors inline-flex items-center gap-1.5">
                     <i class="ri-arrow-left-line"></i>
                     <span>Return to Public Storefront</span>
                 </a>
             </div>
         </div>
 
-        <p class="text-center text-[11px] text-stone-500 mt-6">
+        <p class="text-center text-[11px] text-zinc-500 mt-6">
             FurnishMe &copy; <?php echo date("Y"); ?> • Restricted Atelier Access
         </p>
     </div>
