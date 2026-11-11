@@ -44,7 +44,7 @@
                 </div>
                 <div class="grid grid-cols-2 gap-4 sm:gap-6">
                     <div class="rounded-2xl overflow-hidden aspect-square bg-stone-100 shadow-xs border border-stone-200/80">
-                        <img src="images/about-studio.jpg" alt="Showroom View" class="w-full h-full object-cover" loading="lazy">
+                        <img src="images/banner-workspace.jpg" alt="Design Atelier & Workspace" class="w-full h-full object-cover" loading="lazy">
                     </div>
                     <div class="rounded-2xl overflow-hidden aspect-square bg-stone-100 shadow-xs border border-stone-200/80">
                         <img src="images/banner-dining-room.jpg" alt="Craft Workshop" class="w-full h-full object-cover" loading="lazy">

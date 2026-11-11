@@ -45,19 +45,19 @@
                         <span>In Stock &amp; Ready for White-Glove Delivery</span>
                     </span>
                     <!-- [PHP_BACKEND_HOOK: Dynamic product main image: $product['image']] -->
-                    <img id="main-product-img" src="images/product-1.png" alt="Nordic Solid Wood Armchair" class="w-full h-full object-cover transition-all duration-300" loading="eager">
+                    <img id="main-product-img" src="images/chair-1.jpg" alt="Nordic Solid Wood Armchair" class="w-full h-full object-cover transition-all duration-300" loading="eager">
                 </div>
 
                 <!-- Gallery Thumbnails (Atelier Perspectives) -->
                 <div class="grid grid-cols-4 gap-4">
                     <button type="button" class="aspect-[4/3] rounded-2xl bg-stone-100 border-2 border-stone-900 overflow-hidden shadow-xs transition-all">
-                        <img src="images/product-1.png" alt="Front angle" class="w-full h-full object-cover">
+                        <img src="images/chair-1.jpg" alt="Front angle" class="w-full h-full object-cover">
                     </button>
                     <button type="button" class="aspect-[4/3] rounded-2xl bg-stone-100 border border-stone-200 hover:border-amber-800 overflow-hidden transition-all">
-                        <img src="images/chair-1.jpg" alt="Profile angle" class="w-full h-full object-cover">
+                        <img src="images/chair-2.jpg" alt="Curved profile angle" class="w-full h-full object-cover">
                     </button>
                     <button type="button" class="aspect-[4/3] rounded-2xl bg-stone-100 border border-stone-200 hover:border-amber-800 overflow-hidden transition-all">
-                        <img src="images/product-2.png" alt="Detail material" class="w-full h-full object-cover">
+                        <img src="images/chair-3.jpg" alt="Joinery craft detail" class="w-full h-full object-cover">
                     </button>
                     <button type="button" class="aspect-[4/3] rounded-2xl bg-stone-100 border border-stone-200 hover:border-amber-800 overflow-hidden transition-all">
                         <img src="images/banner-living-room.jpg" alt="Atmospheric room view" class="w-full h-full object-cover">
@@ -210,7 +210,7 @@
                 <div class="group bg-white rounded-2xl border border-stone-200/90 overflow-hidden transition-all duration-300 hover:shadow-md flex flex-col justify-between">
                     <div class="relative w-full aspect-[4/3] bg-stone-100 overflow-hidden flex items-center justify-center">
                         <a href="product_detail.php?id=2" class="w-full h-full block">
-                            <img src="images/product-2.png" alt="Curved Lounge Armchair" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                            <img src="images/chair-2.jpg" alt="Curved Lounge Armchair" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                         </a>
                     </div>
                     <div class="p-4">
@@ -228,7 +228,7 @@
                 <div class="group bg-white rounded-2xl border border-stone-200/90 overflow-hidden transition-all duration-300 hover:shadow-md flex flex-col justify-between">
                     <div class="relative w-full aspect-[4/3] bg-stone-100 overflow-hidden flex items-center justify-center">
                         <a href="product_detail.php?id=3" class="w-full h-full block">
-                            <img src="images/product-3.png" alt="Bouclé Modular Sofa" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                            <img src="images/sofa-1.jpg" alt="Bouclé Modular Sofa" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                         </a>
                     </div>
                     <div class="p-4">
@@ -246,7 +246,7 @@
                 <div class="group bg-white rounded-2xl border border-stone-200/90 overflow-hidden transition-all duration-300 hover:shadow-md flex flex-col justify-between">
                     <div class="relative w-full aspect-[4/3] bg-stone-100 overflow-hidden flex items-center justify-center">
                         <a href="product_detail.php?id=4" class="w-full h-full block">
-                            <img src="images/product-4.png" alt="Solid Oak Dining Table" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                            <img src="images/table-1.jpg" alt="Solid Oak Dining Table" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                         </a>
                     </div>
                     <div class="p-4">
@@ -264,15 +264,15 @@
                 <div class="group bg-white rounded-2xl border border-stone-200/90 overflow-hidden transition-all duration-300 hover:shadow-md flex flex-col justify-between">
                     <div class="relative w-full aspect-[4/3] bg-stone-100 overflow-hidden flex items-center justify-center">
                         <a href="product_detail.php?id=8" class="w-full h-full block">
-                            <img src="images/product-8.png" alt="Solid Walnut Dining Table" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                            <img src="images/table-3.jpg" alt="Polished Marble Low Coffee Table" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                         </a>
                     </div>
                     <div class="p-4">
                         <h4 class="font-serif text-sm font-medium text-stone-900 group-hover:text-amber-800 transition-colors">
-                            <a href="product_detail.php?id=8">Solid Walnut Executive Table</a>
+                            <a href="product_detail.php?id=8">Marble Low Coffee Table</a>
                         </h4>
                         <div class="pt-2 flex items-center justify-between text-xs">
-                            <span class="font-semibold text-stone-900">1,120,000 MMK</span>
+                            <span class="font-semibold text-stone-900">620,000 MMK</span>
                             <span class="text-stone-500">In stock</span>
                         </div>
                     </div>

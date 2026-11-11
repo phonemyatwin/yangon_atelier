@@ -77,7 +77,7 @@
                             <div class="flex flex-col sm:flex-row items-center gap-6 p-4 rounded-2xl bg-stone-50 border border-stone-200">
                                 <div class="w-24 h-24 rounded-xl bg-white border border-stone-200 p-2 flex items-center justify-center flex-shrink-0">
                                     <!-- [PHP_BACKEND_HOOK: Display current product image thumbnail] -->
-                                    <img id="product-preview" src="../images/product-1.png" alt="Current Piece" class="max-h-full max-w-full object-contain">
+                                    <img id="product-preview" src="../images/chair-1.jpg" alt="Current Piece" class="max-h-full max-w-full object-contain">
                                 </div>
                                 <div class="flex-1 space-y-1 text-center sm:text-left">
                                     <span class="text-xs font-medium text-stone-800 block">Replace Image (Optional)</span>

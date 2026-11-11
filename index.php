@@ -214,7 +214,7 @@
                             In Stock
                         </span>
                         <a href="product_detail.php?id=1" class="w-full h-full block">
-                            <img src="images/product-1.png" alt="Nordic Solid Wood Armchair" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                            <img src="images/chair-1.jpg" alt="Nordic Solid Wood Armchair" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                         </a>
                         <div class="absolute inset-0 bg-stone-950/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                             <a href="product_detail.php?id=1" class="w-10 h-10 rounded-full bg-white text-stone-900 hover:bg-stone-900 hover:text-white flex items-center justify-center shadow-md transition-colors" title="View Details">
@@ -243,7 +243,7 @@
                             In Stock
                         </span>
                         <a href="product_detail.php?id=2" class="w-full h-full block">
-                            <img src="images/product-2.png" alt="Curved Lounge Armchair" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                            <img src="images/chair-2.jpg" alt="Curved Lounge Armchair" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                         </a>
                         <div class="absolute inset-0 bg-stone-950/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                             <a href="product_detail.php?id=2" class="w-10 h-10 rounded-full bg-white text-stone-900 hover:bg-stone-900 hover:text-white flex items-center justify-center shadow-md transition-colors" title="View Details">
@@ -272,7 +272,7 @@
                             Low Stock
                         </span>
                         <a href="product_detail.php?id=3" class="w-full h-full block">
-                            <img src="images/product-3.png" alt="Bouclé Modular Sofa" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                            <img src="images/sofa-1.jpg" alt="Bouclé Modular Sofa" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                         </a>
                         <div class="absolute inset-0 bg-stone-950/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                             <a href="product_detail.php?id=3" class="w-10 h-10 rounded-full bg-white text-stone-900 hover:bg-stone-900 hover:text-white flex items-center justify-center shadow-md transition-colors" title="View Details">
@@ -301,7 +301,7 @@
                             In Stock
                         </span>
                         <a href="product_detail.php?id=4" class="w-full h-full block">
-                            <img src="images/product-4.png" alt="Solid Oak Dining Table" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                            <img src="images/table-1.jpg" alt="Solid Oak Dining Table" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                         </a>
                         <div class="absolute inset-0 bg-stone-950/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                             <a href="product_detail.php?id=4" class="w-10 h-10 rounded-full bg-white text-stone-900 hover:bg-stone-900 hover:text-white flex items-center justify-center shadow-md transition-colors" title="View Details">
@@ -319,6 +319,122 @@
                         <div class="pt-4 flex items-center justify-between border-t border-stone-200 mt-4">
                             <span class="text-sm font-semibold text-stone-900">890,000 MMK</span>
                             <span class="text-xs text-stone-500">14 available</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 5: Upholstered Platform Bed -->
+                <div class="group bg-[#FAF8F5] rounded-2xl border border-stone-200 overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-amber-900/40 flex flex-col justify-between">
+                    <div class="relative w-full aspect-[4/3] bg-stone-100 overflow-hidden flex items-center justify-center">
+                        <span class="absolute top-3 left-3 z-10 inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium bg-emerald-50 text-emerald-800 border border-emerald-200">
+                            In Stock
+                        </span>
+                        <a href="product_detail.php?id=5" class="w-full h-full block">
+                            <img src="images/bed-1.jpg" alt="Upholstered Platform Bed" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        </a>
+                        <div class="absolute inset-0 bg-stone-950/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                            <a href="product_detail.php?id=5" class="w-10 h-10 rounded-full bg-white text-stone-900 hover:bg-stone-900 hover:text-white flex items-center justify-center shadow-md transition-colors" title="View Details">
+                                <i class="ri-eye-line text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-5 flex flex-col flex-1 justify-between">
+                        <div>
+                            <span class="text-[11px] uppercase tracking-wider text-amber-800 font-medium">Beds &amp; Bedroom</span>
+                            <h3 class="font-serif text-base font-normal text-stone-900 group-hover:text-amber-900 transition-colors mt-0.5">
+                                <a href="product_detail.php?id=5">Upholstered Platform Bed</a>
+                            </h3>
+                        </div>
+                        <div class="pt-4 flex items-center justify-between border-t border-stone-200 mt-4">
+                            <span class="text-sm font-semibold text-stone-900">1,480,000 MMK</span>
+                            <span class="text-xs text-stone-500">10 available</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 6: Japandi Low Tatami Bed -->
+                <div class="group bg-[#FAF8F5] rounded-2xl border border-stone-200 overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-amber-900/40 flex flex-col justify-between">
+                    <div class="relative w-full aspect-[4/3] bg-stone-100 overflow-hidden flex items-center justify-center">
+                        <span class="absolute top-3 left-3 z-10 inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium bg-amber-50 text-amber-800 border border-amber-200">
+                            Low Stock
+                        </span>
+                        <a href="product_detail.php?id=6" class="w-full h-full block">
+                            <img src="images/bed-2.jpg" alt="Japandi Low Tatami Bed" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        </a>
+                        <div class="absolute inset-0 bg-stone-950/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                            <a href="product_detail.php?id=6" class="w-10 h-10 rounded-full bg-white text-stone-900 hover:bg-stone-900 hover:text-white flex items-center justify-center shadow-md transition-colors" title="View Details">
+                                <i class="ri-eye-line text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-5 flex flex-col flex-1 justify-between">
+                        <div>
+                            <span class="text-[11px] uppercase tracking-wider text-amber-800 font-medium">Beds &amp; Bedroom</span>
+                            <h3 class="font-serif text-base font-normal text-stone-900 group-hover:text-amber-900 transition-colors mt-0.5">
+                                <a href="product_detail.php?id=6">Japandi Low Tatami Bed</a>
+                            </h3>
+                        </div>
+                        <div class="pt-4 flex items-center justify-between border-t border-stone-200 mt-4">
+                            <span class="text-sm font-semibold text-stone-900">1,850,000 MMK</span>
+                            <span class="text-xs text-stone-500">5 available</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 7: Marble Low Coffee Table -->
+                <div class="group bg-[#FAF8F5] rounded-2xl border border-stone-200 overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-amber-900/40 flex flex-col justify-between">
+                    <div class="relative w-full aspect-[4/3] bg-stone-100 overflow-hidden flex items-center justify-center">
+                        <span class="absolute top-3 left-3 z-10 inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium bg-emerald-50 text-emerald-800 border border-emerald-200">
+                            In Stock
+                        </span>
+                        <a href="product_detail.php?id=7" class="w-full h-full block">
+                            <img src="images/table-3.jpg" alt="Marble Low Coffee Table" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        </a>
+                        <div class="absolute inset-0 bg-stone-950/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                            <a href="product_detail.php?id=7" class="w-10 h-10 rounded-full bg-white text-stone-900 hover:bg-stone-900 hover:text-white flex items-center justify-center shadow-md transition-colors" title="View Details">
+                                <i class="ri-eye-line text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-5 flex flex-col flex-1 justify-between">
+                        <div>
+                            <span class="text-[11px] uppercase tracking-wider text-amber-800 font-medium">Tables &amp; Living</span>
+                            <h3 class="font-serif text-base font-normal text-stone-900 group-hover:text-amber-900 transition-colors mt-0.5">
+                                <a href="product_detail.php?id=7">Marble Low Coffee Table</a>
+                            </h3>
+                        </div>
+                        <div class="pt-4 flex items-center justify-between border-t border-stone-200 mt-4">
+                            <span class="text-sm font-semibold text-stone-900">520,000 MMK</span>
+                            <span class="text-xs text-stone-500">18 available</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 8: Sculptural Ceramic Table Lamp -->
+                <div class="group bg-[#FAF8F5] rounded-2xl border border-stone-200 overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-amber-900/40 flex flex-col justify-between">
+                    <div class="relative w-full aspect-[4/3] bg-stone-100 overflow-hidden flex items-center justify-center">
+                        <span class="absolute top-3 left-3 z-10 inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium bg-emerald-50 text-emerald-800 border border-emerald-200">
+                            In Stock
+                        </span>
+                        <a href="product_detail.php?id=8" class="w-full h-full block">
+                            <img src="images/lamp-1.jpg" alt="Sculptural Ceramic Table Lamp" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        </a>
+                        <div class="absolute inset-0 bg-stone-950/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                            <a href="product_detail.php?id=8" class="w-10 h-10 rounded-full bg-white text-stone-900 hover:bg-stone-900 hover:text-white flex items-center justify-center shadow-md transition-colors" title="View Details">
+                                <i class="ri-eye-line text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-5 flex flex-col flex-1 justify-between">
+                        <div>
+                            <span class="text-[11px] uppercase tracking-wider text-amber-800 font-medium">Lighting &amp; Objects</span>
+                            <h3 class="font-serif text-base font-normal text-stone-900 group-hover:text-amber-900 transition-colors mt-0.5">
+                                <a href="product_detail.php?id=8">Sculptural Ceramic Table Lamp</a>
+                            </h3>
+                        </div>
+                        <div class="pt-4 flex items-center justify-between border-t border-stone-200 mt-4">
+                            <span class="text-sm font-semibold text-stone-900">195,000 MMK</span>
+                            <span class="text-xs text-stone-500">32 available</span>
                         </div>
                     </div>
                 </div>

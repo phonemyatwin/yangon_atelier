@@ -51,7 +51,7 @@
                     <!-- [PHP_BACKEND_HOOK: Query product by ID for deletion confirmation display (SELECT * FROM products WHERE id = :id)] -->
                     <div class="border border-stone-200 rounded-2xl p-5 mb-8 flex items-center gap-6">
                         <div class="w-20 h-20 rounded-xl bg-stone-100 border border-stone-200/80 p-2 flex items-center justify-center flex-shrink-0">
-                            <img src="../images/product-1.png" alt="Lounge Armchair" class="max-h-full max-w-full object-contain">
+                            <img src="../images/chair-1.jpg" alt="Lounge Armchair" class="max-h-full max-w-full object-contain">
                         </div>
                         <div class="space-y-1 text-xs">
                             <span class="text-stone-400 font-mono">Product #1</span>
