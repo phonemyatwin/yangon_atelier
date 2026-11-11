@@ -4,60 +4,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delete Team Member | FurnishMe</title>
+    <title>Delete Team Member | FurnishMe Admin</title>
     <link rel="icon" href="../images/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>
 
-<body class="admin__body">
-    <div class="admin__shell">
+<body class="bg-[#FAF8F5] text-stone-900 font-sans antialiased selection:bg-amber-100 selection:text-amber-900">
+    <div class="min-h-screen flex">
         <?php include "components/sidebar.php"; ?>
-        <div class="admin__main">
+
+        <div class="lg:pl-64 flex flex-col flex-1 min-w-0">
             <?php include "components/topbar.php"; ?>
-            <main class="admin__content">
-                <div class="panel">
-                    <div class="panel__head">
-                        <h3>delete member</h3>
-                        <a href="team.php" class="admin__btn sm ghost">cancel</a>
+
+            <main class="flex-1 p-4 sm:p-6 lg:p-8 max-w-3xl w-full mx-auto space-y-6">
+                
+                <!-- Heading -->
+                <div class="flex items-center justify-between">
+                    <div>
+                        <div class="flex items-center gap-2 text-xs text-stone-500 mb-1">
+                            <a href="dashboard.php" class="hover:text-stone-900">Dashboard</a>
+                            <span>/</span>
+                            <a href="team.php" class="hover:text-stone-900">Team</a>
+                            <span>/</span>
+                            <span class="text-rose-600 font-medium">Delete</span>
+                        </div>
+                        <h2 class="font-serif text-2xl sm:text-3xl font-medium text-stone-900">Confirm Member Deletion</h2>
                     </div>
-                    <div class="panel__body">
-                        <p style="font-size:1.5rem;color:var(--text-muted);margin-bottom:1.6rem;">Are you sure you want to delete this member?</p>
-                        <table class="admin__table" style="margin-bottom:2rem;">
-                            <thead>
-                                <tr>
-                                    <th>field</th>
-                                    <th>value</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>ID</td>
-                                    <td style="text-transform:none;">#1</td>
-                                </tr>
-                                <tr>
-                                    <td>Name</td>
-                                    <td style="text-transform:none;">john deo</td>
-                                </tr>
-                                <tr>
-                                    <td>Profile</td>
-                                    <td><img src="../images/team-1.jpg" alt="john deo" style="width:6rem;height:6rem;object-fit:cover;border-radius:.6rem;"></td>
-                                </tr>
-                                <tr>
-                                    <td>Position</td>
-                                    <td style="text-transform:none;">designer</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <form method="post" class="table__actions">
-                            <button type="submit" name="delete" class="admin__btn danger"><i class="ri-delete-bin-line"></i> confirm delete</button>
-                            <a href="team.php" class="admin__btn ghost">cancel</a>
-                        </form>
-                    </div>
+                    <a href="team.php" class="px-4 py-2 rounded-xl border border-stone-200 text-xs font-medium text-stone-700 hover:bg-white transition-colors">
+                        Cancel
+                    </a>
                 </div>
+
+                <!-- Confirmation Card -->
+                <div class="bg-white rounded-3xl border border-rose-200 p-6 sm:p-10 shadow-xs">
+                    <div class="flex items-start gap-4 p-4 rounded-2xl bg-rose-50 border border-rose-100 mb-6">
+                        <i class="ri-error-warning-line text-2xl text-rose-600 flex-shrink-0 mt-0.5"></i>
+                        <div>
+                            <h3 class="text-sm font-semibold text-rose-900">Permanent Member Removal</h3>
+                            <p class="text-xs text-rose-700 mt-1 leading-relaxed">
+                                Are you sure you wish to remove this artisan from the team list? This will remove their profile from the public About and Team sections.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Member Details Summary -->
+                    <!-- [PHP_BACKEND_HOOK: Query team member by ID for deletion confirmation (SELECT * FROM team WHERE id = :id)] -->
+                    <div class="border border-stone-200 rounded-2xl p-5 mb-8 flex items-center gap-5">
+                        <div class="w-16 h-20 rounded-xl bg-stone-100 border border-stone-200 overflow-hidden flex-shrink-0">
+                            <img src="../images/team-1.jpg" alt="Artisan portrait" class="w-full h-full object-cover">
+                        </div>
+                        <div class="space-y-1 text-xs">
+                            <span class="text-stone-400 font-mono">Member #1</span>
+                            <h4 class="font-serif text-base font-medium text-stone-900">Kyaw Zin Hein</h4>
+                            <p class="text-stone-500">Role: <strong class="text-stone-800">Principal Architect &amp; Founder</strong></p>
+                        </div>
+                    </div>
+
+                    <!-- [PHP_BACKEND_HOOK: Team member deletion handler. POST method, unlink image file if exists, execute DELETE FROM team WHERE id = :id] -->
+                    <form method="POST" class="flex items-center justify-end gap-3 pt-4 border-t border-stone-100">
+                        <input type="hidden" name="id" value="1">
+                        <a href="team.php" class="px-5 py-2.5 rounded-xl border border-stone-200 text-xs font-medium text-stone-700 hover:bg-stone-50 transition-colors">
+                            Cancel
+                        </a>
+                        <button type="submit" name="delete" class="px-5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-medium transition-colors shadow-xs flex items-center gap-2">
+                            <i class="ri-delete-bin-line text-sm"></i>
+                            <span>Confirm &amp; Delete Member</span>
+                        </button>
+                    </form>
+                </div>
+
             </main>
+
             <?php include "components/footer.php"; ?>
         </div>
     </div>
+
     <?php include "components/js.php"; ?>
 </body>
 

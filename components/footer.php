@@ -1,39 +1,99 @@
-    <section class="footer">
-        <div class="box__container">
-            <div class="box">
-                <h3>quick links</h3>
-                <a href="index.php"> <i class="ri-arrow-right-line"></i> home </a>
-                <a href="shop.php"> <i class="ri-arrow-right-line"></i> shop </a>
-                <a href="about.php"> <i class="ri-arrow-right-line"></i> about </a>
-                <a href="team.php"> <i class="ri-arrow-right-line"></i> team </a>
-                <a href="blog.php"> <i class="ri-arrow-right-line"></i> blog </a>
-                <a href="contact.php"> <i class="ri-arrow-right-line"></i> contact </a>
+<!-- [PHP_BACKEND_HOOK: Global storefront footer with atelier story and newsletter handler] -->
+<footer class="bg-stone-900 text-stone-300 pt-16 pb-12 border-t border-stone-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 pb-12 border-b border-stone-800">
+            <!-- Col 1: Atelier Story & Mission -->
+            <div class="space-y-4">
+                <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-full bg-stone-100 text-stone-950 flex items-center justify-center font-serif text-base font-semibold">F</span>
+                    <span class="font-serif text-xl tracking-tight text-white font-semibold">FurnishMe</span>
+                </div>
+                <p class="text-sm text-stone-400 leading-relaxed">
+                    A design atelier founded on the principles of Japanese simplicity and Scandinavian warmth. We curate tactile, sculptural furniture handcrafted from sustainably harvested woods and honest textiles.
+                </p>
+                <div class="flex items-center gap-3 pt-2">
+                    <a href="#" aria-label="Instagram" class="w-9 h-9 rounded-full bg-stone-800 hover:bg-stone-700 text-stone-300 hover:text-white flex items-center justify-center transition-colors">
+                        <i class="ri-instagram-line text-lg"></i>
+                    </a>
+                    <a href="#" aria-label="Pinterest" class="w-9 h-9 rounded-full bg-stone-800 hover:bg-stone-700 text-stone-300 hover:text-white flex items-center justify-center transition-colors">
+                        <i class="ri-pinterest-line text-lg"></i>
+                    </a>
+                    <a href="#" aria-label="Facebook" class="w-9 h-9 rounded-full bg-stone-800 hover:bg-stone-700 text-stone-300 hover:text-white flex items-center justify-center transition-colors">
+                        <i class="ri-facebook-circle-line text-lg"></i>
+                    </a>
+                    <a href="#" aria-label="LinkedIn" class="w-9 h-9 rounded-full bg-stone-800 hover:bg-stone-700 text-stone-300 hover:text-white flex items-center justify-center transition-colors">
+                        <i class="ri-linkedin-box-line text-lg"></i>
+                    </a>
+                </div>
             </div>
-            <div class="box">
-                <h3>extra links</h3>
-                <a href="#"> <i class="ri-arrow-right-line"></i> my wishlist </a>
-                <a href="#"> <i class="ri-arrow-right-line"></i> my account </a>
-                <a href="#"> <i class="ri-arrow-right-line"></i> my favorite </a>
-                <a href="#"> <i class="ri-arrow-right-line"></i> terms of user </a>
+
+            <!-- Col 2: Curated Links -->
+            <div>
+                <h4 class="text-xs uppercase tracking-[0.2em] text-stone-400 font-semibold mb-5">Atelier Collection</h4>
+                <ul class="space-y-3 text-sm">
+                    <li><a href="index.php" class="text-stone-300 hover:text-white transition-colors">Home &amp; Highlights</a></li>
+                    <li><a href="shop.php" class="text-stone-300 hover:text-white transition-colors">All Furniture</a></li>
+                    <li><a href="about.php" class="text-stone-300 hover:text-white transition-colors">Our Philosophy</a></li>
+                    <li><a href="team.php" class="text-stone-300 hover:text-white transition-colors">Design Collective</a></li>
+                    <li><a href="blog.php" class="text-stone-300 hover:text-white transition-colors">Design Journal</a></li>
+                    <li><a href="contact.php" class="text-stone-300 hover:text-white transition-colors">Showroom Inquiries</a></li>
+                </ul>
             </div>
-            <div class="box">
-                <h3>extra links</h3>
-                <a href="#"> <i class="ri-facebook-fill"></i> facebook </a>
-                <a href="#"> <i class="ri-twitter-fill"></i> twitter </a>
-                <a href="#"> <i class="ri-instagram-fill"></i> instagram </a>
-                <a href="#"> <i class="ri-linkedin-box-fill"></i> linkedin </a>
-                <a href="#"> <i class="ri-pinterest-fill"></i> pinterest </a>
+
+            <!-- Col 3: Customer Care & Showroom Info -->
+            <div>
+                <h4 class="text-xs uppercase tracking-[0.2em] text-stone-400 font-semibold mb-5">Concierge &amp; Showroom</h4>
+                <div class="space-y-3 text-sm text-stone-300">
+                    <p class="text-stone-400">
+                        <strong class="text-stone-200 block">Yangon Flagship</strong>
+                        No. 42, Inya Road, Bahan Township,<br>Yangon, Myanmar
+                    </p>
+                    <p class="text-stone-400 pt-1">
+                        <span class="block text-stone-200 font-medium">Visiting Hours</span>
+                        Tue — Sun: 09:30 AM — 06:30 PM<br>
+                        (Closed on Mondays)
+                    </p>
+                    <p class="text-stone-400 pt-1">
+                        <span class="block text-stone-200 font-medium">Direct Inquiries</span>
+                        <a href="tel:+959123456789" class="hover:text-white transition-colors">+95 9 123 456 789</a><br>
+                        <a href="mailto:atelier@furnishme.com" class="hover:text-white transition-colors">atelier@furnishme.com</a>
+                    </p>
+                </div>
             </div>
-            <div class="box">
-                <h3>newsletter</h3>
-                <p>subscribe for latest updates</p>
-                <form action="#">
-                    <input type="email" name="" placeholder="enter your email" id="">
-                    <input type="submit" value="subscribe" class="btn">
+
+            <!-- Col 4: Editorial Newsletter -->
+            <div>
+                <h4 class="text-xs uppercase tracking-[0.2em] text-stone-400 font-semibold mb-5">The Atelier Journal</h4>
+                <p class="text-sm text-stone-400 leading-relaxed mb-4">
+                    Subscribe for seasonal lookbooks, tactile wood release previews, and invitations to private showroom vernissages.
+                </p>
+                <!-- [PHP_BACKEND_HOOK: Newsletter subscription handler. Post email to subscribers table, validate format, prevent duplicates] -->
+                <form action="#" method="POST" data-toast-success="Thank you for subscribing to our journal." class="space-y-3">
+                    <div class="relative">
+                        <input type="email" name="subscriber_email" placeholder="Enter your email address" required class="w-full px-4 py-3 bg-stone-800/80 border border-stone-700 rounded-xl text-stone-100 placeholder-stone-500 text-sm focus:outline-none focus:border-stone-400 focus:ring-1 focus:ring-stone-400 transition-all">
+                    </div>
+                    <button type="submit" class="w-full py-3 px-4 rounded-xl bg-stone-100 hover:bg-white text-stone-900 font-medium text-sm transition-colors flex items-center justify-center gap-2">
+                        <span>Subscribe</span>
+                        <i class="ri-arrow-right-line"></i>
+                    </button>
                 </form>
             </div>
         </div>
-    </section>
-    <section class="credit">
-        coded by Developer Daniel | all rights reserved!
-    </section>
+
+        <!-- Bottom Copyright & Credits -->
+        <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-stone-500 gap-4">
+            <p>&copy; <?php echo date("Y"); ?> FurnishMe Atelier. All rights reserved.</p>
+            <div class="flex items-center gap-6">
+                <a href="#" class="hover:text-stone-400 transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-stone-400 transition-colors">Terms of Service</a>
+                <a href="#" class="hover:text-stone-400 transition-colors">Care Instructions</a>
+                <a href="admin/index.php" class="text-stone-500 hover:text-stone-400 transition-colors flex items-center gap-1">
+                    <i class="ri-shield-keyhole-line"></i> Atelier Portal
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Toast Feedback Notifications Container -->
+<div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col gap-3 pointer-events-none"></div>

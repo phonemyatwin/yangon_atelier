@@ -4,77 +4,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contacts | FurnishMe</title>
+    <title>Inquiries &amp; Messages | FurnishMe Atelier Admin</title>
     <link rel="icon" href="../images/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>
 
-<body class="admin__body">
-    <div class="admin__shell">
+<body class="bg-[#FAF8F5] text-stone-900 font-sans antialiased selection:bg-amber-100 selection:text-amber-900">
+    <div class="min-h-screen flex">
         <?php include "components/sidebar.php"; ?>
-        <div class="admin__main">
+
+        <div class="lg:pl-64 flex flex-col flex-1 min-w-0">
             <?php include "components/topbar.php"; ?>
-            <main class="admin__content">
-                <div class="panel">
-                    <div class="panel__head">
-                        <h3>contact messages</h3>
+
+            <main class="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto space-y-6">
+                
+                <!-- Page Header -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                        <div class="flex items-center gap-2 text-xs text-stone-500 mb-1">
+                            <a href="dashboard.php" class="hover:text-stone-900">Dashboard</a>
+                            <span>/</span>
+                            <span class="text-stone-800 font-medium">Inquiries</span>
+                        </div>
+                        <h2 class="font-serif text-2xl sm:text-3xl font-medium text-stone-900">Showroom Inquiries &amp; Messages</h2>
                     </div>
-                    <div class="panel__body flush">
-                        <table class="admin__table">
+                </div>
+
+                <!-- Table Card -->
+                <div class="bg-white rounded-3xl border border-stone-200 overflow-hidden shadow-xs">
+                    <div class="p-5 border-b border-stone-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div class="text-xs text-stone-500">
+                            Showing customer messages from website contact form
+                        </div>
+                        <div class="relative sm:w-64">
+                            <i class="ri-search-line absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 text-xs"></i>
+                            <input type="text" placeholder="Filter messages..." class="w-full pl-8 pr-3 py-1.5 bg-stone-50 border border-stone-200 rounded-lg text-xs placeholder-stone-400 focus:outline-none focus:ring-1 focus:ring-stone-800">
+                        </div>
+                    </div>
+
+                    <!-- [PHP_BACKEND_HOOK: Dynamic contacts table loop: SELECT * FROM contacts ORDER BY id DESC. Use foreach($contacts as $contact) to render: $contact['id'], $contact['name'], $contact['email'], $contact['number'], $contact['created_at']] -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse text-xs">
                             <thead>
-                                <tr>
-                                    <th>id</th>
-                                    <th>name</th>
-                                    <th>email</th>
-                                    <th>number</th>
-                                    <th>actions</th>
+                                <tr class="bg-stone-50/80 border-b border-stone-200/80 text-stone-500 uppercase tracking-wider font-semibold">
+                                    <th class="py-3.5 px-6">ID</th>
+                                    <th class="py-3.5 px-6">Client Name</th>
+                                    <th class="py-3.5 px-6">Email Address</th>
+                                    <th class="py-3.5 px-6">Phone Number</th>
+                                    <th class="py-3.5 px-6">Status</th>
+                                    <th class="py-3.5 px-6 text-right">Actions</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>#1</td>
-                                    <td>Aung Min</td>
-                                    <td style="text-transform:none;">aungmin@gmail.com</td>
-                                    <td style="text-transform:none;">09123456789</td>
-                                    <td>
-                                        <div class="table__actions">
-                                            <a class="admin__btn sm ghost" href="contact_view.php?id=1"><i class="ri-eye-line"></i> view</a>
-                                            <a class="admin__btn sm danger" href="contact_delete.php?id=1"><i class="ri-delete-bin-line"></i> delete</a>
+                            <tbody class="divide-y divide-stone-100 text-stone-700 font-medium">
+                                
+                                <!-- Contact 1 -->
+                                <tr class="hover:bg-stone-50/60 transition-colors">
+                                    <td class="py-4 px-6 text-stone-400">#1</td>
+                                    <td class="py-4 px-6 font-semibold text-stone-900 text-sm">Aung Min</td>
+                                    <td class="py-4 px-6 text-stone-600 font-mono text-xs">aungmin@gmail.com</td>
+                                    <td class="py-4 px-6 text-stone-600">09123456789</td>
+                                    <td class="py-4 px-6">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-amber-50 text-amber-700 border border-amber-200">
+                                            New Message
+                                        </span>
+                                    </td>
+                                    <td class="py-4 px-6 text-right">
+                                        <div class="inline-flex items-center gap-2">
+                                            <a href="contact_view.php?id=1" class="px-2.5 py-1 rounded-lg border border-stone-200 hover:bg-stone-100 text-stone-700 transition-colors flex items-center gap-1">
+                                                <i class="ri-eye-line"></i> View
+                                            </a>
+                                            <a href="contact_delete.php?id=1" class="px-2.5 py-1 rounded-lg border border-rose-200 hover:bg-rose-50 text-rose-600 transition-colors flex items-center gap-1">
+                                                <i class="ri-delete-bin-line"></i> Delete
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>#2</td>
-                                    <td>Su Su</td>
-                                    <td style="text-transform:none;">susu@gmail.com</td>
-                                    <td style="text-transform:none;">09987654321</td>
-                                    <td>
-                                        <div class="table__actions">
-                                            <a class="admin__btn sm ghost" href="contact_view.php?id=2"><i class="ri-eye-line"></i> view</a>
-                                            <a class="admin__btn sm danger" href="contact_delete.php?id=2"><i class="ri-delete-bin-line"></i> delete</a>
+
+                                <!-- Contact 2 -->
+                                <tr class="hover:bg-stone-50/60 transition-colors">
+                                    <td class="py-4 px-6 text-stone-400">#2</td>
+                                    <td class="py-4 px-6 font-semibold text-stone-900 text-sm">Su Su</td>
+                                    <td class="py-4 px-6 text-stone-600 font-mono text-xs">susu@gmail.com</td>
+                                    <td class="py-4 px-6 text-stone-600">09987654321</td>
+                                    <td class="py-4 px-6">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                            Followed Up
+                                        </span>
+                                    </td>
+                                    <td class="py-4 px-6 text-right">
+                                        <div class="inline-flex items-center gap-2">
+                                            <a href="contact_view.php?id=2" class="px-2.5 py-1 rounded-lg border border-stone-200 hover:bg-stone-100 text-stone-700 transition-colors flex items-center gap-1">
+                                                <i class="ri-eye-line"></i> View
+                                            </a>
+                                            <a href="contact_delete.php?id=2" class="px-2.5 py-1 rounded-lg border border-rose-200 hover:bg-rose-50 text-rose-600 transition-colors flex items-center gap-1">
+                                                <i class="ri-delete-bin-line"></i> Delete
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>#3</td>
-                                    <td>Ko Ko</td>
-                                    <td style="text-transform:none;">koko@gmail.com</td>
-                                    <td style="text-transform:none;">09771234567</td>
-                                    <td>
-                                        <div class="table__actions">
-                                            <a class="admin__btn sm ghost" href="contact_view.php?id=3"><i class="ri-eye-line"></i> view</a>
-                                            <a class="admin__btn sm danger" href="contact_delete.php?id=3"><i class="ri-delete-bin-line"></i> delete</a>
+
+                                <!-- Contact 3 -->
+                                <tr class="hover:bg-stone-50/60 transition-colors">
+                                    <td class="py-4 px-6 text-stone-400">#3</td>
+                                    <td class="py-4 px-6 font-semibold text-stone-900 text-sm">Ko Ko</td>
+                                    <td class="py-4 px-6 text-stone-600 font-mono text-xs">koko@gmail.com</td>
+                                    <td class="py-4 px-6 text-stone-600">09456123789</td>
+                                    <td class="py-4 px-6">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-stone-100 text-stone-600">
+                                            Archived
+                                        </span>
+                                    </td>
+                                    <td class="py-4 px-6 text-right">
+                                        <div class="inline-flex items-center gap-2">
+                                            <a href="contact_view.php?id=3" class="px-2.5 py-1 rounded-lg border border-stone-200 hover:bg-stone-100 text-stone-700 transition-colors flex items-center gap-1">
+                                                <i class="ri-eye-line"></i> View
+                                            </a>
+                                            <a href="contact_delete.php?id=3" class="px-2.5 py-1 rounded-lg border border-rose-200 hover:bg-rose-50 text-rose-600 transition-colors flex items-center gap-1">
+                                                <i class="ri-delete-bin-line"></i> Delete
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>
+
                             </tbody>
                         </table>
                     </div>
                 </div>
+
             </main>
+
             <?php include "components/footer.php"; ?>
         </div>
     </div>
+
     <?php include "components/js.php"; ?>
 </body>
 

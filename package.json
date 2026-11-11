@@ -1,0 +1,11 @@
+{
+  "name": "furnishme",
+  "version": "1.0.0",
+  "description": "FurnishMe Luxury Furniture E-Commerce Atelier",
+  "scripts": {
+    "build:css": "npx tailwindcss -i ./src/input.css -o ./css/style.css --minify && npx tailwindcss -i ./src/input.css -o ./admin/css/admin.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}
