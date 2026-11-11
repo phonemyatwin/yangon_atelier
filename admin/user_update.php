@@ -9,7 +9,7 @@
     <?php include "components/css.php"; ?>
 </head>
 
-<body class="bg-[#FAFAFA] text-zinc-900 font-sans antialiased selection:bg-zinc-900 selection:text-white">
+<body class="bg-[#FAF8F5] text-stone-900 font-sans antialiased selection:bg-amber-900 selection:text-white">
     <div class="min-h-screen flex">
         <?php include "components/sidebar.php"; ?>
 
@@ -21,66 +21,66 @@
                 <!-- Heading -->
                 <div class="flex items-center justify-between">
                     <div>
-                        <div class="flex items-center gap-2 text-xs text-zinc-500 mb-1">
-                            <a href="dashboard.php" class="hover:text-zinc-900">Dashboard</a>
+                        <div class="flex items-center gap-2 text-xs text-stone-500 mb-1">
+                            <a href="dashboard.php" class="hover:text-stone-900">Dashboard</a>
                             <span>/</span>
-                            <a href="users.php" class="hover:text-zinc-900">Users</a>
+                            <a href="users.php" class="hover:text-stone-900">Users</a>
                             <span>/</span>
-                            <span class="text-zinc-800 font-medium">Edit User</span>
+                            <span class="text-stone-800 font-medium">Edit User</span>
                         </div>
-                        <h2 class="font-serif text-2xl sm:text-3xl font-medium text-zinc-900">Edit User Account</h2>
+                        <h2 class="font-serif text-2xl sm:text-3xl font-medium text-stone-900">Edit User Account</h2>
                     </div>
-                    <a href="users.php" class="px-4 py-2 rounded-xl border border-zinc-200 text-xs font-medium text-zinc-700 hover:bg-white transition-colors">
+                    <a href="users.php" class="px-4 py-2 rounded-xl border border-stone-200 text-xs font-medium text-stone-700 hover:bg-white transition-colors">
                         Back to List
                     </a>
                 </div>
 
                 <!-- Form Card -->
-                <div class="bg-white rounded-3xl border border-zinc-200 p-6 sm:p-10 shadow-xs">
+                <div class="bg-white rounded-3xl border border-stone-200/90 p-6 sm:p-10 shadow-xs">
                     <!-- [PHP_BACKEND_HOOK: User update handler. Method: POST. Sanitize inputs, check if password changed (if so hash new password), UPDATE users SET username = :username, email = :email WHERE id = :id] -->
                     <form method="POST" class="space-y-5">
                         <input type="hidden" name="id" value="1">
 
                         <!-- Username -->
                         <div class="space-y-1.5">
-                            <label for="username" class="block text-xs font-semibold uppercase tracking-wider text-zinc-700">
+                            <label for="username" class="block text-xs font-semibold uppercase tracking-wider text-stone-700">
                                 Username <span class="text-rose-600">*</span>
                             </label>
                             <div class="relative">
-                                <i class="ri-user-line absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 text-base"></i>
-                                <input type="text" id="username" name="username" required value="admin" class="w-full pl-11 pr-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl text-zinc-900 text-sm placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-800 focus:border-zinc-800 transition-all">
+                                <i class="ri-user-line absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 text-base"></i>
+                                <input type="text" id="username" name="username" required value="admin" class="w-full pl-11 pr-4 py-3 bg-stone-50 border border-stone-200 rounded-xl text-stone-900 text-sm placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-amber-900 focus:border-amber-900 transition-all">
                             </div>
                         </div>
 
                         <!-- Email -->
                         <div class="space-y-1.5">
-                            <label for="email" class="block text-xs font-semibold uppercase tracking-wider text-zinc-700">
+                            <label for="email" class="block text-xs font-semibold uppercase tracking-wider text-stone-700">
                                 Email Address <span class="text-rose-600">*</span>
                             </label>
                             <div class="relative">
-                                <i class="ri-mail-line absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 text-base"></i>
-                                <input type="email" id="email" name="email" required value="admin@gmail.com" class="w-full pl-11 pr-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl text-zinc-900 text-sm placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-800 focus:border-zinc-800 transition-all">
+                                <i class="ri-mail-line absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 text-base"></i>
+                                <input type="email" id="email" name="email" required value="admin@gmail.com" class="w-full pl-11 pr-4 py-3 bg-stone-50 border border-stone-200 rounded-xl text-stone-900 text-sm placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-amber-900 focus:border-amber-900 transition-all">
                             </div>
                         </div>
 
                         <!-- Optional Password Change -->
-                        <div class="space-y-1.5 pt-2 border-t border-zinc-100">
-                            <label for="password" class="block text-xs font-semibold uppercase tracking-wider text-zinc-700">
+                        <div class="space-y-1.5 pt-2 border-t border-stone-100">
+                            <label for="password" class="block text-xs font-semibold uppercase tracking-wider text-stone-700">
                                 Reset Password (Optional)
                             </label>
                             <div class="relative">
-                                <i class="ri-lock-2-line absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 text-base"></i>
-                                <input type="password" id="password" name="password" placeholder="Leave empty to keep existing password" class="w-full pl-11 pr-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl text-zinc-900 text-sm placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-800 focus:border-zinc-800 transition-all">
+                                <i class="ri-lock-2-line absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 text-base"></i>
+                                <input type="password" id="password" name="password" placeholder="Leave empty to keep existing password" class="w-full pl-11 pr-4 py-3 bg-stone-50 border border-stone-200 rounded-xl text-stone-900 text-sm placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-amber-900 focus:border-amber-900 transition-all">
                             </div>
-                            <span class="text-[11px] text-zinc-400">Only fill this if you want to replace the user's password.</span>
+                            <span class="text-[11px] text-stone-400">Only fill this if you want to replace the user's password.</span>
                         </div>
 
                         <!-- Form Actions -->
-                        <div class="pt-4 border-t border-zinc-100 flex items-center justify-end gap-3">
-                            <a href="users.php" class="px-5 py-3 rounded-xl border border-zinc-200 text-xs font-medium text-zinc-700 hover:bg-zinc-50 transition-colors">
+                        <div class="pt-4 border-t border-stone-100 flex items-center justify-end gap-3">
+                            <a href="users.php" class="px-5 py-3 rounded-xl border border-stone-200 text-xs font-medium text-stone-700 hover:bg-stone-50 transition-colors">
                                 Cancel
                             </a>
-                            <button type="submit" name="update" class="px-6 py-3 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white text-xs font-medium transition-colors shadow-xs flex items-center gap-2">
+                            <button type="submit" name="update" class="px-6 py-3 rounded-xl bg-stone-900 hover:bg-amber-900 text-white text-xs font-medium transition-colors shadow-xs flex items-center gap-2">
                                 <i class="ri-save-line text-sm"></i>
                                 <span>Save Changes</span>
                             </button>

@@ -9,7 +9,7 @@
     <?php include "components/css.php"; ?>
 </head>
 
-<body class="bg-[#FAFAFA] text-zinc-900 font-sans antialiased selection:bg-zinc-900 selection:text-white">
+<body class="bg-[#FAF8F5] text-stone-900 font-sans antialiased selection:bg-amber-900 selection:text-white">
     <div class="min-h-screen flex">
         <?php include "components/sidebar.php"; ?>
 
@@ -21,16 +21,16 @@
                 <!-- Heading -->
                 <div class="flex items-center justify-between">
                     <div>
-                        <div class="flex items-center gap-2 text-xs text-zinc-500 mb-1">
-                            <a href="dashboard.php" class="hover:text-zinc-900">Dashboard</a>
+                        <div class="flex items-center gap-2 text-xs text-stone-500 mb-1">
+                            <a href="dashboard.php" class="hover:text-stone-900">Dashboard</a>
                             <span>/</span>
-                            <a href="users.php" class="hover:text-zinc-900">Users</a>
+                            <a href="users.php" class="hover:text-stone-900">Users</a>
                             <span>/</span>
                             <span class="text-rose-600 font-medium">Delete</span>
                         </div>
-                        <h2 class="font-serif text-2xl sm:text-3xl font-medium text-zinc-900">Confirm User Deletion</h2>
+                        <h2 class="font-serif text-2xl sm:text-3xl font-medium text-stone-900">Confirm User Deletion</h2>
                     </div>
-                    <a href="users.php" class="px-4 py-2 rounded-xl border border-zinc-200 text-xs font-medium text-zinc-700 hover:bg-white transition-colors">
+                    <a href="users.php" class="px-4 py-2 rounded-xl border border-stone-200 text-xs font-medium text-stone-700 hover:bg-white transition-colors">
                         Cancel
                     </a>
                 </div>
@@ -49,21 +49,21 @@
 
                     <!-- User Details Summary -->
                     <!-- [PHP_BACKEND_HOOK: Query user details by ID for deletion confirmation (SELECT * FROM users WHERE id = :id)] -->
-                    <div class="border border-zinc-200 rounded-2xl p-5 mb-8 flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-full bg-zinc-900 text-white flex items-center justify-center font-serif text-sm font-semibold flex-shrink-0">
+                    <div class="border border-stone-200 rounded-2xl p-5 mb-8 flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-stone-900 text-white flex items-center justify-center font-serif text-sm font-semibold flex-shrink-0">
                             AD
                         </div>
                         <div class="space-y-0.5 text-xs">
-                            <span class="text-zinc-400 font-mono">User #1</span>
-                            <h4 class="font-semibold text-zinc-900 text-sm">admin</h4>
-                            <p class="text-zinc-500">Email: <span class="font-mono text-zinc-800">admin@gmail.com</span></p>
+                            <span class="text-stone-400 font-mono">User #1</span>
+                            <h4 class="font-semibold text-stone-900 text-sm">admin</h4>
+                            <p class="text-stone-500">Email: <span class="font-mono text-stone-800">admin@gmail.com</span></p>
                         </div>
                     </div>
 
                     <!-- [PHP_BACKEND_HOOK: User deletion handler. POST method, prevent deleting self/last admin account, execute DELETE FROM users WHERE id = :id] -->
-                    <form method="POST" class="flex items-center justify-end gap-3 pt-4 border-t border-zinc-100">
+                    <form method="POST" class="flex items-center justify-end gap-3 pt-4 border-t border-stone-100">
                         <input type="hidden" name="id" value="1">
-                        <a href="users.php" class="px-5 py-2.5 rounded-xl border border-zinc-200 text-xs font-medium text-zinc-700 hover:bg-zinc-50 transition-colors">
+                        <a href="users.php" class="px-5 py-2.5 rounded-xl border border-stone-200 text-xs font-medium text-stone-700 hover:bg-stone-50 transition-colors">
                             Cancel
                         </a>
                         <button type="submit" name="delete" class="px-5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-medium transition-colors shadow-xs flex items-center gap-2">

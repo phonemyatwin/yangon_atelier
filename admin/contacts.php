@@ -9,7 +9,7 @@
     <?php include "components/css.php"; ?>
 </head>
 
-<body class="bg-[#FAFAFA] text-zinc-900 font-sans antialiased selection:bg-zinc-900 selection:text-white">
+<body class="bg-[#FAF8F5] text-stone-900 font-sans antialiased selection:bg-amber-900 selection:text-white">
     <div class="min-h-screen flex">
         <?php include "components/sidebar.php"; ?>
 
@@ -21,24 +21,24 @@
                 <!-- Page Header -->
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
-                        <div class="flex items-center gap-2 text-xs text-zinc-500 mb-1">
-                            <a href="dashboard.php" class="hover:text-zinc-900">Dashboard</a>
+                        <div class="flex items-center gap-2 text-xs text-stone-500 mb-1">
+                            <a href="dashboard.php" class="hover:text-stone-900">Dashboard</a>
                             <span>/</span>
-                            <span class="text-zinc-800 font-medium">Inquiries</span>
+                            <span class="text-stone-800 font-medium">Inquiries</span>
                         </div>
-                        <h2 class="font-serif text-2xl sm:text-3xl font-medium text-zinc-900">Showroom Inquiries &amp; Messages</h2>
+                        <h2 class="font-serif text-2xl sm:text-3xl font-medium text-stone-900">Showroom Inquiries &amp; Messages</h2>
                     </div>
                 </div>
 
                 <!-- Table Card -->
-                <div class="bg-white rounded-3xl border border-zinc-200 overflow-hidden shadow-xs">
-                    <div class="p-5 border-b border-zinc-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                        <div class="text-xs text-zinc-500">
+                <div class="bg-white rounded-3xl border border-stone-200/90 overflow-hidden shadow-xs">
+                    <div class="p-5 border-b border-stone-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div class="text-xs text-stone-500">
                             Showing customer messages from website contact form
                         </div>
                         <div class="relative sm:w-64">
-                            <i class="ri-search-line absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 text-xs"></i>
-                            <input type="text" placeholder="Filter messages..." class="w-full pl-8 pr-3 py-1.5 bg-zinc-50 border border-zinc-200 rounded-lg text-xs placeholder-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-800">
+                            <i class="ri-search-line absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 text-xs"></i>
+                            <input type="text" placeholder="Filter messages..." class="w-full pl-8 pr-3 py-1.5 bg-stone-50 border border-stone-200 rounded-lg text-xs placeholder-stone-400 focus:outline-none focus:ring-1 focus:ring-amber-900">
                         </div>
                     </div>
 
@@ -46,7 +46,7 @@
                     <div class="overflow-x-auto">
                         <table class="w-full text-left border-collapse text-xs">
                             <thead>
-                                <tr class="bg-zinc-50/80 border-b border-zinc-200/80 text-zinc-500 uppercase tracking-wider font-semibold">
+                                <tr class="bg-stone-50/80 border-b border-stone-200/80 text-stone-500 uppercase tracking-wider font-semibold">
                                     <th class="py-3.5 px-6">ID</th>
                                     <th class="py-3.5 px-6">Client Name</th>
                                     <th class="py-3.5 px-6">Email Address</th>
@@ -55,22 +55,22 @@
                                     <th class="py-3.5 px-6 text-right">Actions</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-zinc-100 text-zinc-700 font-medium">
+                            <tbody class="divide-y divide-stone-100 text-stone-700 font-medium">
                                 
                                 <!-- Contact 1 -->
-                                <tr class="hover:bg-zinc-50/60 transition-colors">
-                                    <td class="py-4 px-6 text-zinc-400">#1</td>
-                                    <td class="py-4 px-6 font-semibold text-zinc-900 text-sm">Aung Min</td>
-                                    <td class="py-4 px-6 text-zinc-600 font-mono text-xs">aungmin@gmail.com</td>
-                                    <td class="py-4 px-6 text-zinc-600">09973383719</td>
+                                <tr class="hover:bg-stone-50/60 transition-colors">
+                                    <td class="py-4 px-6 text-stone-400">#1</td>
+                                    <td class="py-4 px-6 font-semibold text-stone-900 text-sm">Aung Min</td>
+                                    <td class="py-4 px-6 text-stone-600 font-mono text-xs">aungmin@gmail.com</td>
+                                    <td class="py-4 px-6 text-stone-600">09973383719</td>
                                     <td class="py-4 px-6">
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-amber-50 text-amber-700 border border-amber-200">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-amber-50 text-amber-800 border border-amber-200">
                                             New Message
                                         </span>
                                     </td>
                                     <td class="py-4 px-6 text-right">
                                         <div class="inline-flex items-center gap-2">
-                                            <a href="contact_view.php?id=1" class="px-2.5 py-1 rounded-lg border border-zinc-200 hover:bg-zinc-100 text-zinc-700 transition-colors flex items-center gap-1">
+                                            <a href="contact_view.php?id=1" class="px-2.5 py-1 rounded-lg border border-stone-200 hover:bg-stone-100 text-stone-700 transition-colors flex items-center gap-1">
                                                 <i class="ri-eye-line"></i> View
                                             </a>
                                             <a href="contact_delete.php?id=1" class="px-2.5 py-1 rounded-lg border border-rose-200 hover:bg-rose-50 text-rose-600 transition-colors flex items-center gap-1">
@@ -81,19 +81,19 @@
                                 </tr>
 
                                 <!-- Contact 2 -->
-                                <tr class="hover:bg-zinc-50/60 transition-colors">
-                                    <td class="py-4 px-6 text-zinc-400">#2</td>
-                                    <td class="py-4 px-6 font-semibold text-zinc-900 text-sm">Su Su</td>
-                                    <td class="py-4 px-6 text-zinc-600 font-mono text-xs">susu@gmail.com</td>
-                                    <td class="py-4 px-6 text-zinc-600">09421122846</td>
+                                <tr class="hover:bg-stone-50/60 transition-colors">
+                                    <td class="py-4 px-6 text-stone-400">#2</td>
+                                    <td class="py-4 px-6 font-semibold text-stone-900 text-sm">Su Su</td>
+                                    <td class="py-4 px-6 text-stone-600 font-mono text-xs">susu@gmail.com</td>
+                                    <td class="py-4 px-6 text-stone-600">09421122846</td>
                                     <td class="py-4 px-6">
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
                                             Followed Up
                                         </span>
                                     </td>
                                     <td class="py-4 px-6 text-right">
                                         <div class="inline-flex items-center gap-2">
-                                            <a href="contact_view.php?id=2" class="px-2.5 py-1 rounded-lg border border-zinc-200 hover:bg-zinc-100 text-zinc-700 transition-colors flex items-center gap-1">
+                                            <a href="contact_view.php?id=2" class="px-2.5 py-1 rounded-lg border border-stone-200 hover:bg-stone-100 text-stone-700 transition-colors flex items-center gap-1">
                                                 <i class="ri-eye-line"></i> View
                                             </a>
                                             <a href="contact_delete.php?id=2" class="px-2.5 py-1 rounded-lg border border-rose-200 hover:bg-rose-50 text-rose-600 transition-colors flex items-center gap-1">
@@ -104,19 +104,19 @@
                                 </tr>
 
                                 <!-- Contact 3 -->
-                                <tr class="hover:bg-zinc-50/60 transition-colors">
-                                    <td class="py-4 px-6 text-zinc-400">#3</td>
-                                    <td class="py-4 px-6 font-semibold text-zinc-900 text-sm">Ko Ko</td>
-                                    <td class="py-4 px-6 text-zinc-600 font-mono text-xs">koko@gmail.com</td>
-                                    <td class="py-4 px-6 text-zinc-600">09456123789</td>
+                                <tr class="hover:bg-stone-50/60 transition-colors">
+                                    <td class="py-4 px-6 text-stone-400">#3</td>
+                                    <td class="py-4 px-6 font-semibold text-stone-900 text-sm">Ko Ko</td>
+                                    <td class="py-4 px-6 text-stone-600 font-mono text-xs">koko@gmail.com</td>
+                                    <td class="py-4 px-6 text-stone-600">09456123789</td>
                                     <td class="py-4 px-6">
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-zinc-100 text-zinc-600">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-stone-100 text-stone-600">
                                             Archived
                                         </span>
                                     </td>
                                     <td class="py-4 px-6 text-right">
                                         <div class="inline-flex items-center gap-2">
-                                            <a href="contact_view.php?id=3" class="px-2.5 py-1 rounded-lg border border-zinc-200 hover:bg-zinc-100 text-zinc-700 transition-colors flex items-center gap-1">
+                                            <a href="contact_view.php?id=3" class="px-2.5 py-1 rounded-lg border border-stone-200 hover:bg-stone-100 text-stone-700 transition-colors flex items-center gap-1">
                                                 <i class="ri-eye-line"></i> View
                                             </a>
                                             <a href="contact_delete.php?id=3" class="px-2.5 py-1 rounded-lg border border-rose-200 hover:bg-rose-50 text-rose-600 transition-colors flex items-center gap-1">
