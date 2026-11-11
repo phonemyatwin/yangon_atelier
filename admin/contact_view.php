@@ -52,7 +52,7 @@
                         </div>
                         <div>
                             <span class="text-zinc-400 block mb-0.5">Phone / Viber</span>
-                            <a href="tel:09123456789" class="text-zinc-800 hover:underline font-mono block">09123456789</a>
+                            <a href="tel:09973383719" class="text-zinc-800 hover:underline font-mono block">09973383719</a>
                         </div>
                         <div>
                             <span class="text-zinc-400 block mb-0.5">Email Address</span>
@@ -69,7 +69,7 @@
                         <span class="text-xs uppercase tracking-widest text-zinc-400 font-semibold block">Message Body</span>
                         <div class="p-6 rounded-2xl bg-[#FAFAFA] border border-zinc-200/80 text-zinc-800 text-sm leading-relaxed">
                             <p>
-                                Hello, I would like to know more about your modern sofa collection and delivery options in Yangon. We are currently finishing an architectural residence in Bahan and looking for 2 living room modular lounge chairs and an oak dining set. Please contact me with availability and wood finishes. Thank you.
+                                Hello, I would like to know more about your modern sofa collection and delivery options in Yangon. We are currently finishing an architectural residence in Yankin and looking for 2 living room modular lounge chairs and an oak dining set. Please contact me with availability and wood finishes. Thank you.
                             </p>
                         </div>
                     </div>

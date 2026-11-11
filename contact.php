@@ -56,7 +56,7 @@
                         <div class="text-sm">
                             <strong class="text-zinc-900 font-medium block">Atelier Address</strong>
                             <p class="text-zinc-600 mt-0.5 leading-relaxed">
-                                No. 42, Inya Road, Bahan Township,<br>Yangon, Myanmar 11201
+                                No. 55A, Maggin Street, Yankin Township,<br>Yangon, Myanmar
                             </p>
                         </div>
                     </div>
@@ -80,8 +80,8 @@
                         </div>
                         <div class="text-sm">
                             <strong class="text-zinc-900 font-medium block">Telephone &amp; Viber</strong>
-                            <a href="tel:+959123456789" class="text-zinc-700 hover:text-zinc-950 transition-colors mt-0.5 block">+95 9 123 456 789</a>
-                            <a href="tel:+959987654321" class="text-zinc-700 hover:text-zinc-950 transition-colors block">+95 9 987 654 321</a>
+                            <a href="tel:+959973383719" class="text-zinc-700 hover:text-zinc-950 transition-colors mt-0.5 block">+95 9 973 383 719</a>
+                            <a href="tel:+959421122846" class="text-zinc-700 hover:text-zinc-950 transition-colors block">+95 9 421 122 846</a>
                         </div>
                     </div>
 
@@ -137,7 +137,7 @@
                                 </label>
                                 <div class="relative">
                                     <i class="ri-phone-line absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 text-base"></i>
-                                    <input type="tel" id="number" name="number" required placeholder="09 123 456 789" class="w-full pl-11 pr-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl text-zinc-900 text-sm placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-zinc-900 transition-all">
+                                    <input type="tel" id="number" name="number" required placeholder="09 973 383 719" class="w-full pl-11 pr-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl text-zinc-900 text-sm placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-900 focus:border-zinc-900 transition-all">
                                 </div>
                             </div>
 
@@ -178,7 +178,7 @@
         <div class="mt-16 sm:mt-20">
             <div class="mb-4">
                 <span class="text-xs uppercase tracking-widest text-zinc-400 font-semibold block">Map &amp; Directions</span>
-                <h3 class="font-serif text-xl font-normal text-zinc-900">Locate Our Bahan Atelier</h3>
+                <h3 class="font-serif text-xl font-normal text-zinc-900">Locate Our Yankin Atelier</h3>
             </div>
             <div class="w-full h-96 sm:h-[450px] rounded-3xl overflow-hidden border border-zinc-200 shadow-sm bg-zinc-100">
                 <iframe class="w-full h-full border-0"

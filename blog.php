@@ -98,8 +98,8 @@
                 </div>
                 <div class="px-6 pb-6 pt-4 border-t border-zinc-100 flex items-center justify-between">
                     <div class="flex items-center gap-2">
-                        <span class="w-7 h-7 rounded-full bg-zinc-100 text-zinc-700 flex items-center justify-center text-xs font-semibold">AM</span>
-                        <span class="text-xs font-medium text-zinc-700">Aung Myo Tun</span>
+                        <span class="w-7 h-7 rounded-full bg-zinc-100 text-zinc-700 flex items-center justify-center text-xs font-semibold">ST</span>
+                        <span class="text-xs font-medium text-zinc-700">Su Thinzar Htet</span>
                     </div>
                     <a href="blog_detail.php?id=2" class="text-xs font-semibold text-zinc-900 hover:text-amber-900 inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
                         <span>Read</span>
@@ -133,8 +133,8 @@
                 </div>
                 <div class="px-6 pb-6 pt-4 border-t border-zinc-100 flex items-center justify-between">
                     <div class="flex items-center gap-2">
-                        <span class="w-7 h-7 rounded-full bg-zinc-100 text-zinc-700 flex items-center justify-center text-xs font-semibold">TM</span>
-                        <span class="text-xs font-medium text-zinc-700">Thiri May</span>
+                        <span class="w-7 h-7 rounded-full bg-zinc-100 text-zinc-700 flex items-center justify-center text-xs font-semibold">TN</span>
+                        <span class="text-xs font-medium text-zinc-700">Thae Nay Nwe Soe</span>
                     </div>
                     <a href="blog_detail.php?id=3" class="text-xs font-semibold text-zinc-900 hover:text-amber-900 inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
                         <span>Read</span>
@@ -203,8 +203,8 @@
                 </div>
                 <div class="px-6 pb-6 pt-4 border-t border-zinc-100 flex items-center justify-between">
                     <div class="flex items-center gap-2">
-                        <span class="w-7 h-7 rounded-full bg-zinc-100 text-zinc-700 flex items-center justify-center text-xs font-semibold">MK</span>
-                        <span class="text-xs font-medium text-zinc-700">Min Khant Zaw</span>
+                        <span class="w-7 h-7 rounded-full bg-zinc-100 text-zinc-700 flex items-center justify-center text-xs font-semibold">NA</span>
+                        <span class="text-xs font-medium text-zinc-700">Nyi Nyi Aung</span>
                     </div>
                     <a href="blog_detail.php?id=5" class="text-xs font-semibold text-zinc-900 hover:text-amber-900 inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
                         <span>Read</span>
@@ -238,8 +238,8 @@
                 </div>
                 <div class="px-6 pb-6 pt-4 border-t border-zinc-100 flex items-center justify-between">
                     <div class="flex items-center gap-2">
-                        <span class="w-7 h-7 rounded-full bg-zinc-100 text-zinc-700 flex items-center justify-center text-xs font-semibold">KH</span>
-                        <span class="text-xs font-medium text-zinc-700">Kyaw Zin Hein</span>
+                        <span class="w-7 h-7 rounded-full bg-zinc-100 text-zinc-700 flex items-center justify-center text-xs font-semibold">PW</span>
+                        <span class="text-xs font-medium text-zinc-700">Phone Myat Win</span>
                     </div>
                     <a href="blog_detail.php?id=6" class="text-xs font-semibold text-zinc-900 hover:text-amber-900 inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
                         <span>Read</span>

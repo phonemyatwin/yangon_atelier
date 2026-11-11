@@ -48,7 +48,7 @@
                             </label>
                             <div class="relative">
                                 <i class="ri-user-line absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 text-base"></i>
-                                <input type="text" id="name" name="name" required value="Kyaw Zin Hein" class="w-full pl-11 pr-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl text-zinc-900 text-sm placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-800 focus:border-zinc-800 transition-all">
+                                <input type="text" id="name" name="name" required value="Phone Myat Win" class="w-full pl-11 pr-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl text-zinc-900 text-sm placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-800 focus:border-zinc-800 transition-all">
                             </div>
                         </div>
 

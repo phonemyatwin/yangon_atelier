@@ -99,7 +99,7 @@
                                         <span class="font-semibold text-zinc-900 block text-sm">Joinery Without Nails: The Heritage of Wood Craft</span>
                                         <span class="text-[11px] text-zinc-400">Artisanship • 6 min read</span>
                                     </td>
-                                    <td class="py-4 px-6 text-zinc-700">Aung Myo Tun</td>
+                                    <td class="py-4 px-6 text-zinc-700">Su Thinzar Htet</td>
                                     <td class="py-4 px-6 text-zinc-500">2026-04-28</td>
                                     <td class="py-4 px-6 text-right">
                                         <div class="inline-flex items-center gap-2">
@@ -125,7 +125,7 @@
                                         <span class="font-semibold text-zinc-900 block text-sm">Sculpting Ambient Light in Living Rooms</span>
                                         <span class="text-[11px] text-zinc-400">Lighting • 5 min read</span>
                                     </td>
-                                    <td class="py-4 px-6 text-zinc-700">Thiri May</td>
+                                    <td class="py-4 px-6 text-zinc-700">Thae Nay Nwe Soe</td>
                                     <td class="py-4 px-6 text-zinc-500">2026-04-14</td>
                                     <td class="py-4 px-6 text-right">
                                         <div class="inline-flex items-center gap-2">

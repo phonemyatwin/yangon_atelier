@@ -41,7 +41,7 @@
             <!-- Member 1 -->
             <article class="group bg-white rounded-3xl border border-zinc-200 overflow-hidden shadow-xs hover:shadow-xl transition-all duration-500 flex flex-col">
                 <div class="relative aspect-[4/5] bg-zinc-100 overflow-hidden">
-                    <img src="images/team-1.jpg" alt="Kyaw Zin Hein" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                    <img src="images/team-1.jpg" alt="Phone Myat Win" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
                         <div class="flex items-center gap-3 text-white">
                             <a href="#" aria-label="LinkedIn" class="w-9 h-9 rounded-full bg-white/20 backdrop-blur-md hover:bg-white hover:text-zinc-900 flex items-center justify-center text-sm transition-colors">
@@ -56,7 +56,7 @@
                 <div class="p-6 flex-1 flex flex-col justify-between">
                     <div>
                         <span class="text-xs font-semibold uppercase tracking-wider text-amber-800">Founder &amp; Principal Architect</span>
-                        <h3 class="font-serif text-xl font-normal text-zinc-900 mt-1">Kyaw Zin Hein</h3>
+                        <h3 class="font-serif text-xl font-normal text-zinc-900 mt-1">Phone Myat Win</h3>
                         <p class="text-xs text-zinc-600 mt-2 leading-relaxed">
                             Formally trained in Kyoto and Copenhagen, bringing twenty years of architectural proportioning and sustainable joinery research.
                         </p>
@@ -67,7 +67,7 @@
             <!-- Member 2 -->
             <article class="group bg-white rounded-3xl border border-zinc-200 overflow-hidden shadow-xs hover:shadow-xl transition-all duration-500 flex flex-col">
                 <div class="relative aspect-[4/5] bg-zinc-100 overflow-hidden">
-                    <img src="images/team-2.jpg" alt="Thiri May" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                    <img src="images/team-2.jpg" alt="Thae Nay Nwe Soe" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
                         <div class="flex items-center gap-3 text-white">
                             <a href="#" aria-label="LinkedIn" class="w-9 h-9 rounded-full bg-white/20 backdrop-blur-md hover:bg-white hover:text-zinc-900 flex items-center justify-center text-sm transition-colors">
@@ -82,7 +82,7 @@
                 <div class="p-6 flex-1 flex flex-col justify-between">
                     <div>
                         <span class="text-xs font-semibold uppercase tracking-wider text-amber-800">Head of Interior Ergonomics</span>
-                        <h3 class="font-serif text-xl font-normal text-zinc-900 mt-1">Thiri May</h3>
+                        <h3 class="font-serif text-xl font-normal text-zinc-900 mt-1">Thae Nay Nwe Soe</h3>
                         <p class="text-xs text-zinc-600 mt-2 leading-relaxed">
                             Directs user posture studies and spatial cadence to ensure every chair and daybed delivers profound restorative comfort.
                         </p>
@@ -93,7 +93,7 @@
             <!-- Member 3 -->
             <article class="group bg-white rounded-3xl border border-zinc-200 overflow-hidden shadow-xs hover:shadow-xl transition-all duration-500 flex flex-col">
                 <div class="relative aspect-[4/5] bg-zinc-100 overflow-hidden">
-                    <img src="images/team-3.jpg" alt="Aung Myo Tun" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                    <img src="images/team-3.jpg" alt="Su Thinzar Htet" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
                         <div class="flex items-center gap-3 text-white">
                             <a href="#" aria-label="LinkedIn" class="w-9 h-9 rounded-full bg-white/20 backdrop-blur-md hover:bg-white hover:text-zinc-900 flex items-center justify-center text-sm transition-colors">
@@ -108,7 +108,7 @@
                 <div class="p-6 flex-1 flex flex-col justify-between">
                     <div>
                         <span class="text-xs font-semibold uppercase tracking-wider text-amber-800">Master Wood Craftsman</span>
-                        <h3 class="font-serif text-xl font-normal text-zinc-900 mt-1">Aung Myo Tun</h3>
+                        <h3 class="font-serif text-xl font-normal text-zinc-900 mt-1">Su Thinzar Htet</h3>
                         <p class="text-xs text-zinc-600 mt-2 leading-relaxed">
                             Third-generation artisan supervising timber drying seasoning cycles, grain orientation, and precision joinery execution.
                         </p>
@@ -119,7 +119,7 @@
             <!-- Member 4 -->
             <article class="group bg-white rounded-3xl border border-zinc-200 overflow-hidden shadow-xs hover:shadow-xl transition-all duration-500 flex flex-col">
                 <div class="relative aspect-[4/5] bg-zinc-100 overflow-hidden">
-                    <img src="images/team-4.jpg" alt="Hnin Yu Nandar" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                    <img src="images/team-4.jpg" alt="Myat Chal Oo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
                         <div class="flex items-center gap-3 text-white">
                             <a href="#" aria-label="LinkedIn" class="w-9 h-9 rounded-full bg-white/20 backdrop-blur-md hover:bg-white hover:text-zinc-900 flex items-center justify-center text-sm transition-colors">
@@ -134,7 +134,7 @@
                 <div class="p-6 flex-1 flex flex-col justify-between">
                     <div>
                         <span class="text-xs font-semibold uppercase tracking-wider text-amber-800">Material &amp; Textile Curator</span>
-                        <h3 class="font-serif text-xl font-normal text-zinc-900 mt-1">Hnin Yu Nandar</h3>
+                        <h3 class="font-serif text-xl font-normal text-zinc-900 mt-1">Myat Chal Oo</h3>
                         <p class="text-xs text-zinc-600 mt-2 leading-relaxed">
                             Selects organic unbleached linens, vegetable-tanned hides, and hand-spun wool weaves from regional smallholder weavers.
                         </p>
@@ -145,7 +145,7 @@
             <!-- Member 5 -->
             <article class="group bg-white rounded-3xl border border-zinc-200 overflow-hidden shadow-xs hover:shadow-xl transition-all duration-500 flex flex-col justify-between">
                 <div class="relative aspect-[4/5] bg-zinc-100 overflow-hidden">
-                    <img src="images/team-5.jpg" alt="Min Khant Zaw" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                    <img src="images/team-5.jpg" alt="Nyi Nyi Aung" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
                         <div class="flex items-center gap-3 text-white">
                             <a href="#" aria-label="LinkedIn" class="w-9 h-9 rounded-full bg-white/20 backdrop-blur-md hover:bg-white hover:text-zinc-900 flex items-center justify-center text-sm transition-colors">
@@ -160,7 +160,7 @@
                 <div class="p-6 flex-1 flex flex-col justify-between">
                     <div>
                         <span class="text-xs font-semibold uppercase tracking-wider text-amber-800">Finishing Specialist</span>
-                        <h3 class="font-serif text-xl font-normal text-zinc-900 mt-1">Min Khant Zaw</h3>
+                        <h3 class="font-serif text-xl font-normal text-zinc-900 mt-1">Nyi Nyi Aung</h3>
                         <p class="text-xs text-zinc-600 mt-2 leading-relaxed">
                             Pioneered our low-sheen botanical wax and natural tung-oil formulation for tactile moisture protection.
                         </p>
@@ -171,7 +171,7 @@
             <!-- Member 6 -->
             <article class="group bg-white rounded-3xl border border-zinc-200 overflow-hidden shadow-xs hover:shadow-xl transition-all duration-500 flex flex-col justify-between">
                 <div class="relative aspect-[4/5] bg-zinc-100 overflow-hidden">
-                    <img src="images/team-6.jpg" alt="Su Myat Mon" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                    <img src="images/team-6.jpg" alt="Min Khant Naung" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
                         <div class="flex items-center gap-3 text-white">
                             <a href="#" aria-label="LinkedIn" class="w-9 h-9 rounded-full bg-white/20 backdrop-blur-md hover:bg-white hover:text-zinc-900 flex items-center justify-center text-sm transition-colors">
@@ -186,7 +186,7 @@
                 <div class="p-6 flex-1 flex flex-col justify-between">
                     <div>
                         <span class="text-xs font-semibold uppercase tracking-wider text-amber-800">Showroom Concierge Director</span>
-                        <h3 class="font-serif text-xl font-normal text-zinc-900 mt-1">Su Myat Mon</h3>
+                        <h3 class="font-serif text-xl font-normal text-zinc-900 mt-1">Min Khant Naung</h3>
                         <p class="text-xs text-zinc-600 mt-2 leading-relaxed">
                             Leads customized home spatial walkthroughs and oversees white-glove delivery scheduling throughout Myanmar.
                         </p>

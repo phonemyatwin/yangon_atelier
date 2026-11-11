@@ -50,7 +50,7 @@
     <div class="pt-6 border-t border-zinc-100">
         <div class="mb-4">
             <span class="text-xs uppercase tracking-widest text-zinc-400 font-medium block mb-1">Yangon Flagship</span>
-            <p class="text-xs text-zinc-600 leading-relaxed">No. 42, Inya Road, Bahan Township,<br>Yangon, Myanmar</p>
+            <p class="text-xs text-zinc-600 leading-relaxed">No. 55A, Maggin Street, Yankin Township,<br>Yangon, Myanmar</p>
             <p class="text-xs text-zinc-500 mt-1">Daily 09:30 AM — 06:30 PM</p>
         </div>
         <a href="login.php" class="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white text-sm font-medium transition-colors shadow-xs">

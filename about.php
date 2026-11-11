@@ -193,7 +193,7 @@
                 <span class="text-xs uppercase tracking-widest text-zinc-400 font-semibold">Private Viewing</span>
                 <h3 class="font-serif text-2xl sm:text-3xl font-normal text-white">Experience the Textures in Person</h3>
                 <p class="text-sm text-zinc-400 leading-relaxed">
-                    Schedule an appointment with one of our spatial curators at the Bahan Township showroom.
+                    Schedule an appointment with one of our spatial curators at the Yankin Township showroom.
                 </p>
             </div>
             <a href="contact.php" class="px-8 py-4 rounded-xl bg-white hover:bg-zinc-100 text-zinc-950 font-medium text-sm transition-colors whitespace-nowrap shadow-sm">

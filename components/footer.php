@@ -46,7 +46,7 @@
                 <div class="space-y-3 text-sm text-zinc-300">
                     <p class="text-zinc-400">
                         <strong class="text-zinc-200 block">Yangon Flagship</strong>
-                        No. 42, Inya Road, Bahan Township,<br>Yangon, Myanmar
+                        No. 55A, Maggin Street, Yankin Township,<br>Yangon, Myanmar
                     </p>
                     <p class="text-zinc-400 pt-1">
                         <span class="block text-zinc-200 font-medium">Visiting Hours</span>
@@ -55,7 +55,7 @@
                     </p>
                     <p class="text-zinc-400 pt-1">
                         <span class="block text-zinc-200 font-medium">Direct Inquiries</span>
-                        <a href="tel:+959123456789" class="hover:text-white transition-colors">+95 9 123 456 789</a><br>
+                        <a href="tel:+959973383719" class="hover:text-white transition-colors">+95 9 973 383 719</a><br>
                         <a href="mailto:atelier@furnishme.com" class="hover:text-white transition-colors">atelier@furnishme.com</a>
                     </p>
                 </div>

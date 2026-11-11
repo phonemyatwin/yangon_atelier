@@ -171,7 +171,7 @@
                                     <td class="py-4 px-6 text-zinc-400">#1</td>
                                     <td class="py-4 px-6 font-semibold text-zinc-900">Aung Min</td>
                                     <td class="py-4 px-6 text-zinc-600">aungmin@gmail.com</td>
-                                    <td class="py-4 px-6 text-zinc-600">09123456789</td>
+                                    <td class="py-4 px-6 text-zinc-600">09973383719</td>
                                     <td class="py-4 px-6">
                                         <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-amber-50 text-amber-700 border border-amber-200">
                                              Pending Review
@@ -192,7 +192,7 @@
                                     <td class="py-4 px-6 text-zinc-400">#2</td>
                                     <td class="py-4 px-6 font-semibold text-zinc-900">Su Su</td>
                                     <td class="py-4 px-6 text-zinc-600">susu@gmail.com</td>
-                                    <td class="py-4 px-6 text-zinc-600">09987654321</td>
+                                    <td class="py-4 px-6 text-zinc-600">09421122846</td>
                                     <td class="py-4 px-6">
                                         <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
                                             Followed Up

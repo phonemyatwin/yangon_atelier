@@ -55,7 +55,7 @@
                         </div>
                         <div class="space-y-1 text-xs">
                             <span class="text-zinc-400 font-mono">Member #1</span>
-                            <h4 class="font-serif text-base font-medium text-zinc-900">Kyaw Zin Hein</h4>
+                            <h4 class="font-serif text-base font-medium text-zinc-900">Phone Myat Win</h4>
                             <p class="text-zinc-500">Role: <strong class="text-zinc-800">Principal Architect &amp; Founder</strong></p>
                         </div>
                     </div>

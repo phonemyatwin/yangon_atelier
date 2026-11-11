@@ -437,7 +437,7 @@
                     <div class="pt-6 border-t border-zinc-100 mt-6 flex items-center justify-between">
                         <div class="flex items-center gap-2 text-xs font-medium text-zinc-700">
                             <i class="ri-user-line text-zinc-400"></i>
-                            <span>Aung Myo Tun</span>
+                            <span>Su Thinzar Htet</span>
                         </div>
                         <a href="blog_detail.php?id=2" class="text-xs font-semibold text-zinc-900 hover:text-amber-900 inline-flex items-center gap-1">
                             <span>Read</span>
@@ -469,7 +469,7 @@
                     <div class="pt-6 border-t border-zinc-100 mt-6 flex items-center justify-between">
                         <div class="flex items-center gap-2 text-xs font-medium text-zinc-700">
                             <i class="ri-user-line text-zinc-400"></i>
-                            <span>Thiri May</span>
+                            <span>Thae Nay Nwe Soe</span>
                         </div>
                         <a href="blog_detail.php?id=3" class="text-xs font-semibold text-zinc-900 hover:text-amber-900 inline-flex items-center gap-1">
                             <span>Read</span>

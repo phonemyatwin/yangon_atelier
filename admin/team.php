@@ -65,10 +65,10 @@
                                     <td class="py-4 px-6 text-zinc-400">#1</td>
                                     <td class="py-4 px-6">
                                         <div class="w-10 h-10 rounded-full bg-zinc-100 border border-zinc-200 overflow-hidden">
-                                            <img src="../images/team-1.jpg" alt="Kyaw Zin Hein" class="w-full h-full object-cover">
+                                            <img src="../images/team-1.jpg" alt="Phone Myat Win" class="w-full h-full object-cover">
                                         </div>
                                     </td>
-                                    <td class="py-4 px-6 font-semibold text-zinc-900 text-sm">Kyaw Zin Hein</td>
+                                    <td class="py-4 px-6 font-semibold text-zinc-900 text-sm">Phone Myat Win</td>
                                     <td class="py-4 px-6 text-zinc-600">Principal Architect &amp; Founder</td>
                                     <td class="py-4 px-6 text-right">
                                         <div class="inline-flex items-center gap-2">
@@ -87,10 +87,10 @@
                                     <td class="py-4 px-6 text-zinc-400">#2</td>
                                     <td class="py-4 px-6">
                                         <div class="w-10 h-10 rounded-full bg-zinc-100 border border-zinc-200 overflow-hidden">
-                                            <img src="../images/team-2.jpg" alt="Thiri May" class="w-full h-full object-cover">
+                                            <img src="../images/team-2.jpg" alt="Thae Nay Nwe Soe" class="w-full h-full object-cover">
                                         </div>
                                     </td>
-                                    <td class="py-4 px-6 font-semibold text-zinc-900 text-sm">Thiri May</td>
+                                    <td class="py-4 px-6 font-semibold text-zinc-900 text-sm">Thae Nay Nwe Soe</td>
                                     <td class="py-4 px-6 text-zinc-600">Head of Interior Ergonomics</td>
                                     <td class="py-4 px-6 text-right">
                                         <div class="inline-flex items-center gap-2">
@@ -109,10 +109,10 @@
                                     <td class="py-4 px-6 text-zinc-400">#3</td>
                                     <td class="py-4 px-6">
                                         <div class="w-10 h-10 rounded-full bg-zinc-100 border border-zinc-200 overflow-hidden">
-                                            <img src="../images/team-3.jpg" alt="Aung Myo Tun" class="w-full h-full object-cover">
+                                            <img src="../images/team-3.jpg" alt="Su Thinzar Htet" class="w-full h-full object-cover">
                                         </div>
                                     </td>
-                                    <td class="py-4 px-6 font-semibold text-zinc-900 text-sm">Aung Myo Tun</td>
+                                    <td class="py-4 px-6 font-semibold text-zinc-900 text-sm">Su Thinzar Htet</td>
                                     <td class="py-4 px-6 text-zinc-600">Master Wood Craftsman</td>
                                     <td class="py-4 px-6 text-right">
                                         <div class="inline-flex items-center gap-2">
@@ -120,6 +120,72 @@
                                                 <i class="ri-pencil-line"></i> Edit
                                             </a>
                                             <a href="team_delete.php?id=3" class="px-2.5 py-1 rounded-lg border border-rose-200 hover:bg-rose-50 text-rose-600 transition-colors flex items-center gap-1">
+                                                <i class="ri-delete-bin-line"></i> Delete
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Member 4 -->
+                                <tr class="hover:bg-zinc-50/60 transition-colors">
+                                    <td class="py-4 px-6 text-zinc-400">#4</td>
+                                    <td class="py-4 px-6">
+                                        <div class="w-10 h-10 rounded-full bg-zinc-100 border border-zinc-200 overflow-hidden">
+                                            <img src="../images/team-4.jpg" alt="Myat Chal Oo" class="w-full h-full object-cover">
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-6 font-semibold text-zinc-900 text-sm">Myat Chal Oo</td>
+                                    <td class="py-4 px-6 text-zinc-600">Material &amp; Textile Curator</td>
+                                    <td class="py-4 px-6 text-right">
+                                        <div class="inline-flex items-center gap-2">
+                                            <a href="team_update.php?id=4" class="px-2.5 py-1 rounded-lg border border-zinc-200 hover:bg-zinc-100 text-zinc-700 transition-colors flex items-center gap-1">
+                                                <i class="ri-pencil-line"></i> Edit
+                                            </a>
+                                            <a href="team_delete.php?id=4" class="px-2.5 py-1 rounded-lg border border-rose-200 hover:bg-rose-50 text-rose-600 transition-colors flex items-center gap-1">
+                                                <i class="ri-delete-bin-line"></i> Delete
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Member 5 -->
+                                <tr class="hover:bg-zinc-50/60 transition-colors">
+                                    <td class="py-4 px-6 text-zinc-400">#5</td>
+                                    <td class="py-4 px-6">
+                                        <div class="w-10 h-10 rounded-full bg-zinc-100 border border-zinc-200 overflow-hidden">
+                                            <img src="../images/team-5.jpg" alt="Nyi Nyi Aung" class="w-full h-full object-cover">
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-6 font-semibold text-zinc-900 text-sm">Nyi Nyi Aung</td>
+                                    <td class="py-4 px-6 text-zinc-600">Finishing Specialist</td>
+                                    <td class="py-4 px-6 text-right">
+                                        <div class="inline-flex items-center gap-2">
+                                            <a href="team_update.php?id=5" class="px-2.5 py-1 rounded-lg border border-zinc-200 hover:bg-zinc-100 text-zinc-700 transition-colors flex items-center gap-1">
+                                                <i class="ri-pencil-line"></i> Edit
+                                            </a>
+                                            <a href="team_delete.php?id=5" class="px-2.5 py-1 rounded-lg border border-rose-200 hover:bg-rose-50 text-rose-600 transition-colors flex items-center gap-1">
+                                                <i class="ri-delete-bin-line"></i> Delete
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Member 6 -->
+                                <tr class="hover:bg-zinc-50/60 transition-colors">
+                                    <td class="py-4 px-6 text-zinc-400">#6</td>
+                                    <td class="py-4 px-6">
+                                        <div class="w-10 h-10 rounded-full bg-zinc-100 border border-zinc-200 overflow-hidden">
+                                            <img src="../images/team-6.jpg" alt="Min Khant Naung" class="w-full h-full object-cover">
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-6 font-semibold text-zinc-900 text-sm">Min Khant Naung</td>
+                                    <td class="py-4 px-6 text-zinc-600">Showroom Concierge Director</td>
+                                    <td class="py-4 px-6 text-right">
+                                        <div class="inline-flex items-center gap-2">
+                                            <a href="team_update.php?id=6" class="px-2.5 py-1 rounded-lg border border-zinc-200 hover:bg-zinc-100 text-zinc-700 transition-colors flex items-center gap-1">
+                                                <i class="ri-pencil-line"></i> Edit
+                                            </a>
+                                            <a href="team_delete.php?id=6" class="px-2.5 py-1 rounded-lg border border-rose-200 hover:bg-rose-50 text-rose-600 transition-colors flex items-center gap-1">
                                                 <i class="ri-delete-bin-line"></i> Delete
                                             </a>
                                         </div>

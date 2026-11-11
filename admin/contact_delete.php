@@ -55,7 +55,7 @@
                             <span class="text-zinc-400">2026-11-04</span>
                         </div>
                         <h4 class="font-semibold text-zinc-900 text-sm">From: Aung Min</h4>
-                        <p class="text-zinc-500">Email: <span class="font-mono text-zinc-800">aungmin@gmail.com</span> • Phone: <span class="text-zinc-800">09123456789</span></p>
+                        <p class="text-zinc-500">Email: <span class="font-mono text-zinc-800">aungmin@gmail.com</span> • Phone: <span class="text-zinc-800">09973383719</span></p>
                     </div>
 
                     <!-- [PHP_BACKEND_HOOK: Contact deletion handler. POST method, execute DELETE FROM contacts WHERE id = :id] -->
