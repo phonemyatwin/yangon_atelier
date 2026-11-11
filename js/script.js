@@ -202,6 +202,26 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // --- Product Gallery Thumbnail Switcher ---
+  const mainProductImg = document.getElementById("main-product-img");
+  const thumbBtns = document.querySelectorAll(".thumb-btn");
+  if (mainProductImg && thumbBtns.length > 0) {
+    thumbBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const src = btn.getAttribute("data-src");
+        if (src) {
+          mainProductImg.src = src;
+          thumbBtns.forEach((b) => {
+            b.classList.remove("border-2", "border-stone-900");
+            b.classList.add("border", "border-stone-200");
+          });
+          btn.classList.remove("border", "border-stone-200");
+          btn.classList.add("border-2", "border-stone-900");
+        }
+      });
+    });
+  }
+
   // --- Form submission mock feedback ---
   document.querySelectorAll("form[data-toast-success]").forEach((form) => {
     form.addEventListener("submit", (e) => {

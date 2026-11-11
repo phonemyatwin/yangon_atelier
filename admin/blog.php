@@ -139,6 +139,84 @@
                                     </td>
                                 </tr>
 
+                                <!-- Post 4 -->
+                                <tr class="hover:bg-stone-50/60 transition-colors">
+                                    <td class="py-4 px-6 text-stone-400">#4</td>
+                                    <td class="py-4 px-6">
+                                        <div class="w-16 h-11 rounded-lg bg-stone-100 border border-stone-200 overflow-hidden">
+                                            <img src="../images/blog-interior-tips.jpg" alt="Article image" class="w-full h-full object-cover">
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <span class="font-semibold text-stone-900 block text-sm">The Ritual of Morning Tea &amp; Minimalist Dining</span>
+                                        <span class="text-[11px] text-amber-800">Lifestyle • 4 min read</span>
+                                    </td>
+                                    <td class="py-4 px-6 text-stone-700">Myat Chal Oo</td>
+                                    <td class="py-4 px-6 text-stone-500">2026-03-30</td>
+                                    <td class="py-4 px-6 text-right">
+                                        <div class="inline-flex items-center gap-2">
+                                            <a href="blog_update.php?id=4" class="px-2.5 py-1 rounded-lg border border-stone-200 hover:bg-stone-100 text-stone-700 transition-colors flex items-center gap-1">
+                                                <i class="ri-pencil-line"></i> Edit
+                                            </a>
+                                            <a href="blog_delete.php?id=4" class="px-2.5 py-1 rounded-lg border border-rose-200 hover:bg-rose-50 text-rose-600 transition-colors flex items-center gap-1">
+                                                <i class="ri-delete-bin-line"></i> Delete
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Post 5 -->
+                                <tr class="hover:bg-stone-50/60 transition-colors">
+                                    <td class="py-4 px-6 text-stone-400">#5</td>
+                                    <td class="py-4 px-6">
+                                        <div class="w-16 h-11 rounded-lg bg-stone-100 border border-stone-200 overflow-hidden">
+                                            <img src="../images/blog-modern-styling.jpg" alt="Article image" class="w-full h-full object-cover">
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <span class="font-semibold text-stone-900 block text-sm">Botanical Plant Waxes: Caring for Solid Wood</span>
+                                        <span class="text-[11px] text-amber-800">Care • 7 min read</span>
+                                    </td>
+                                    <td class="py-4 px-6 text-stone-700">Nyi Nyi Aung</td>
+                                    <td class="py-4 px-6 text-stone-500">2026-03-18</td>
+                                    <td class="py-4 px-6 text-right">
+                                        <div class="inline-flex items-center gap-2">
+                                            <a href="blog_update.php?id=5" class="px-2.5 py-1 rounded-lg border border-stone-200 hover:bg-stone-100 text-stone-700 transition-colors flex items-center gap-1">
+                                                <i class="ri-pencil-line"></i> Edit
+                                            </a>
+                                            <a href="blog_delete.php?id=5" class="px-2.5 py-1 rounded-lg border border-rose-200 hover:bg-rose-50 text-rose-600 transition-colors flex items-center gap-1">
+                                                <i class="ri-delete-bin-line"></i> Delete
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Post 6 -->
+                                <tr class="hover:bg-stone-50/60 transition-colors">
+                                    <td class="py-4 px-6 text-stone-400">#6</td>
+                                    <td class="py-4 px-6">
+                                        <div class="w-16 h-11 rounded-lg bg-stone-100 border border-stone-200 overflow-hidden">
+                                            <img src="../images/blog-color-palettes.jpg" alt="Article image" class="w-full h-full object-cover">
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <span class="font-semibold text-stone-900 block text-sm">Designing Quiet Havens in High-Density Cities</span>
+                                        <span class="text-[11px] text-amber-800">Interior • 5 min read</span>
+                                    </td>
+                                    <td class="py-4 px-6 text-stone-700">Phone Myat Win</td>
+                                    <td class="py-4 px-6 text-stone-500">2026-02-25</td>
+                                    <td class="py-4 px-6 text-right">
+                                        <div class="inline-flex items-center gap-2">
+                                            <a href="blog_update.php?id=6" class="px-2.5 py-1 rounded-lg border border-stone-200 hover:bg-stone-100 text-stone-700 transition-colors flex items-center gap-1">
+                                                <i class="ri-pencil-line"></i> Edit
+                                            </a>
+                                            <a href="blog_delete.php?id=6" class="px-2.5 py-1 rounded-lg border border-rose-200 hover:bg-rose-50 text-rose-600 transition-colors flex items-center gap-1">
+                                                <i class="ri-delete-bin-line"></i> Delete
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+
                             </tbody>
                         </table>
                     </div>

@@ -497,8 +497,8 @@
             </a>
         </div>
 
-        <!-- [PHP_BACKEND_HOOK: Dynamic blog posts query (SELECT * FROM blogs ORDER BY created_at DESC LIMIT 3)] -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- [PHP_BACKEND_HOOK: Dynamic blog posts query (SELECT * FROM blogs ORDER BY created_at DESC LIMIT 6)] -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <!-- Article 1 -->
             <article class="group bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-xs hover:shadow-xl transition-all duration-500 flex flex-col">
                 <a href="blog_detail.php?id=1" class="relative aspect-[16/10] overflow-hidden bg-stone-100 block">
@@ -588,6 +588,102 @@
                             <span>Thae Nay Nwe Soe</span>
                         </div>
                         <a href="blog_detail.php?id=3" class="text-xs font-semibold text-stone-900 hover:text-amber-900 inline-flex items-center gap-1">
+                            <span>Read</span>
+                            <i class="ri-arrow-right-line"></i>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Article 4 -->
+            <article class="group bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-xs hover:shadow-xl transition-all duration-500 flex flex-col">
+                <a href="blog_detail.php?id=4" class="relative aspect-[16/10] overflow-hidden bg-stone-100 block">
+                    <img src="images/blog-interior-tips.jpg" alt="The Ritual of Morning Tea & Minimalist Dining" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                </a>
+                <div class="p-6 flex flex-col flex-1 justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3 text-xs text-stone-500">
+                            <span>Mar 30, 2026</span>
+                            <span class="w-1 h-1 rounded-full bg-stone-300"></span>
+                            <span>4 min read</span>
+                        </div>
+                        <h3 class="font-serif text-xl font-normal text-stone-900 group-hover:text-amber-900 transition-colors">
+                            <a href="blog_detail.php?id=4">The Ritual of Morning Tea &amp; Minimalist Dining</a>
+                        </h3>
+                        <p class="text-sm text-stone-600 line-clamp-2 leading-relaxed">
+                            Arranging dining corners with natural oak benches, low stoneware vessels, and unfiltered morning sun.
+                        </p>
+                    </div>
+                    <div class="pt-6 border-t border-stone-100 mt-6 flex items-center justify-between">
+                        <div class="flex items-center gap-2 text-xs font-medium text-stone-700">
+                            <i class="ri-user-line text-amber-800"></i>
+                            <span>Myat Chal Oo</span>
+                        </div>
+                        <a href="blog_detail.php?id=4" class="text-xs font-semibold text-stone-900 hover:text-amber-900 inline-flex items-center gap-1">
+                            <span>Read</span>
+                            <i class="ri-arrow-right-line"></i>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Article 5 -->
+            <article class="group bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-xs hover:shadow-xl transition-all duration-500 flex flex-col">
+                <a href="blog_detail.php?id=5" class="relative aspect-[16/10] overflow-hidden bg-stone-100 block">
+                    <img src="images/blog-modern-styling.jpg" alt="Botanical Plant Waxes: Caring for Solid Wood" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                </a>
+                <div class="p-6 flex flex-col flex-1 justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3 text-xs text-stone-500">
+                            <span>Mar 18, 2026</span>
+                            <span class="w-1 h-1 rounded-full bg-stone-300"></span>
+                            <span>7 min read</span>
+                        </div>
+                        <h3 class="font-serif text-xl font-normal text-stone-900 group-hover:text-amber-900 transition-colors">
+                            <a href="blog_detail.php?id=5">Botanical Plant Waxes: Caring for Solid Wood</a>
+                        </h3>
+                        <p class="text-sm text-stone-600 line-clamp-2 leading-relaxed">
+                            A tactile handbook on nourishing walnut and white oak tables using cold-pressed linseed oils and organic beeswax.
+                        </p>
+                    </div>
+                    <div class="pt-6 border-t border-stone-100 mt-6 flex items-center justify-between">
+                        <div class="flex items-center gap-2 text-xs font-medium text-stone-700">
+                            <i class="ri-user-line text-amber-800"></i>
+                            <span>Nyi Nyi Aung</span>
+                        </div>
+                        <a href="blog_detail.php?id=5" class="text-xs font-semibold text-stone-900 hover:text-amber-900 inline-flex items-center gap-1">
+                            <span>Read</span>
+                            <i class="ri-arrow-right-line"></i>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Article 6 -->
+            <article class="group bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-xs hover:shadow-xl transition-all duration-500 flex flex-col">
+                <a href="blog_detail.php?id=6" class="relative aspect-[16/10] overflow-hidden bg-stone-100 block">
+                    <img src="images/blog-color-palettes.jpg" alt="Designing Quiet Havens in High-Density Cities" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                </a>
+                <div class="p-6 flex flex-col flex-1 justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3 text-xs text-stone-500">
+                            <span>Feb 25, 2026</span>
+                            <span class="w-1 h-1 rounded-full bg-stone-300"></span>
+                            <span>5 min read</span>
+                        </div>
+                        <h3 class="font-serif text-xl font-normal text-stone-900 group-hover:text-amber-900 transition-colors">
+                            <a href="blog_detail.php?id=6">Designing Quiet Havens in High-Density Cities</a>
+                        </h3>
+                        <p class="text-sm text-stone-600 line-clamp-2 leading-relaxed">
+                            Selecting acoustic textiles, muted travertine hues, and low silhouettes that mute metropolitan turbulence.
+                        </p>
+                    </div>
+                    <div class="pt-6 border-t border-stone-100 mt-6 flex items-center justify-between">
+                        <div class="flex items-center gap-2 text-xs font-medium text-stone-700">
+                            <i class="ri-user-line text-amber-800"></i>
+                            <span>Phone Myat Win</span>
+                        </div>
+                        <a href="blog_detail.php?id=6" class="text-xs font-semibold text-stone-900 hover:text-amber-900 inline-flex items-center gap-1">
                             <span>Read</span>
                             <i class="ri-arrow-right-line"></i>
                         </a>

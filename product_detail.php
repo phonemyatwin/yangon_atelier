@@ -49,18 +49,18 @@
                 </div>
 
                 <!-- Gallery Thumbnails (Atelier Perspectives) -->
-                <div class="grid grid-cols-4 gap-4">
-                    <button type="button" class="aspect-[4/3] rounded-2xl bg-stone-100 border-2 border-stone-900 overflow-hidden shadow-xs transition-all">
-                        <img src="images/chair-1.jpg" alt="Front angle" class="w-full h-full object-cover">
+                <div class="grid grid-cols-4 gap-4" id="gallery-thumbs">
+                    <button type="button" data-src="images/chair-1.jpg" class="thumb-btn aspect-[4/3] rounded-2xl bg-stone-100 border-2 border-stone-900 overflow-hidden shadow-xs transition-all">
+                        <img src="images/chair-1.jpg" alt="Front angle" class="w-full h-full object-cover pointer-events-none">
                     </button>
-                    <button type="button" class="aspect-[4/3] rounded-2xl bg-stone-100 border border-stone-200 hover:border-amber-800 overflow-hidden transition-all">
-                        <img src="images/chair-2.jpg" alt="Curved profile angle" class="w-full h-full object-cover">
+                    <button type="button" data-src="images/chair-2.jpg" class="thumb-btn aspect-[4/3] rounded-2xl bg-stone-100 border border-stone-200 hover:border-amber-800 overflow-hidden transition-all">
+                        <img src="images/chair-2.jpg" alt="Curved profile angle" class="w-full h-full object-cover pointer-events-none">
                     </button>
-                    <button type="button" class="aspect-[4/3] rounded-2xl bg-stone-100 border border-stone-200 hover:border-amber-800 overflow-hidden transition-all">
-                        <img src="images/chair-3.jpg" alt="Joinery craft detail" class="w-full h-full object-cover">
+                    <button type="button" data-src="images/chair-3.jpg" class="thumb-btn aspect-[4/3] rounded-2xl bg-stone-100 border border-stone-200 hover:border-amber-800 overflow-hidden transition-all">
+                        <img src="images/chair-3.jpg" alt="Joinery craft detail" class="w-full h-full object-cover pointer-events-none">
                     </button>
-                    <button type="button" class="aspect-[4/3] rounded-2xl bg-stone-100 border border-stone-200 hover:border-amber-800 overflow-hidden transition-all">
-                        <img src="images/banner-living-room.jpg" alt="Atmospheric room view" class="w-full h-full object-cover">
+                    <button type="button" data-src="images/banner-living-room.jpg" class="thumb-btn aspect-[4/3] rounded-2xl bg-stone-100 border border-stone-200 hover:border-amber-800 overflow-hidden transition-all">
+                        <img src="images/banner-living-room.jpg" alt="Atmospheric room view" class="w-full h-full object-cover pointer-events-none">
                     </button>
                 </div>
 
