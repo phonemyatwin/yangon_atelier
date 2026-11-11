@@ -11,21 +11,36 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        canvas: '#FAF8F5',       // Warm architectural atelier canvas
-        surface: '#FFFFFF',      // Crisp elevated alabaster cards
-        sand: '#F3EDE4',         // Muted limestone / travertine fill
+        canvas: '#F5EFE6',       // Warm architectural atelier canvas (replaces sterile white)
+        surface: '#FAF6F0',      // Elevated ivory alabaster card surface
+        sand: '#EDE5D8',         // Muted limestone / travertine fill
+        travertine: '#E2D8C9',   // Architectural travertine border
+        espresso: '#161311',     // Deep smoked walnut anchor
         stone: {
-          50: '#FAF8F5',
-          100: '#F4EFE8',
-          200: '#E8E2D8',
-          300: '#D6CCC0',
-          400: '#A89E90',
-          500: '#786F63',
-          600: '#57524A',
-          700: '#443F38',
-          800: '#2A2622',
-          900: '#1C1917',
-          950: '#13110F',
+          50: '#F7F3EC',         // Warm sand / ivory tint
+          100: '#EFE9DF',        // Muted travertine fill
+          200: '#E2D8C9',        // Soft architectural limestone border
+          300: '#CEBFAC',        // Subtle divider tone
+          400: '#9E8E7C',        // Muted captions & icons
+          500: '#736555',        // Medium secondary text
+          600: '#54483C',        // Readable warm body text
+          700: '#3E342B',        // Subheaders & strong labels
+          800: '#28221B',        // Primary architectural headings
+          900: '#1A1613',        // Deep smoked walnut
+          950: '#100E0C',        // Rich obsidian espresso
+        },
+        amber: {
+          50: '#FBF7F0',
+          100: '#F5EBDB',
+          200: '#EAD6B8',
+          300: '#DCBD90',
+          400: '#CCA068',
+          500: '#B58245',
+          600: '#996733',
+          700: '#7C4E26',
+          800: '#613B1E',
+          900: '#452814',
+          950: '#25140A',
         },
         cognac: {
           50: '#FDF9F4',

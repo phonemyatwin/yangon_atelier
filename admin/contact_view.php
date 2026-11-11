@@ -12,7 +12,7 @@
     <?php include "components/css.php"; ?>
 </head>
 
-<body class="bg-[#FAF8F5] text-stone-900 font-sans antialiased selection:bg-amber-900 selection:text-white">
+<body class="bg-[#F5EFE6] text-stone-900 font-sans antialiased selection:bg-amber-800 selection:text-white">
     <div class="min-h-screen flex">
         <?php include "components/sidebar.php"; ?>
 
@@ -34,7 +34,7 @@
                         <h2 class="font-serif text-2xl sm:text-3xl font-medium text-stone-900">Showroom Inquiry Details</h2>
                     </div>
                     <div class="flex items-center gap-2">
-                        <a href="contacts.php" class="px-4 py-2 rounded-xl border border-stone-200 text-xs font-medium text-stone-700 hover:bg-white transition-colors">
+                        <a href="contacts.php" class="px-4 py-2 rounded-xl border border-[#E2D8C9] text-xs font-medium text-stone-700 hover:bg-white transition-colors">
                             Back
                         </a>
                         <a href="contact_delete.php?id=1" class="px-4 py-2 rounded-xl border border-rose-200 text-xs font-medium text-rose-600 hover:bg-rose-50 transition-colors flex items-center gap-1">
@@ -45,10 +45,10 @@
 
                 <!-- Inquiry Card -->
                 <!-- [PHP_BACKEND_HOOK: Single contact message query (SELECT * FROM contacts WHERE id = :id)] -->
-                <div class="bg-white rounded-3xl border border-stone-200/90 p-6 sm:p-10 shadow-xs space-y-8">
+                <div class="bg-[#FCFAF7] rounded-3xl border border-[#E2D8C9] p-6 sm:p-10 shadow-xs space-y-8">
                     
                     <!-- Metadata Grid -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-5 rounded-2xl bg-stone-50 border border-stone-200/80 text-xs">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-5 rounded-2xl bg-[#F5EFE6] border border-[#E2D8C9]/80 text-xs">
                         <div>
                             <span class="text-stone-400 block mb-0.5">Sender Name</span>
                             <strong class="text-stone-900 text-sm block">Aung Min</strong>
@@ -69,8 +69,8 @@
 
                     <!-- Message Content -->
                     <div class="space-y-3">
-                        <span class="text-xs uppercase tracking-widest text-amber-800 font-semibold block">Message Body</span>
-                        <div class="p-6 rounded-2xl bg-[#F4EFE8]/50 border border-stone-200/80 text-stone-800 text-sm leading-relaxed">
+                        <span class="text-xs uppercase tracking-widest text-[#7C4E26] font-semibold block">Message Body</span>
+                        <div class="p-6 rounded-2xl bg-[#EFE9DF]/50 border border-[#E2D8C9] text-stone-800 text-sm leading-relaxed">
                             <p>
                                 Hello, I would like to know more about your modern sofa collection and delivery options in Yangon. We are currently finishing an architectural residence in Yankin and looking for 2 living room modular lounge chairs and an oak dining set. Please contact me with availability and wood finishes. Thank you.
                             </p>
@@ -78,10 +78,10 @@
                     </div>
 
                     <!-- Response Actions -->
-                    <div class="pt-6 border-t border-stone-100 flex flex-wrap items-center justify-between gap-4">
-                        <span class="text-xs text-stone-400">Status: <strong class="text-amber-800">Requires Follow-up</strong></span>
+                    <div class="pt-6 border-t border-[#E2D8C9] flex flex-wrap items-center justify-between gap-4">
+                        <span class="text-xs text-stone-400">Status: <strong class="text-[#7C4E26]">Requires Follow-up</strong></span>
                         <div class="flex items-center gap-3">
-                            <a href="mailto:aungmin@gmail.com?subject=Regarding%20Your%20FurnishMe%20Showroom%20Inquiry" class="px-6 py-2.5 rounded-xl bg-stone-900 hover:bg-amber-900 text-white text-xs font-medium transition-colors shadow-xs flex items-center gap-2">
+                            <a href="mailto:aungmin@gmail.com?subject=Regarding%20Your%20FurnishMe%20Showroom%20Inquiry" class="px-6 py-2.5 rounded-xl bg-[#1A1613] hover:bg-[#7C4E26] text-[#F7F3EC] text-xs font-medium transition-colors shadow-xs flex items-center gap-2">
                                 <i class="ri-reply-line text-sm"></i>
                                 <span>Reply via Email</span>
                             </a>

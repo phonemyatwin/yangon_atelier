@@ -12,7 +12,7 @@
     <?php include "components/css.php"; ?>
 </head>
 
-<body class="bg-[#FAF8F5] text-stone-900 font-sans antialiased selection:bg-amber-900 selection:text-white">
+<body class="bg-[#F5EFE6] text-stone-900 font-sans antialiased selection:bg-amber-800 selection:text-white">
     <div class="min-h-screen flex">
         <?php include "components/sidebar.php"; ?>
 
@@ -34,14 +34,14 @@
                 </div>
 
                 <!-- Table Card -->
-                <div class="bg-white rounded-3xl border border-stone-200/90 overflow-hidden shadow-xs">
-                    <div class="p-5 border-b border-stone-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div class="bg-[#FCFAF7] rounded-3xl border border-[#E2D8C9] overflow-hidden shadow-xs">
+                    <div class="p-5 border-b border-[#E2D8C9] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                         <div class="text-xs text-stone-500">
                             Showing customer messages from website contact form
                         </div>
                         <div class="relative sm:w-64">
                             <i class="ri-search-line absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 text-xs"></i>
-                            <input type="text" placeholder="Filter messages..." class="w-full pl-8 pr-3 py-1.5 bg-stone-50 border border-stone-200 rounded-lg text-xs placeholder-stone-400 focus:outline-none focus:ring-1 focus:ring-amber-900">
+                            <input type="text" placeholder="Filter messages..." class="w-full pl-8 pr-3 py-1.5 bg-[#F5EFE6] border border-[#E2D8C9] rounded-lg text-xs placeholder-stone-400 focus:outline-none focus:ring-1 focus:ring-[#7C4E26]">
                         </div>
                     </div>
 
@@ -49,7 +49,7 @@
                     <div class="overflow-x-auto">
                         <table class="w-full text-left border-collapse text-xs">
                             <thead>
-                                <tr class="bg-stone-50/80 border-b border-stone-200/80 text-stone-500 uppercase tracking-wider font-semibold">
+                                <tr class="bg-[#F5EFE6] border-b border-[#E2D8C9] text-stone-500 uppercase tracking-wider font-semibold">
                                     <th class="py-3.5 px-6">ID</th>
                                     <th class="py-3.5 px-6">Client Name</th>
                                     <th class="py-3.5 px-6">Email Address</th>
@@ -58,22 +58,22 @@
                                     <th class="py-3.5 px-6 text-right">Actions</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-stone-100 text-stone-700 font-medium">
+                            <tbody class="divide-y divide-[#E2D8C9] text-stone-700 font-medium">
                                 
                                 <!-- Contact 1 -->
-                                <tr class="hover:bg-stone-50/60 transition-colors">
+                                <tr class="hover:bg-[#F5EFE6]/60 transition-colors">
                                     <td class="py-4 px-6 text-stone-400">#1</td>
                                     <td class="py-4 px-6 font-semibold text-stone-900 text-sm">Aung Min</td>
                                     <td class="py-4 px-6 text-stone-600 font-mono text-xs">aungmin@gmail.com</td>
                                     <td class="py-4 px-6 text-stone-600">09973383719</td>
                                     <td class="py-4 px-6">
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-amber-50 text-amber-800 border border-amber-200">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-amber-50 text-[#7C4E26] border border-amber-200">
                                             New Message
                                         </span>
                                     </td>
                                     <td class="py-4 px-6 text-right">
                                         <div class="inline-flex items-center gap-2">
-                                            <a href="contact_view.php?id=1" class="px-2.5 py-1 rounded-lg border border-stone-200 hover:bg-stone-100 text-stone-700 transition-colors flex items-center gap-1">
+                                            <a href="contact_view.php?id=1" class="px-2.5 py-1 rounded-lg border border-[#E2D8C9] hover:bg-[#EFE8DD] text-stone-700 transition-colors flex items-center gap-1">
                                                 <i class="ri-eye-line"></i> View
                                             </a>
                                             <a href="contact_delete.php?id=1" class="px-2.5 py-1 rounded-lg border border-rose-200 hover:bg-rose-50 text-rose-600 transition-colors flex items-center gap-1">
@@ -84,7 +84,7 @@
                                 </tr>
 
                                 <!-- Contact 2 -->
-                                <tr class="hover:bg-stone-50/60 transition-colors">
+                                <tr class="hover:bg-[#F5EFE6]/60 transition-colors">
                                     <td class="py-4 px-6 text-stone-400">#2</td>
                                     <td class="py-4 px-6 font-semibold text-stone-900 text-sm">Su Su</td>
                                     <td class="py-4 px-6 text-stone-600 font-mono text-xs">susu@gmail.com</td>
@@ -96,7 +96,7 @@
                                     </td>
                                     <td class="py-4 px-6 text-right">
                                         <div class="inline-flex items-center gap-2">
-                                            <a href="contact_view.php?id=2" class="px-2.5 py-1 rounded-lg border border-stone-200 hover:bg-stone-100 text-stone-700 transition-colors flex items-center gap-1">
+                                            <a href="contact_view.php?id=2" class="px-2.5 py-1 rounded-lg border border-[#E2D8C9] hover:bg-[#EFE8DD] text-stone-700 transition-colors flex items-center gap-1">
                                                 <i class="ri-eye-line"></i> View
                                             </a>
                                             <a href="contact_delete.php?id=2" class="px-2.5 py-1 rounded-lg border border-rose-200 hover:bg-rose-50 text-rose-600 transition-colors flex items-center gap-1">
@@ -107,19 +107,19 @@
                                 </tr>
 
                                 <!-- Contact 3 -->
-                                <tr class="hover:bg-stone-50/60 transition-colors">
+                                <tr class="hover:bg-[#F5EFE6]/60 transition-colors">
                                     <td class="py-4 px-6 text-stone-400">#3</td>
                                     <td class="py-4 px-6 font-semibold text-stone-900 text-sm">Ko Ko</td>
                                     <td class="py-4 px-6 text-stone-600 font-mono text-xs">koko@gmail.com</td>
                                     <td class="py-4 px-6 text-stone-600">09456123789</td>
                                     <td class="py-4 px-6">
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-stone-100 text-stone-600">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-[#EFE8DD] text-stone-600">
                                             Archived
                                         </span>
                                     </td>
                                     <td class="py-4 px-6 text-right">
                                         <div class="inline-flex items-center gap-2">
-                                            <a href="contact_view.php?id=3" class="px-2.5 py-1 rounded-lg border border-stone-200 hover:bg-stone-100 text-stone-700 transition-colors flex items-center gap-1">
+                                            <a href="contact_view.php?id=3" class="px-2.5 py-1 rounded-lg border border-[#E2D8C9] hover:bg-[#EFE8DD] text-stone-700 transition-colors flex items-center gap-1">
                                                 <i class="ri-eye-line"></i> View
                                             </a>
                                             <a href="contact_delete.php?id=3" class="px-2.5 py-1 rounded-lg border border-rose-200 hover:bg-rose-50 text-rose-600 transition-colors flex items-center gap-1">

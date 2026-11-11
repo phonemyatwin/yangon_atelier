@@ -13,12 +13,12 @@
     <?php include "components/css.php"; ?>
 </head>
 
-<body class="bg-[#FAF8F5] text-stone-900 font-sans selection:bg-amber-900 selection:text-white">
+<body class="bg-[#F5EFE6] text-stone-900 font-sans selection:bg-amber-800 selection:text-white">
     <?php include "components/header.php"; ?>
     <?php include "components/navbar.php"; ?>
 
     <!-- PAGE HEADER BREADCRUMB -->
-    <header class="bg-[#F4EFE8] border-b border-stone-200 py-12 lg:py-16">
+    <header class="bg-[#EDE5D8] border-b border-[#E2D8C9] py-12 lg:py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <nav class="flex items-center gap-2 text-xs font-medium text-stone-500 mb-3" aria-label="Breadcrumb">
                 <a href="index.php" class="hover:text-stone-900 transition-colors">Home</a>
@@ -27,7 +27,7 @@
             </nav>
             <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
                 <div>
-                    <span class="text-xs uppercase tracking-[0.25em] text-amber-800 font-semibold block mb-2">Preservation &amp; Stewardship</span>
+                    <span class="text-xs uppercase tracking-[0.25em] text-[#7C4E26] font-semibold block mb-2">Preservation &amp; Stewardship</span>
                     <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal tracking-tight text-stone-900">
                         Material Care &amp; Longevity Guide
                     </h1>
@@ -35,7 +35,7 @@
                         Thoughtful rituals to nurture solid timbers, tactile textiles, honest leathers, and honed stone so they mature with graceful distinction through generations.
                     </p>
                 </div>
-                <div class="text-xs text-stone-500 bg-white/70 backdrop-blur-xs px-4 py-2.5 rounded-xl border border-stone-200/80 whitespace-nowrap">
+                <div class="text-xs text-stone-500 bg-[#FCFAF7]/80 backdrop-blur-xs px-4 py-2.5 rounded-xl border border-[#E2D8C9] whitespace-nowrap">
                     <span>Curated by: </span>
                     <strong class="text-stone-900 font-semibold">Nyi Nyi Aung, Finishing Specialist</strong>
                 </div>
@@ -47,10 +47,10 @@
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
 
         <!-- PHILOSOPHY INTRO BANNER -->
-        <div class="mb-14 bg-white rounded-3xl border border-stone-200 overflow-hidden shadow-xs grid grid-cols-1 lg:grid-cols-12">
+        <div class="mb-14 bg-[#FCFAF7] rounded-3xl border border-[#E2D8C9] overflow-hidden shadow-xs grid grid-cols-1 lg:grid-cols-12">
             <div class="lg:col-span-7 p-8 sm:p-10 lg:p-12 flex flex-col justify-between">
                 <div>
-                    <span class="text-xs uppercase tracking-[0.2em] text-amber-800 font-semibold block mb-3">The Art of Wabi-Sabi Patina</span>
+                    <span class="text-xs uppercase tracking-[0.2em] text-[#7C4E26] font-semibold block mb-3">The Art of Wabi-Sabi Patina</span>
                     <h2 class="font-serif text-2xl sm:text-3xl font-normal text-stone-900 tracking-tight leading-snug">
                         Furniture designed to breathe, settle, and grow richer with time.
                     </h2>
@@ -59,7 +59,7 @@
                     </p>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-8 mt-8 border-t border-stone-100 text-xs">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-8 mt-8 border-t border-[#E2D8C9] text-xs">
                     <div>
                         <strong class="text-stone-900 block font-semibold">40% — 60%</strong>
                         <span class="text-stone-500">Ideal indoor relative humidity</span>
@@ -86,7 +86,7 @@
         <!-- QUICK DOS & DON'TS -->
         <section class="mb-16">
             <div class="text-center max-w-xl mx-auto mb-8">
-                <span class="text-xs uppercase tracking-[0.2em] text-amber-800 font-semibold block mb-2">Golden Rules</span>
+                <span class="text-xs uppercase tracking-[0.2em] text-[#7C4E26] font-semibold block mb-2">Golden Rules</span>
                 <h2 class="font-serif text-2xl sm:text-3xl font-normal text-stone-900">Atelier Principles of Care</h2>
             </div>
 
@@ -154,43 +154,43 @@
             
             <!-- STICKY TABLE OF CONTENTS -->
             <aside class="lg:col-span-4">
-                <div class="lg:sticky lg:top-28 bg-white border border-stone-200 rounded-3xl p-6 shadow-xs">
+                <div class="lg:sticky lg:top-28 bg-[#FCFAF7] border border-[#E2D8C9] rounded-3xl p-6 shadow-xs">
                     <h3 class="text-xs uppercase tracking-[0.2em] text-stone-400 font-semibold mb-4">
                         Material Chapters
                     </h3>
                     <nav class="space-y-1 text-xs">
-                        <a href="#care-wood" class="block py-2.5 px-3 rounded-xl font-medium text-stone-700 hover:text-stone-950 hover:bg-stone-50 transition-colors flex items-center gap-2">
-                            <i class="ri-hammer-line text-amber-800"></i>
+                        <a href="#care-wood" class="block py-2.5 px-3 rounded-xl font-medium text-stone-700 hover:text-stone-950 hover:bg-[#EFE9DF] transition-colors flex items-center gap-2">
+                            <i class="ri-hammer-line text-[#7C4E26]"></i>
                             <span>Solid Woods &amp; Plant Oils</span>
                         </a>
-                        <a href="#care-textiles" class="block py-2.5 px-3 rounded-xl font-medium text-stone-700 hover:text-stone-950 hover:bg-stone-50 transition-colors flex items-center gap-2">
-                            <i class="ri-t-shirt-air-line text-amber-800"></i>
+                        <a href="#care-textiles" class="block py-2.5 px-3 rounded-xl font-medium text-stone-700 hover:text-stone-950 hover:bg-[#EFE9DF] transition-colors flex items-center gap-2">
+                            <i class="ri-t-shirt-air-line text-[#7C4E26]"></i>
                             <span>Bouclé &amp; Belgian Linens</span>
                         </a>
-                        <a href="#care-leather" class="block py-2.5 px-3 rounded-xl font-medium text-stone-700 hover:text-stone-950 hover:bg-stone-50 transition-colors flex items-center gap-2">
-                            <i class="ri-pantone-line text-amber-800"></i>
+                        <a href="#care-leather" class="block py-2.5 px-3 rounded-xl font-medium text-stone-700 hover:text-stone-950 hover:bg-[#EFE9DF] transition-colors flex items-center gap-2">
+                            <i class="ri-pantone-line text-[#7C4E26]"></i>
                             <span>Full-Grain Vegetable Leather</span>
                         </a>
-                        <a href="#care-stone" class="block py-2.5 px-3 rounded-xl font-medium text-stone-700 hover:text-stone-950 hover:bg-stone-50 transition-colors flex items-center gap-2">
-                            <i class="ri-shape-line text-amber-800"></i>
+                        <a href="#care-stone" class="block py-2.5 px-3 rounded-xl font-medium text-stone-700 hover:text-stone-950 hover:bg-[#EFE9DF] transition-colors flex items-center gap-2">
+                            <i class="ri-shape-line text-[#7C4E26]"></i>
                             <span>Honed Marble &amp; Travertine</span>
                         </a>
-                        <a href="#care-rattan" class="block py-2.5 px-3 rounded-xl font-medium text-stone-700 hover:text-stone-950 hover:bg-stone-50 transition-colors flex items-center gap-2">
-                            <i class="ri-grid-line text-amber-800"></i>
+                        <a href="#care-rattan" class="block py-2.5 px-3 rounded-xl font-medium text-stone-700 hover:text-stone-950 hover:bg-[#EFE9DF] transition-colors flex items-center gap-2">
+                            <i class="ri-grid-line text-[#7C4E26]"></i>
                             <span>Natural Woven Rattan &amp; Cane</span>
                         </a>
-                        <a href="#care-monsoon" class="block py-2.5 px-3 rounded-xl font-medium text-stone-700 hover:text-stone-950 hover:bg-stone-50 transition-colors flex items-center gap-2">
-                            <i class="ri-drop-line text-amber-800"></i>
+                        <a href="#care-monsoon" class="block py-2.5 px-3 rounded-xl font-medium text-stone-700 hover:text-stone-950 hover:bg-[#EFE9DF] transition-colors flex items-center gap-2">
+                            <i class="ri-drop-line text-[#7C4E26]"></i>
                             <span>Tropical Climate &amp; Monsoon Care</span>
                         </a>
                     </nav>
 
                     <!-- Concierge Card -->
-                    <div class="mt-8 pt-6 border-t border-stone-100 text-xs text-stone-600 space-y-3">
+                    <div class="mt-8 pt-6 border-t border-[#E2D8C9] text-xs text-stone-600 space-y-3">
                         <div class="flex items-center gap-3">
-                            <img src="images/team-5.jpg" alt="Nyi Nyi Aung" class="w-11 h-11 rounded-full object-cover border border-stone-200">
+                            <img src="images/team-5.jpg" alt="Nyi Nyi Aung" class="w-11 h-11 rounded-full object-cover border border-[#E2D8C9]">
                             <div>
-                                <span class="text-[11px] uppercase tracking-wider text-amber-800 font-semibold block">Craft Concierge</span>
+                                <span class="text-[11px] uppercase tracking-wider text-[#7C4E26] font-semibold block">Craft Concierge</span>
                                 <p class="font-medium text-stone-900">Nyi Nyi Aung</p>
                                 <p class="text-[11px] text-stone-500">Finishing Specialist</p>
                             </div>
@@ -213,14 +213,14 @@
                 <section id="care-wood" class="scroll-mt-28 space-y-5">
                     <div class="flex items-center gap-2">
                         <span class="w-2 h-2 rounded-full bg-amber-800"></span>
-                        <span class="text-xs uppercase tracking-wider text-amber-800 font-semibold">Chapter 1</span>
+                        <span class="text-xs uppercase tracking-wider text-[#7C4E26] font-semibold">Chapter 1</span>
                     </div>
                     <h2 class="font-serif text-2xl sm:text-3xl font-normal text-stone-900 tracking-tight">Solid Woods &amp; Plant Oil Finishes</h2>
                     <p>
                         We craft our dining tables, beds, and chairs from premium solid timbers: American White Oak, Black Walnut, and sustainably harvested Burmese Teak. Our pieces are treated with breathable bio-based hardwax oils that penetrate deep into the pores, leaving the natural tactile grain palpable to the touch.
                     </p>
 
-                    <div class="bg-white rounded-3xl p-6 sm:p-8 border border-stone-200 shadow-xs space-y-6">
+                    <div class="bg-white rounded-3xl p-6 sm:p-8 border border-[#E2D8C9] shadow-xs space-y-6">
                         <div class="space-y-2">
                             <h3 class="font-serif text-base font-semibold text-stone-900">Daily &amp; Weekly Maintenance</h3>
                             <p class="text-xs text-stone-600">
@@ -228,14 +228,14 @@
                             </p>
                         </div>
 
-                        <div class="space-y-2 pt-4 border-t border-stone-100">
+                        <div class="space-y-2 pt-4 border-t border-[#E2D8C9]">
                             <h3 class="font-serif text-base font-semibold text-stone-900">Bi-Annual Re-Oiling Ritual</h3>
                             <p class="text-xs text-stone-600">
                                 Once or twice per year (preferably before the dry season and after monsoon), apply a thin coat of FurnishMe Botanical Hardwax Oil using a soft cotton pad. Allow the oil to absorb for 15 minutes, then vigorously buff away all excess surface residue with a dry cloth until the timber feels dry and silky.
                             </p>
                         </div>
 
-                        <div class="space-y-2 pt-4 border-t border-stone-100">
+                        <div class="space-y-2 pt-4 border-t border-[#E2D8C9]">
                             <h3 class="font-serif text-base font-semibold text-stone-900">Treating Minor Scratches</h3>
                             <p class="text-xs text-stone-600">
                                 Superficial hairline scratches can be gently sanded along the grain using ultra-fine 320-grit sandpaper, followed by a localized dab of our natural maintenance oil. The scratch will gracefully blend back into the surrounding wood fibers.
@@ -245,17 +245,17 @@
                 </section>
 
                 <!-- TEXTILE CARE -->
-                <section id="care-textiles" class="scroll-mt-28 space-y-5 pt-8 border-t border-stone-200">
+                <section id="care-textiles" class="scroll-mt-28 space-y-5 pt-8 border-t border-[#E2D8C9]">
                     <div class="flex items-center gap-2">
                         <span class="w-2 h-2 rounded-full bg-amber-800"></span>
-                        <span class="text-xs uppercase tracking-wider text-amber-800 font-semibold">Chapter 2</span>
+                        <span class="text-xs uppercase tracking-wider text-[#7C4E26] font-semibold">Chapter 2</span>
                     </div>
                     <h2 class="font-serif text-2xl sm:text-3xl font-normal text-stone-900 tracking-tight">Bouclé, Woven Fabrics &amp; Belgian Linens</h2>
                     <p>
                         Our modular sectionals, armchairs, and tatami bed headboards feature tactile bouclé wools, heavy-slub Belgian linens, and muted architectural weaves. These fabrics offer comforting softness while resisting pilling through structural yarn twists.
                     </p>
 
-                    <div class="bg-white rounded-3xl p-6 sm:p-8 border border-stone-200 shadow-xs space-y-6">
+                    <div class="bg-white rounded-3xl p-6 sm:p-8 border border-[#E2D8C9] shadow-xs space-y-6">
                         <div class="space-y-2">
                             <h3 class="font-serif text-base font-semibold text-stone-900">Vacuuming &amp; Aeration</h3>
                             <p class="text-xs text-stone-600">
@@ -263,7 +263,7 @@
                             </p>
                         </div>
 
-                        <div class="space-y-2 pt-4 border-t border-stone-100">
+                        <div class="space-y-2 pt-4 border-t border-[#E2D8C9]">
                             <h3 class="font-serif text-base font-semibold text-stone-900">Emergency Spot Cleaning</h3>
                             <p class="text-xs text-stone-600">
                                 Immediately blot liquids with an undyed absorbent cloth. For light marks, use a mixture of distilled water and a drop of pH-neutral soap. Dab gently without scrubbing to protect the loop structure. Allow to air dry completely away from direct sun.
@@ -273,10 +273,10 @@
                 </section>
 
                 <!-- LEATHER CARE -->
-                <section id="care-leather" class="scroll-mt-28 space-y-5 pt-8 border-t border-stone-200">
+                <section id="care-leather" class="scroll-mt-28 space-y-5 pt-8 border-t border-[#E2D8C9]">
                     <div class="flex items-center gap-2">
                         <span class="w-2 h-2 rounded-full bg-amber-800"></span>
-                        <span class="text-xs uppercase tracking-wider text-amber-800 font-semibold">Chapter 3</span>
+                        <span class="text-xs uppercase tracking-wider text-[#7C4E26] font-semibold">Chapter 3</span>
                     </div>
                     <h2 class="font-serif text-2xl sm:text-3xl font-normal text-stone-900 tracking-tight">Full-Grain Vegetable-Tanned Leather</h2>
                     <p>
@@ -284,13 +284,13 @@
                     </p>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="p-6 rounded-2xl bg-white border border-stone-200 shadow-xs">
+                        <div class="p-6 rounded-2xl bg-white border border-[#E2D8C9] shadow-xs">
                             <h4 class="font-serif text-sm font-semibold text-stone-900 mb-2">Preserving Hydration</h4>
                             <p class="text-xs text-stone-600">
                                 In modern air-conditioned interiors, leather can lose moisture. Apply an organic beeswax leather cream once per year to preserve suppleness and prevent hairline surface creasing.
                             </p>
                         </div>
-                        <div class="p-6 rounded-2xl bg-white border border-stone-200 shadow-xs">
+                        <div class="p-6 rounded-2xl bg-white border border-[#E2D8C9] shadow-xs">
                             <h4 class="font-serif text-sm font-semibold text-stone-900 mb-2">Sunlight Precautions</h4>
                             <p class="text-xs text-stone-600">
                                 Prolonged direct tropical sunlight will bleach natural tanning dyes. Position your leather lounger at least 1 meter away from unshaded floor-to-ceiling windows.
@@ -300,17 +300,17 @@
                 </section>
 
                 <!-- STONE & TRAVERTINE -->
-                <section id="care-stone" class="scroll-mt-28 space-y-5 pt-8 border-t border-stone-200">
+                <section id="care-stone" class="scroll-mt-28 space-y-5 pt-8 border-t border-[#E2D8C9]">
                     <div class="flex items-center gap-2">
                         <span class="w-2 h-2 rounded-full bg-amber-800"></span>
-                        <span class="text-xs uppercase tracking-wider text-amber-800 font-semibold">Chapter 4</span>
+                        <span class="text-xs uppercase tracking-wider text-[#7C4E26] font-semibold">Chapter 4</span>
                     </div>
                     <h2 class="font-serif text-2xl sm:text-3xl font-normal text-stone-900 tracking-tight">Honed Marble &amp; Travertine Stone</h2>
                     <p>
                         FurnishMe low coffee tables and architectural pedestals feature natural Italian Carrara marble and unfilled Roman travertine. We hand-hone their surfaces to a matte, non-glossy finish that honors their geological sediment.
                     </p>
 
-                    <div class="bg-white rounded-3xl p-6 sm:p-8 border border-stone-200 shadow-xs space-y-4 text-xs text-stone-600">
+                    <div class="bg-white rounded-3xl p-6 sm:p-8 border border-[#E2D8C9] shadow-xs space-y-4 text-xs text-stone-600">
                         <p>
                             <strong class="text-stone-900">Acid Sensitivity:</strong> Natural marble and travertine are calcium-based and susceptible to etching from acidic liquids (lemon juice, vinegar, red wine, perfume). Always place glassware on linen or cork coasters.
                         </p>
@@ -321,16 +321,16 @@
                 </section>
 
                 <!-- RATTAN & CANE -->
-                <section id="care-rattan" class="scroll-mt-28 space-y-5 pt-8 border-t border-stone-200">
+                <section id="care-rattan" class="scroll-mt-28 space-y-5 pt-8 border-t border-[#E2D8C9]">
                     <div class="flex items-center gap-2">
                         <span class="w-2 h-2 rounded-full bg-amber-800"></span>
-                        <span class="text-xs uppercase tracking-wider text-amber-800 font-semibold">Chapter 5</span>
+                        <span class="text-xs uppercase tracking-wider text-[#7C4E26] font-semibold">Chapter 5</span>
                     </div>
                     <h2 class="font-serif text-2xl sm:text-3xl font-normal text-stone-900 tracking-tight">Natural Woven Rattan &amp; Cane</h2>
                     <p>
                         Our occasional lounge chairs and bed headboards incorporate handwoven natural rattan peel. Rattan is remarkably tensile and flexible, yet thrives best when shielded from extreme dryness.
                     </p>
-                    <div class="p-6 rounded-2xl bg-white border border-stone-200 shadow-xs text-xs text-stone-600 space-y-3">
+                    <div class="p-6 rounded-2xl bg-white border border-[#E2D8C9] shadow-xs text-xs text-stone-600 space-y-3">
                         <p>
                             To prevent natural cane fibers from becoming brittle in high-air-conditioned homes, lightly mist the underside of the cane weaving once every few months with filtered water from a spray bottle, then allow it to dry naturally. This restores natural elasticity and prevents sagging.
                         </p>
@@ -338,26 +338,26 @@
                 </section>
 
                 <!-- MONSOON & TROPICAL CLIMATE -->
-                <section id="care-monsoon" class="scroll-mt-28 space-y-5 pt-8 border-t border-stone-200">
+                <section id="care-monsoon" class="scroll-mt-28 space-y-5 pt-8 border-t border-[#E2D8C9]">
                     <div class="flex items-center gap-2">
                         <span class="w-2 h-2 rounded-full bg-amber-800"></span>
-                        <span class="text-xs uppercase tracking-wider text-amber-800 font-semibold">Chapter 6</span>
+                        <span class="text-xs uppercase tracking-wider text-[#7C4E26] font-semibold">Chapter 6</span>
                     </div>
                     <h2 class="font-serif text-2xl sm:text-3xl font-normal text-stone-900 tracking-tight">Tropical Climate &amp; Monsoon Care</h2>
                     <p>
                         Myanmar's seasonal shifts—from hot, dry summers to torrential monsoons—require conscientious ventilation. Solid wood is hygroscopic, expanding during high humidity and contracting in dry months.
                     </p>
 
-                    <div class="bg-[#F4EFE8] rounded-3xl p-6 sm:p-8 border border-stone-200 space-y-4 text-xs text-stone-700">
+                    <div class="bg-[#F4EFE8] rounded-3xl p-6 sm:p-8 border border-[#E2D8C9] space-y-4 text-xs text-stone-700">
                         <div class="flex items-start gap-3">
-                            <i class="ri-temp-hot-line text-lg text-amber-900 flex-shrink-0 mt-0.5"></i>
+                            <i class="ri-temp-hot-line text-lg text-[#7C4E26] flex-shrink-0 mt-0.5"></i>
                             <div>
                                 <strong class="text-stone-900 block mb-0.5">Airflow &amp; Monsoon Ventilation</strong>
                                 <p class="text-stone-600">During the heavy rains from June to October, maintain gentle cross-ventilation or run a dehumidifier to keep indoor humidity under 65%. Avoid leaving wooden tables pushed flush against exterior walls that conduct dampness.</p>
                             </div>
                         </div>
                         <div class="flex items-start gap-3 pt-3 border-t border-stone-300/80">
-                            <i class="ri-sun-line text-lg text-amber-900 flex-shrink-0 mt-0.5"></i>
+                            <i class="ri-sun-line text-lg text-[#7C4E26] flex-shrink-0 mt-0.5"></i>
                             <div>
                                 <strong class="text-stone-900 block mb-0.5">Dry Season Acclimatization</strong>
                                 <p class="text-stone-600">During the arid winter and dry season months (December to April), a localized application of our botanical wood balm prevents timber from losing its natural moisture reserve.</p>

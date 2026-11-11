@@ -12,7 +12,7 @@
     <?php include "components/css.php"; ?>
 </head>
 
-<body class="bg-[#FAF8F5] text-stone-900 font-sans antialiased selection:bg-amber-900 selection:text-white">
+<body class="bg-[#F5EFE6] text-stone-900 font-sans antialiased selection:bg-amber-800 selection:text-white">
     <div class="min-h-screen flex">
         <?php include "components/sidebar.php"; ?>
 
@@ -31,21 +31,21 @@
                         </div>
                         <h2 class="font-serif text-2xl sm:text-3xl font-medium text-stone-900">Atelier Journal &amp; Editorial</h2>
                     </div>
-                    <a href="blog_create.php" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-stone-900 hover:bg-amber-900 text-white text-xs font-medium transition-colors shadow-xs">
+                    <a href="blog_create.php" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#1A1613] hover:bg-[#7C4E26] text-[#F7F3EC] text-xs font-medium transition-colors shadow-xs">
                         <i class="ri-add-line text-base"></i>
                         <span>New Journal Article</span>
                     </a>
                 </div>
 
                 <!-- Blog Table Card -->
-                <div class="bg-white rounded-3xl border border-stone-200/90 overflow-hidden shadow-xs">
-                    <div class="p-5 border-b border-stone-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div class="bg-[#FCFAF7] rounded-3xl border border-[#E2D8C9] overflow-hidden shadow-xs">
+                    <div class="p-5 border-b border-[#E2D8C9] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                         <div class="text-xs text-stone-500">
                             Showing published editorial entries
                         </div>
                         <div class="relative sm:w-64">
                             <i class="ri-search-line absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 text-xs"></i>
-                            <input type="text" placeholder="Search articles..." class="w-full pl-8 pr-3 py-1.5 bg-stone-50 border border-stone-200 rounded-lg text-xs placeholder-stone-400 focus:outline-none focus:ring-1 focus:ring-amber-900">
+                            <input type="text" placeholder="Search articles..." class="w-full pl-8 pr-3 py-1.5 bg-[#F5EFE6] border border-[#E2D8C9] rounded-lg text-xs placeholder-stone-400 focus:outline-none focus:ring-1 focus:ring-[#7C4E26]">
                         </div>
                     </div>
 
@@ -53,7 +53,7 @@
                     <div class="overflow-x-auto">
                         <table class="w-full text-left border-collapse text-xs">
                             <thead>
-                                <tr class="bg-stone-50/80 border-b border-stone-200/80 text-stone-500 uppercase tracking-wider font-semibold">
+                                <tr class="bg-[#F5EFE6] border-b border-[#E2D8C9] text-stone-500 uppercase tracking-wider font-semibold">
                                     <th class="py-3.5 px-6">ID</th>
                                     <th class="py-3.5 px-6">Header Image</th>
                                     <th class="py-3.5 px-6">Article Title</th>
@@ -62,25 +62,25 @@
                                     <th class="py-3.5 px-6 text-right">Actions</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-stone-100 text-stone-700 font-medium">
+                            <tbody class="divide-y divide-[#E2D8C9] text-stone-700 font-medium">
                                 
                                 <!-- Post 1 -->
-                                <tr class="hover:bg-stone-50/60 transition-colors">
+                                <tr class="hover:bg-[#F5EFE6]/60 transition-colors">
                                     <td class="py-4 px-6 text-stone-400">#1</td>
                                     <td class="py-4 px-6">
-                                        <div class="w-16 h-11 rounded-lg bg-stone-100 border border-stone-200 overflow-hidden">
+                                        <div class="w-16 h-11 rounded-lg bg-[#EFE8DD] border border-[#E2D8C9] overflow-hidden">
                                             <img src="../images/blog-minimalist-spaces.jpg" alt="Article image" class="w-full h-full object-cover">
                                         </div>
                                     </td>
                                     <td class="py-4 px-6">
                                         <span class="font-semibold text-stone-900 block text-sm">The Philosophy of Wabi-Sabi in Modern Interiors</span>
-                                        <span class="text-[11px] text-amber-800">Philosophy • 4 min read</span>
+                                        <span class="text-[11px] text-[#7C4E26]">Philosophy • 4 min read</span>
                                     </td>
                                     <td class="py-4 px-6 text-stone-700">Editorial Staff</td>
                                     <td class="py-4 px-6 text-stone-500">2026-05-21</td>
                                     <td class="py-4 px-6 text-right">
                                         <div class="inline-flex items-center gap-2">
-                                            <a href="blog_update.php?id=1" class="px-2.5 py-1 rounded-lg border border-stone-200 hover:bg-stone-100 text-stone-700 transition-colors flex items-center gap-1">
+                                            <a href="blog_update.php?id=1" class="px-2.5 py-1 rounded-lg border border-[#E2D8C9] hover:bg-[#EFE8DD] text-stone-700 transition-colors flex items-center gap-1">
                                                 <i class="ri-pencil-line"></i> Edit
                                             </a>
                                             <a href="blog_delete.php?id=1" class="px-2.5 py-1 rounded-lg border border-rose-200 hover:bg-rose-50 text-rose-600 transition-colors flex items-center gap-1">
@@ -91,22 +91,22 @@
                                 </tr>
 
                                 <!-- Post 2 -->
-                                <tr class="hover:bg-stone-50/60 transition-colors">
+                                <tr class="hover:bg-[#F5EFE6]/60 transition-colors">
                                     <td class="py-4 px-6 text-stone-400">#2</td>
                                     <td class="py-4 px-6">
-                                        <div class="w-16 h-11 rounded-lg bg-stone-100 border border-stone-200 overflow-hidden">
+                                        <div class="w-16 h-11 rounded-lg bg-[#EFE8DD] border border-[#E2D8C9] overflow-hidden">
                                             <img src="../images/blog-sustainable-wood.jpg" alt="Article image" class="w-full h-full object-cover">
                                         </div>
                                     </td>
                                     <td class="py-4 px-6">
                                         <span class="font-semibold text-stone-900 block text-sm">Joinery Without Nails: The Heritage of Wood Craft</span>
-                                        <span class="text-[11px] text-amber-800">Artisanship • 6 min read</span>
+                                        <span class="text-[11px] text-[#7C4E26]">Artisanship • 6 min read</span>
                                     </td>
                                     <td class="py-4 px-6 text-stone-700">Su Thinzar Htet</td>
                                     <td class="py-4 px-6 text-stone-500">2026-04-28</td>
                                     <td class="py-4 px-6 text-right">
                                         <div class="inline-flex items-center gap-2">
-                                            <a href="blog_update.php?id=2" class="px-2.5 py-1 rounded-lg border border-stone-200 hover:bg-stone-100 text-stone-700 transition-colors flex items-center gap-1">
+                                            <a href="blog_update.php?id=2" class="px-2.5 py-1 rounded-lg border border-[#E2D8C9] hover:bg-[#EFE8DD] text-stone-700 transition-colors flex items-center gap-1">
                                                 <i class="ri-pencil-line"></i> Edit
                                             </a>
                                             <a href="blog_delete.php?id=2" class="px-2.5 py-1 rounded-lg border border-rose-200 hover:bg-rose-50 text-rose-600 transition-colors flex items-center gap-1">
@@ -117,22 +117,22 @@
                                 </tr>
 
                                 <!-- Post 3 -->
-                                <tr class="hover:bg-stone-50/60 transition-colors">
+                                <tr class="hover:bg-[#F5EFE6]/60 transition-colors">
                                     <td class="py-4 px-6 text-stone-400">#3</td>
                                     <td class="py-4 px-6">
-                                        <div class="w-16 h-11 rounded-lg bg-stone-100 border border-stone-200 overflow-hidden">
+                                        <div class="w-16 h-11 rounded-lg bg-[#EFE8DD] border border-[#E2D8C9] overflow-hidden">
                                             <img src="../images/blog-lighting-guide.jpg" alt="Article image" class="w-full h-full object-cover">
                                         </div>
                                     </td>
                                     <td class="py-4 px-6">
                                         <span class="font-semibold text-stone-900 block text-sm">Sculpting Ambient Light in Living Rooms</span>
-                                        <span class="text-[11px] text-amber-800">Lighting • 5 min read</span>
+                                        <span class="text-[11px] text-[#7C4E26]">Lighting • 5 min read</span>
                                     </td>
                                     <td class="py-4 px-6 text-stone-700">Thae Nay Nwe Soe</td>
                                     <td class="py-4 px-6 text-stone-500">2026-04-14</td>
                                     <td class="py-4 px-6 text-right">
                                         <div class="inline-flex items-center gap-2">
-                                            <a href="blog_update.php?id=3" class="px-2.5 py-1 rounded-lg border border-stone-200 hover:bg-stone-100 text-stone-700 transition-colors flex items-center gap-1">
+                                            <a href="blog_update.php?id=3" class="px-2.5 py-1 rounded-lg border border-[#E2D8C9] hover:bg-[#EFE8DD] text-stone-700 transition-colors flex items-center gap-1">
                                                 <i class="ri-pencil-line"></i> Edit
                                             </a>
                                             <a href="blog_delete.php?id=3" class="px-2.5 py-1 rounded-lg border border-rose-200 hover:bg-rose-50 text-rose-600 transition-colors flex items-center gap-1">
@@ -143,22 +143,22 @@
                                 </tr>
 
                                 <!-- Post 4 -->
-                                <tr class="hover:bg-stone-50/60 transition-colors">
+                                <tr class="hover:bg-[#F5EFE6]/60 transition-colors">
                                     <td class="py-4 px-6 text-stone-400">#4</td>
                                     <td class="py-4 px-6">
-                                        <div class="w-16 h-11 rounded-lg bg-stone-100 border border-stone-200 overflow-hidden">
+                                        <div class="w-16 h-11 rounded-lg bg-[#EFE8DD] border border-[#E2D8C9] overflow-hidden">
                                             <img src="../images/blog-interior-tips.jpg" alt="Article image" class="w-full h-full object-cover">
                                         </div>
                                     </td>
                                     <td class="py-4 px-6">
                                         <span class="font-semibold text-stone-900 block text-sm">The Ritual of Morning Tea &amp; Minimalist Dining</span>
-                                        <span class="text-[11px] text-amber-800">Lifestyle • 4 min read</span>
+                                        <span class="text-[11px] text-[#7C4E26]">Lifestyle • 4 min read</span>
                                     </td>
                                     <td class="py-4 px-6 text-stone-700">Myat Chal Oo</td>
                                     <td class="py-4 px-6 text-stone-500">2026-03-30</td>
                                     <td class="py-4 px-6 text-right">
                                         <div class="inline-flex items-center gap-2">
-                                            <a href="blog_update.php?id=4" class="px-2.5 py-1 rounded-lg border border-stone-200 hover:bg-stone-100 text-stone-700 transition-colors flex items-center gap-1">
+                                            <a href="blog_update.php?id=4" class="px-2.5 py-1 rounded-lg border border-[#E2D8C9] hover:bg-[#EFE8DD] text-stone-700 transition-colors flex items-center gap-1">
                                                 <i class="ri-pencil-line"></i> Edit
                                             </a>
                                             <a href="blog_delete.php?id=4" class="px-2.5 py-1 rounded-lg border border-rose-200 hover:bg-rose-50 text-rose-600 transition-colors flex items-center gap-1">
@@ -169,22 +169,22 @@
                                 </tr>
 
                                 <!-- Post 5 -->
-                                <tr class="hover:bg-stone-50/60 transition-colors">
+                                <tr class="hover:bg-[#F5EFE6]/60 transition-colors">
                                     <td class="py-4 px-6 text-stone-400">#5</td>
                                     <td class="py-4 px-6">
-                                        <div class="w-16 h-11 rounded-lg bg-stone-100 border border-stone-200 overflow-hidden">
+                                        <div class="w-16 h-11 rounded-lg bg-[#EFE8DD] border border-[#E2D8C9] overflow-hidden">
                                             <img src="../images/blog-modern-styling.jpg" alt="Article image" class="w-full h-full object-cover">
                                         </div>
                                     </td>
                                     <td class="py-4 px-6">
                                         <span class="font-semibold text-stone-900 block text-sm">Botanical Plant Waxes: Caring for Solid Wood</span>
-                                        <span class="text-[11px] text-amber-800">Care • 7 min read</span>
+                                        <span class="text-[11px] text-[#7C4E26]">Care • 7 min read</span>
                                     </td>
                                     <td class="py-4 px-6 text-stone-700">Nyi Nyi Aung</td>
                                     <td class="py-4 px-6 text-stone-500">2026-03-18</td>
                                     <td class="py-4 px-6 text-right">
                                         <div class="inline-flex items-center gap-2">
-                                            <a href="blog_update.php?id=5" class="px-2.5 py-1 rounded-lg border border-stone-200 hover:bg-stone-100 text-stone-700 transition-colors flex items-center gap-1">
+                                            <a href="blog_update.php?id=5" class="px-2.5 py-1 rounded-lg border border-[#E2D8C9] hover:bg-[#EFE8DD] text-stone-700 transition-colors flex items-center gap-1">
                                                 <i class="ri-pencil-line"></i> Edit
                                             </a>
                                             <a href="blog_delete.php?id=5" class="px-2.5 py-1 rounded-lg border border-rose-200 hover:bg-rose-50 text-rose-600 transition-colors flex items-center gap-1">
@@ -195,22 +195,22 @@
                                 </tr>
 
                                 <!-- Post 6 -->
-                                <tr class="hover:bg-stone-50/60 transition-colors">
+                                <tr class="hover:bg-[#F5EFE6]/60 transition-colors">
                                     <td class="py-4 px-6 text-stone-400">#6</td>
                                     <td class="py-4 px-6">
-                                        <div class="w-16 h-11 rounded-lg bg-stone-100 border border-stone-200 overflow-hidden">
+                                        <div class="w-16 h-11 rounded-lg bg-[#EFE8DD] border border-[#E2D8C9] overflow-hidden">
                                             <img src="../images/blog-color-palettes.jpg" alt="Article image" class="w-full h-full object-cover">
                                         </div>
                                     </td>
                                     <td class="py-4 px-6">
                                         <span class="font-semibold text-stone-900 block text-sm">Designing Quiet Havens in High-Density Cities</span>
-                                        <span class="text-[11px] text-amber-800">Interior • 5 min read</span>
+                                        <span class="text-[11px] text-[#7C4E26]">Interior • 5 min read</span>
                                     </td>
                                     <td class="py-4 px-6 text-stone-700">Phone Myat Win</td>
                                     <td class="py-4 px-6 text-stone-500">2026-02-25</td>
                                     <td class="py-4 px-6 text-right">
                                         <div class="inline-flex items-center gap-2">
-                                            <a href="blog_update.php?id=6" class="px-2.5 py-1 rounded-lg border border-stone-200 hover:bg-stone-100 text-stone-700 transition-colors flex items-center gap-1">
+                                            <a href="blog_update.php?id=6" class="px-2.5 py-1 rounded-lg border border-[#E2D8C9] hover:bg-[#EFE8DD] text-stone-700 transition-colors flex items-center gap-1">
                                                 <i class="ri-pencil-line"></i> Edit
                                             </a>
                                             <a href="blog_delete.php?id=6" class="px-2.5 py-1 rounded-lg border border-rose-200 hover:bg-rose-50 text-rose-600 transition-colors flex items-center gap-1">

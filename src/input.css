@@ -4,6 +4,23 @@
 
 @layer base {
   body {
-    @apply bg-[#FAF8F5] text-stone-900 antialiased font-sans selection:bg-amber-900 selection:text-white;
+    @apply bg-[#F5EFE6] text-stone-900 antialiased font-sans selection:bg-amber-800 selection:text-white;
+  }
+}
+
+@layer utilities {
+  /* Warm tactile luxury card */
+  .atelier-card {
+    @apply bg-[#FCFAF7] border border-[#E2D8C9] rounded-3xl transition-all duration-300;
+  }
+  
+  /* Elevated hover elevation */
+  .atelier-card-hover {
+    @apply hover:border-[#B58245] hover:shadow-[0_16px_36px_-8px_rgba(40,30,20,0.12)];
+  }
+
+  /* Deep smoked walnut button */
+  .btn-espresso {
+    @apply bg-[#1A1613] hover:bg-[#7C4E26] text-[#F7F3EC] transition-colors duration-200 shadow-xs;
   }
 }

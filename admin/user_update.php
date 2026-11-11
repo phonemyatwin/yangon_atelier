@@ -12,7 +12,7 @@
     <?php include "components/css.php"; ?>
 </head>
 
-<body class="bg-[#FAF8F5] text-stone-900 font-sans antialiased selection:bg-amber-900 selection:text-white">
+<body class="bg-[#F5EFE6] text-stone-900 font-sans antialiased selection:bg-amber-800 selection:text-white">
     <div class="min-h-screen flex">
         <?php include "components/sidebar.php"; ?>
 
@@ -33,13 +33,13 @@
                         </div>
                         <h2 class="font-serif text-2xl sm:text-3xl font-medium text-stone-900">Edit User Account</h2>
                     </div>
-                    <a href="users.php" class="px-4 py-2 rounded-xl border border-stone-200 text-xs font-medium text-stone-700 hover:bg-white transition-colors">
+                    <a href="users.php" class="px-4 py-2 rounded-xl border border-[#E2D8C9] text-xs font-medium text-stone-700 hover:bg-white transition-colors">
                         Back to List
                     </a>
                 </div>
 
                 <!-- Form Card -->
-                <div class="bg-white rounded-3xl border border-stone-200/90 p-6 sm:p-10 shadow-xs">
+                <div class="bg-[#FCFAF7] rounded-3xl border border-[#E2D8C9] p-6 sm:p-10 shadow-xs">
                     <!-- [PHP_BACKEND_HOOK: User update handler. Method: POST. Sanitize inputs, check if password changed (if so hash new password), UPDATE users SET username = :username, email = :email WHERE id = :id] -->
                     <form method="POST" class="space-y-5">
                         <input type="hidden" name="id" value="1">
@@ -51,7 +51,7 @@
                             </label>
                             <div class="relative">
                                 <i class="ri-user-line absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 text-base"></i>
-                                <input type="text" id="username" name="username" required value="admin" class="w-full pl-11 pr-4 py-3 bg-stone-50 border border-stone-200 rounded-xl text-stone-900 text-sm placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-amber-900 focus:border-amber-900 transition-all">
+                                <input type="text" id="username" name="username" required value="admin" class="w-full pl-11 pr-4 py-3 bg-[#F5EFE6] border border-[#E2D8C9] rounded-xl text-stone-900 text-sm placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#7C4E26] focus:border-amber-900 transition-all">
                             </div>
                         </div>
 
@@ -62,28 +62,28 @@
                             </label>
                             <div class="relative">
                                 <i class="ri-mail-line absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 text-base"></i>
-                                <input type="email" id="email" name="email" required value="admin@gmail.com" class="w-full pl-11 pr-4 py-3 bg-stone-50 border border-stone-200 rounded-xl text-stone-900 text-sm placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-amber-900 focus:border-amber-900 transition-all">
+                                <input type="email" id="email" name="email" required value="admin@gmail.com" class="w-full pl-11 pr-4 py-3 bg-[#F5EFE6] border border-[#E2D8C9] rounded-xl text-stone-900 text-sm placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#7C4E26] focus:border-amber-900 transition-all">
                             </div>
                         </div>
 
                         <!-- Optional Password Change -->
-                        <div class="space-y-1.5 pt-2 border-t border-stone-100">
+                        <div class="space-y-1.5 pt-2 border-t border-[#E2D8C9]">
                             <label for="password" class="block text-xs font-semibold uppercase tracking-wider text-stone-700">
                                 Reset Password (Optional)
                             </label>
                             <div class="relative">
                                 <i class="ri-lock-2-line absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 text-base"></i>
-                                <input type="password" id="password" name="password" placeholder="Leave empty to keep existing password" class="w-full pl-11 pr-4 py-3 bg-stone-50 border border-stone-200 rounded-xl text-stone-900 text-sm placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-amber-900 focus:border-amber-900 transition-all">
+                                <input type="password" id="password" name="password" placeholder="Leave empty to keep existing password" class="w-full pl-11 pr-4 py-3 bg-[#F5EFE6] border border-[#E2D8C9] rounded-xl text-stone-900 text-sm placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#7C4E26] focus:border-amber-900 transition-all">
                             </div>
                             <span class="text-[11px] text-stone-400">Only fill this if you want to replace the user's password.</span>
                         </div>
 
                         <!-- Form Actions -->
-                        <div class="pt-4 border-t border-stone-100 flex items-center justify-end gap-3">
-                            <a href="users.php" class="px-5 py-3 rounded-xl border border-stone-200 text-xs font-medium text-stone-700 hover:bg-stone-50 transition-colors">
+                        <div class="pt-4 border-t border-[#E2D8C9] flex items-center justify-end gap-3">
+                            <a href="users.php" class="px-5 py-3 rounded-xl border border-[#E2D8C9] text-xs font-medium text-stone-700 hover:bg-[#F5EFE6] transition-colors">
                                 Cancel
                             </a>
-                            <button type="submit" name="update" class="px-6 py-3 rounded-xl bg-stone-900 hover:bg-amber-900 text-white text-xs font-medium transition-colors shadow-xs flex items-center gap-2">
+                            <button type="submit" name="update" class="px-6 py-3 rounded-xl bg-[#1A1613] hover:bg-[#7C4E26] text-[#F7F3EC] text-xs font-medium transition-colors shadow-xs flex items-center gap-2">
                                 <i class="ri-save-line text-sm"></i>
                                 <span>Save Changes</span>
                             </button>

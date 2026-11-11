@@ -12,7 +12,7 @@
     <?php include "components/css.php"; ?>
 </head>
 
-<body class="bg-[#FAF8F5] text-stone-900 font-sans antialiased selection:bg-amber-900 selection:text-white">
+<body class="bg-[#F5EFE6] text-stone-900 font-sans antialiased selection:bg-amber-800 selection:text-white">
     <div class="min-h-screen flex">
         <?php include "components/sidebar.php"; ?>
 
@@ -33,7 +33,7 @@
                         </div>
                         <h2 class="font-serif text-2xl sm:text-3xl font-medium text-stone-900">Confirm Message Deletion</h2>
                     </div>
-                    <a href="contacts.php" class="px-4 py-2 rounded-xl border border-stone-200 text-xs font-medium text-stone-700 hover:bg-white transition-colors">
+                    <a href="contacts.php" class="px-4 py-2 rounded-xl border border-[#E2D8C9] text-xs font-medium text-stone-700 hover:bg-white transition-colors">
                         Cancel
                     </a>
                 </div>
@@ -52,8 +52,8 @@
 
                     <!-- Message Details Summary -->
                     <!-- [PHP_BACKEND_HOOK: Query contact message by ID for deletion confirmation (SELECT * FROM contacts WHERE id = :id)] -->
-                    <div class="border border-stone-200 rounded-2xl p-5 mb-8 space-y-2 text-xs">
-                        <div class="flex items-center justify-between border-b border-stone-100 pb-2">
+                    <div class="border border-[#E2D8C9] rounded-2xl p-5 mb-8 space-y-2 text-xs">
+                        <div class="flex items-center justify-between border-b border-[#E2D8C9] pb-2">
                             <span class="text-stone-400 font-mono">Inquiry #1</span>
                             <span class="text-stone-400">2026-11-04</span>
                         </div>
@@ -62,9 +62,9 @@
                     </div>
 
                     <!-- [PHP_BACKEND_HOOK: Contact deletion handler. POST method, execute DELETE FROM contacts WHERE id = :id] -->
-                    <form method="POST" class="flex items-center justify-end gap-3 pt-4 border-t border-stone-100">
+                    <form method="POST" class="flex items-center justify-end gap-3 pt-4 border-t border-[#E2D8C9]">
                         <input type="hidden" name="id" value="1">
-                        <a href="contacts.php" class="px-5 py-2.5 rounded-xl border border-stone-200 text-xs font-medium text-stone-700 hover:bg-stone-50 transition-colors">
+                        <a href="contacts.php" class="px-5 py-2.5 rounded-xl border border-[#E2D8C9] text-xs font-medium text-stone-700 hover:bg-[#F5EFE6] transition-colors">
                             Cancel
                         </a>
                         <button type="submit" name="delete" class="px-5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-medium transition-colors shadow-xs flex items-center gap-2">

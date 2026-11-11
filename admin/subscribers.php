@@ -12,7 +12,7 @@
     <?php include "components/css.php"; ?>
 </head>
 
-<body class="bg-[#FAF8F5] text-stone-900 font-sans antialiased selection:bg-amber-900 selection:text-white">
+<body class="bg-[#F5EFE6] text-stone-900 font-sans antialiased selection:bg-amber-800 selection:text-white">
     <div class="min-h-screen flex">
         <?php include "components/sidebar.php"; ?>
 
@@ -34,14 +34,14 @@
                 </div>
 
                 <!-- Table Card -->
-                <div class="bg-white rounded-3xl border border-stone-200/90 overflow-hidden shadow-xs">
-                    <div class="p-5 border-b border-stone-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div class="bg-[#FCFAF7] rounded-3xl border border-[#E2D8C9] overflow-hidden shadow-xs">
+                    <div class="p-5 border-b border-[#E2D8C9] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                         <div class="text-xs text-stone-500">
                             Showing verified email subscribers
                         </div>
                         <div class="relative sm:w-64">
                             <i class="ri-search-line absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 text-xs"></i>
-                            <input type="text" placeholder="Filter subscribers by email..." class="w-full pl-8 pr-3 py-1.5 bg-stone-50 border border-stone-200 rounded-lg text-xs placeholder-stone-400 focus:outline-none focus:ring-1 focus:ring-amber-900">
+                            <input type="text" placeholder="Filter subscribers by email..." class="w-full pl-8 pr-3 py-1.5 bg-[#F5EFE6] border border-[#E2D8C9] rounded-lg text-xs placeholder-stone-400 focus:outline-none focus:ring-1 focus:ring-[#7C4E26]">
                         </div>
                     </div>
 
@@ -49,7 +49,7 @@
                     <div class="overflow-x-auto">
                         <table class="w-full text-left border-collapse text-xs">
                             <thead>
-                                <tr class="bg-stone-50/80 border-b border-stone-200/80 text-stone-500 uppercase tracking-wider font-semibold">
+                                <tr class="bg-[#F5EFE6] border-b border-[#E2D8C9] text-stone-500 uppercase tracking-wider font-semibold">
                                     <th class="py-3.5 px-6">ID</th>
                                     <th class="py-3.5 px-6">Subscriber Email</th>
                                     <th class="py-3.5 px-6">Subscription Date</th>
@@ -57,10 +57,10 @@
                                     <th class="py-3.5 px-6 text-right">Actions</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-stone-100 text-stone-700 font-medium">
+                            <tbody class="divide-y divide-[#E2D8C9] text-stone-700 font-medium">
                                 
                                 <!-- Sub 1 -->
-                                <tr class="hover:bg-stone-50/60 transition-colors">
+                                <tr class="hover:bg-[#F5EFE6]/60 transition-colors">
                                     <td class="py-4 px-6 text-stone-400">#1</td>
                                     <td class="py-4 px-6 font-mono text-stone-900 text-xs font-semibold">aungmin@gmail.com</td>
                                     <td class="py-4 px-6 text-stone-500">2026-11-01</td>
@@ -77,7 +77,7 @@
                                 </tr>
 
                                 <!-- Sub 2 -->
-                                <tr class="hover:bg-stone-50/60 transition-colors">
+                                <tr class="hover:bg-[#F5EFE6]/60 transition-colors">
                                     <td class="py-4 px-6 text-stone-400">#2</td>
                                     <td class="py-4 px-6 font-mono text-stone-900 text-xs font-semibold">susu@gmail.com</td>
                                     <td class="py-4 px-6 text-stone-500">2026-11-02</td>
@@ -94,7 +94,7 @@
                                 </tr>
 
                                 <!-- Sub 3 -->
-                                <tr class="hover:bg-stone-50/60 transition-colors">
+                                <tr class="hover:bg-[#F5EFE6]/60 transition-colors">
                                     <td class="py-4 px-6 text-stone-400">#3</td>
                                     <td class="py-4 px-6 font-mono text-stone-900 text-xs font-semibold">koko@gmail.com</td>
                                     <td class="py-4 px-6 text-stone-500">2026-11-03</td>

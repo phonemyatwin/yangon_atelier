@@ -14,7 +14,7 @@
     <?php include "components/css.php"; ?>
 </head>
 
-<body class="bg-[#FAF8F5] text-stone-900 font-sans selection:bg-amber-900 selection:text-white">
+<body class="bg-[#F5EFE6] text-stone-900 font-sans selection:bg-amber-800 selection:text-white">
     <?php include "components/header.php"; ?>
     <?php include "components/navbar.php"; ?>
 
@@ -29,7 +29,7 @@
                     <i class="ri-arrow-left-line text-sm"></i>
                     <span>Back to Journal</span>
                 </a>
-                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-amber-100/70 border border-amber-200/60 text-amber-900">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-[#EAD6B8]/50 border border-[#CEBFAC] text-[#7C4E26]">
                     Interior Philosophy
                 </span>
             </div>
@@ -40,9 +40,9 @@
                 <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal tracking-tight text-stone-900 leading-[1.2]">
                     The Philosophy of Wabi-Sabi in Modern Interiors
                 </h1>
-                <div class="flex items-center gap-4 text-xs text-stone-500 pt-2 border-b border-stone-200 pb-6">
+                <div class="flex items-center gap-4 text-xs text-stone-500 pt-2 border-b border-[#E2D8C9] pb-6">
                     <div class="flex items-center gap-2">
-                        <span class="w-8 h-8 rounded-full bg-stone-900 text-white flex items-center justify-center font-serif text-xs font-semibold">ED</span>
+                        <span class="w-8 h-8 rounded-full bg-[#1A1613] text-[#F7F3EC] flex items-center justify-center font-serif text-xs font-semibold">ED</span>
                         <span class="font-medium text-stone-900">Atelier Editorial</span>
                     </div>
                     <span class="w-1 h-1 rounded-full bg-stone-300"></span>
@@ -54,7 +54,7 @@
 
             <!-- Featured Image -->
             <!-- [PHP_BACKEND_HOOK: Dynamic blog image: $blog['image']] -->
-            <div class="rounded-3xl overflow-hidden aspect-[16/10] bg-stone-100 border border-stone-200/90 shadow-sm mb-12">
+            <div class="rounded-3xl overflow-hidden aspect-[16/10] bg-stone-100 border border-[#E2D8C9] shadow-sm mb-12">
                 <img src="images/blog-minimalist-spaces.jpg" alt="The Philosophy of Wabi-Sabi in Modern Interiors" class="w-full h-full object-cover">
             </div>
 
@@ -70,7 +70,7 @@
                 </p>
 
                 <!-- Editorial Pull Quote -->
-                <blockquote class="my-10 border-l-2 border-amber-900 pl-6 py-2 italic font-serif text-xl sm:text-2xl text-stone-900 leading-snug bg-[#F4EFE8]/50 rounded-r-xl">
+                <blockquote class="my-10 border-l-2 border-[#7C4E26] pl-6 py-3 italic font-serif text-xl sm:text-2xl text-stone-900 leading-snug bg-[#EDE5D8]/60 rounded-r-2xl">
                     "True luxury in modern living is the tactile reassurance that an object was shaped by human hands and will mature alongside your own life."
                 </blockquote>
 
@@ -103,8 +103,8 @@
             </div>
 
             <!-- Author Bio Box -->
-            <div class="max-w-3xl mx-auto mt-14 p-6 sm:p-8 rounded-2xl bg-white border border-stone-200 shadow-xs flex flex-col sm:flex-row items-center sm:items-start gap-6">
-                <span class="w-16 h-16 rounded-2xl bg-stone-900 text-white flex items-center justify-center font-serif text-xl font-medium flex-shrink-0">
+            <div class="max-w-3xl mx-auto mt-14 p-6 sm:p-8 rounded-3xl bg-[#FCFAF7] border border-[#E2D8C9] shadow-xs flex flex-col sm:flex-row items-center sm:items-start gap-6">
+                <span class="w-16 h-16 rounded-2xl bg-[#1A1613] text-[#F7F3EC] flex items-center justify-center font-serif text-xl font-medium flex-shrink-0">
                     ED
                 </span>
                 <div class="space-y-2 text-center sm:text-left">
@@ -116,12 +116,12 @@
             </div>
 
             <!-- Back to Journal CTA -->
-            <div class="max-w-3xl mx-auto mt-12 pt-8 border-t border-stone-200 flex items-center justify-between">
-                <a href="blog.php" class="inline-flex items-center gap-2 text-sm font-semibold text-stone-900 hover:text-amber-800 transition-colors">
+            <div class="max-w-3xl mx-auto mt-12 pt-8 border-t border-[#E2D8C9] flex items-center justify-between">
+                <a href="blog.php" class="inline-flex items-center gap-2 text-sm font-semibold text-stone-900 hover:text-[#7C4E26] transition-colors">
                     <i class="ri-arrow-left-line"></i>
                     <span>All Journal Entries</span>
                 </a>
-                <a href="shop.php" class="inline-flex items-center gap-2 text-sm font-semibold text-stone-900 hover:text-amber-800 transition-colors">
+                <a href="shop.php" class="inline-flex items-center gap-2 text-sm font-semibold text-stone-900 hover:text-[#7C4E26] transition-colors">
                     <span>Explore Featured Furniture</span>
                     <i class="ri-arrow-right-line"></i>
                 </a>

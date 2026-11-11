@@ -12,7 +12,7 @@
     <?php include "components/css.php"; ?>
 </head>
 
-<body class="bg-[#FAF8F5] text-stone-900 font-sans antialiased selection:bg-amber-900 selection:text-white">
+<body class="bg-[#F5EFE6] text-stone-900 font-sans antialiased selection:bg-amber-800 selection:text-white">
     <div class="min-h-screen flex">
         <?php include "components/sidebar.php"; ?>
 
@@ -33,13 +33,13 @@
                         </div>
                         <h2 class="font-serif text-2xl sm:text-3xl font-medium text-stone-900">Edit Furniture Piece</h2>
                     </div>
-                    <a href="products.php" class="px-4 py-2 rounded-xl border border-stone-200 text-xs font-medium text-stone-700 hover:bg-white transition-colors">
+                    <a href="products.php" class="px-4 py-2 rounded-xl border border-[#E2D8C9] text-xs font-medium text-stone-700 hover:bg-white transition-colors">
                         Back to List
                     </a>
                 </div>
 
                 <!-- Form Card -->
-                <div class="bg-white rounded-3xl border border-stone-200/90 p-6 sm:p-10 shadow-xs">
+                <div class="bg-[#FCFAF7] rounded-3xl border border-[#E2D8C9] p-6 sm:p-10 shadow-xs">
                     <!-- [PHP_BACKEND_HOOK: Product update handler. Method: POST, enctype="multipart/form-data". Handle optional new image upload or preserve existing, UPDATE products SET name = :name, price = :price, stock = :stock, description = :description WHERE id = :id] -->
                     <form method="POST" enctype="multipart/form-data" class="space-y-6">
                         <input type="hidden" name="id" value="1">
@@ -49,7 +49,7 @@
                             <label for="name" class="block text-xs font-semibold uppercase tracking-wider text-stone-700">
                                 Product Title <span class="text-rose-600">*</span>
                             </label>
-                            <input type="text" id="name" name="name" required value="Sculptural Lounge Armchair" class="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl text-stone-900 text-sm placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-amber-900 focus:border-amber-900 transition-all">
+                            <input type="text" id="name" name="name" required value="Sculptural Lounge Armchair" class="w-full px-4 py-3 bg-[#F5EFE6] border border-[#E2D8C9] rounded-xl text-stone-900 text-sm placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#7C4E26] focus:border-amber-900 transition-all">
                         </div>
 
                         <!-- Price and Stock Grid -->
@@ -60,7 +60,7 @@
                                 </label>
                                 <div class="relative">
                                     <span class="absolute left-4 top-1/2 -translate-y-1/2 text-xs font-semibold text-stone-400">MMK</span>
-                                    <input type="number" step="1" id="price" name="price" required value="40000" class="w-full pl-14 pr-4 py-3 bg-stone-50 border border-stone-200 rounded-xl text-stone-900 text-sm placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-amber-900 focus:border-amber-900 transition-all">
+                                    <input type="number" step="1" id="price" name="price" required value="40000" class="w-full pl-14 pr-4 py-3 bg-[#F5EFE6] border border-[#E2D8C9] rounded-xl text-stone-900 text-sm placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#7C4E26] focus:border-amber-900 transition-all">
                                 </div>
                             </div>
 
@@ -68,7 +68,7 @@
                                 <label for="stock" class="block text-xs font-semibold uppercase tracking-wider text-stone-700">
                                     Inventory Count <span class="text-rose-600">*</span>
                                 </label>
-                                <input type="number" id="stock" name="stock" required value="25" class="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl text-stone-900 text-sm placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-amber-900 focus:border-amber-900 transition-all">
+                                <input type="number" id="stock" name="stock" required value="25" class="w-full px-4 py-3 bg-[#F5EFE6] border border-[#E2D8C9] rounded-xl text-stone-900 text-sm placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#7C4E26] focus:border-amber-900 transition-all">
                             </div>
                         </div>
 
@@ -77,8 +77,8 @@
                             <label class="block text-xs font-semibold uppercase tracking-wider text-stone-700">
                                 Current Artwork &amp; Replacement
                             </label>
-                            <div class="flex flex-col sm:flex-row items-center gap-6 p-4 rounded-2xl bg-stone-50 border border-stone-200">
-                                <div class="w-24 h-24 rounded-xl bg-white border border-stone-200 p-2 flex items-center justify-center flex-shrink-0">
+                            <div class="flex flex-col sm:flex-row items-center gap-6 p-4 rounded-2xl bg-[#F5EFE6] border border-[#E2D8C9]">
+                                <div class="w-24 h-24 rounded-xl bg-[#FCFAF7] border border-[#E2D8C9] p-2 flex items-center justify-center flex-shrink-0">
                                     <!-- [PHP_BACKEND_HOOK: Display current product image thumbnail] -->
                                     <img id="product-preview" src="../images/chair-1.jpg" alt="Current Piece" class="max-h-full max-w-full object-contain">
                                 </div>
@@ -95,15 +95,15 @@
                             <label for="description" class="block text-xs font-semibold uppercase tracking-wider text-stone-700">
                                 Piece Narrative &amp; Specifications
                             </label>
-                            <textarea id="description" name="description" rows="4" class="w-full p-4 bg-stone-50 border border-stone-200 rounded-xl text-stone-900 text-sm placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-amber-900 focus:border-amber-900 transition-all">The Sculptural Lounge Armchair merges Scandinavian ergonomic posture with the organic tranquility of Japanese joinery.</textarea>
+                            <textarea id="description" name="description" rows="4" class="w-full p-4 bg-[#F5EFE6] border border-[#E2D8C9] rounded-xl text-stone-900 text-sm placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#7C4E26] focus:border-amber-900 transition-all">The Sculptural Lounge Armchair merges Scandinavian ergonomic posture with the organic tranquility of Japanese joinery.</textarea>
                         </div>
 
                         <!-- Form Actions -->
-                        <div class="pt-4 border-t border-stone-100 flex items-center justify-end gap-3">
-                            <a href="products.php" class="px-5 py-3 rounded-xl border border-stone-200 text-xs font-medium text-stone-700 hover:bg-stone-50 transition-colors">
+                        <div class="pt-4 border-t border-[#E2D8C9] flex items-center justify-end gap-3">
+                            <a href="products.php" class="px-5 py-3 rounded-xl border border-[#E2D8C9] text-xs font-medium text-stone-700 hover:bg-[#F5EFE6] transition-colors">
                                 Cancel
                             </a>
-                            <button type="submit" name="update" class="px-6 py-3 rounded-xl bg-stone-900 hover:bg-amber-900 text-white text-xs font-medium transition-colors shadow-xs flex items-center gap-2">
+                            <button type="submit" name="update" class="px-6 py-3 rounded-xl bg-[#1A1613] hover:bg-[#7C4E26] text-[#F7F3EC] text-xs font-medium transition-colors shadow-xs flex items-center gap-2">
                                 <i class="ri-save-line text-sm"></i>
                                 <span>Save Changes</span>
                             </button>

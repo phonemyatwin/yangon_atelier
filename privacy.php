@@ -13,12 +13,12 @@
     <?php include "components/css.php"; ?>
 </head>
 
-<body class="bg-[#FAF8F5] text-stone-900 font-sans selection:bg-amber-900 selection:text-white">
+<body class="bg-[#F5EFE6] text-stone-900 font-sans selection:bg-amber-800 selection:text-white">
     <?php include "components/header.php"; ?>
     <?php include "components/navbar.php"; ?>
 
     <!-- PAGE HEADER BREADCRUMB -->
-    <header class="bg-[#F4EFE8] border-b border-stone-200 py-12 lg:py-16">
+    <header class="bg-[#EDE5D8] border-b border-[#E2D8C9] py-12 lg:py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <nav class="flex items-center gap-2 text-xs font-medium text-stone-500 mb-3" aria-label="Breadcrumb">
                 <a href="index.php" class="hover:text-stone-900 transition-colors">Home</a>
@@ -27,7 +27,7 @@
             </nav>
             <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
                 <div>
-                    <span class="text-xs uppercase tracking-[0.25em] text-amber-800 font-semibold block mb-2">Legal &amp; Governance</span>
+                    <span class="text-xs uppercase tracking-[0.25em] text-[#7C4E26] font-semibold block mb-2">Legal &amp; Governance</span>
                     <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal tracking-tight text-stone-900">
                         Privacy Policy &amp; Data Stewardship
                     </h1>
@@ -35,7 +35,7 @@
                         Our uncompromising commitment to safeguarding your private information, bespoke commission records, and showroom consultations with transparency and care.
                     </p>
                 </div>
-                <div class="text-xs text-stone-500 bg-white/70 backdrop-blur-xs px-4 py-2.5 rounded-xl border border-stone-200/80 whitespace-nowrap">
+                <div class="text-xs text-stone-500 bg-[#FCFAF7]/80 backdrop-blur-xs px-4 py-2.5 rounded-xl border border-[#E2D8C9] whitespace-nowrap">
                     <span>Effective Date: </span>
                     <strong class="text-stone-900 font-semibold">November 11, 2026</strong>
                 </div>
@@ -47,9 +47,9 @@
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         
         <!-- EXECUTIVE OVERVIEW / ATELIER COMMITMENT -->
-        <div class="mb-12 bg-white rounded-3xl p-6 sm:p-8 lg:p-10 border border-stone-200 shadow-xs">
+        <div class="mb-12 bg-[#FCFAF7] rounded-3xl p-6 sm:p-8 lg:p-10 border border-[#E2D8C9] shadow-xs">
             <div class="flex items-center gap-3 mb-4">
-                <div class="w-10 h-10 rounded-xl bg-[#F4EFE8] text-amber-900 flex items-center justify-center text-xl">
+                <div class="w-10 h-10 rounded-xl bg-[#EFE9DF] text-[#7C4E26] flex items-center justify-center text-xl">
                     <i class="ri-shield-check-line"></i>
                 </div>
                 <h2 class="font-serif text-xl sm:text-2xl font-normal text-stone-900">Executive Privacy Commitment</h2>
@@ -57,30 +57,30 @@
             <p class="text-stone-600 text-sm leading-relaxed mb-6">
                 At FurnishMe Atelier ("FurnishMe", "we", "our", or "us"), we operate with the same deliberate mindfulness in our digital infrastructure as we do when hand-planing solid teak and walnut timbers. We treat your personal data with profound reverence. We do not sell, rent, monetize, or broker your personal information to third-party data brokers under any circumstance.
             </p>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 border-t border-stone-100 text-xs">
-                <div class="p-4 rounded-2xl bg-stone-50 border border-stone-200/70">
-                    <div class="text-amber-800 font-semibold mb-1 flex items-center gap-1.5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 border-t border-[#E2D8C9] text-xs">
+                <div class="p-4 rounded-2xl bg-[#F5EFE6] border border-[#E2D8C9]">
+                    <div class="text-[#7C4E26] font-semibold mb-1 flex items-center gap-1.5">
                         <i class="ri-forbid-line"></i>
                         <span>Zero Data Brokering</span>
                     </div>
                     <p class="text-stone-500 leading-normal">Your information is never sold or exchanged for behavioral ad targeting.</p>
                 </div>
-                <div class="p-4 rounded-2xl bg-stone-50 border border-stone-200/70">
-                    <div class="text-amber-800 font-semibold mb-1 flex items-center gap-1.5">
+                <div class="p-4 rounded-2xl bg-[#F5EFE6] border border-[#E2D8C9]">
+                    <div class="text-[#7C4E26] font-semibold mb-1 flex items-center gap-1.5">
                         <i class="ri-lock-line"></i>
                         <span>Secure Fulfillment</span>
                     </div>
                     <p class="text-stone-500 leading-normal">Delivery details are shared solely with vetted white-glove transport artisans.</p>
                 </div>
-                <div class="p-4 rounded-2xl bg-stone-50 border border-stone-200/70">
-                    <div class="text-amber-800 font-semibold mb-1 flex items-center gap-1.5">
+                <div class="p-4 rounded-2xl bg-[#F5EFE6] border border-[#E2D8C9]">
+                    <div class="text-[#7C4E26] font-semibold mb-1 flex items-center gap-1.5">
                         <i class="ri-fingerprint-line"></i>
                         <span>Full Sovereignty</span>
                     </div>
                     <p class="text-stone-500 leading-normal">Request complete export or permanent deletion of your profile anytime.</p>
                 </div>
-                <div class="p-4 rounded-2xl bg-stone-50 border border-stone-200/70">
-                    <div class="text-amber-800 font-semibold mb-1 flex items-center gap-1.5">
+                <div class="p-4 rounded-2xl bg-[#F5EFE6] border border-[#E2D8C9]">
+                    <div class="text-[#7C4E26] font-semibold mb-1 flex items-center gap-1.5">
                         <i class="ri-bank-card-line"></i>
                         <span>PCI-DSS Compliant</span>
                     </div>
@@ -93,49 +93,49 @@
             
             <!-- STICKY TABLE OF CONTENTS -->
             <aside class="lg:col-span-4">
-                <div class="lg:sticky lg:top-28 bg-white border border-stone-200 rounded-3xl p-6 shadow-xs">
+                <div class="lg:sticky lg:top-28 bg-[#FCFAF7] border border-[#E2D8C9] rounded-3xl p-6 shadow-xs">
                     <h3 class="text-xs uppercase tracking-[0.2em] text-stone-400 font-semibold mb-4">
                         Sections &amp; Articles
                     </h3>
                     <nav class="space-y-1 text-xs">
-                        <a href="#section-1" class="block py-2 px-3 rounded-xl font-medium text-stone-700 hover:text-stone-950 hover:bg-stone-50 transition-colors">
+                        <a href="#section-1" class="block py-2 px-3 rounded-xl font-medium text-stone-700 hover:text-stone-950 hover:bg-[#EFE9DF] transition-colors">
                             1. Scope &amp; Atelier Introduction
                         </a>
-                        <a href="#section-2" class="block py-2 px-3 rounded-xl font-medium text-stone-700 hover:text-stone-950 hover:bg-stone-50 transition-colors">
+                        <a href="#section-2" class="block py-2 px-3 rounded-xl font-medium text-stone-700 hover:text-stone-950 hover:bg-[#EFE9DF] transition-colors">
                             2. Information We Collect
                         </a>
-                        <a href="#section-3" class="block py-2 px-3 rounded-xl font-medium text-stone-700 hover:text-stone-950 hover:bg-stone-50 transition-colors">
+                        <a href="#section-3" class="block py-2 px-3 rounded-xl font-medium text-stone-700 hover:text-stone-950 hover:bg-[#EFE9DF] transition-colors">
                             3. Purpose &amp; Processing Grounds
                         </a>
-                        <a href="#section-4" class="block py-2 px-3 rounded-xl font-medium text-stone-700 hover:text-stone-950 hover:bg-stone-50 transition-colors">
+                        <a href="#section-4" class="block py-2 px-3 rounded-xl font-medium text-stone-700 hover:text-stone-950 hover:bg-[#EFE9DF] transition-colors">
                             4. Logistics &amp; Service Partners
                         </a>
-                        <a href="#section-5" class="block py-2 px-3 rounded-xl font-medium text-stone-700 hover:text-stone-950 hover:bg-stone-50 transition-colors">
+                        <a href="#section-5" class="block py-2 px-3 rounded-xl font-medium text-stone-700 hover:text-stone-950 hover:bg-[#EFE9DF] transition-colors">
                             5. Cookies &amp; Telemetry
                         </a>
-                        <a href="#section-6" class="block py-2 px-3 rounded-xl font-medium text-stone-700 hover:text-stone-950 hover:bg-stone-50 transition-colors">
+                        <a href="#section-6" class="block py-2 px-3 rounded-xl font-medium text-stone-700 hover:text-stone-950 hover:bg-[#EFE9DF] transition-colors">
                             6. Retention &amp; Archival Lifecycles
                         </a>
-                        <a href="#section-7" class="block py-2 px-3 rounded-xl font-medium text-stone-700 hover:text-stone-950 hover:bg-stone-50 transition-colors">
+                        <a href="#section-7" class="block py-2 px-3 rounded-xl font-medium text-stone-700 hover:text-stone-950 hover:bg-[#EFE9DF] transition-colors">
                             7. Technical Safeguards &amp; Security
                         </a>
-                        <a href="#section-8" class="block py-2 px-3 rounded-xl font-medium text-stone-700 hover:text-stone-950 hover:bg-stone-50 transition-colors">
+                        <a href="#section-8" class="block py-2 px-3 rounded-xl font-medium text-stone-700 hover:text-stone-950 hover:bg-[#EFE9DF] transition-colors">
                             8. Your Privacy Rights &amp; Recourse
                         </a>
-                        <a href="#section-9" class="block py-2 px-3 rounded-xl font-medium text-stone-700 hover:text-stone-950 hover:bg-stone-50 transition-colors">
+                        <a href="#section-9" class="block py-2 px-3 rounded-xl font-medium text-stone-700 hover:text-stone-950 hover:bg-[#EFE9DF] transition-colors">
                             9. Children's Privacy Notice
                         </a>
-                        <a href="#section-10" class="block py-2 px-3 rounded-xl font-medium text-stone-700 hover:text-stone-950 hover:bg-stone-50 transition-colors">
+                        <a href="#section-10" class="block py-2 px-3 rounded-xl font-medium text-stone-700 hover:text-stone-950 hover:bg-[#EFE9DF] transition-colors">
                             10. Direct Privacy Officer Inquiries
                         </a>
                     </nav>
 
                     <!-- Concierge Card -->
-                    <div class="mt-8 pt-6 border-t border-stone-100 text-xs text-stone-600 space-y-2">
-                        <span class="text-[11px] uppercase tracking-wider text-amber-800 font-semibold block">Data Protection Office</span>
+                    <div class="mt-8 pt-6 border-t border-[#E2D8C9] text-xs text-stone-600 space-y-2">
+                        <span class="text-[11px] uppercase tracking-wider text-[#7C4E26] font-semibold block">Data Protection Office</span>
                         <p class="font-medium text-stone-900">Min Khant Naung</p>
                         <p class="text-stone-500">Showroom Concierge &amp; Governance</p>
-                        <a href="mailto:privacy@furnishme.com" class="inline-flex items-center gap-1.5 text-stone-900 hover:text-amber-900 font-medium transition-colors pt-1">
+                        <a href="mailto:privacy@furnishme.com" class="inline-flex items-center gap-1.5 text-stone-900 hover:text-[#7C4E26] font-medium transition-colors pt-1">
                             <i class="ri-mail-line"></i>
                             <span>privacy@furnishme.com</span>
                         </a>
@@ -148,7 +148,7 @@
 
                 <!-- SECTION 1 -->
                 <section id="section-1" class="scroll-mt-28 space-y-4">
-                    <span class="text-xs uppercase tracking-wider text-amber-800 font-semibold">Section 1</span>
+                    <span class="text-xs uppercase tracking-wider text-[#7C4E26] font-semibold">Section 1</span>
                     <h2 class="font-serif text-2xl font-normal text-stone-900 tracking-tight">Scope &amp; Atelier Introduction</h2>
                     <p>
                         This Privacy Policy applies to personal data collected by FurnishMe through our digital boutique at <code>furnishme.com</code>, our local atelier communications, private client consultations, architectural bespoke commissions, and physical visits to our Yangon Flagship showroom located at No. 55A, Maggin Street, Yankin Township, Yangon, Myanmar.
@@ -159,14 +159,14 @@
                 </section>
 
                 <!-- SECTION 2 -->
-                <section id="section-2" class="scroll-mt-28 space-y-4 pt-8 border-t border-stone-200">
-                    <span class="text-xs uppercase tracking-wider text-amber-800 font-semibold">Section 2</span>
+                <section id="section-2" class="scroll-mt-28 space-y-4 pt-8 border-t border-[#E2D8C9]">
+                    <span class="text-xs uppercase tracking-wider text-[#7C4E26] font-semibold">Section 2</span>
                     <h2 class="font-serif text-2xl font-normal text-stone-900 tracking-tight">Information We Collect</h2>
                     <p>
                         We deliberately limit data collection to that which is strictly essential for precision furniture fabrication, white-glove architectural delivery, customer warranty validation, and serene client communication:
                     </p>
                     
-                    <div class="space-y-4 pl-4 border-l-2 border-amber-900/40 mt-4">
+                    <div class="space-y-4 pl-4 border-l-2 border-[#7C4E26]/60 mt-4">
                         <div>
                             <h3 class="font-serif text-base font-semibold text-stone-900">A. Identity &amp; Contact Credentials</h3>
                             <p class="text-xs text-stone-500 mt-1">
@@ -195,8 +195,8 @@
                 </section>
 
                 <!-- SECTION 3 -->
-                <section id="section-3" class="scroll-mt-28 space-y-4 pt-8 border-t border-stone-200">
-                    <span class="text-xs uppercase tracking-wider text-amber-800 font-semibold">Section 3</span>
+                <section id="section-3" class="scroll-mt-28 space-y-4 pt-8 border-t border-[#E2D8C9]">
+                    <span class="text-xs uppercase tracking-wider text-[#7C4E26] font-semibold">Section 3</span>
                     <h2 class="font-serif text-2xl font-normal text-stone-900 tracking-tight">Purpose &amp; Processing Grounds</h2>
                     <p>
                         Every piece of data collected corresponds to a genuine operational necessity under recognized legal standards:
@@ -218,20 +218,20 @@
                 </section>
 
                 <!-- SECTION 4 -->
-                <section id="section-4" class="scroll-mt-28 space-y-4 pt-8 border-t border-stone-200">
-                    <span class="text-xs uppercase tracking-wider text-amber-800 font-semibold">Section 4</span>
+                <section id="section-4" class="scroll-mt-28 space-y-4 pt-8 border-t border-[#E2D8C9]">
+                    <span class="text-xs uppercase tracking-wider text-[#7C4E26] font-semibold">Section 4</span>
                     <h2 class="font-serif text-2xl font-normal text-stone-900 tracking-tight">Logistics &amp; Service Partners</h2>
                     <p>
                         FurnishMe does not distribute your information to marketers. We share selective data solely with trusted operational partners bound by strict confidentiality agreements:
                     </p>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
-                        <div class="p-5 rounded-2xl bg-white border border-stone-200 shadow-xs">
+                        <div class="p-5 rounded-2xl bg-white border border-[#E2D8C9] shadow-xs">
                             <h3 class="font-serif text-sm font-semibold text-stone-900 mb-1">White-Glove Couriers</h3>
                             <p class="text-xs text-stone-500">
                                 Designated transport specialists receive only your name, phone number, and delivery destination to coordinate scheduled in-room installation.
                             </p>
                         </div>
-                        <div class="p-5 rounded-2xl bg-white border border-stone-200 shadow-xs">
+                        <div class="p-5 rounded-2xl bg-white border border-[#E2D8C9] shadow-xs">
                             <h3 class="font-serif text-sm font-semibold text-stone-900 mb-1">Payment Gateways</h3>
                             <p class="text-xs text-stone-500">
                                 Certified financial clearing networks (including KBZPay, CB Pay, and Visa/Mastercard processing facilities) process transactions over end-to-end TLS 1.3 encryption.
@@ -241,8 +241,8 @@
                 </section>
 
                 <!-- SECTION 5 -->
-                <section id="section-5" class="scroll-mt-28 space-y-4 pt-8 border-t border-stone-200">
-                    <span class="text-xs uppercase tracking-wider text-amber-800 font-semibold">Section 5</span>
+                <section id="section-5" class="scroll-mt-28 space-y-4 pt-8 border-t border-[#E2D8C9]">
+                    <span class="text-xs uppercase tracking-wider text-[#7C4E26] font-semibold">Section 5</span>
                     <h2 class="font-serif text-2xl font-normal text-stone-900 tracking-tight">Cookies &amp; Telemetry</h2>
                     <p>
                         Our website utilizes minimal, non-invasive cookies strictly to enable smooth digital commerce. These cookies maintain session state for your shopping bag, preserve sorting selections, and retain UI preferences.
@@ -253,8 +253,8 @@
                 </section>
 
                 <!-- SECTION 6 -->
-                <section id="section-6" class="scroll-mt-28 space-y-4 pt-8 border-t border-stone-200">
-                    <span class="text-xs uppercase tracking-wider text-amber-800 font-semibold">Section 6</span>
+                <section id="section-6" class="scroll-mt-28 space-y-4 pt-8 border-t border-[#E2D8C9]">
+                    <span class="text-xs uppercase tracking-wider text-[#7C4E26] font-semibold">Section 6</span>
                     <h2 class="font-serif text-2xl font-normal text-stone-900 tracking-tight">Retention &amp; Archival Lifecycles</h2>
                     <p>
                         Personal data is retained only for the duration required to achieve the purpose for which it was assembled:
@@ -268,25 +268,25 @@
                 </section>
 
                 <!-- SECTION 7 -->
-                <section id="section-7" class="scroll-mt-28 space-y-4 pt-8 border-t border-stone-200">
-                    <span class="text-xs uppercase tracking-wider text-amber-800 font-semibold">Section 7</span>
+                <section id="section-7" class="scroll-mt-28 space-y-4 pt-8 border-t border-[#E2D8C9]">
+                    <span class="text-xs uppercase tracking-wider text-[#7C4E26] font-semibold">Section 7</span>
                     <h2 class="font-serif text-2xl font-normal text-stone-900 tracking-tight">Technical Safeguards &amp; Security</h2>
                     <p>
                         We implement rigorous organizational and technical measures to protect your data against unauthorized destruction, loss, alteration, or interception. These include:
                     </p>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-                        <div class="p-4 rounded-2xl bg-stone-100/70 border border-stone-200">
-                            <i class="ri-shield-keyhole-line text-lg text-amber-900 block mb-1"></i>
+                        <div class="p-4 rounded-2xl bg-stone-100/70 border border-[#E2D8C9]">
+                            <i class="ri-shield-keyhole-line text-lg text-[#7C4E26] block mb-1"></i>
                             <strong class="text-xs text-stone-900 block">TLS 1.3 Encryption</strong>
                             <p class="text-[11px] text-stone-500 mt-1">All data transmitted between your browser and our servers is cryptographically secured.</p>
                         </div>
-                        <div class="p-4 rounded-2xl bg-stone-100/70 border border-stone-200">
-                            <i class="ri-database-2-line text-lg text-amber-900 block mb-1"></i>
+                        <div class="p-4 rounded-2xl bg-stone-100/70 border border-[#E2D8C9]">
+                            <i class="ri-database-2-line text-lg text-[#7C4E26] block mb-1"></i>
                             <strong class="text-xs text-stone-900 block">Restricted Access</strong>
                             <p class="text-[11px] text-stone-500 mt-1">Only bonded atelier personnel with verified roles can inspect delivery logs.</p>
                         </div>
-                        <div class="p-4 rounded-2xl bg-stone-100/70 border border-stone-200">
-                            <i class="ri-history-line text-lg text-amber-900 block mb-1"></i>
+                        <div class="p-4 rounded-2xl bg-stone-100/70 border border-[#E2D8C9]">
+                            <i class="ri-history-line text-lg text-[#7C4E26] block mb-1"></i>
                             <strong class="text-xs text-stone-900 block">Security Auditing</strong>
                             <p class="text-[11px] text-stone-500 mt-1">Quarterly vulnerability assessments on our hosting clusters and software dependencies.</p>
                         </div>
@@ -294,28 +294,28 @@
                 </section>
 
                 <!-- SECTION 8 -->
-                <section id="section-8" class="scroll-mt-28 space-y-4 pt-8 border-t border-stone-200">
-                    <span class="text-xs uppercase tracking-wider text-amber-800 font-semibold">Section 8</span>
+                <section id="section-8" class="scroll-mt-28 space-y-4 pt-8 border-t border-[#E2D8C9]">
+                    <span class="text-xs uppercase tracking-wider text-[#7C4E26] font-semibold">Section 8</span>
                     <h2 class="font-serif text-2xl font-normal text-stone-900 tracking-tight">Your Privacy Rights &amp; Recourse</h2>
                     <p>
                         Regardless of where you reside, FurnishMe accords you fundamental data privacy rights:
                     </p>
                     <div class="space-y-3">
-                        <div class="flex items-start gap-3 p-4 rounded-2xl bg-white border border-stone-200">
+                        <div class="flex items-start gap-3 p-4 rounded-2xl bg-white border border-[#E2D8C9]">
                             <i class="ri-checkbox-circle-line text-emerald-700 text-lg flex-shrink-0 mt-0.5"></i>
                             <div>
                                 <strong class="text-xs text-stone-900 block">Right of Access &amp; Portability</strong>
                                 <span class="text-xs text-stone-500">Request a complete copy of all personal records, order histories, and bespoke notes associated with your identity in an open format.</span>
                             </div>
                         </div>
-                        <div class="flex items-start gap-3 p-4 rounded-2xl bg-white border border-stone-200">
+                        <div class="flex items-start gap-3 p-4 rounded-2xl bg-white border border-[#E2D8C9]">
                             <i class="ri-edit-line text-amber-700 text-lg flex-shrink-0 mt-0.5"></i>
                             <div>
                                 <strong class="text-xs text-stone-900 block">Right of Rectification</strong>
                                 <span class="text-xs text-stone-500">Instruct our concierge to modify inaccurate delivery contacts or update your architectural measurements at any time.</span>
                             </div>
                         </div>
-                        <div class="flex items-start gap-3 p-4 rounded-2xl bg-white border border-stone-200">
+                        <div class="flex items-start gap-3 p-4 rounded-2xl bg-white border border-[#E2D8C9]">
                             <i class="ri-delete-bin-line text-rose-700 text-lg flex-shrink-0 mt-0.5"></i>
                             <div>
                                 <strong class="text-xs text-stone-900 block">Right of Erasure ("To Be Forgotten")</strong>
@@ -324,13 +324,13 @@
                         </div>
                     </div>
                     <p class="text-xs text-stone-500 pt-2">
-                        To exercise any of these privileges, please send an electronic request to <a href="mailto:privacy@furnishme.com" class="text-amber-900 underline font-medium">privacy@furnishme.com</a>. We respond to all verified inquiries within 5 business days.
+                        To exercise any of these privileges, please send an electronic request to <a href="mailto:privacy@furnishme.com" class="text-[#7C4E26] underline font-medium">privacy@furnishme.com</a>. We respond to all verified inquiries within 5 business days.
                     </p>
                 </section>
 
                 <!-- SECTION 9 -->
-                <section id="section-9" class="scroll-mt-28 space-y-4 pt-8 border-t border-stone-200">
-                    <span class="text-xs uppercase tracking-wider text-amber-800 font-semibold">Section 9</span>
+                <section id="section-9" class="scroll-mt-28 space-y-4 pt-8 border-t border-[#E2D8C9]">
+                    <span class="text-xs uppercase tracking-wider text-[#7C4E26] font-semibold">Section 9</span>
                     <h2 class="font-serif text-2xl font-normal text-stone-900 tracking-tight">Children's Privacy Notice</h2>
                     <p>
                         FurnishMe Atelier specializes in heirloom residential furniture and architectural interiors conceived for discerning adult homeowners and design professionals. Our digital services are not directed toward children under the age of 18, and we do not knowingly collect personal data from minors. If you believe a minor has submitted personal information through our forms, please alert our concierge immediately for immediate deletion.
@@ -338,14 +338,14 @@
                 </section>
 
                 <!-- SECTION 10 -->
-                <section id="section-10" class="scroll-mt-28 space-y-6 pt-8 border-t border-stone-200">
-                    <span class="text-xs uppercase tracking-wider text-amber-800 font-semibold">Section 10</span>
+                <section id="section-10" class="scroll-mt-28 space-y-6 pt-8 border-t border-[#E2D8C9]">
+                    <span class="text-xs uppercase tracking-wider text-[#7C4E26] font-semibold">Section 10</span>
                     <h2 class="font-serif text-2xl font-normal text-stone-900 tracking-tight">Direct Privacy Officer Inquiries</h2>
                     <p>
                         For questions, formal clarifications, data deletion petitions, or to discuss our responsible data governance policies in detail, please reach our designated officers:
                     </p>
 
-                    <div class="bg-[#F4EFE8] rounded-3xl p-6 sm:p-8 border border-stone-200 space-y-6">
+                    <div class="bg-[#F4EFE8] rounded-3xl p-6 sm:p-8 border border-[#E2D8C9] space-y-6">
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-stone-300/80">
                             <div>
                                 <h3 class="font-serif text-lg font-semibold text-stone-900">FurnishMe Atelier — Data Governance Desk</h3>
@@ -369,15 +369,15 @@
                             <div>
                                 <span class="font-semibold text-stone-900 block mb-1">Direct Telecommunications</span>
                                 <p class="text-stone-600 leading-relaxed">
-                                    Showroom: <a href="tel:+959973383719" class="text-amber-900 font-medium hover:underline">+95 9 973 383 719</a><br>
-                                    Office: <a href="tel:+959421122846" class="text-amber-900 font-medium hover:underline">+95 9 421 122 846</a>
+                                    Showroom: <a href="tel:+959973383719" class="text-[#7C4E26] font-medium hover:underline">+95 9 973 383 719</a><br>
+                                    Office: <a href="tel:+959421122846" class="text-[#7C4E26] font-medium hover:underline">+95 9 421 122 846</a>
                                 </p>
                             </div>
                             <div>
                                 <span class="font-semibold text-stone-900 block mb-1">Electronic Correspondence</span>
                                 <p class="text-stone-600 leading-relaxed">
-                                    Privacy Officer: <a href="mailto:privacy@furnishme.com" class="text-amber-900 font-medium hover:underline">privacy@furnishme.com</a><br>
-                                    General Atelier: <a href="mailto:atelier@furnishme.com" class="text-amber-900 font-medium hover:underline">atelier@furnishme.com</a>
+                                    Privacy Officer: <a href="mailto:privacy@furnishme.com" class="text-[#7C4E26] font-medium hover:underline">privacy@furnishme.com</a><br>
+                                    General Atelier: <a href="mailto:atelier@furnishme.com" class="text-[#7C4E26] font-medium hover:underline">atelier@furnishme.com</a>
                                 </p>
                             </div>
                         </div>

@@ -12,7 +12,7 @@
     <?php include "components/css.php"; ?>
 </head>
 
-<body class="bg-[#FAF8F5] text-stone-900 font-sans antialiased selection:bg-amber-900 selection:text-white">
+<body class="bg-[#F5EFE6] text-stone-900 font-sans antialiased selection:bg-amber-800 selection:text-white">
     <div class="min-h-screen flex">
         <?php include "components/sidebar.php"; ?>
 
@@ -33,13 +33,13 @@
                         </div>
                         <h2 class="font-serif text-2xl sm:text-3xl font-medium text-stone-900">Add Design Collective Member</h2>
                     </div>
-                    <a href="team.php" class="px-4 py-2 rounded-xl border border-stone-200 text-xs font-medium text-stone-700 hover:bg-white transition-colors">
+                    <a href="team.php" class="px-4 py-2 rounded-xl border border-[#E2D8C9] text-xs font-medium text-stone-700 hover:bg-white transition-colors">
                         Cancel &amp; Return
                     </a>
                 </div>
 
                 <!-- Form Card -->
-                <div class="bg-white rounded-3xl border border-stone-200/90 p-6 sm:p-10 shadow-xs">
+                <div class="bg-[#FCFAF7] rounded-3xl border border-[#E2D8C9] p-6 sm:p-10 shadow-xs">
                     <!-- [PHP_BACKEND_HOOK: Team member creation handler. Method: POST, enctype="multipart/form-data". Upload portrait to images/ directory, sanitize inputs, execute INSERT INTO team (name, position, image)] -->
                     <form method="POST" enctype="multipart/form-data" class="space-y-6">
                         
@@ -50,7 +50,7 @@
                             </label>
                             <div class="relative">
                                 <i class="ri-user-line absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 text-base"></i>
-                                <input type="text" id="name" name="name" required placeholder="e.g. Thae Nay Nwe Soe" class="w-full pl-11 pr-4 py-3 bg-stone-50 border border-stone-200 rounded-xl text-stone-900 text-sm placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-amber-900 focus:border-amber-900 transition-all">
+                                <input type="text" id="name" name="name" required placeholder="e.g. Thae Nay Nwe Soe" class="w-full pl-11 pr-4 py-3 bg-[#F5EFE6] border border-[#E2D8C9] rounded-xl text-stone-900 text-sm placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#7C4E26] focus:border-amber-900 transition-all">
                             </div>
                         </div>
 
@@ -61,7 +61,7 @@
                             </label>
                             <div class="relative">
                                 <i class="ri-briefcase-line absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 text-base"></i>
-                                <input type="text" id="position" name="position" required placeholder="e.g. Master Wood Joiner" class="w-full pl-11 pr-4 py-3 bg-stone-50 border border-stone-200 rounded-xl text-stone-900 text-sm placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-amber-900 focus:border-amber-900 transition-all">
+                                <input type="text" id="position" name="position" required placeholder="e.g. Master Wood Joiner" class="w-full pl-11 pr-4 py-3 bg-[#F5EFE6] border border-[#E2D8C9] rounded-xl text-stone-900 text-sm placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-[#7C4E26] focus:border-amber-900 transition-all">
                             </div>
                         </div>
 
@@ -70,25 +70,25 @@
                             <label class="block text-xs font-semibold uppercase tracking-wider text-stone-700">
                                 Portrait Photograph <span class="text-rose-600">*</span>
                             </label>
-                            <div class="border-2 border-dashed border-stone-200 rounded-2xl p-6 text-center hover:border-amber-800 transition-colors bg-stone-50/50">
+                            <div class="border-2 border-dashed border-[#E2D8C9] rounded-2xl p-6 text-center hover:border-amber-800 transition-colors bg-[#F5EFE6]/50">
                                 <div class="max-w-xs mx-auto flex flex-col items-center">
-                                    <i class="ri-camera-lens-line text-3xl text-amber-800 mb-2"></i>
+                                    <i class="ri-camera-lens-line text-3xl text-[#7C4E26] mb-2"></i>
                                     <span class="text-xs font-medium text-stone-700">Upload portrait photograph</span>
                                     <span class="text-[11px] text-stone-400 mt-0.5">JPG or PNG (aspect ratio 4:5 recommended)</span>
                                     <input type="file" id="profile" name="profile" accept="image/*" required data-preview-target="team-preview" class="mt-4 text-xs text-stone-500 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-medium file:bg-stone-900 file:text-white hover:file:bg-amber-900 file:cursor-pointer cursor-pointer">
                                 </div>
                                 <div class="mt-4 flex justify-center">
-                                    <img id="team-preview" src="" alt="Portrait preview" class="hidden w-24 h-30 object-cover rounded-xl border border-stone-200 shadow-xs">
+                                    <img id="team-preview" src="" alt="Portrait preview" class="hidden w-24 h-30 object-cover rounded-xl border border-[#E2D8C9] shadow-xs">
                                 </div>
                             </div>
                         </div>
 
                         <!-- Form Actions -->
-                        <div class="pt-4 border-t border-stone-100 flex items-center justify-end gap-3">
-                            <a href="team.php" class="px-5 py-3 rounded-xl border border-stone-200 text-xs font-medium text-stone-700 hover:bg-stone-50 transition-colors">
+                        <div class="pt-4 border-t border-[#E2D8C9] flex items-center justify-end gap-3">
+                            <a href="team.php" class="px-5 py-3 rounded-xl border border-[#E2D8C9] text-xs font-medium text-stone-700 hover:bg-[#F5EFE6] transition-colors">
                                 Cancel
                             </a>
-                            <button type="submit" name="create" class="px-6 py-3 rounded-xl bg-stone-900 hover:bg-amber-900 text-white text-xs font-medium transition-colors shadow-xs flex items-center gap-2">
+                            <button type="submit" name="create" class="px-6 py-3 rounded-xl bg-[#1A1613] hover:bg-[#7C4E26] text-[#F7F3EC] text-xs font-medium transition-colors shadow-xs flex items-center gap-2">
                                 <i class="ri-check-line text-sm"></i>
                                 <span>Save Team Member</span>
                             </button>
