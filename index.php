@@ -25,7 +25,7 @@
             <!-- Slide 1: Heirloom Private Library Suite (Active by default) -->
             <div class="hero-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-100 z-10">
                 <div class="absolute inset-0">
-                    <img src="images/hero-luxury-suite.jpg" alt="Heirloom Private Library Suite" class="w-full h-full object-cover brightness-[0.78]" loading="eager">
+                    <img src="images/hero-luxury-suite.jpg" alt="Heirloom Private Library Suite" class="w-full h-full object-cover" loading="eager" fetchpriority="high">
                     <div class="absolute inset-0 bg-gradient-to-r from-stone-950/95 via-stone-950/60 to-transparent"></div>
                 </div>
                 <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex items-center py-20">
@@ -56,7 +56,7 @@
             <!-- Slide 2: Chateau Grand Hearth -->
             <div class="hero-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 pointer-events-none z-0">
                 <div class="absolute inset-0">
-                    <img src="images/hero-chateau-salon.jpg" alt="Chateau Grand Hearth Salon" class="w-full h-full object-cover brightness-[0.78]" loading="lazy">
+                    <img src="images/hero-chateau-salon.jpg" alt="Chateau Grand Hearth Salon" class="w-full h-full object-cover" loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-r from-stone-950/95 via-stone-950/60 to-transparent"></div>
                 </div>
                 <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex items-center py-20">
@@ -87,7 +87,7 @@
             <!-- Slide 3: Gilded Drawing Room -->
             <div class="hero-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 pointer-events-none z-0">
                 <div class="absolute inset-0">
-                    <img src="images/hero-gilded-salon.jpg" alt="Gilded Estate Drawing Room" class="w-full h-full object-cover brightness-[0.78]" loading="lazy">
+                    <img src="images/hero-gilded-salon.jpg" alt="Gilded Estate Drawing Room" class="w-full h-full object-cover" loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-r from-stone-950/95 via-stone-950/60 to-transparent"></div>
                 </div>
                 <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex items-center py-20">
@@ -118,7 +118,7 @@
             <!-- Slide 4: Executive Estate Study -->
             <div class="hero-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 pointer-events-none z-0">
                 <div class="absolute inset-0">
-                    <img src="images/hero-estate-study.jpg" alt="Executive Estate Study & Salon" class="w-full h-full object-cover brightness-[0.78]" loading="lazy">
+                    <img src="images/hero-estate-study.jpg" alt="Executive Estate Study & Salon" class="w-full h-full object-cover" loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-r from-stone-950/95 via-stone-950/60 to-transparent"></div>
                 </div>
                 <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex items-center py-20">
@@ -149,7 +149,7 @@
             <!-- Slide 5: Minimalist Living Interior -->
             <div class="hero-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 pointer-events-none z-0">
                 <div class="absolute inset-0">
-                    <img src="images/hero-slide-1.jpg" alt="Minimalist Living Interior" class="w-full h-full object-cover brightness-[0.78]" loading="lazy">
+                    <img src="images/hero-slide-1.jpg" alt="Minimalist Living Interior" class="w-full h-full object-cover" loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-r from-stone-950/90 via-stone-950/50 to-transparent"></div>
                 </div>
                 <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex items-center py-20">
@@ -180,7 +180,7 @@
             <!-- Slide 6: Warm Dining Room Interior -->
             <div class="hero-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 pointer-events-none z-0">
                 <div class="absolute inset-0">
-                    <img src="images/hero-slide-2.jpg" alt="Warm Dining Room Interior" class="w-full h-full object-cover brightness-[0.78]" loading="lazy">
+                    <img src="images/hero-slide-2.jpg" alt="Warm Dining Room Interior" class="w-full h-full object-cover" loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-r from-stone-950/90 via-stone-950/50 to-transparent"></div>
                 </div>
                 <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex items-center py-20">
@@ -211,7 +211,7 @@
             <!-- Slide 7: Master Bedroom Sanctuary -->
             <div class="hero-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 pointer-events-none z-0">
                 <div class="absolute inset-0">
-                    <img src="images/hero-slide-3.jpg" alt="Master Bedroom Sanctuary" class="w-full h-full object-cover brightness-[0.78]" loading="lazy">
+                    <img src="images/hero-slide-3.jpg" alt="Master Bedroom Sanctuary" class="w-full h-full object-cover" loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-r from-stone-950/90 via-stone-950/50 to-transparent"></div>
                 </div>
                 <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex items-center py-20">
