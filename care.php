@@ -96,56 +96,56 @@ require_once __DIR__ . '/components/connection.php';
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- DOs -->
-                <div class="p-6 sm:p-8 rounded-3xl bg-emerald-50/60 border border-emerald-200/80">
+                <div class="p-6 sm:p-8 rounded-3xl bg-[#DCE5DF]/70 border border-[#C6D6CB] shadow-xs">
                     <div class="flex items-center gap-3 mb-4">
-                        <div class="w-9 h-9 rounded-xl bg-emerald-600 text-white flex items-center justify-center text-lg">
+                        <div class="w-9 h-9 rounded-xl bg-[#3F624D] text-[#F6F3EE] flex items-center justify-center text-lg shadow-xs">
                             <i class="ri-check-line"></i>
                         </div>
-                        <h3 class="font-serif text-lg font-semibold text-emerald-950">Recommended Practices</h3>
+                        <h3 class="font-serif text-lg font-semibold text-[#2D4537]">Recommended Practices</h3>
                     </div>
-                    <ul class="space-y-3 text-xs sm:text-sm text-emerald-900/90">
+                    <ul class="space-y-3 text-xs sm:text-sm text-[#3F624D]">
                         <li class="flex items-start gap-2.5">
-                            <i class="ri-checkbox-circle-fill text-emerald-600 text-base flex-shrink-0 mt-0.5"></i>
+                            <i class="ri-checkbox-circle-fill text-[#3F624D] text-base flex-shrink-0 mt-0.5"></i>
                             <span>Wipe spills immediately using a clean, soft microfiber cloth wrung out in lukewarm water.</span>
                         </li>
                         <li class="flex items-start gap-2.5">
-                            <i class="ri-checkbox-circle-fill text-emerald-600 text-base flex-shrink-0 mt-0.5"></i>
+                            <i class="ri-checkbox-circle-fill text-[#3F624D] text-base flex-shrink-0 mt-0.5"></i>
                             <span>Use coasters, natural cork trivets, and felt pads beneath stoneware vases, teapots, and laptops.</span>
                         </li>
                         <li class="flex items-start gap-2.5">
-                            <i class="ri-checkbox-circle-fill text-emerald-600 text-base flex-shrink-0 mt-0.5"></i>
+                            <i class="ri-checkbox-circle-fill text-[#3F624D] text-base flex-shrink-0 mt-0.5"></i>
                             <span>Dust weekly in the direction of the timber grain with a dry, lint-free cotton cloth.</span>
                         </li>
                         <li class="flex items-start gap-2.5">
-                            <i class="ri-checkbox-circle-fill text-emerald-600 text-base flex-shrink-0 mt-0.5"></i>
+                            <i class="ri-checkbox-circle-fill text-[#3F624D] text-base flex-shrink-0 mt-0.5"></i>
                             <span>Rotate reversible cushions and lounger seats monthly to promote balanced textile wear.</span>
                         </li>
                     </ul>
                 </div>
 
                 <!-- DON'Ts -->
-                <div class="p-6 sm:p-8 rounded-3xl bg-rose-50/60 border border-rose-200/80">
+                <div class="p-6 sm:p-8 rounded-3xl bg-[#EFE0E0]/70 border border-[#DFC8C8] shadow-xs">
                     <div class="flex items-center gap-3 mb-4">
-                        <div class="w-9 h-9 rounded-xl bg-rose-600 text-white flex items-center justify-center text-lg">
+                        <div class="w-9 h-9 rounded-xl bg-[#8C3B3B] text-[#F6F3EE] flex items-center justify-center text-lg shadow-xs">
                             <i class="ri-close-line"></i>
                         </div>
-                        <h3 class="font-serif text-lg font-semibold text-rose-950">What to Strictly Avoid</h3>
+                        <h3 class="font-serif text-lg font-semibold text-[#4D2424]">What to Strictly Avoid</h3>
                     </div>
-                    <ul class="space-y-3 text-xs sm:text-sm text-rose-900/90">
+                    <ul class="space-y-3 text-xs sm:text-sm text-[#8C3B3B]">
                         <li class="flex items-start gap-2.5">
-                            <i class="ri-close-circle-fill text-rose-600 text-base flex-shrink-0 mt-0.5"></i>
+                            <i class="ri-close-circle-fill text-[#8C3B3B] text-base flex-shrink-0 mt-0.5"></i>
                             <span>Never use aerosol spray polishes, ammonia, bleach, acidic citrus sprays, or chemical degreasers.</span>
                         </li>
                         <li class="flex items-start gap-2.5">
-                            <i class="ri-close-circle-fill text-rose-600 text-base flex-shrink-0 mt-0.5"></i>
+                            <i class="ri-close-circle-fill text-[#8C3B3B] text-base flex-shrink-0 mt-0.5"></i>
                             <span>Do not place solid wood furniture directly against high-velocity air conditioner discharge vents.</span>
                         </li>
                         <li class="flex items-start gap-2.5">
-                            <i class="ri-close-circle-fill text-rose-600 text-base flex-shrink-0 mt-0.5"></i>
+                            <i class="ri-close-circle-fill text-[#8C3B3B] text-base flex-shrink-0 mt-0.5"></i>
                             <span>Avoid placing boiling cast-iron cookware directly on raw timber or unsealed travertine surfaces.</span>
                         </li>
                         <li class="flex items-start gap-2.5">
-                            <i class="ri-close-circle-fill text-rose-600 text-base flex-shrink-0 mt-0.5"></i>
+                            <i class="ri-close-circle-fill text-[#8C3B3B] text-base flex-shrink-0 mt-0.5"></i>
                             <span>Never scrub fabric stains aggressively; always gently dab and blot from the edge inward.</span>
                         </li>
                     </ul>
@@ -202,7 +202,7 @@ require_once __DIR__ . '/components/connection.php';
                         <p class="text-[11px] text-[#6E6359] leading-relaxed">
                             Need a bespoke restoration touch-up kit or guidance on oiling an heirloom tabletop?
                         </p>
-                        <a href="contact.php" class="w-full py-2.5 px-3 rounded-xl bg-stone-900 hover:bg-amber-900 text-white text-xs font-medium transition-colors flex items-center justify-center gap-1.5 shadow-xs">
+                        <a href="contact.php" class="w-full py-2.5 px-3 rounded-xl bg-[#8A5A44] hover:bg-[#704735] text-[#F6F3EE] text-xs font-medium transition-colors flex items-center justify-center gap-1.5 shadow-xs">
                             <i class="ri-service-line"></i>
                             <span>Request Atelier Care Kit</span>
                         </a>
@@ -216,7 +216,7 @@ require_once __DIR__ . '/components/connection.php';
                 <!-- WOOD CARE -->
                 <section id="care-wood" class="scroll-mt-28 space-y-5">
                     <div class="flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full bg-amber-800"></span>
+                        <span class="w-2 h-2 rounded-full bg-[#8A5A44]"></span>
                         <span class="text-xs uppercase tracking-wider text-[#8A5A44] font-semibold">Chapter 1</span>
                     </div>
                     <h2 class="font-serif text-2xl sm:text-3xl font-normal text-[#362F2A] tracking-tight">Solid Woods &amp; Plant Oil Finishes</h2>
@@ -224,7 +224,7 @@ require_once __DIR__ . '/components/connection.php';
                         We craft our dining tables, beds, and chairs from premium solid timbers: American White Oak, Black Walnut, and sustainably harvested Burmese Teak. Our pieces are treated with breathable bio-based hardwax oils that penetrate deep into the pores, leaving the natural tactile grain palpable to the touch.
                     </p>
 
-                    <div class="bg-white rounded-3xl p-6 sm:p-8 border border-[#C9C0B3] shadow-xs space-y-6">
+                    <div class="bg-[#F6F3EE] rounded-3xl p-6 sm:p-8 border border-[#C9C0B3] shadow-xs space-y-6">
                         <div class="space-y-2">
                             <h3 class="font-serif text-base font-semibold text-[#362F2A]">Daily &amp; Weekly Maintenance</h3>
                             <p class="text-xs text-[#6E6359]">
@@ -251,7 +251,7 @@ require_once __DIR__ . '/components/connection.php';
                 <!-- TEXTILE CARE -->
                 <section id="care-textiles" class="scroll-mt-28 space-y-5 pt-8 border-t border-[#C9C0B3]">
                     <div class="flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full bg-amber-800"></span>
+                        <span class="w-2 h-2 rounded-full bg-[#8A5A44]"></span>
                         <span class="text-xs uppercase tracking-wider text-[#8A5A44] font-semibold">Chapter 2</span>
                     </div>
                     <h2 class="font-serif text-2xl sm:text-3xl font-normal text-[#362F2A] tracking-tight">Bouclé, Woven Fabrics &amp; Belgian Linens</h2>
@@ -259,7 +259,7 @@ require_once __DIR__ . '/components/connection.php';
                         Our modular sectionals, armchairs, and tatami bed headboards feature tactile bouclé wools, heavy-slub Belgian linens, and muted architectural weaves. These fabrics offer comforting softness while resisting pilling through structural yarn twists.
                     </p>
 
-                    <div class="bg-white rounded-3xl p-6 sm:p-8 border border-[#C9C0B3] shadow-xs space-y-6">
+                    <div class="bg-[#F6F3EE] rounded-3xl p-6 sm:p-8 border border-[#C9C0B3] shadow-xs space-y-6">
                         <div class="space-y-2">
                             <h3 class="font-serif text-base font-semibold text-[#362F2A]">Vacuuming &amp; Aeration</h3>
                             <p class="text-xs text-[#6E6359]">
@@ -279,7 +279,7 @@ require_once __DIR__ . '/components/connection.php';
                 <!-- LEATHER CARE -->
                 <section id="care-leather" class="scroll-mt-28 space-y-5 pt-8 border-t border-[#C9C0B3]">
                     <div class="flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full bg-amber-800"></span>
+                        <span class="w-2 h-2 rounded-full bg-[#8A5A44]"></span>
                         <span class="text-xs uppercase tracking-wider text-[#8A5A44] font-semibold">Chapter 3</span>
                     </div>
                     <h2 class="font-serif text-2xl sm:text-3xl font-normal text-[#362F2A] tracking-tight">Full-Grain Vegetable-Tanned Leather</h2>
@@ -288,13 +288,13 @@ require_once __DIR__ . '/components/connection.php';
                     </p>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="p-6 rounded-2xl bg-white border border-[#C9C0B3] shadow-xs">
+                        <div class="p-6 rounded-2xl bg-[#F6F3EE] border border-[#C9C0B3] shadow-xs">
                             <h4 class="font-serif text-sm font-semibold text-[#362F2A] mb-2">Preserving Hydration</h4>
                             <p class="text-xs text-[#6E6359]">
                                 In modern air-conditioned interiors, leather can lose moisture. Apply an organic beeswax leather cream once per year to preserve suppleness and prevent hairline surface creasing.
                             </p>
                         </div>
-                        <div class="p-6 rounded-2xl bg-white border border-[#C9C0B3] shadow-xs">
+                        <div class="p-6 rounded-2xl bg-[#F6F3EE] border border-[#C9C0B3] shadow-xs">
                             <h4 class="font-serif text-sm font-semibold text-[#362F2A] mb-2">Sunlight Precautions</h4>
                             <p class="text-xs text-[#6E6359]">
                                 Prolonged direct tropical sunlight will bleach natural tanning dyes. Position your leather lounger at least 1 meter away from unshaded floor-to-ceiling windows.
@@ -306,7 +306,7 @@ require_once __DIR__ . '/components/connection.php';
                 <!-- STONE & TRAVERTINE -->
                 <section id="care-stone" class="scroll-mt-28 space-y-5 pt-8 border-t border-[#C9C0B3]">
                     <div class="flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full bg-amber-800"></span>
+                        <span class="w-2 h-2 rounded-full bg-[#8A5A44]"></span>
                         <span class="text-xs uppercase tracking-wider text-[#8A5A44] font-semibold">Chapter 4</span>
                     </div>
                     <h2 class="font-serif text-2xl sm:text-3xl font-normal text-[#362F2A] tracking-tight">Honed Marble &amp; Travertine Stone</h2>
@@ -314,7 +314,7 @@ require_once __DIR__ . '/components/connection.php';
                         Yangon Atelier low coffee tables and architectural pedestals feature natural Italian Carrara marble and unfilled Roman travertine. We hand-hone their surfaces to a matte, non-glossy finish that honors their geological sediment.
                     </p>
 
-                    <div class="bg-white rounded-3xl p-6 sm:p-8 border border-[#C9C0B3] shadow-xs space-y-4 text-xs text-[#6E6359]">
+                    <div class="bg-[#F6F3EE] rounded-3xl p-6 sm:p-8 border border-[#C9C0B3] shadow-xs space-y-4 text-xs text-[#6E6359]">
                         <p>
                             <strong class="text-[#362F2A]">Acid Sensitivity:</strong> Natural marble and travertine are calcium-based and susceptible to etching from acidic liquids (lemon juice, vinegar, red wine, perfume). Always place glassware on linen or cork coasters.
                         </p>
@@ -327,14 +327,14 @@ require_once __DIR__ . '/components/connection.php';
                 <!-- RATTAN & CANE -->
                 <section id="care-rattan" class="scroll-mt-28 space-y-5 pt-8 border-t border-[#C9C0B3]">
                     <div class="flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full bg-amber-800"></span>
+                        <span class="w-2 h-2 rounded-full bg-[#8A5A44]"></span>
                         <span class="text-xs uppercase tracking-wider text-[#8A5A44] font-semibold">Chapter 5</span>
                     </div>
                     <h2 class="font-serif text-2xl sm:text-3xl font-normal text-[#362F2A] tracking-tight">Natural Woven Rattan &amp; Cane</h2>
                     <p>
                         Our occasional lounge chairs and bed headboards incorporate handwoven natural rattan peel. Rattan is remarkably tensile and flexible, yet thrives best when shielded from extreme dryness.
                     </p>
-                    <div class="p-6 rounded-2xl bg-white border border-[#C9C0B3] shadow-xs text-xs text-[#6E6359] space-y-3">
+                    <div class="p-6 rounded-2xl bg-[#F6F3EE] border border-[#C9C0B3] shadow-xs text-xs text-[#6E6359] space-y-3">
                         <p>
                             To prevent natural cane fibers from becoming brittle in high-air-conditioned homes, lightly mist the underside of the cane weaving once every few months with filtered water from a spray bottle, then allow it to dry naturally. This restores natural elasticity and prevents sagging.
                         </p>
@@ -344,7 +344,7 @@ require_once __DIR__ . '/components/connection.php';
                 <!-- MONSOON & TROPICAL CLIMATE -->
                 <section id="care-monsoon" class="scroll-mt-28 space-y-5 pt-8 border-t border-[#C9C0B3]">
                     <div class="flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full bg-amber-800"></span>
+                        <span class="w-2 h-2 rounded-full bg-[#8A5A44]"></span>
                         <span class="text-xs uppercase tracking-wider text-[#8A5A44] font-semibold">Chapter 6</span>
                     </div>
                     <h2 class="font-serif text-2xl sm:text-3xl font-normal text-[#362F2A] tracking-tight">Tropical Climate &amp; Monsoon Care</h2>
@@ -352,7 +352,7 @@ require_once __DIR__ . '/components/connection.php';
                         Myanmar's seasonal shifts—from hot, dry summers to torrential monsoons—require conscientious ventilation. Solid wood is hygroscopic, expanding during high humidity and contracting in dry months.
                     </p>
 
-                    <div class="bg-[#F4EFE8] rounded-3xl p-6 sm:p-8 border border-[#C9C0B3] space-y-4 text-xs text-[#6E6359]">
+                    <div class="bg-[#F6F3EE] rounded-3xl p-6 sm:p-8 border border-[#C9C0B3] shadow-xs space-y-4 text-xs text-[#6E6359]">
                         <div class="flex items-start gap-3">
                             <i class="ri-temp-hot-line text-lg text-[#8A5A44] flex-shrink-0 mt-0.5"></i>
                             <div>

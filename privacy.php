@@ -229,13 +229,13 @@ require_once __DIR__ . '/components/connection.php';
                         Yangon Atelier does not distribute your information to marketers. We share selective data solely with trusted operational partners bound by strict confidentiality agreements:
                     </p>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
-                        <div class="p-5 rounded-2xl bg-white border border-[#C9C0B3] shadow-xs">
+                        <div class="p-5 rounded-2xl bg-[#F6F3EE] border border-[#C9C0B3] shadow-xs">
                             <h3 class="font-serif text-sm font-semibold text-[#362F2A] mb-1">White-Glove Couriers</h3>
                             <p class="text-xs text-[#6E6359]">
                                 Designated transport specialists receive only your name, phone number, and delivery destination to coordinate scheduled in-room installation.
                             </p>
                         </div>
-                        <div class="p-5 rounded-2xl bg-white border border-[#C9C0B3] shadow-xs">
+                        <div class="p-5 rounded-2xl bg-[#F6F3EE] border border-[#C9C0B3] shadow-xs">
                             <h3 class="font-serif text-sm font-semibold text-[#362F2A] mb-1">Payment Gateways</h3>
                             <p class="text-xs text-[#6E6359]">
                                 Certified financial clearing networks (including KBZPay, CB Pay, and Visa/Mastercard processing facilities) process transactions over end-to-end TLS 1.3 encryption.
@@ -305,22 +305,22 @@ require_once __DIR__ . '/components/connection.php';
                         Regardless of where you reside, Yangon Atelier accords you fundamental data privacy rights:
                     </p>
                     <div class="space-y-3">
-                        <div class="flex items-start gap-3 p-4 rounded-2xl bg-white border border-[#C9C0B3]">
-                            <i class="ri-checkbox-circle-line text-emerald-700 text-lg flex-shrink-0 mt-0.5"></i>
+                        <div class="flex items-start gap-3 p-4 rounded-2xl bg-[#F6F3EE] border border-[#C9C0B3] shadow-xs">
+                            <i class="ri-checkbox-circle-line text-[#3F624D] text-lg flex-shrink-0 mt-0.5"></i>
                             <div>
                                 <strong class="text-xs text-[#362F2A] block">Right of Access &amp; Portability</strong>
                                 <span class="text-xs text-[#6E6359]">Request a complete copy of all personal records, order histories, and bespoke notes associated with your identity in an open format.</span>
                             </div>
                         </div>
-                        <div class="flex items-start gap-3 p-4 rounded-2xl bg-white border border-[#C9C0B3]">
-                            <i class="ri-edit-line text-amber-700 text-lg flex-shrink-0 mt-0.5"></i>
+                        <div class="flex items-start gap-3 p-4 rounded-2xl bg-[#F6F3EE] border border-[#C9C0B3] shadow-xs">
+                            <i class="ri-edit-line text-[#8C5327] text-lg flex-shrink-0 mt-0.5"></i>
                             <div>
                                 <strong class="text-xs text-[#362F2A] block">Right of Rectification</strong>
                                 <span class="text-xs text-[#6E6359]">Instruct our concierge to modify inaccurate delivery contacts or update your architectural measurements at any time.</span>
                             </div>
                         </div>
-                        <div class="flex items-start gap-3 p-4 rounded-2xl bg-white border border-[#C9C0B3]">
-                            <i class="ri-delete-bin-line text-rose-700 text-lg flex-shrink-0 mt-0.5"></i>
+                        <div class="flex items-start gap-3 p-4 rounded-2xl bg-[#F6F3EE] border border-[#C9C0B3] shadow-xs">
+                            <i class="ri-delete-bin-line text-[#8C3B3B] text-lg flex-shrink-0 mt-0.5"></i>
                             <div>
                                 <strong class="text-xs text-[#362F2A] block">Right of Erasure ("To Be Forgotten")</strong>
                                 <span class="text-xs text-[#6E6359]">Request permanent deletion of your profile, newsletter subscription, and correspondence logs, subject to mandatory statutory tax retention limits.</span>
@@ -349,13 +349,13 @@ require_once __DIR__ . '/components/connection.php';
                         For questions, formal clarifications, data deletion petitions, or to discuss our responsible data governance policies in detail, please reach our designated officers:
                     </p>
 
-                    <div class="bg-[#F4EFE8] rounded-3xl p-6 sm:p-8 border border-[#C9C0B3] space-y-6">
+                    <div class="bg-[#F6F3EE] rounded-3xl p-6 sm:p-8 border border-[#C9C0B3] shadow-xs space-y-6">
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#C9C0B3]/80">
                             <div>
                                 <h3 class="font-serif text-lg font-semibold text-[#362F2A]">Yangon Atelier — Data Governance Desk</h3>
                                 <p class="text-xs text-[#6E6359] mt-1">Supervised by Min Khant Naung, Showroom Concierge Director</p>
                             </div>
-                            <a href="contact.php" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-stone-900 text-white text-xs font-medium hover:bg-amber-900 transition-colors shadow-xs">
+                            <a href="contact.php" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#8A5A44] text-[#F6F3EE] text-xs font-medium hover:bg-[#704735] transition-colors shadow-xs">
                                 <span>Contact Showroom</span>
                                 <i class="ri-arrow-right-line"></i>
                             </a>

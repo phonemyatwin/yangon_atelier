@@ -213,13 +213,13 @@ require_once __DIR__ . '/components/connection.php';
                         We operate dedicated white-glove transport to ensure our furniture arrives in museum condition:
                     </p>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
-                        <div class="p-5 rounded-2xl bg-white border border-[#C9C0B3] shadow-xs">
+                        <div class="p-5 rounded-2xl bg-[#F6F3EE] border border-[#C9C0B3] shadow-xs">
                             <h3 class="font-serif text-sm font-semibold text-[#362F2A] mb-1">Clearance Dimensions</h3>
                             <p class="text-xs text-[#6E6359]">
                                 It is the client's sole responsibility to measure building entrances, elevators, staircase turns, and doorways prior to delivery. If furniture cannot physically clear transit corridors, re-routing or hoist fees will apply.
                             </p>
                         </div>
-                        <div class="p-5 rounded-2xl bg-white border border-[#C9C0B3] shadow-xs">
+                        <div class="p-5 rounded-2xl bg-[#F6F3EE] border border-[#C9C0B3] shadow-xs">
                             <h3 class="font-serif text-sm font-semibold text-[#362F2A] mb-1">In-Room White-Glove Service</h3>
                             <p class="text-xs text-[#6E6359]">
                                 Our logistics artisans unpack each piece in your room of choice, assemble structural components, level the legs to your flooring, and completely remove all transit packaging for eco-recycling.
@@ -237,14 +237,14 @@ require_once __DIR__ . '/components/connection.php';
                     </p>
                     <div class="p-6 rounded-3xl bg-[#DFD8CD]/70 border border-[#C9C0B3] space-y-3">
                         <div class="flex items-center gap-2 text-[#362F2A] font-semibold text-sm">
-                            <i class="ri-shield-check-line text-emerald-700 text-lg"></i>
+                            <i class="ri-shield-check-line text-[#3F624D] text-lg"></i>
                             <span>What Is Fully Covered:</span>
                         </div>
                         <p class="text-xs text-[#6E6359] leading-relaxed">
                             Structural joint failure, mortise separation, timber cracking stemming from seasoning or kiln-drying defects, structural sag in dining table frames, and internal framing failure in upholstered sofas.
                         </p>
                         <div class="flex items-center gap-2 text-[#362F2A] font-semibold text-sm pt-2">
-                            <i class="ri-close-circle-line text-rose-700 text-lg"></i>
+                            <i class="ri-close-circle-line text-[#8C3B3B] text-lg"></i>
                             <span>What Is Not Covered:</span>
                         </div>
                         <p class="text-xs text-[#6E6359] leading-relaxed">
@@ -317,13 +317,13 @@ require_once __DIR__ . '/components/connection.php';
                         These Terms and all commercial contracts are governed by and construed in accordance with the substantive commercial laws of the Republic of the Union of Myanmar. The parties agree to resolve any dispute amicably through good-faith mediation at our Yangon Flagship showroom prior to initiating formal legal proceedings.
                     </p>
 
-                    <div class="bg-[#F4EFE8] rounded-3xl p-6 sm:p-8 border border-[#C9C0B3] space-y-6">
+                    <div class="bg-[#F6F3EE] rounded-3xl p-6 sm:p-8 border border-[#C9C0B3] shadow-xs space-y-6">
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#C9C0B3]/80">
                             <div>
                                 <h3 class="font-serif text-lg font-semibold text-[#362F2A]">Yangon Atelier — Commercial Governance</h3>
                                 <p class="text-xs text-[#6E6359] mt-1">Supervised by Phone Myat Win, Principal Architect</p>
                             </div>
-                            <a href="contact.php" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-stone-900 text-white text-xs font-medium hover:bg-amber-900 transition-colors shadow-xs">
+                            <a href="contact.php" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#8A5A44] text-[#F6F3EE] text-xs font-medium hover:bg-[#704735] transition-colors shadow-xs">
                                 <span>Contact Atelier</span>
                                 <i class="ri-arrow-right-line"></i>
                             </a>
