@@ -1,39 +1,11 @@
 <?php
 /**
  * ============================================================================
- * FURNISHME BACKEND INSTRUCTION GUIDELINE - SHOWROOM INQUIRIES LIST
+ * FURNISHME BACKEND INSTRUCTION GUIDELINE - ADMIN CONTACT INQUIRIES LIST
  * ============================================================================
  * FILE: admin/contacts.php
- * PURPOSE: Lists all client inquiries and bespoke commission messages submitted
- *          via the public contact form from the 'contacts' table.
- * 
- * STEP-BY-STEP IMPLEMENTATION GUIDE:
- * 1. Initialize Session & Enforce Authentication Guard:
- *    if (session_status() === PHP_SESSION_NONE) { session_start(); }
- *    if (!isset($_SESSION['admin_user'])) {
- *        header("Location: index.php");
- *        exit;
- *    }
- * 
- * 2. Include Database Connection:
- *    require_once "../components/connection.php";
- * 
- * 3. Handle Flash Notifications:
- *    $msg = $_GET['msg'] ?? '';
- *    if ($msg === 'deleted') $success = "Inquiry message deleted successfully.";
- * 
- * 4. Query Inquiries from Database:
- *    $search = trim($_GET['search'] ?? '');
- *    if (!empty($search)) {
- *        $stmt = $connection->prepare("SELECT id, name, email, number, status, created_at FROM contacts WHERE name LIKE ? OR email LIKE ? ORDER BY id DESC");
- *        $wildcard = "%$search%";
- *        $stmt->bind_param("ss", $wildcard, $wildcard);
- *        $stmt->execute();
- *        $contacts = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
- *    } else {
- *        $res = $connection->query("SELECT id, name, email, number, status, created_at FROM contacts ORDER BY id DESC");
- *        $contacts = $res ? $res->fetch_all(MYSQLI_ASSOC) : [];
- *    }
+ * PURPOSE: Lists client showroom inquiries from 'contacts' table and provides
+ *          links to view full message detail and delete.
  * ============================================================================
  */
 
@@ -62,7 +34,7 @@ if (isset($_GET['msg']) && $_GET['msg'] === 'deleted') {
     <?php include "components/css.php"; ?>
 </head>
 
-<body class="bg-[#0D0B09] text-[#EDE4D7] font-sans antialiased selection:bg-[#C5A059] selection:text-[#0D0B09]">
+<body class="bg-[#EDE8E0] text-[#362F2A] font-sans antialiased selection:bg-[#8A5A44] selection:text-[#F6F3EE]">
     <div class="min-h-screen flex">
         <?php include "components/sidebar.php"; ?>
 
@@ -74,82 +46,39 @@ if (isset($_GET['msg']) && $_GET['msg'] === 'deleted') {
                 <!-- Page Header -->
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
-                        <div class="flex items-center gap-2 text-xs text-[#8C7D6B] mb-1">
-                            <a href="dashboard.php" class="hover:text-[#FAF6EE]">Dashboard</a>
+                        <div class="flex items-center gap-2 text-xs text-[#6E6359] mb-1">
+                            <a href="dashboard.php" class="hover:text-[#362F2A] transition-colors">Dashboard</a>
                             <span>/</span>
-                            <span class="text-[#FAF6EE] font-medium">Inquiries</span>
+                            <span class="text-[#362F2A] font-medium">Inquiries</span>
                         </div>
-                        <h2 class="font-serif text-2xl sm:text-3xl font-medium text-[#FAF6EE]">Showroom Inquiries &amp; Messages</h2>
+                        <h2 class="font-serif text-2xl sm:text-3xl font-medium text-[#362F2A]">Showroom Inquiries &amp; Messages</h2>
                     </div>
                 </div>
 
-                <!-- ==============================================================
-                     PHP BACKEND GUIDELINE: Success Notification Banner
-                     ============================================================== -->
+                <!-- Success Notification Banner -->
                 <?php if (!empty($success)): ?>
-                    <div class="p-4 rounded-2xl bg-emerald-950/60 border border-emerald-800 text-emerald-300 text-xs flex items-center gap-2.5">
+                    <div class="p-4 rounded-2xl bg-[#DCE5DF] border border-[#C6D6CB] text-[#3F624D] text-xs flex items-center gap-2.5">
                         <i class="ri-checkbox-circle-line text-lg flex-shrink-0"></i>
                         <span><?= htmlspecialchars($success) ?></span>
                     </div>
                 <?php endif; ?>
 
-                <!-- Table Card -->
-                <div class="bg-[#161310] rounded-3xl border border-[#2A231C] overflow-hidden shadow-xs">
-                    <div class="p-5 border-b border-[#2A231C] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                        <div class="text-xs text-[#8C7D6B]">
-                            Showing customer inquiries &amp; consultation requests (Total: <strong><?= count($contacts ?? []) ?></strong>)
+                <!-- Table Card in Raw Linen (#F6F3EE) -->
+                <div class="bg-[#F6F3EE] rounded-3xl border border-[#C9C0B3] overflow-hidden shadow-xs">
+                    <div class="p-5 border-b border-[#C9C0B3] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div class="text-xs text-[#6E6359]">
+                            Showing customer inquiries &amp; consultation requests (Total: <strong>3</strong>)
                         </div>
                         <div class="relative sm:w-64">
-                            <i class="ri-search-line absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 text-xs"></i>
-                            <input type="text" placeholder="Filter messages..." class="w-full pl-8 pr-3 py-1.5 bg-[#0D0B09] border border-[#2A231C] rounded-lg text-xs placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#C5A059]">
+                            <i class="ri-search-line absolute left-3 top-1/2 -translate-y-1/2 text-[#6E6359] text-xs"></i>
+                            <input type="text" placeholder="Filter messages..." class="w-full pl-8 pr-3 py-1.5 bg-[#EDE8E0] border border-[#C9C0B3] rounded-lg text-xs text-[#362F2A] placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44]">
                         </div>
                     </div>
 
-                    <!-- ==========================================================
-                         PHP BACKEND GUIDELINE: Dynamic Contacts Table Loop
-                         Query: SELECT id, name, email, number, status, created_at FROM contacts ORDER BY id DESC
-                         Loop through $contacts:
-                         <?php /*
-                         if (!empty($contacts)) {
-                             foreach ($contacts as $contact) {
-                                 $statusClass = ($contact['status'] === 'New')
-                                     ? 'bg-amber-950/40 text-amber-300 border-amber-800/60'
-                                     : (($contact['status'] === 'Replied')
-                                         ? 'bg-emerald-950/40 text-emerald-300 border-emerald-800/60'
-                                         : 'bg-[#0D0B09] text-[#8C7D6B] border-[#2A231C]');
-                                 ?>
-                                 <tr class="hover:bg-[#161310] transition-colors">
-                                     <td class="py-4 px-6 text-stone-400">#<?= (int)$contact['id'] ?></td>
-                                     <td class="py-4 px-6 font-semibold text-[#FAF6EE] text-sm"><?= htmlspecialchars($contact['name']) ?></td>
-                                     <td class="py-4 px-6 text-[#8C7D6B] font-mono text-xs"><?= htmlspecialchars($contact['email']) ?></td>
-                                     <td class="py-4 px-6 text-[#8C7D6B]"><?= htmlspecialchars($contact['number'] ?: '—') ?></td>
-                                     <td class="py-4 px-6">
-                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold border <?= $statusClass ?>">
-                                             <?= htmlspecialchars($contact['status'] ?? 'New') ?>
-                                         </span>
-                                     </td>
-                                     <td class="py-4 px-6 text-right">
-                                         <div class="inline-flex items-center gap-2">
-                                             <a href="contact_view.php?id=<?= (int)$contact['id'] ?>" class="px-2.5 py-1 rounded-lg border border-[#2A231C] hover:bg-[#0D0B09] text-[#D6C8B4] transition-colors flex items-center gap-1">
-                                                 <i class="ri-eye-line"></i> View
-                                             </a>
-                                             <a href="contact_delete.php?id=<?= (int)$contact['id'] ?>" class="px-2.5 py-1 rounded-lg border border-rose-900/60 hover:bg-rose-950/50 text-rose-400 transition-colors flex items-center gap-1">
-                                                 <i class="ri-delete-bin-line"></i> Delete
-                                             </a>
-                                         </div>
-                                     </td>
-                                 </tr>
-                                 <?php
-                             }
-                         } else {
-                             echo '<tr><td colspan="6" class="py-8 text-center text-xs text-[#8C7D6B]">No client messages found in the repository.</td></tr>';
-                         }
-                         */ ?>
-                         ========================================================== -->
                     <div class="overflow-x-auto">
                         <table class="w-full text-left border-collapse text-xs">
                             <thead>
-                                <tr class="bg-[#0D0B09] border-b border-[#2A231C] text-[#8C7D6B] uppercase tracking-wider font-semibold">
+                                <tr class="bg-[#DFD8CD] border-b border-[#C9C0B3] text-[#362F2A] uppercase tracking-wider font-semibold">
                                     <th class="py-3.5 px-6">ID</th>
                                     <th class="py-3.5 px-6">Client Name</th>
                                     <th class="py-3.5 px-6">Email Address</th>
@@ -158,25 +87,25 @@ if (isset($_GET['msg']) && $_GET['msg'] === 'deleted') {
                                     <th class="py-3.5 px-6 text-right">Actions</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-[#E2D8C9] text-[#D6C8B4] font-medium">
+                            <tbody class="divide-y divide-[#C9C0B3] text-[#6E6359] font-medium">
                                 
                                 <!-- Contact 1 -->
-                                <tr class="hover:bg-[#161310] transition-colors">
-                                    <td class="py-4 px-6 text-stone-400">#1</td>
-                                    <td class="py-4 px-6 font-semibold text-[#FAF6EE] text-sm">Aung Min</td>
-                                    <td class="py-4 px-6 text-[#8C7D6B] font-mono text-xs">aungmin@gmail.com</td>
-                                    <td class="py-4 px-6 text-[#8C7D6B]">09973383719</td>
+                                <tr class="hover:bg-[#DFD8CD]/40 transition-colors">
+                                    <td class="py-4 px-6 text-[#6E6359]">#1</td>
+                                    <td class="py-4 px-6 font-semibold text-[#362F2A] text-sm">Aung Min</td>
+                                    <td class="py-4 px-6 text-[#6E6359] font-mono text-xs">aungmin@gmail.com</td>
+                                    <td class="py-4 px-6 text-[#6E6359]">09973383719</td>
                                     <td class="py-4 px-6">
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-amber-50 text-[#C5A059] border border-amber-200">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold text-[#8C5327] bg-[#EFE2D5] border border-[#E0CFBF]">
                                              New Message
                                         </span>
                                     </td>
                                     <td class="py-4 px-6 text-right">
                                         <div class="inline-flex items-center gap-2">
-                                            <a href="contact_view.php?id=1" class="px-2.5 py-1 rounded-lg border border-[#2A231C] hover:bg-[#0D0B09] text-[#D6C8B4] transition-colors flex items-center gap-1">
+                                            <a href="contact_view.php?id=1" class="px-2.5 py-1 rounded-lg border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-[#362F2A] font-semibold transition-colors flex items-center gap-1">
                                                 <i class="ri-eye-line"></i> View
                                             </a>
-                                            <a href="contact_delete.php?id=1" class="px-2.5 py-1 rounded-lg border border-rose-200 hover:bg-rose-50 text-rose-600 transition-colors flex items-center gap-1">
+                                            <a href="contact_delete.php?id=1" class="px-2.5 py-1 rounded-lg border border-[#DFC8C8] bg-[#EFE0E0] hover:bg-[#E5D0D0] text-[#8C3B3B] font-semibold transition-colors flex items-center gap-1">
                                                 <i class="ri-delete-bin-line"></i> Delete
                                             </a>
                                         </div>
@@ -184,22 +113,22 @@ if (isset($_GET['msg']) && $_GET['msg'] === 'deleted') {
                                 </tr>
 
                                 <!-- Contact 2 -->
-                                <tr class="hover:bg-[#161310] transition-colors">
-                                    <td class="py-4 px-6 text-stone-400">#2</td>
-                                    <td class="py-4 px-6 font-semibold text-[#FAF6EE] text-sm">Su Su</td>
-                                    <td class="py-4 px-6 text-[#8C7D6B] font-mono text-xs">susu@gmail.com</td>
-                                    <td class="py-4 px-6 text-[#8C7D6B]">09421122846</td>
+                                <tr class="hover:bg-[#DFD8CD]/40 transition-colors">
+                                    <td class="py-4 px-6 text-[#6E6359]">#2</td>
+                                    <td class="py-4 px-6 font-semibold text-[#362F2A] text-sm">Su Su</td>
+                                    <td class="py-4 px-6 text-[#6E6359] font-mono text-xs">susu@gmail.com</td>
+                                    <td class="py-4 px-6 text-[#6E6359]">09421122846</td>
                                     <td class="py-4 px-6">
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
-                                             Followed Up
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold text-[#3F624D] bg-[#DCE5DF] border border-[#C6D6CB]">
+                                            Followed Up
                                         </span>
                                     </td>
                                     <td class="py-4 px-6 text-right">
                                         <div class="inline-flex items-center gap-2">
-                                            <a href="contact_view.php?id=2" class="px-2.5 py-1 rounded-lg border border-[#2A231C] hover:bg-[#0D0B09] text-[#D6C8B4] transition-colors flex items-center gap-1">
+                                            <a href="contact_view.php?id=2" class="px-2.5 py-1 rounded-lg border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-[#362F2A] font-semibold transition-colors flex items-center gap-1">
                                                 <i class="ri-eye-line"></i> View
                                             </a>
-                                            <a href="contact_delete.php?id=2" class="px-2.5 py-1 rounded-lg border border-rose-200 hover:bg-rose-50 text-rose-600 transition-colors flex items-center gap-1">
+                                            <a href="contact_delete.php?id=2" class="px-2.5 py-1 rounded-lg border border-[#DFC8C8] bg-[#EFE0E0] hover:bg-[#E5D0D0] text-[#8C3B3B] font-semibold transition-colors flex items-center gap-1">
                                                 <i class="ri-delete-bin-line"></i> Delete
                                             </a>
                                         </div>
@@ -207,22 +136,22 @@ if (isset($_GET['msg']) && $_GET['msg'] === 'deleted') {
                                 </tr>
 
                                 <!-- Contact 3 -->
-                                <tr class="hover:bg-[#161310] transition-colors">
-                                    <td class="py-4 px-6 text-stone-400">#3</td>
-                                    <td class="py-4 px-6 font-semibold text-[#FAF6EE] text-sm">Ko Ko</td>
-                                    <td class="py-4 px-6 text-[#8C7D6B] font-mono text-xs">koko@gmail.com</td>
-                                    <td class="py-4 px-6 text-[#8C7D6B]">09456123789</td>
+                                <tr class="hover:bg-[#DFD8CD]/40 transition-colors">
+                                    <td class="py-4 px-6 text-[#6E6359]">#3</td>
+                                    <td class="py-4 px-6 font-semibold text-[#362F2A] text-sm">Ko Ko</td>
+                                    <td class="py-4 px-6 text-[#6E6359] font-mono text-xs">koko@gmail.com</td>
+                                    <td class="py-4 px-6 text-[#6E6359]">09456123789</td>
                                     <td class="py-4 px-6">
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-[#0D0B09] text-[#8C7D6B]">
-                                             Archived
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold text-[#6E6359] bg-[#DFD8CD] border border-[#C9C0B3]">
+                                            Archived
                                         </span>
                                     </td>
                                     <td class="py-4 px-6 text-right">
                                         <div class="inline-flex items-center gap-2">
-                                            <a href="contact_view.php?id=3" class="px-2.5 py-1 rounded-lg border border-[#2A231C] hover:bg-[#0D0B09] text-[#D6C8B4] transition-colors flex items-center gap-1">
+                                            <a href="contact_view.php?id=3" class="px-2.5 py-1 rounded-lg border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-[#362F2A] font-semibold transition-colors flex items-center gap-1">
                                                 <i class="ri-eye-line"></i> View
                                             </a>
-                                            <a href="contact_delete.php?id=3" class="px-2.5 py-1 rounded-lg border border-rose-200 hover:bg-rose-50 text-rose-600 transition-colors flex items-center gap-1">
+                                            <a href="contact_delete.php?id=3" class="px-2.5 py-1 rounded-lg border border-[#DFC8C8] bg-[#EFE0E0] hover:bg-[#E5D0D0] text-[#8C3B3B] font-semibold transition-colors flex items-center gap-1">
                                                 <i class="ri-delete-bin-line"></i> Delete
                                             </a>
                                         </div>

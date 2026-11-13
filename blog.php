@@ -41,23 +41,23 @@ if (session_status() === PHP_SESSION_NONE) {
     <?php include "components/css.php"; ?>
 </head>
 
-<body class="bg-[#0D0B09] text-[#EDE4D7] font-sans selection:bg-[#C5A059] selection:text-[#0D0B09]">
+<body class="bg-[#EDE8E0] text-[#362F2A] font-sans selection:bg-[#8A5A44] selection:text-[#F6F3EE] antialiased">
     <?php include "components/header.php"; ?>
     <?php include "components/navbar.php"; ?>
 
     <!-- PAGE HEADER BREADCRUMB -->
-    <header class="bg-[#110E0C] border-b border-[#221C16] py-12 lg:py-16">
+    <header class="bg-[#DFD8CD] border-b border-[#C9C0B3] py-12 lg:py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <nav class="flex items-center gap-2 text-xs font-medium text-[#8C7D6B] mb-3" aria-label="Breadcrumb">
-                <a href="index.php" class="hover:text-[#FAF6EE] transition-colors">Home</a>
-                <span class="text-stone-400">/</span>
-                <span class="text-[#C5A059] font-semibold">The Atelier Journal</span>
+            <nav class="flex items-center gap-2 text-xs font-medium text-[#6E6359] mb-3" aria-label="Breadcrumb">
+                <a href="index.php" class="hover:text-[#362F2A] transition-colors">Home</a>
+                <span class="text-[#C9C0B3]">/</span>
+                <span class="text-[#8A5A44] font-semibold">The Atelier Journal</span>
             </nav>
             <div class="max-w-3xl">
-                <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal tracking-tight text-[#FAF6EE]">
+                <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal tracking-tight text-[#362F2A]">
                     Chronicles of Craft, Wood &amp; Sanctuary.
                 </h1>
-                <p class="text-sm sm:text-base text-[#D6C8B4] mt-3 leading-relaxed">
+                <p class="text-sm sm:text-base text-[#6E6359] mt-3 leading-relaxed">
                     Essays on spatial harmony, sustainable forestry, interior wabi-sabi philosophy, and tactile living.
                 </p>
             </div>
@@ -75,30 +75,30 @@ if (session_status() === PHP_SESSION_NONE) {
              if (!empty($blogs)) {
                  foreach ($blogs as $blog) {
                      ?>
-                     <article class="group bg-[#161310] rounded-3xl border border-[#2A231C] overflow-hidden shadow-xl hover:shadow-2xl hover:border-[#C5A059] transition-all duration-500 flex flex-col justify-between">
+                     <article class="group bg-[#F6F3EE] rounded-3xl border border-[#C9C0B3] overflow-hidden shadow-sm hover:shadow-xl hover:border-[#8A5A44] transition-all duration-500 flex flex-col justify-between">
                          <div>
-                             <a href="blog_detail.php?id=<?= $blog['id'] ?>" class="relative aspect-[16/10] overflow-hidden bg-[#0D0B09] border-b border-[#221C16] block">
+                             <a href="blog_detail.php?id=<?= $blog['id'] ?>" class="relative aspect-[16/10] overflow-hidden bg-[#EDE8E0] border-b border-[#C9C0B3] block">
                                  <img src="images/<?= htmlspecialchars($blog['image']) ?>" alt="<?= htmlspecialchars($blog['title']) ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
-                                 <span class="absolute top-4 left-4 inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold bg-[#161310]/95 backdrop-blur-md text-[#C5A059] border border-[#2A231C] shadow-xs">
+                                 <span class="absolute top-4 left-4 inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold bg-[#F6F3EE]/95 backdrop-blur-md text-[#8A5A44] border border-[#C9C0B3] shadow-xs">
                                      <?= htmlspecialchars($blog['category'] ?? 'Editorial') ?>
                                  </span>
                              </a>
                              <div class="p-6">
-                                 <div class="flex items-center gap-3 text-xs text-[#8C7D6B] mb-3">
-                                     <span class="flex items-center gap-1"><i class="ri-calendar-line text-[#C5A059]"></i> <?= date("M d, Y", strtotime($blog['created_at'])) ?></span>
-                                     <span class="w-1 h-1 rounded-full bg-[#453A30]"></span>
+                                 <div class="flex items-center gap-3 text-xs text-[#6E6359] mb-3">
+                                     <span class="flex items-center gap-1"><i class="ri-calendar-line text-[#8A5A44]"></i> <?= date("M d, Y", strtotime($blog['created_at'])) ?></span>
+                                     <span class="w-1 h-1 rounded-full bg-[#C9C0B3]"></span>
                                      <span>By <?= htmlspecialchars($blog['author'] ?? 'Atelier') ?></span>
                                  </div>
-                                 <h2 class="font-serif text-xl font-normal text-[#FAF6EE] group-hover:text-[#C5A059] transition-colors leading-snug">
+                                 <h2 class="font-serif text-xl font-normal text-[#362F2A] group-hover:text-[#8A5A44] transition-colors leading-snug">
                                      <a href="blog_detail.php?id=<?= $blog['id'] ?>"><?= htmlspecialchars($blog['title']) ?></a>
                                  </h2>
-                                 <p class="text-sm text-[#8C7D6B] line-clamp-3 mt-3 leading-relaxed">
+                                 <p class="text-sm text-[#6E6359] line-clamp-3 mt-3 leading-relaxed">
                                      <?= htmlspecialchars(substr(strip_tags($blog['content']), 0, 150)) ?>...
                                  </p>
                              </div>
                          </div>
                          <div class="p-6 pt-0">
-                             <a href="blog_detail.php?id=<?= $blog['id'] ?>" class="text-xs font-semibold text-[#C5A059] hover:underline flex items-center gap-1">
+                             <a href="blog_detail.php?id=<?= $blog['id'] ?>" class="text-xs font-semibold text-[#8A5A44] hover:underline flex items-center gap-1">
                                  <span>Read Full Essay</span>
                                  <i class="ri-arrow-right-line"></i>
                              </a>
@@ -107,41 +107,41 @@ if (session_status() === PHP_SESSION_NONE) {
                      <?php
                  }
              } else {
-                 echo '<p class="col-span-full text-center py-12 text-stone-400">No journal essays published yet.</p>';
+                 echo '<p class="col-span-full text-center py-12 text-[#C9C0B3]">No journal essays published yet.</p>';
              }
              */ ?>
              ================================================================== -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
             
             <!-- Journal Post 1 -->
-            <article class="group bg-[#161310] rounded-3xl border border-[#2A231C] overflow-hidden shadow-xl hover:shadow-2xl hover:border-[#C5A059] transition-all duration-500 flex flex-col justify-between">
+            <article class="group bg-[#F6F3EE] rounded-3xl border border-[#C9C0B3] overflow-hidden shadow-sm hover:shadow-xl hover:border-[#8A5A44] transition-all duration-500 flex flex-col justify-between">
                 <div>
-                    <a href="blog_detail.php?id=1" class="relative aspect-[16/10] overflow-hidden bg-[#0D0B09] border-b border-[#221C16] block">
+                    <a href="blog_detail.php?id=1" class="relative aspect-[16/10] overflow-hidden bg-[#EDE8E0] border-b border-[#C9C0B3] block">
                         <img src="images/blog-minimalist-spaces.jpg" alt="The Philosophy of Wabi-Sabi in Modern Interiors" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
-                        <span class="absolute top-4 left-4 inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold bg-[#161310]/95 backdrop-blur-md text-[#C5A059] border border-[#2A231C] shadow-xs">
+                        <span class="absolute top-4 left-4 inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold bg-[#F6F3EE]/95 backdrop-blur-md text-[#8A5A44] border border-[#C9C0B3] shadow-xs">
                             Philosophy
                         </span>
                     </a>
                     <div class="p-6">
-                        <div class="flex items-center gap-3 text-xs text-[#8C7D6B] mb-3">
-                            <span class="flex items-center gap-1"><i class="ri-calendar-line text-[#C5A059]"></i> May 21, 2026</span>
-                            <span class="w-1 h-1 rounded-full bg-[#453A30]"></span>
+                        <div class="flex items-center gap-3 text-xs text-[#6E6359] mb-3">
+                            <span class="flex items-center gap-1"><i class="ri-calendar-line text-[#8A5A44]"></i> May 21, 2026</span>
+                            <span class="w-1 h-1 rounded-full bg-[#C9C0B3]"></span>
                             <span>4 min read</span>
                         </div>
-                        <h2 class="font-serif text-xl font-normal text-[#FAF6EE] group-hover:text-[#C5A059] transition-colors leading-snug">
+                        <h2 class="font-serif text-xl font-normal text-[#362F2A] group-hover:text-[#8A5A44] transition-colors leading-snug">
                             <a href="blog_detail.php?id=1">The Philosophy of Wabi-Sabi in Modern Interiors</a>
                         </h2>
-                        <p class="text-sm text-[#8C7D6B] line-clamp-3 mt-3 leading-relaxed">
+                        <p class="text-sm text-[#6E6359] line-clamp-3 mt-3 leading-relaxed">
                             How embracing natural grain knots, textured linens, and imperfect clay forms fosters sanctuary within contemporary urban homes.
                         </p>
                     </div>
                 </div>
-                <div class="px-6 pb-6 pt-4 border-t border-[#221C16] flex items-center justify-between">
+                <div class="px-6 pb-6 pt-4 border-t border-[#C9C0B3] flex items-center justify-between">
                     <div class="flex items-center gap-2">
-                        <span class="w-7 h-7 rounded-full bg-[#EFE9DF] text-[#C5A059] flex items-center justify-center text-xs font-semibold">ED</span>
-                        <span class="text-xs font-medium text-[#D6C8B4]">Editorial Staff</span>
+                        <span class="w-7 h-7 rounded-full bg-[#EFE9DF] text-[#8A5A44] flex items-center justify-center text-xs font-semibold">ED</span>
+                        <span class="text-xs font-medium text-[#6E6359]">Editorial Staff</span>
                     </div>
-                    <a href="blog_detail.php?id=1" class="text-xs font-semibold text-stone-900 hover:text-[#C5A059] inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                    <a href="blog_detail.php?id=1" class="text-xs font-semibold text-stone-900 hover:text-[#8A5A44] inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
                         <span>Read</span>
                         <i class="ri-arrow-right-line"></i>
                     </a>
@@ -149,34 +149,34 @@ if (session_status() === PHP_SESSION_NONE) {
             </article>
 
             <!-- Journal Post 2 -->
-            <article class="group bg-[#161310] rounded-3xl border border-[#2A231C] overflow-hidden shadow-xl hover:shadow-2xl hover:border-[#C5A059] transition-all duration-500 flex flex-col justify-between">
+            <article class="group bg-[#F6F3EE] rounded-3xl border border-[#C9C0B3] overflow-hidden shadow-sm hover:shadow-xl hover:border-[#8A5A44] transition-all duration-500 flex flex-col justify-between">
                 <div>
-                    <a href="blog_detail.php?id=2" class="relative aspect-[16/10] overflow-hidden bg-[#0D0B09] border-b border-[#221C16] block">
+                    <a href="blog_detail.php?id=2" class="relative aspect-[16/10] overflow-hidden bg-[#EDE8E0] border-b border-[#C9C0B3] block">
                         <img src="images/blog-sustainable-wood.jpg" alt="Joinery Without Nails: The Heritage of Wood Craft" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
-                        <span class="absolute top-4 left-4 inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold bg-[#161310]/95 backdrop-blur-md text-[#C5A059] border border-[#2A231C] shadow-xs">
+                        <span class="absolute top-4 left-4 inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold bg-[#F6F3EE]/95 backdrop-blur-md text-[#8A5A44] border border-[#C9C0B3] shadow-xs">
                             Artisanship
                         </span>
                     </a>
                     <div class="p-6">
-                        <div class="flex items-center gap-3 text-xs text-[#8C7D6B] mb-3">
-                            <span class="flex items-center gap-1"><i class="ri-calendar-line text-[#C5A059]"></i> Apr 28, 2026</span>
-                            <span class="w-1 h-1 rounded-full bg-[#453A30]"></span>
+                        <div class="flex items-center gap-3 text-xs text-[#6E6359] mb-3">
+                            <span class="flex items-center gap-1"><i class="ri-calendar-line text-[#8A5A44]"></i> Apr 28, 2026</span>
+                            <span class="w-1 h-1 rounded-full bg-[#C9C0B3]"></span>
                             <span>6 min read</span>
                         </div>
-                        <h2 class="font-serif text-xl font-normal text-[#FAF6EE] group-hover:text-[#C5A059] transition-colors leading-snug">
+                        <h2 class="font-serif text-xl font-normal text-[#362F2A] group-hover:text-[#8A5A44] transition-colors leading-snug">
                             <a href="blog_detail.php?id=2">Joinery Without Nails: The Heritage of Wood Craft</a>
                         </h2>
-                        <p class="text-sm text-[#8C7D6B] line-clamp-3 mt-3 leading-relaxed">
+                        <p class="text-sm text-[#6E6359] line-clamp-3 mt-3 leading-relaxed">
                             A deep look inside our workshop where master carpenters shape interlocking joints that withstand temperature shifts for generations.
                         </p>
                     </div>
                 </div>
-                <div class="px-6 pb-6 pt-4 border-t border-[#221C16] flex items-center justify-between">
+                <div class="px-6 pb-6 pt-4 border-t border-[#C9C0B3] flex items-center justify-between">
                     <div class="flex items-center gap-2">
-                        <span class="w-7 h-7 rounded-full bg-[#EFE9DF] text-[#C5A059] flex items-center justify-center text-xs font-semibold">ST</span>
-                        <span class="text-xs font-medium text-[#D6C8B4]">Su Thinzar Htet</span>
+                        <span class="w-7 h-7 rounded-full bg-[#EFE9DF] text-[#8A5A44] flex items-center justify-center text-xs font-semibold">ST</span>
+                        <span class="text-xs font-medium text-[#6E6359]">Su Thinzar Htet</span>
                     </div>
-                    <a href="blog_detail.php?id=2" class="text-xs font-semibold text-stone-900 hover:text-[#C5A059] inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                    <a href="blog_detail.php?id=2" class="text-xs font-semibold text-stone-900 hover:text-[#8A5A44] inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
                         <span>Read</span>
                         <i class="ri-arrow-right-line"></i>
                     </a>
@@ -184,34 +184,34 @@ if (session_status() === PHP_SESSION_NONE) {
             </article>
 
             <!-- Journal Post 3 -->
-            <article class="group bg-[#161310] rounded-3xl border border-[#2A231C] overflow-hidden shadow-xl hover:shadow-2xl hover:border-[#C5A059] transition-all duration-500 flex flex-col justify-between">
+            <article class="group bg-[#F6F3EE] rounded-3xl border border-[#C9C0B3] overflow-hidden shadow-sm hover:shadow-xl hover:border-[#8A5A44] transition-all duration-500 flex flex-col justify-between">
                 <div>
-                    <a href="blog_detail.php?id=3" class="relative aspect-[16/10] overflow-hidden bg-[#0D0B09] border-b border-[#221C16] block">
+                    <a href="blog_detail.php?id=3" class="relative aspect-[16/10] overflow-hidden bg-[#EDE8E0] border-b border-[#C9C0B3] block">
                         <img src="images/blog-lighting-guide.jpg" alt="Sculpting Ambient Light in Living Rooms" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
-                        <span class="absolute top-4 left-4 inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold bg-[#161310]/95 backdrop-blur-md text-[#C5A059] border border-[#2A231C] shadow-xs">
+                        <span class="absolute top-4 left-4 inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold bg-[#F6F3EE]/95 backdrop-blur-md text-[#8A5A44] border border-[#C9C0B3] shadow-xs">
                             Lighting
                         </span>
                     </a>
                     <div class="p-6">
-                        <div class="flex items-center gap-3 text-xs text-[#8C7D6B] mb-3">
-                            <span class="flex items-center gap-1"><i class="ri-calendar-line text-[#C5A059]"></i> Apr 14, 2026</span>
-                            <span class="w-1 h-1 rounded-full bg-[#453A30]"></span>
+                        <div class="flex items-center gap-3 text-xs text-[#6E6359] mb-3">
+                            <span class="flex items-center gap-1"><i class="ri-calendar-line text-[#8A5A44]"></i> Apr 14, 2026</span>
+                            <span class="w-1 h-1 rounded-full bg-[#C9C0B3]"></span>
                             <span>5 min read</span>
                         </div>
-                        <h2 class="font-serif text-xl font-normal text-[#FAF6EE] group-hover:text-[#C5A059] transition-colors leading-snug">
+                        <h2 class="font-serif text-xl font-normal text-[#362F2A] group-hover:text-[#8A5A44] transition-colors leading-snug">
                             <a href="blog_detail.php?id=3">Sculpting Ambient Light in Living Rooms</a>
                         </h2>
-                        <p class="text-sm text-[#8C7D6B] line-clamp-3 mt-3 leading-relaxed">
+                        <p class="text-sm text-[#6E6359] line-clamp-3 mt-3 leading-relaxed">
                             How soft indirect fixtures and natural parchment shades change the emotional cadence of our domestic evenings.
                         </p>
                     </div>
                 </div>
-                <div class="px-6 pb-6 pt-4 border-t border-[#221C16] flex items-center justify-between">
+                <div class="px-6 pb-6 pt-4 border-t border-[#C9C0B3] flex items-center justify-between">
                     <div class="flex items-center gap-2">
-                        <span class="w-7 h-7 rounded-full bg-[#EFE9DF] text-[#C5A059] flex items-center justify-center text-xs font-semibold">TN</span>
-                        <span class="text-xs font-medium text-[#D6C8B4]">Thae Nay Nwe Soe</span>
+                        <span class="w-7 h-7 rounded-full bg-[#EFE9DF] text-[#8A5A44] flex items-center justify-center text-xs font-semibold">TN</span>
+                        <span class="text-xs font-medium text-[#6E6359]">Thae Nay Nwe Soe</span>
                     </div>
-                    <a href="blog_detail.php?id=3" class="text-xs font-semibold text-stone-900 hover:text-[#C5A059] inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                    <a href="blog_detail.php?id=3" class="text-xs font-semibold text-stone-900 hover:text-[#8A5A44] inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
                         <span>Read</span>
                         <i class="ri-arrow-right-line"></i>
                     </a>
@@ -219,34 +219,34 @@ if (session_status() === PHP_SESSION_NONE) {
             </article>
 
             <!-- Journal Post 4 -->
-            <article class="group bg-[#161310] rounded-3xl border border-[#2A231C] overflow-hidden shadow-xl hover:shadow-2xl hover:border-[#C5A059] transition-all duration-500 flex flex-col justify-between">
+            <article class="group bg-[#F6F3EE] rounded-3xl border border-[#C9C0B3] overflow-hidden shadow-sm hover:shadow-xl hover:border-[#8A5A44] transition-all duration-500 flex flex-col justify-between">
                 <div>
-                    <a href="blog_detail.php?id=4" class="relative aspect-[16/10] overflow-hidden bg-[#0D0B09] border-b border-[#221C16] block">
+                    <a href="blog_detail.php?id=4" class="relative aspect-[16/10] overflow-hidden bg-[#EDE8E0] border-b border-[#C9C0B3] block">
                         <img src="images/blog-interior-tips.jpg" alt="The Ritual of Morning Tea & Minimalist Dining" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
-                        <span class="absolute top-4 left-4 inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold bg-[#161310]/95 backdrop-blur-md text-[#C5A059] border border-[#2A231C] shadow-xs">
+                        <span class="absolute top-4 left-4 inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold bg-[#F6F3EE]/95 backdrop-blur-md text-[#8A5A44] border border-[#C9C0B3] shadow-xs">
                             Living Rituals
                         </span>
                     </a>
                     <div class="p-6">
-                        <div class="flex items-center gap-3 text-xs text-[#8C7D6B] mb-3">
-                            <span class="flex items-center gap-1"><i class="ri-calendar-line text-[#C5A059]"></i> Mar 30, 2026</span>
-                            <span class="w-1 h-1 rounded-full bg-[#453A30]"></span>
+                        <div class="flex items-center gap-3 text-xs text-[#6E6359] mb-3">
+                            <span class="flex items-center gap-1"><i class="ri-calendar-line text-[#8A5A44]"></i> Mar 30, 2026</span>
+                            <span class="w-1 h-1 rounded-full bg-[#C9C0B3]"></span>
                             <span>3 min read</span>
                         </div>
-                        <h2 class="font-serif text-xl font-normal text-[#FAF6EE] group-hover:text-[#C5A059] transition-colors leading-snug">
+                        <h2 class="font-serif text-xl font-normal text-[#362F2A] group-hover:text-[#8A5A44] transition-colors leading-snug">
                             <a href="blog_detail.php?id=4">The Ritual of Morning Tea &amp; Minimalist Dining</a>
                         </h2>
-                        <p class="text-sm text-[#8C7D6B] line-clamp-3 mt-3 leading-relaxed">
+                        <p class="text-sm text-[#6E6359] line-clamp-3 mt-3 leading-relaxed">
                             Transforming the morning routine through uncluttered solid oak surfaces, tactile ceramic cups, and natural daylight.
                         </p>
                     </div>
                 </div>
-                <div class="px-6 pb-6 pt-4 border-t border-[#221C16] flex items-center justify-between">
+                <div class="px-6 pb-6 pt-4 border-t border-[#C9C0B3] flex items-center justify-between">
                     <div class="flex items-center gap-2">
-                        <span class="w-7 h-7 rounded-full bg-[#EFE9DF] text-[#C5A059] flex items-center justify-center text-xs font-semibold">ED</span>
-                        <span class="text-xs font-medium text-[#D6C8B4]">Editorial Staff</span>
+                        <span class="w-7 h-7 rounded-full bg-[#EFE9DF] text-[#8A5A44] flex items-center justify-center text-xs font-semibold">ED</span>
+                        <span class="text-xs font-medium text-[#6E6359]">Editorial Staff</span>
                     </div>
-                    <a href="blog_detail.php?id=4" class="text-xs font-semibold text-stone-900 hover:text-[#C5A059] inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                    <a href="blog_detail.php?id=4" class="text-xs font-semibold text-stone-900 hover:text-[#8A5A44] inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
                         <span>Read</span>
                         <i class="ri-arrow-right-line"></i>
                     </a>
@@ -254,34 +254,34 @@ if (session_status() === PHP_SESSION_NONE) {
             </article>
 
             <!-- Journal Post 5 -->
-            <article class="group bg-[#161310] rounded-3xl border border-[#2A231C] overflow-hidden shadow-xl hover:shadow-2xl hover:border-[#C5A059] transition-all duration-500 flex flex-col justify-between">
+            <article class="group bg-[#F6F3EE] rounded-3xl border border-[#C9C0B3] overflow-hidden shadow-sm hover:shadow-xl hover:border-[#8A5A44] transition-all duration-500 flex flex-col justify-between">
                 <div>
-                    <a href="blog_detail.php?id=5" class="relative aspect-[16/10] overflow-hidden bg-[#0D0B09] border-b border-[#221C16] block">
+                    <a href="blog_detail.php?id=5" class="relative aspect-[16/10] overflow-hidden bg-[#EDE8E0] border-b border-[#C9C0B3] block">
                         <img src="images/blog-modern-styling.jpg" alt="Botanical Plant Waxes: Caring for Solid Wood" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
-                        <span class="absolute top-4 left-4 inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold bg-[#161310]/95 backdrop-blur-md text-[#C5A059] border border-[#2A231C] shadow-xs">
+                        <span class="absolute top-4 left-4 inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold bg-[#F6F3EE]/95 backdrop-blur-md text-[#8A5A44] border border-[#C9C0B3] shadow-xs">
                             Maintenance
                         </span>
                     </a>
                     <div class="p-6">
-                        <div class="flex items-center gap-3 text-xs text-[#8C7D6B] mb-3">
-                            <span class="flex items-center gap-1"><i class="ri-calendar-line text-[#C5A059]"></i> Mar 18, 2026</span>
-                            <span class="w-1 h-1 rounded-full bg-[#453A30]"></span>
+                        <div class="flex items-center gap-3 text-xs text-[#6E6359] mb-3">
+                            <span class="flex items-center gap-1"><i class="ri-calendar-line text-[#8A5A44]"></i> Mar 18, 2026</span>
+                            <span class="w-1 h-1 rounded-full bg-[#C9C0B3]"></span>
                             <span>5 min read</span>
                         </div>
-                        <h2 class="font-serif text-xl font-normal text-[#FAF6EE] group-hover:text-[#C5A059] transition-colors leading-snug">
+                        <h2 class="font-serif text-xl font-normal text-[#362F2A] group-hover:text-[#8A5A44] transition-colors leading-snug">
                             <a href="blog_detail.php?id=5">Botanical Plant Waxes: Caring for Solid Wood</a>
                         </h2>
-                        <p class="text-sm text-[#8C7D6B] line-clamp-3 mt-3 leading-relaxed">
+                        <p class="text-sm text-[#6E6359] line-clamp-3 mt-3 leading-relaxed">
                             Practical steps to protect unvarnished timber from dryness, humidity shifts, and everyday stains while preserving the velvet feel.
                         </p>
                     </div>
                 </div>
-                <div class="px-6 pb-6 pt-4 border-t border-[#221C16] flex items-center justify-between">
+                <div class="px-6 pb-6 pt-4 border-t border-[#C9C0B3] flex items-center justify-between">
                     <div class="flex items-center gap-2">
-                        <span class="w-7 h-7 rounded-full bg-[#EFE9DF] text-[#C5A059] flex items-center justify-center text-xs font-semibold">NA</span>
-                        <span class="text-xs font-medium text-[#D6C8B4]">Nyi Nyi Aung</span>
+                        <span class="w-7 h-7 rounded-full bg-[#EFE9DF] text-[#8A5A44] flex items-center justify-center text-xs font-semibold">NA</span>
+                        <span class="text-xs font-medium text-[#6E6359]">Nyi Nyi Aung</span>
                     </div>
-                    <a href="blog_detail.php?id=5" class="text-xs font-semibold text-stone-900 hover:text-[#C5A059] inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                    <a href="blog_detail.php?id=5" class="text-xs font-semibold text-stone-900 hover:text-[#8A5A44] inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
                         <span>Read</span>
                         <i class="ri-arrow-right-line"></i>
                     </a>
@@ -289,34 +289,34 @@ if (session_status() === PHP_SESSION_NONE) {
             </article>
 
             <!-- Journal Post 6 -->
-            <article class="group bg-[#161310] rounded-3xl border border-[#2A231C] overflow-hidden shadow-xl hover:shadow-2xl hover:border-[#C5A059] transition-all duration-500 flex flex-col justify-between">
+            <article class="group bg-[#F6F3EE] rounded-3xl border border-[#C9C0B3] overflow-hidden shadow-sm hover:shadow-xl hover:border-[#8A5A44] transition-all duration-500 flex flex-col justify-between">
                 <div>
-                    <a href="blog_detail.php?id=6" class="relative aspect-[16/10] overflow-hidden bg-[#0D0B09] border-b border-[#221C16] block">
+                    <a href="blog_detail.php?id=6" class="relative aspect-[16/10] overflow-hidden bg-[#EDE8E0] border-b border-[#C9C0B3] block">
                         <img src="images/blog-color-palettes.jpg" alt="Designing Quiet Havens in High-Density Cities" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
-                        <span class="absolute top-4 left-4 inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold bg-[#161310]/95 backdrop-blur-md text-[#C5A059] border border-[#2A231C] shadow-xs">
+                        <span class="absolute top-4 left-4 inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold bg-[#F6F3EE]/95 backdrop-blur-md text-[#8A5A44] border border-[#C9C0B3] shadow-xs">
                             Architecture
                         </span>
                     </a>
                     <div class="p-6">
-                        <div class="flex items-center gap-3 text-xs text-[#8C7D6B] mb-3">
-                            <span class="flex items-center gap-1"><i class="ri-calendar-line text-[#C5A059]"></i> Feb 27, 2026</span>
-                            <span class="w-1 h-1 rounded-full bg-[#453A30]"></span>
+                        <div class="flex items-center gap-3 text-xs text-[#6E6359] mb-3">
+                            <span class="flex items-center gap-1"><i class="ri-calendar-line text-[#8A5A44]"></i> Feb 27, 2026</span>
+                            <span class="w-1 h-1 rounded-full bg-[#C9C0B3]"></span>
                             <span>7 min read</span>
                         </div>
-                        <h2 class="font-serif text-xl font-normal text-[#FAF6EE] group-hover:text-[#C5A059] transition-colors leading-snug">
+                        <h2 class="font-serif text-xl font-normal text-[#362F2A] group-hover:text-[#8A5A44] transition-colors leading-snug">
                             <a href="blog_detail.php?id=6">Designing Quiet Havens in High-Density Cities</a>
                         </h2>
-                        <p class="text-sm text-[#8C7D6B] line-clamp-3 mt-3 leading-relaxed">
+                        <p class="text-sm text-[#6E6359] line-clamp-3 mt-3 leading-relaxed">
                             How low-profile floor silhouettes and muted earth pigments buffer sensory fatigue in modern apartment dwellings.
                         </p>
                     </div>
                 </div>
-                <div class="px-6 pb-6 pt-4 border-t border-[#221C16] flex items-center justify-between">
+                <div class="px-6 pb-6 pt-4 border-t border-[#C9C0B3] flex items-center justify-between">
                     <div class="flex items-center gap-2">
-                        <span class="w-7 h-7 rounded-full bg-[#EFE9DF] text-[#C5A059] flex items-center justify-center text-xs font-semibold">PW</span>
-                        <span class="text-xs font-medium text-[#D6C8B4]">Phone Myat Win</span>
+                        <span class="w-7 h-7 rounded-full bg-[#EFE9DF] text-[#8A5A44] flex items-center justify-center text-xs font-semibold">PW</span>
+                        <span class="text-xs font-medium text-[#6E6359]">Phone Myat Win</span>
                     </div>
-                    <a href="blog_detail.php?id=6" class="text-xs font-semibold text-stone-900 hover:text-[#C5A059] inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                    <a href="blog_detail.php?id=6" class="text-xs font-semibold text-stone-900 hover:text-[#8A5A44] inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
                         <span>Read</span>
                         <i class="ri-arrow-right-line"></i>
                     </a>
@@ -327,9 +327,9 @@ if (session_status() === PHP_SESSION_NONE) {
 
         <!-- JOURNAL PAGINATION -->
         <div class="mt-16 flex items-center justify-center gap-2 text-sm">
-            <span class="w-10 h-10 rounded-xl bg-[#C5A059] text-[#0D0B09] font-semibold flex items-center justify-center font-medium shadow-xs">1</span>
-            <a href="blog.php?page=2" class="w-10 h-10 rounded-xl border border-[#2A231C] text-[#D6C8B4] hover:bg-[#1D1914] hover:text-[#FAF6EE] bg-[#161310] flex items-center justify-center font-medium transition-colors">2</a>
-            <a href="blog.php?page=2" class="w-10 h-10 rounded-xl border border-[#2A231C] text-[#D6C8B4] hover:bg-[#1D1914] hover:text-[#FAF6EE] bg-[#161310] flex items-center justify-center font-medium transition-colors">
+            <span class="w-10 h-10 rounded-xl bg-[#8A5A44] text-[#F6F3EE] shadow-sm font-semibold flex items-center justify-center font-medium shadow-xs">1</span>
+            <a href="blog.php?page=2" class="w-10 h-10 rounded-xl border border-[#C9C0B3] text-[#6E6359] hover:bg-[#DFD8CD] hover:text-[#362F2A] bg-[#F6F3EE] flex items-center justify-center font-medium transition-colors">2</a>
+            <a href="blog.php?page=2" class="w-10 h-10 rounded-xl border border-[#C9C0B3] text-[#6E6359] hover:bg-[#DFD8CD] hover:text-[#362F2A] bg-[#F6F3EE] flex items-center justify-center font-medium transition-colors">
                 <i class="ri-arrow-right-s-line text-lg"></i>
             </a>
         </div>

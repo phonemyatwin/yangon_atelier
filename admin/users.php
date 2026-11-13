@@ -4,38 +4,8 @@
  * FURNISHME BACKEND INSTRUCTION GUIDELINE - ADMIN USERS LIST
  * ============================================================================
  * FILE: admin/users.php
- * PURPOSE: Lists all registered client accounts from the 'users' table, allows
- *          keyword searching, and provides links to create, edit, or delete users.
- * 
- * STEP-BY-STEP IMPLEMENTATION GUIDE:
- * 1. Initialize Session & Enforce Authentication Guard:
- *    if (session_status() === PHP_SESSION_NONE) { session_start(); }
- *    if (!isset($_SESSION['admin_user'])) {
- *        header("Location: index.php");
- *        exit;
- *    }
- * 
- * 2. Include Database Connection:
- *    require_once "../components/connection.php";
- * 
- * 3. Handle Flash Notifications:
- *    $msg = $_GET['msg'] ?? '';
- *    if ($msg === 'created') $success = "User account created successfully.";
- *    if ($msg === 'updated') $success = "User account updated successfully.";
- *    if ($msg === 'deleted') $success = "User account deleted successfully.";
- * 
- * 4. Query Registered Users:
- *    $search = trim($_GET['search'] ?? '');
- *    if (!empty($search)) {
- *        $stmt = $connection->prepare("SELECT id, username, email, created_at FROM users WHERE username LIKE ? OR email LIKE ? ORDER BY id DESC");
- *        $wildcard = "%$search%";
- *        $stmt->bind_param("ss", $wildcard, $wildcard);
- *        $stmt->execute();
- *        $users = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
- *    } else {
- *        $res = $connection->query("SELECT id, username, email, created_at FROM users ORDER BY id DESC");
- *        $users = $res ? $res->fetch_all(MYSQLI_ASSOC) : [];
- *    }
+ * PURPOSE: Lists all user accounts, displays account details, and links to
+ *          account creation, update, and deletion flows.
  * ============================================================================
  */
 
@@ -66,7 +36,7 @@ if (isset($_GET['msg'])) {
     <?php include "components/css.php"; ?>
 </head>
 
-<body class="bg-[#0D0B09] text-[#EDE4D7] font-sans antialiased selection:bg-[#C5A059] selection:text-[#0D0B09]">
+<body class="bg-[#EDE8E0] text-[#362F2A] font-sans antialiased selection:bg-[#8A5A44] selection:text-[#F6F3EE]">
     <div class="min-h-screen flex">
         <?php include "components/sidebar.php"; ?>
 
@@ -78,91 +48,43 @@ if (isset($_GET['msg'])) {
                 <!-- Page Action Header -->
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
-                        <div class="flex items-center gap-2 text-xs text-[#8C7D6B] mb-1">
-                            <a href="dashboard.php" class="hover:text-[#FAF6EE]">Dashboard</a>
+                        <div class="flex items-center gap-2 text-xs text-[#6E6359] mb-1">
+                            <a href="dashboard.php" class="hover:text-[#362F2A] transition-colors">Dashboard</a>
                             <span>/</span>
-                            <span class="text-[#FAF6EE] font-medium">Users</span>
+                            <span class="text-[#362F2A] font-medium">Users</span>
                         </div>
-                        <h2 class="font-serif text-2xl sm:text-3xl font-medium text-[#FAF6EE]">Registered Accounts</h2>
+                        <h2 class="font-serif text-2xl sm:text-3xl font-medium text-[#362F2A]">Registered Accounts</h2>
                     </div>
-                    <a href="user_create.php" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#C5A059] hover:bg-[#D4AF37] text-[#0D0B09] font-semibold text-xs font-medium transition-colors shadow-xs">
+                    <a href="user_create.php" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#8A5A44] hover:bg-[#704735] text-[#F6F3EE] font-semibold text-xs transition-colors shadow-xs">
                         <i class="ri-user-add-line text-base"></i>
                         <span>Add New User</span>
                     </a>
                 </div>
 
-                <!-- ==============================================================
-                     PHP BACKEND GUIDELINE: Success Notification Banner
-                     ============================================================== -->
+                <!-- Success Notification Banner -->
                 <?php if (!empty($success)): ?>
-                    <div class="p-4 rounded-2xl bg-emerald-950/60 border border-emerald-800 text-emerald-300 text-xs flex items-center gap-2.5">
+                    <div class="p-4 rounded-2xl bg-[#DCE5DF] border border-[#C6D6CB] text-[#3F624D] text-xs flex items-center gap-2.5">
                         <i class="ri-checkbox-circle-line text-lg flex-shrink-0"></i>
                         <span><?= htmlspecialchars($success) ?></span>
                     </div>
                 <?php endif; ?>
 
-                <!-- Table Card -->
-                <div class="bg-[#161310] rounded-3xl border border-[#2A231C] overflow-hidden shadow-xs">
-                    <div class="p-5 border-b border-[#2A231C] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                        <div class="text-xs text-[#8C7D6B]">
-                            Showing <strong><?= count($users ?? []) ?></strong> registered accounts
+                <!-- Table Card in Raw Linen (#F6F3EE) -->
+                <div class="bg-[#F6F3EE] rounded-3xl border border-[#C9C0B3] overflow-hidden shadow-xs">
+                    <div class="p-5 border-b border-[#C9C0B3] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div class="text-xs text-[#6E6359]">
+                            Showing <strong>1</strong> registered account
                         </div>
                         <div class="relative sm:w-64">
-                            <i class="ri-search-line absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 text-xs"></i>
-                            <input type="text" placeholder="Search users by name or email..." class="w-full pl-8 pr-3 py-1.5 bg-[#0D0B09] border border-[#2A231C] rounded-lg text-xs placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#C5A059]">
+                            <i class="ri-search-line absolute left-3 top-1/2 -translate-y-1/2 text-[#6E6359] text-xs"></i>
+                            <input type="text" placeholder="Search users by name or email..." class="w-full pl-8 pr-3 py-1.5 bg-[#EDE8E0] border border-[#C9C0B3] rounded-lg text-xs text-[#362F2A] placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44]">
                         </div>
                     </div>
 
-                    <!-- ==========================================================
-                         PHP BACKEND GUIDELINE: Dynamic Users Table Loop
-                         Query: SELECT id, username, email FROM users ORDER BY id DESC
-                         Loop through $users:
-                         <?php /*
-                         if (!empty($users)) {
-                             foreach ($users as $user) {
-                                 $initials = strtoupper(substr($user['username'], 0, 2));
-                                 ?>
-                                 <tr class="hover:bg-[#161310] transition-colors">
-                                     <td class="py-4 px-6 text-stone-400">#<?= $user['id'] ?></td>
-                                     <td class="py-4 px-6">
-                                         <div class="flex items-center gap-3">
-                                             <span class="w-9 h-9 rounded-full bg-[#1C1814] text-[#C5A059] flex items-center justify-center font-serif text-xs font-semibold">
-                                                 <?= htmlspecialchars($initials) ?>
-                                             </span>
-                                             <div>
-                                                 <span class="font-semibold text-[#FAF6EE] block text-sm"><?= htmlspecialchars($user['username']) ?></span>
-                                                 <span class="text-[10px] text-[#8C7D6B] uppercase tracking-wider">Client Member</span>
-                                             </div>
-                                         </div>
-                                     </td>
-                                     <td class="py-4 px-6 text-[#8C7D6B] font-mono text-xs"><?= htmlspecialchars($user['email']) ?></td>
-                                     <td class="py-4 px-6">
-                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                                             Verified
-                                         </span>
-                                     </td>
-                                     <td class="py-4 px-6 text-right">
-                                         <div class="inline-flex items-center gap-2">
-                                             <a href="user_update.php?id=<?= $user['id'] ?>" class="px-2.5 py-1 rounded-lg border border-[#2A231C] hover:bg-[#0D0B09] text-[#D6C8B4] transition-colors flex items-center gap-1">
-                                                 <i class="ri-pencil-line"></i> Edit
-                                             </a>
-                                             <a href="user_delete.php?id=<?= $user['id'] ?>" class="px-2.5 py-1 rounded-lg border border-rose-200 hover:bg-rose-50 text-rose-600 transition-colors flex items-center gap-1">
-                                                 <i class="ri-delete-bin-line"></i> Delete
-                                             </a>
-                                         </div>
-                                     </td>
-                                 </tr>
-                                 <?php
-                             }
-                         } else {
-                             echo '<tr><td colspan="5" class="py-8 text-center text-stone-400">No user accounts found.</td></tr>';
-                         }
-                         */ ?>
-                         ========================================================== -->
                     <div class="overflow-x-auto">
                         <table class="w-full text-left border-collapse text-xs">
                             <thead>
-                                <tr class="bg-[#0D0B09] border-b border-[#2A231C] text-[#8C7D6B] uppercase tracking-wider font-semibold">
+                                <tr class="bg-[#DFD8CD] border-b border-[#C9C0B3] text-[#362F2A] uppercase tracking-wider font-semibold">
                                     <th class="py-3.5 px-6">ID</th>
                                     <th class="py-3.5 px-6">User Profile</th>
                                     <th class="py-3.5 px-6">Email Address</th>
@@ -170,32 +92,32 @@ if (isset($_GET['msg'])) {
                                     <th class="py-3.5 px-6 text-right">Actions</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-[#E2D8C9] text-[#D6C8B4] font-medium">
-                                <tr class="hover:bg-[#161310] transition-colors">
-                                    <td class="py-4 px-6 text-stone-400">#1</td>
+                            <tbody class="divide-y divide-[#C9C0B3] text-[#6E6359] font-medium">
+                                <tr class="hover:bg-[#DFD8CD]/40 transition-colors">
+                                    <td class="py-4 px-6 text-[#6E6359]">#1</td>
                                     <td class="py-4 px-6">
                                         <div class="flex items-center gap-3">
-                                            <span class="w-9 h-9 rounded-full bg-stone-900 text-white flex items-center justify-center font-serif text-xs font-semibold">
+                                            <span class="w-9 h-9 rounded-full bg-[#DFD8CD] text-[#8A5A44] flex items-center justify-center font-serif text-xs font-semibold">
                                                 AD
                                             </span>
                                             <div>
-                                                <span class="font-semibold text-[#FAF6EE] block text-sm">admin</span>
-                                                <span class="text-[10px] text-[#C5A059] font-medium uppercase tracking-wider">Super Administrator</span>
+                                                <span class="font-semibold text-[#362F2A] block text-sm">admin</span>
+                                                <span class="text-[10px] text-[#8A5A44] font-semibold uppercase tracking-wider">Super Administrator</span>
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="py-4 px-6 text-[#8C7D6B] font-mono text-xs">admin@gmail.com</td>
+                                    <td class="py-4 px-6 text-[#6E6359] font-mono text-xs">admin@gmail.com</td>
                                     <td class="py-4 px-6">
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold text-[#3F624D] bg-[#DCE5DF] border border-[#C6D6CB]">
                                             Verified Active
                                         </span>
                                     </td>
                                     <td class="py-4 px-6 text-right">
                                         <div class="inline-flex items-center gap-2">
-                                            <a href="user_update.php?id=1" class="px-2.5 py-1 rounded-lg border border-[#2A231C] hover:bg-[#0D0B09] text-[#D6C8B4] transition-colors flex items-center gap-1">
+                                            <a href="user_update.php?id=1" class="px-2.5 py-1 rounded-lg border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-[#8A5A44] font-semibold transition-colors flex items-center gap-1">
                                                 <i class="ri-pencil-line"></i> Edit
                                             </a>
-                                            <a href="user_delete.php?id=1" class="px-2.5 py-1 rounded-lg border border-rose-200 hover:bg-rose-50 text-rose-600 transition-colors flex items-center gap-1">
+                                            <a href="user_delete.php?id=1" class="px-2.5 py-1 rounded-lg border border-[#DFC8C8] bg-[#EFE0E0] hover:bg-[#E5D0D0] text-[#8C3B3B] font-semibold transition-colors flex items-center gap-1">
                                                 <i class="ri-delete-bin-line"></i> Delete
                                             </a>
                                         </div>

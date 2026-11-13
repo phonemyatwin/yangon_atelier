@@ -1,6 +1,6 @@
 /**
  * FurnishMe Atelier — Main Frontend Scripts
- * Luxury Japanese/Scandinavian Minimalist UI Interactions
+ * Luxury Warm Travertine & Smoked Clay Atelier Interactions
  */
 
 // Prevent mouse wheel from inadvertently changing number inputs
@@ -26,29 +26,29 @@ function showToast(message, type = "info") {
 
   const toast = document.createElement("div");
   toast.className =
-    "pointer-events-auto flex items-center gap-3 px-5 py-3.5 rounded-xl shadow-lg border text-sm font-medium transition-all duration-300 transform translate-y-4 opacity-0";
+    "pointer-events-auto flex items-center gap-3 px-5 py-3.5 rounded-2xl shadow-xl border text-sm font-medium transition-all duration-300 transform translate-y-4 opacity-0";
 
   let iconClass = "ri-information-line";
-  let styleClasses = "bg-[#181512] text-[#FAF6EE] border-[#2A231C] shadow-2xl";
+  let styleClasses = "bg-[#F6F3EE] text-[#362F2A] border-[#C9C0B3] shadow-xl";
 
   if (type === "success") {
-    iconClass = "ri-checkbox-circle-line text-[#52D288]";
-    styleClasses = "bg-[#181512] text-[#FAF6EE] border-[#1E4D32] shadow-2xl";
+    iconClass = "ri-checkbox-circle-line text-[#3F624D]";
+    styleClasses = "bg-[#F6F3EE] text-[#362F2A] border-[#C6D6CB] shadow-xl";
   } else if (type === "error") {
-    iconClass = "ri-error-warning-line text-rose-500";
-    styleClasses = "bg-[#181512] text-[#FAF6EE] border-rose-900/60 shadow-2xl";
+    iconClass = "ri-error-warning-line text-[#8C3B3B]";
+    styleClasses = "bg-[#F6F3EE] text-[#362F2A] border-[#DFC8C8] shadow-xl";
   } else if (type === "warning") {
-    iconClass = "ri-alert-line text-[#E5A95A]";
-    styleClasses = "bg-[#181512] text-[#FAF6EE] border-[#87642A] shadow-2xl";
+    iconClass = "ri-alert-line text-[#8C5327]";
+    styleClasses = "bg-[#F6F3EE] text-[#362F2A] border-[#E0CFBF] shadow-xl";
   } else {
-    iconClass = "ri-information-line text-[#C5A059]";
+    iconClass = "ri-information-line text-[#8A5A44]";
   }
 
   toast.className += " " + styleClasses;
   toast.innerHTML = `
     <i class="${iconClass} text-lg flex-shrink-0"></i>
     <span class="flex-1">${message}</span>
-    <button type="button" aria-label="Close" class="text-[#8C7D6B] hover:text-[#FAF6EE] transition-colors ml-2" onclick="this.parentElement.remove()">
+    <button type="button" aria-label="Close notification" class="text-[#6E6359] hover:text-[#362F2A] transition-colors ml-2" onclick="this.parentElement.remove()">
       <i class="ri-close-line text-base"></i>
     </button>
   `;
@@ -212,24 +212,23 @@ document.addEventListener("DOMContentLoaded", () => {
         if (src) {
           mainProductImg.src = src;
           thumbBtns.forEach((b) => {
-            b.classList.remove("border-2", "border-[#C5A059]");
-            b.classList.add("border", "border-[#2A231C]");
+            b.classList.remove("border-2", "border-[#8A5A44]");
+            b.classList.add("border", "border-[#C9C0B3]");
           });
-          btn.classList.remove("border", "border-[#2A231C]");
-          btn.classList.add("border-2", "border-[#C5A059]");
+          btn.classList.remove("border", "border-[#C9C0B3]");
+          btn.classList.add("border-2", "border-[#8A5A44]");
         }
       });
     });
   }
 
-  // --- Form submission mock feedback ---
+  // --- Form submission feedback ---
   document.querySelectorAll("form[data-toast-success]").forEach((form) => {
     form.addEventListener("submit", (e) => {
       const msg = form.getAttribute("data-toast-success");
-      // If form doesn't have an action or has action="#"
       if (!form.action || form.getAttribute("action") === "#" || form.getAttribute("action") === "") {
         e.preventDefault();
-        showToast(msg || "Action completed successfully", "success");
+        showToast(msg || "Action completed successfully.", "success");
         form.reset();
       }
     });
@@ -259,11 +258,11 @@ function showSlide(slideIndex) {
 
   dots.forEach((dot, idx) => {
     if (idx === currentSlide) {
-      dot.classList.add("bg-[#C5A059]", "w-8");
-      dot.classList.remove("bg-white/40", "w-2.5", "w-2", "bg-stone-900", "bg-stone-300", "bg-[#CBA57F]");
+      dot.classList.add("bg-[#8A5A44]", "w-8");
+      dot.classList.remove("bg-[#F6F3EE]/50", "bg-white/40", "w-2.5", "w-2");
     } else {
-      dot.classList.remove("bg-[#C5A059]", "bg-[#CBA57F]", "bg-white", "w-8", "bg-stone-900");
-      dot.classList.add("bg-white/40", "w-2.5");
+      dot.classList.remove("bg-[#8A5A44]", "w-8");
+      dot.classList.add("bg-[#F6F3EE]/50", "w-2.5");
     }
   });
 }
@@ -279,10 +278,8 @@ function prev() {
 // Auto slider if on home page
 if (document.querySelector(".hero-slide")) {
   setInterval(() => {
-    // Only auto-advance if document is visible
     if (!document.hidden) {
       next();
     }
   }, 6500);
 }
-ynwesoe

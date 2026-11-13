@@ -1,47 +1,10 @@
 <?php
 /**
  * ============================================================================
- * FURNISHME BACKEND INSTRUCTION GUIDELINE - VIEW SHOWROOM INQUIRY
+ * FURNISHME BACKEND INSTRUCTION GUIDELINE - VIEW INQUIRY
  * ============================================================================
  * FILE: admin/contact_view.php
- * PURPOSE: Inspects the complete details and bespoke consultation message from
- *          a prospective client in the 'contacts' table by ID.
- * 
- * STEP-BY-STEP IMPLEMENTATION GUIDE:
- * 1. Initialize Session & Enforce Authentication Guard:
- *    if (session_status() === PHP_SESSION_NONE) { session_start(); }
- *    if (!isset($_SESSION['admin_user'])) {
- *        header("Location: index.php");
- *        exit;
- *    }
- * 
- * 2. Include Database Connection:
- *    require_once "../components/connection.php";
- * 
- * 3. Validate Contact ID Parameter:
- *    $contact_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
- *    if ($contact_id <= 0) {
- *        header("Location: contacts.php");
- *        exit;
- *    }
- * 
- * 4. Fetch Inquiry Details from Database:
- *    $stmt = $connection->prepare("SELECT * FROM contacts WHERE id = ? LIMIT 1");
- *    $stmt->bind_param("i", $contact_id);
- *    $stmt->execute();
- *    $result = $stmt->get_result();
- *    $contact = $result->fetch_assoc();
- *    if (!$contact) {
- *        header("Location: contacts.php");
- *        exit;
- *    }
- * 
- * 5. (Optional) Auto-Update Status to 'Read' or 'Followed Up':
- *    if ($contact['status'] === 'New') {
- *        $upd = $connection->prepare("UPDATE contacts SET status = 'Replied' WHERE id = ?");
- *        $upd->bind_param("i", $contact_id);
- *        $upd->execute();
- *    }
+ * PURPOSE: Displays full message content and sender info for a specific inquiry.
  * ============================================================================
  */
 
@@ -54,15 +17,7 @@ if (!isset($_SESSION['admin_user'])) {
     exit;
 }
 
-require_once "../components/connection.php";
-
 $contact_id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
-// In production, execute the prepared query:
-// $stmt = $connection->prepare("SELECT * FROM contacts WHERE id = ? LIMIT 1");
-// $stmt->bind_param("i", $contact_id);
-// $stmt->execute();
-// $contact = $stmt->get_result()->fetch_assoc();
-// If empty, redirect: if (!$contact) { header("Location: contacts.php"); exit; }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,7 +30,7 @@ $contact_id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
     <?php include "components/css.php"; ?>
 </head>
 
-<body class="bg-[#0D0B09] text-[#EDE4D7] font-sans antialiased selection:bg-[#C5A059] selection:text-[#0D0B09]">
+<body class="bg-[#EDE8E0] text-[#362F2A] font-sans antialiased selection:bg-[#8A5A44] selection:text-[#F6F3EE]">
     <div class="min-h-screen flex">
         <?php include "components/sidebar.php"; ?>
 
@@ -87,82 +42,67 @@ $contact_id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
                 <!-- Heading & Back Nav -->
                 <div class="flex items-center justify-between">
                     <div>
-                        <div class="flex items-center gap-2 text-xs text-[#8C7D6B] mb-1">
-                            <a href="dashboard.php" class="hover:text-[#FAF6EE]">Dashboard</a>
+                        <div class="flex items-center gap-2 text-xs text-[#6E6359] mb-1">
+                            <a href="dashboard.php" class="hover:text-[#362F2A] transition-colors">Dashboard</a>
                             <span>/</span>
-                            <a href="contacts.php" class="hover:text-[#FAF6EE]">Inquiries</a>
+                            <a href="contacts.php" class="hover:text-[#362F2A] transition-colors">Inquiries</a>
                             <span>/</span>
-                            <span class="text-[#FAF6EE] font-medium">Message #<?= (int)$contact_id ?></span>
+                            <span class="text-[#362F2A] font-medium">Message #<?= (int)$contact_id ?></span>
                         </div>
-                        <h2 class="font-serif text-2xl sm:text-3xl font-medium text-[#FAF6EE]">Showroom Inquiry Details</h2>
+                        <h2 class="font-serif text-2xl sm:text-3xl font-medium text-[#362F2A]">Showroom Inquiry Details</h2>
                     </div>
                     <div class="flex items-center gap-2">
-                        <a href="contacts.php" class="px-4 py-2 rounded-xl border border-[#2A231C] text-xs font-medium text-[#D6C8B4] hover:bg-[#161310] transition-colors">
+                        <a href="contacts.php" class="px-4 py-2 rounded-xl border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-xs font-semibold text-[#362F2A] transition-colors">
                             Back
                         </a>
-                        <!-- ======================================================
-                             PHP BACKEND GUIDELINE: Delete Inquiry Link
-                             Directs to contact_delete.php?id=<?= (int)$contact_id ?>
-                             ====================================================== -->
-                        <a href="contact_delete.php?id=<?= (int)$contact_id ?>" class="px-4 py-2 rounded-xl border border-rose-900/60 text-xs font-medium text-rose-400 hover:bg-rose-950/50 transition-colors flex items-center gap-1">
+                        <a href="contact_delete.php?id=<?= (int)$contact_id ?>" class="px-4 py-2 rounded-xl border border-[#DFC8C8] bg-[#EFE0E0] hover:bg-[#E5D0D0] text-[#8C3B3B] text-xs font-semibold transition-colors flex items-center gap-1">
                             <i class="ri-delete-bin-line"></i> Delete
                         </a>
                     </div>
                 </div>
 
-                <!-- Inquiry Card -->
-                <!-- ==========================================================
-                     PHP BACKEND GUIDELINE: Dynamic Inquiry Details Rendering
-                     Extract row from DB: $contact = $result->fetch_assoc();
-                     Fields to render:
-                     - Name:      <?= htmlspecialchars($contact['name'] ?? 'Aung Min') ?>
-                     - Phone:     <?= htmlspecialchars($contact['number'] ?? '09973383719') ?>
-                     - Email:     <?= htmlspecialchars($contact['email'] ?? 'aungmin@gmail.com') ?>
-                     - Date:      <?= date('F j, Y, g:i a', strtotime($contact['created_at'] ?? 'now')) ?>
-                     - Status:    <?= htmlspecialchars($contact['status'] ?? 'New') ?>
-                     - Message:   <?= nl2br(htmlspecialchars($contact['message'] ?? '')) ?>
-                     ========================================================== -->
-                <div class="bg-[#161310] rounded-3xl border border-[#2A231C] p-6 sm:p-10 shadow-xs space-y-8">
+                <!-- Inquiry Card in Raw Linen (#F6F3EE) -->
+                <div class="bg-[#F6F3EE] rounded-3xl border border-[#C9C0B3] p-6 sm:p-10 shadow-xs space-y-8">
                     
                     <!-- Metadata Grid -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-5 rounded-2xl bg-[#0D0B09] border border-[#2A231C]/80 text-xs">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-5 rounded-2xl bg-[#EDE8E0] border border-[#C9C0B3] text-xs">
                         <div>
-                            <span class="text-stone-400 block mb-0.5">Sender Name</span>
-                            <strong class="text-[#FAF6EE] text-sm block"><?= htmlspecialchars($contact['name'] ?? 'Aung Min') ?></strong>
+                            <span class="text-[#6E6359] block mb-0.5">Sender Name</span>
+                            <strong class="text-[#362F2A] text-sm block">Aung Min</strong>
                         </div>
                         <div>
-                            <span class="text-stone-400 block mb-0.5">Phone / Viber</span>
-                            <a href="tel:<?= htmlspecialchars($contact['number'] ?? '09973383719') ?>" class="text-[#FAF6EE] hover:underline font-mono block">
-                                <?= htmlspecialchars($contact['number'] ?? '09973383719') ?>
+                            <span class="text-[#6E6359] block mb-0.5">Phone / Viber</span>
+                            <a href="tel:09973383719" class="text-[#362F2A] hover:underline font-mono block">
+                                09973383719
                             </a>
                         </div>
                         <div>
-                            <span class="text-stone-400 block mb-0.5">Email Address</span>
-                            <a href="mailto:<?= htmlspecialchars($contact['email'] ?? 'aungmin@gmail.com') ?>" class="text-[#FAF6EE] hover:underline font-mono block">
-                                <?= htmlspecialchars($contact['email'] ?? 'aungmin@gmail.com') ?>
+                            <span class="text-[#6E6359] block mb-0.5">Email Address</span>
+                            <a href="mailto:aungmin@gmail.com" class="text-[#362F2A] hover:underline font-mono block">
+                                aungmin@gmail.com
                             </a>
                         </div>
                         <div>
-                            <span class="text-stone-400 block mb-0.5">Received Date</span>
-                            <span class="text-[#D6C8B4] block"><?= htmlspecialchars($contact['created_at'] ?? '2026-11-04 14:30') ?></span>
+                            <span class="text-[#6E6359] block mb-0.5">Received Date</span>
+                            <span class="text-[#362F2A] block">2026-11-04 14:30</span>
                         </div>
                     </div>
 
                     <!-- Message Content -->
                     <div class="space-y-3">
-                        <span class="text-xs uppercase tracking-widest text-[#C5A059] font-semibold block">Message Body</span>
-                        <div class="p-6 rounded-2xl bg-[#1C1814]/50 border border-[#2A231C] text-[#FAF6EE] text-sm leading-relaxed">
+                        <span class="text-xs uppercase tracking-widest text-[#8A5A44] font-semibold block">Message Body</span>
+                        <div class="p-6 rounded-2xl bg-[#EDE8E0] border border-[#C9C0B3] text-[#362F2A] text-sm leading-relaxed">
                             <p>
-                                <?= nl2br(htmlspecialchars($contact['message'] ?? 'Hello, I would like to know more about your modern sofa collection and delivery options in Yangon. We are currently finishing an architectural residence in Yankin and looking for 2 living room modular lounge chairs and an oak dining set. Please contact me with availability and wood finishes. Thank you.')) ?>
+                                Hello, I would like to know more about your modern sofa collection and delivery options in Yangon. We are currently finishing an architectural residence in Yankin and looking for 2 living room modular lounge chairs and an oak dining set. Please contact me with availability and wood finishes. Thank you.
                             </p>
                         </div>
                     </div>
 
                     <!-- Response Actions -->
-                    <div class="pt-6 border-t border-[#2A231C] flex flex-wrap items-center justify-between gap-4">
-                        <span class="text-xs text-stone-400">Status: <strong class="text-[#C5A059]"><?= htmlspecialchars($contact['status'] ?? 'Requires Follow-up') ?></strong></span>
+                    <div class="pt-6 border-t border-[#C9C0B3] flex flex-wrap items-center justify-between gap-4">
+                        <span class="text-xs text-[#6E6359]">Status: <strong class="text-[#8C5327]">Requires Follow-up</strong></span>
                         <div class="flex items-center gap-3">
-                            <a href="mailto:<?= htmlspecialchars($contact['email'] ?? 'aungmin@gmail.com') ?>?subject=Regarding%20Your%20FurnishMe%20Showroom%20Inquiry" class="px-6 py-2.5 rounded-xl bg-[#C5A059] hover:bg-[#D4AF37] text-[#0D0B09] font-semibold text-xs transition-colors shadow-xs flex items-center gap-2">
+                            <a href="mailto:aungmin@gmail.com?subject=Regarding%20Your%20FurnishMe%20Showroom%20Inquiry" class="px-6 py-2.5 rounded-xl bg-[#8A5A44] hover:bg-[#704735] text-[#F6F3EE] font-semibold text-xs transition-colors shadow-xs flex items-center gap-2">
                                 <i class="ri-reply-line text-sm"></i>
                                 <span>Reply via Email</span>
                             </a>

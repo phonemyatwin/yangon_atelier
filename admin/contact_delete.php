@@ -4,41 +4,8 @@
  * FURNISHME BACKEND INSTRUCTION GUIDELINE - DELETE INQUIRY
  * ============================================================================
  * FILE: admin/contact_delete.php
- * PURPOSE: Securely deletes a showroom inquiry message from the 'contacts' table.
- * 
- * STEP-BY-STEP IMPLEMENTATION GUIDE:
- * 1. Initialize Session & Enforce Authentication Guard:
- *    if (session_status() === PHP_SESSION_NONE) { session_start(); }
- *    if (!isset($_SESSION['admin_user'])) {
- *        header("Location: index.php");
- *        exit;
- *    }
- * 
- * 2. Include Database Connection:
- *    require_once "../components/connection.php";
- * 
- * 3. Handle POST Deletion Request:
- *    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'])) {
- *        $id = (int)($_POST['id'] ?? 0);
- *        if ($id > 0) {
- *            $stmt = $connection->prepare("DELETE FROM contacts WHERE id = ?");
- *            $stmt->bind_param("i", $id);
- *            $stmt->execute();
- *            header("Location: contacts.php?msg=deleted");
- *            exit;
- *        }
- *    }
- * 
- * 4. Fetch Message Summary for Confirmation:
- *    $contact_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
- *    $stmt = $connection->prepare("SELECT id, name, email, number, created_at FROM contacts WHERE id = ? LIMIT 1");
- *    $stmt->bind_param("i", $contact_id);
- *    $stmt->execute();
- *    $contact = $stmt->get_result()->fetch_assoc();
- *    if (!$contact) {
- *        header("Location: contacts.php");
- *        exit;
- *    }
+ * PURPOSE: Confirms deletion of an inquiry and executes DELETE query against
+ *          the 'contacts' database table.
  * ============================================================================
  */
 
@@ -51,7 +18,6 @@ if (!isset($_SESSION['admin_user'])) {
     exit;
 }
 
-$error = '';
 $contact_id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
 ?>
 <!DOCTYPE html>
@@ -65,7 +31,7 @@ $contact_id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
     <?php include "components/css.php"; ?>
 </head>
 
-<body class="bg-[#0D0B09] text-[#EDE4D7] font-sans antialiased selection:bg-[#C5A059] selection:text-[#0D0B09]">
+<body class="bg-[#EDE8E0] text-[#362F2A] font-sans antialiased selection:bg-[#8A5A44] selection:text-[#F6F3EE]">
     <div class="min-h-screen flex">
         <?php include "components/sidebar.php"; ?>
 
@@ -77,65 +43,49 @@ $contact_id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
                 <!-- Heading -->
                 <div class="flex items-center justify-between">
                     <div>
-                        <div class="flex items-center gap-2 text-xs text-[#8C7D6B] mb-1">
-                            <a href="dashboard.php" class="hover:text-[#FAF6EE]">Dashboard</a>
+                        <div class="flex items-center gap-2 text-xs text-[#6E6359] mb-1">
+                            <a href="dashboard.php" class="hover:text-[#362F2A] transition-colors">Dashboard</a>
                             <span>/</span>
-                            <a href="contacts.php" class="hover:text-[#FAF6EE]">Inquiries</a>
+                            <a href="contacts.php" class="hover:text-[#362F2A] transition-colors">Inquiries</a>
                             <span>/</span>
-                            <span class="text-rose-600 font-medium">Delete</span>
+                            <span class="text-[#8C3B3B] font-medium">Delete</span>
                         </div>
-                        <h2 class="font-serif text-2xl sm:text-3xl font-medium text-[#FAF6EE]">Confirm Message Deletion</h2>
+                        <h2 class="font-serif text-2xl sm:text-3xl font-medium text-[#362F2A]">Confirm Message Deletion</h2>
                     </div>
-                    <a href="contacts.php" class="px-4 py-2 rounded-xl border border-[#2A231C] text-xs font-medium text-[#D6C8B4] hover:bg-[#161310] transition-colors">
+                    <a href="contacts.php" class="px-4 py-2 rounded-xl border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-xs font-semibold text-[#362F2A] transition-colors">
                         Cancel
                     </a>
                 </div>
 
-                <!-- Confirmation Card -->
-                <div class="bg-white rounded-3xl border border-rose-200 p-6 sm:p-10 shadow-xs">
-                    <div class="flex items-start gap-4 p-4 rounded-2xl bg-rose-50 border border-rose-100 mb-6">
-                        <i class="ri-error-warning-line text-2xl text-rose-600 flex-shrink-0 mt-0.5"></i>
+                <!-- Confirmation Card in Raw Linen (#F6F3EE) -->
+                <div class="bg-[#F6F3EE] rounded-3xl border border-[#C9C0B3] p-6 sm:p-10 shadow-xs">
+                    <div class="flex items-start gap-4 p-4 rounded-2xl bg-[#EFE0E0] border border-[#DFC8C8] mb-6">
+                        <i class="ri-error-warning-line text-2xl text-[#8C3B3B] flex-shrink-0 mt-0.5"></i>
                         <div>
-                            <h3 class="text-sm font-semibold text-rose-900">Permanent Message Removal</h3>
-                            <p class="text-xs text-rose-700 mt-1 leading-relaxed">
+                            <h3 class="text-sm font-semibold text-[#8C3B3B]">Permanent Message Removal</h3>
+                            <p class="text-xs text-[#8C3B3B]/90 mt-1 leading-relaxed">
                                 Are you sure you wish to delete this customer inquiry? This action cannot be reversed.
                             </p>
                         </div>
                     </div>
 
                     <!-- Message Details Summary -->
-                    <!-- ==========================================================
-                         PHP BACKEND GUIDELINE: Display Contact Summary
-                         Fetch via: SELECT id, name, email, number, created_at FROM contacts WHERE id = ?
-                         Fields to render:
-                         - Inquiry ID: #<?= (int)$contact_id ?>
-                         - Received:   <?= htmlspecialchars($contact['created_at'] ?? '2026-11-04') ?>
-                         - From:       <?= htmlspecialchars($contact['name'] ?? 'Aung Min') ?>
-                         - Email:      <?= htmlspecialchars($contact['email'] ?? 'aungmin@gmail.com') ?>
-                         - Phone:      <?= htmlspecialchars($contact['number'] ?? '09973383719') ?>
-                         ========================================================== -->
-                    <div class="border border-[#2A231C] rounded-2xl p-5 mb-8 space-y-2 text-xs">
-                        <div class="flex items-center justify-between border-b border-[#2A231C] pb-2">
-                            <span class="text-stone-400 font-mono">Inquiry #<?= (int)$contact_id ?></span>
-                            <span class="text-stone-400">2026-11-04</span>
+                    <div class="border border-[#C9C0B3] bg-[#EDE8E0] rounded-2xl p-5 mb-8 space-y-2 text-xs">
+                        <div class="flex items-center justify-between border-b border-[#C9C0B3] pb-2">
+                            <span class="text-[#6E6359] font-mono">Inquiry #<?= (int)$contact_id ?></span>
+                            <span class="text-[#6E6359]">2026-11-04</span>
                         </div>
-                        <h4 class="font-semibold text-stone-900 text-sm">From: <?= htmlspecialchars($contact['name'] ?? 'Aung Min') ?></h4>
-                        <p class="text-stone-600">Email: <span class="font-mono text-stone-900"><?= htmlspecialchars($contact['email'] ?? 'aungmin@gmail.com') ?></span> • Phone: <span class="text-stone-900"><?= htmlspecialchars($contact['number'] ?? '09973383719') ?></span></p>
+                        <h4 class="font-semibold text-[#362F2A] text-sm">From: Aung Min</h4>
+                        <p class="text-[#6E6359]">Email: <span class="font-mono text-[#362F2A]">aungmin@gmail.com</span> • Phone: <span class="text-[#362F2A]">09973383719</span></p>
                     </div>
 
-                    <!-- ==========================================================
-                         PHP BACKEND GUIDELINE: Contact Deletion Form Handler
-                         Method: POST
-                         Action: contact_delete.php
-                         Target SQL: DELETE FROM contacts WHERE id = ?
-                         On success: Redirect to contacts.php?msg=deleted
-                         ========================================================== -->
-                    <form method="POST" action="contact_delete.php" class="flex items-center justify-end gap-3 pt-4 border-t border-stone-200">
+                    <!-- Deletion Form -->
+                    <form method="POST" action="contacts.php?msg=deleted" class="flex items-center justify-end gap-3 pt-4 border-t border-[#C9C0B3]">
                         <input type="hidden" name="id" value="<?= (int)$contact_id ?>">
-                        <a href="contacts.php" class="px-5 py-2.5 rounded-xl border border-[#2A231C] text-xs font-medium text-stone-700 hover:bg-stone-100 transition-colors">
+                        <a href="contacts.php" class="px-5 py-2.5 rounded-xl border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-xs font-semibold text-[#362F2A] transition-colors">
                             Cancel
                         </a>
-                        <button type="submit" name="delete" class="px-5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-medium transition-colors shadow-xs flex items-center gap-2">
+                        <button type="submit" name="delete" class="px-5 py-2.5 rounded-xl bg-[#8C3B3B] hover:bg-[#782F2F] text-[#F6F3EE] text-xs font-semibold transition-colors shadow-xs flex items-center gap-2">
                             <i class="ri-delete-bin-line text-sm"></i>
                             <span>Confirm &amp; Delete Message</span>
                         </button>
