@@ -39,7 +39,7 @@ require_once __DIR__ . '/components/connection.php';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Design Collective &amp; Master Artisans | Yangon Atelier</title>
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="images/favicon/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>
 
@@ -79,7 +79,7 @@ require_once __DIR__ . '/components/connection.php';
                 <!-- Large Archival Portrait Bay -->
                 <div class="lg:col-span-5 relative">
                     <div class="relative aspect-[3/4] rounded-2xl overflow-hidden border border-[#C9C0B3] shadow-md bg-[#EDE8E0]">
-                        <img src="images/team-1.jpg" alt="Phone Myat Win, Founder & Principal Architect" class="w-full h-full object-cover" loading="eager">
+                        <img src="images/team/phonemyatwin.jpg" alt="Phone Myat Win, Founder & Principal Architect" class="w-full h-full object-cover" loading="eager">
                         <div class="absolute inset-0 bg-gradient-to-t from-[#362F2A]/80 via-transparent to-transparent"></div>
                         <div class="absolute bottom-6 left-6 right-6 flex items-center justify-between text-white">
                             <span class="text-xs uppercase tracking-widest text-[#F6F3EE] font-medium">Archival Portrait № 01</span>
@@ -154,7 +154,7 @@ require_once __DIR__ . '/components/connection.php';
                 <div class="group rounded-3xl bg-[#F6F3EE] border border-[#C9C0B3] p-6 sm:p-8 lg:p-10 hover:border-[#8A5A44] transition-all duration-300 shadow-sm hover:shadow-xl">
                     <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
                         <div class="md:col-span-4 relative aspect-[4/5] rounded-2xl overflow-hidden bg-[#EDE8E0] border border-[#C9C0B3]">
-                            <img src="images/team-2.jpg" alt="Thae Nay Nwe Soe" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                            <img src="images/team/thaenaynwesoe.jpg" alt="Thae Nay Nwe Soe" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                             <span class="absolute top-4 left-4 px-2.5 py-1 rounded-full text-[10px] font-semibold bg-[#DFD8CD] text-[#362F2A] border border-[#C9C0B3]">
                                 II. Ergonomics
                             </span>
@@ -186,7 +186,7 @@ require_once __DIR__ . '/components/connection.php';
                 <div class="group rounded-3xl bg-[#F6F3EE] border border-[#C9C0B3] p-6 sm:p-8 lg:p-10 hover:border-[#8A5A44] transition-all duration-300 shadow-sm hover:shadow-xl">
                     <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
                         <div class="md:col-span-4 relative aspect-[4/5] rounded-2xl overflow-hidden bg-[#EDE8E0] border border-[#C9C0B3]">
-                            <img src="images/team-3.jpg" alt="Su Thinzar Htet" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                            <img src="images/team/suthinzarhtet.jpg" alt="Su Thinzar Htet" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                             <span class="absolute top-4 left-4 px-2.5 py-1 rounded-full text-[10px] font-semibold bg-[#DFD8CD] text-[#362F2A] border border-[#C9C0B3]">
                                 III. Joinery
                             </span>
@@ -218,7 +218,7 @@ require_once __DIR__ . '/components/connection.php';
                 <div class="group rounded-3xl bg-[#F6F3EE] border border-[#C9C0B3] p-6 sm:p-8 lg:p-10 hover:border-[#8A5A44] transition-all duration-300 shadow-sm hover:shadow-xl">
                     <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
                         <div class="md:col-span-4 relative aspect-[4/5] rounded-2xl overflow-hidden bg-[#EDE8E0] border border-[#C9C0B3]">
-                            <img src="images/team-4.jpg" alt="Myat Chal Oo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                            <img src="images/team/myatchaloo.jpg" alt="Myat Chal Oo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                             <span class="absolute top-4 left-4 px-2.5 py-1 rounded-full text-[10px] font-semibold bg-[#DFD8CD] text-[#362F2A] border border-[#C9C0B3]">
                                 IV. Textiles
                             </span>
@@ -250,7 +250,7 @@ require_once __DIR__ . '/components/connection.php';
                 <div class="group rounded-3xl bg-[#F6F3EE] border border-[#C9C0B3] p-6 sm:p-8 lg:p-10 hover:border-[#8A5A44] transition-all duration-300 shadow-sm hover:shadow-xl">
                     <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
                         <div class="md:col-span-4 relative aspect-[4/5] rounded-2xl overflow-hidden bg-[#EDE8E0] border border-[#C9C0B3]">
-                            <img src="images/team-5.jpg" alt="Nyi Nyi Aung" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                            <img src="images/team/nyinyiaung.jpg" alt="Nyi Nyi Aung" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                             <span class="absolute top-4 left-4 px-2.5 py-1 rounded-full text-[10px] font-semibold bg-[#DFD8CD] text-[#362F2A] border border-[#C9C0B3]">
                                 V. Finishing
                             </span>
@@ -282,7 +282,7 @@ require_once __DIR__ . '/components/connection.php';
                 <div class="group rounded-3xl bg-[#F6F3EE] border border-[#C9C0B3] p-6 sm:p-8 lg:p-10 hover:border-[#8A5A44] transition-all duration-300 shadow-sm hover:shadow-xl">
                     <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
                         <div class="md:col-span-4 relative aspect-[4/5] rounded-2xl overflow-hidden bg-[#EDE8E0] border border-[#C9C0B3]">
-                            <img src="images/team-6.jpg" alt="Min Khant Naung" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                            <img src="images/team/minkhantnaung.jpg" alt="Min Khant Naung" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                             <span class="absolute top-4 left-4 px-2.5 py-1 rounded-full text-[10px] font-semibold bg-[#DFD8CD] text-[#362F2A] border border-[#C9C0B3]">
                                 VI. Concierge
                             </span>

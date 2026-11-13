@@ -55,7 +55,7 @@ require_once __DIR__ . '/components/connection.php';
          <title><?= htmlspecialchars($blog['title'] ?? 'Journal Article') ?> | Yangon Atelier Journal</title>
          ================================================================== -->
     <title>The Philosophy of Wabi-Sabi in Modern Interiors | Yangon Atelier Journal</title>
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="images/favicon/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>
 
@@ -108,7 +108,7 @@ require_once __DIR__ . '/components/connection.php';
             <!-- Featured Image -->
             <!-- [PHP_BACKEND_HOOK: Dynamic blog image: $blog['image']] -->
             <div class="rounded-3xl overflow-hidden aspect-[16/10] bg-[#EDE8E0] border border-[#C9C0B3] shadow-lg mb-12">
-                <img src="images/blog-minimalist-spaces.jpg" alt="The Philosophy of Wabi-Sabi in Modern Interiors" class="w-full h-full object-cover">
+                <img src="images/blogs/blog1.jpg" alt="The Philosophy of Wabi-Sabi in Modern Interiors" class="w-full h-full object-cover">
             </div>
 
             <!-- Reading Body Layout (max-w-3xl) -->

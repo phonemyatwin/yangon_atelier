@@ -40,7 +40,7 @@ require_once __DIR__ . '/components/connection.php';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yangon Atelier — Warm Minimalist Furniture &amp; Objects</title>
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="images/favicon/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>
 
@@ -55,7 +55,7 @@ require_once __DIR__ . '/components/connection.php';
             <!-- Slide 1: Heirloom Private Library Suite (Active by default) -->
             <div class="hero-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-100 z-10">
                 <div class="absolute inset-0">
-                    <img src="images/hero-luxury-suite.jpg" alt="Heirloom Private Library Suite" class="w-full h-full object-cover" loading="eager" fetchpriority="high">
+                    <img src="images/hero/hero1.jpg" alt="Heirloom Private Library Suite" class="w-full h-full object-cover" loading="eager" fetchpriority="high">
                     <div class="absolute inset-0 bg-gradient-to-r from-[#362F2A]/95 via-[#362F2A]/60 to-transparent"></div>
                 </div>
                 <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex items-center py-20">
@@ -86,7 +86,7 @@ require_once __DIR__ . '/components/connection.php';
             <!-- Slide 2: Chateau Grand Hearth -->
             <div class="hero-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 pointer-events-none z-0">
                 <div class="absolute inset-0">
-                    <img src="images/hero-chateau-salon.jpg" alt="Chateau Grand Hearth Salon" class="w-full h-full object-cover" loading="lazy">
+                    <img src="images/hero/hero2.jpg" alt="Chateau Grand Hearth Salon" class="w-full h-full object-cover" loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-r from-[#362F2A]/95 via-[#362F2A]/60 to-transparent"></div>
                 </div>
                 <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex items-center py-20">
@@ -117,7 +117,7 @@ require_once __DIR__ . '/components/connection.php';
             <!-- Slide 3: Gilded Drawing Room -->
             <div class="hero-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 pointer-events-none z-0">
                 <div class="absolute inset-0">
-                    <img src="images/hero-gilded-salon.jpg" alt="Gilded Estate Drawing Room" class="w-full h-full object-cover" loading="lazy">
+                    <img src="images/hero/hero3.jpg" alt="Gilded Estate Drawing Room" class="w-full h-full object-cover" loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-r from-[#362F2A]/95 via-[#362F2A]/60 to-transparent"></div>
                 </div>
                 <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex items-center py-20">
@@ -148,7 +148,7 @@ require_once __DIR__ . '/components/connection.php';
             <!-- Slide 4: Executive Estate Study -->
             <div class="hero-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 pointer-events-none z-0">
                 <div class="absolute inset-0">
-                    <img src="images/hero-estate-study.jpg" alt="Executive Estate Study & Salon" class="w-full h-full object-cover" loading="lazy">
+                    <img src="images/hero/hero4.jpg" alt="Executive Estate Study & Salon" class="w-full h-full object-cover" loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-r from-[#362F2A]/95 via-[#362F2A]/60 to-transparent"></div>
                 </div>
                 <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex items-center py-20">
@@ -179,7 +179,7 @@ require_once __DIR__ . '/components/connection.php';
             <!-- Slide 5: Minimalist Living Interior -->
             <div class="hero-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 pointer-events-none z-0">
                 <div class="absolute inset-0">
-                    <img src="images/hero-slide-1.jpg" alt="Minimalist Living Interior" class="w-full h-full object-cover" loading="lazy">
+                    <img src="images/hero/hero5.jpg" alt="Minimalist Living Interior" class="w-full h-full object-cover" loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-r from-[#362F2A]/90 via-[#362F2A]/50 to-transparent"></div>
                 </div>
                 <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex items-center py-20">
@@ -210,7 +210,7 @@ require_once __DIR__ . '/components/connection.php';
             <!-- Slide 6: Warm Dining Room Interior -->
             <div class="hero-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 pointer-events-none z-0">
                 <div class="absolute inset-0">
-                    <img src="images/hero-slide-2.jpg" alt="Warm Dining Room Interior" class="w-full h-full object-cover" loading="lazy">
+                    <img src="images/hero/hero1.jpg" alt="Warm Dining Room Interior" class="w-full h-full object-cover" loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-r from-[#362F2A]/90 via-[#362F2A]/50 to-transparent"></div>
                 </div>
                 <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex items-center py-20">
@@ -241,7 +241,7 @@ require_once __DIR__ . '/components/connection.php';
             <!-- Slide 7: Master Bedroom Sanctuary -->
             <div class="hero-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 pointer-events-none z-0">
                 <div class="absolute inset-0">
-                    <img src="images/hero-slide-3.jpg" alt="Master Bedroom Sanctuary" class="w-full h-full object-cover" loading="lazy">
+                    <img src="images/hero/hero2.jpg" alt="Master Bedroom Sanctuary" class="w-full h-full object-cover" loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-r from-[#362F2A]/90 via-[#362F2A]/50 to-transparent"></div>
                 </div>
                 <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex items-center py-20">
@@ -314,7 +314,7 @@ require_once __DIR__ . '/components/connection.php';
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <!-- Space 1: Living Room -->
             <a href="shop.php?category=sofas" class="group relative rounded-3xl overflow-hidden aspect-[4/5] bg-[#F6F3EE] block shadow-md hover:shadow-xl transition-all duration-500 border border-[#C9C0B3] hover:border-[#8A5A44]">
-                <img src="images/banner-living-room.jpg" alt="Living & Lounge Architecture" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" loading="lazy">
+                <img src="images/about/about2.jpg" alt="Living & Lounge Architecture" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" loading="lazy">
                 <div class="absolute inset-0 bg-gradient-to-t from-[#362F2A]/90 via-[#362F2A]/30 to-transparent"></div>
                 <div class="absolute bottom-0 inset-x-0 p-8 text-white space-y-2">
                     <span class="text-xs uppercase tracking-wider text-[#DFD8CD] font-medium">Lounge &amp; Living</span>
@@ -328,7 +328,7 @@ require_once __DIR__ . '/components/connection.php';
 
             <!-- Space 2: Dining Room -->
             <a href="shop.php?category=tables" class="group relative rounded-3xl overflow-hidden aspect-[4/5] bg-[#F6F3EE] block shadow-md hover:shadow-xl transition-all duration-500 border border-[#C9C0B3] hover:border-[#8A5A44]">
-                <img src="images/banner-dining-room.jpg" alt="Dining Room Architecture" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" loading="lazy">
+                <img src="images/about/workshop2.jpg" alt="Dining Room Architecture" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" loading="lazy">
                 <div class="absolute inset-0 bg-gradient-to-t from-[#362F2A]/90 via-[#362F2A]/30 to-transparent"></div>
                 <div class="absolute bottom-0 inset-x-0 p-8 text-white space-y-2">
                     <span class="text-xs uppercase tracking-wider text-[#DFD8CD] font-medium">Dining &amp; Gathering</span>
@@ -342,7 +342,7 @@ require_once __DIR__ . '/components/connection.php';
 
             <!-- Space 3: Workspace -->
             <a href="shop.php?category=workspace" class="group relative rounded-3xl overflow-hidden aspect-[4/5] bg-[#F6F3EE] block shadow-md hover:shadow-xl transition-all duration-500 border border-[#C9C0B3] hover:border-[#8A5A44]">
-                <img src="images/banner-workspace.jpg" alt="Workspace & Studio Architecture" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" loading="lazy">
+                <img src="images/about/workshop1.jpg" alt="Workspace & Studio Architecture" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" loading="lazy">
                 <div class="absolute inset-0 bg-gradient-to-t from-[#362F2A]/90 via-[#362F2A]/30 to-transparent"></div>
                 <div class="absolute bottom-0 inset-x-0 p-8 text-white space-y-2">
                     <span class="text-xs uppercase tracking-wider text-[#DFD8CD] font-medium">Studio &amp; Focus</span>
@@ -378,7 +378,7 @@ require_once __DIR__ . '/components/connection.php';
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
                     <!-- Masterpiece Image Bay -->
                     <div class="lg:col-span-7 relative aspect-[4/3] rounded-2xl overflow-hidden bg-[#EDE8E0] border border-[#C9C0B3]">
-                        <img src="images/chair-1.jpg" alt="Nordic Solid Wood Armchair" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="eager">
+                        <img src="images/chairs/chair1.jpg" alt="Nordic Solid Wood Armchair" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="eager">
                         <span class="absolute top-4 left-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-[#DCE5DF] text-[#3F624D] border border-[#C6D6CB] shadow-xs">
                             <span class="w-1.5 h-1.5 rounded-full bg-[#3F624D]"></span>
                             <span>Flagship Atelier Piece</span>
@@ -435,7 +435,7 @@ require_once __DIR__ . '/components/connection.php';
                 <article class="group rounded-2xl bg-[#F6F3EE] border border-[#C9C0B3] p-5 hover:border-[#8A5A44] transition-all duration-300 shadow-sm hover:shadow-md flex flex-col justify-between">
                     <div>
                         <div class="relative aspect-[4/3] rounded-xl overflow-hidden bg-[#EDE8E0] border border-[#C9C0B3] mb-5">
-                            <img src="images/chair-2.jpg" alt="Curved Lounge Armchair" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                            <img src="images/chairs/chair2.jpg" alt="Curved Lounge Armchair" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                             <span class="absolute top-3 left-3 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-[#DFD8CD] text-[#362F2A] border border-[#C9C0B3]">
                                 Companion Piece
                             </span>
@@ -458,7 +458,7 @@ require_once __DIR__ . '/components/connection.php';
                 <article class="group rounded-2xl bg-[#F6F3EE] border border-[#C9C0B3] p-5 hover:border-[#8A5A44] transition-all duration-300 shadow-sm hover:shadow-md flex flex-col justify-between">
                     <div>
                         <div class="relative aspect-[4/3] rounded-xl overflow-hidden bg-[#EDE8E0] border border-[#C9C0B3] mb-5">
-                            <img src="images/sofa-1.jpg" alt="Bouclé Modular Sofa" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                            <img src="images/couches/couch1.jpg" alt="Bouclé Modular Sofa" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                             <span class="absolute top-3 left-3 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-[#DFD8CD] text-[#362F2A] border border-[#C9C0B3]">
                                 Living Hearth
                             </span>
@@ -481,7 +481,7 @@ require_once __DIR__ . '/components/connection.php';
                 <article class="group rounded-2xl bg-[#F6F3EE] border border-[#C9C0B3] p-5 hover:border-[#8A5A44] transition-all duration-300 shadow-sm hover:shadow-md flex flex-col justify-between">
                     <div>
                         <div class="relative aspect-[4/3] rounded-xl overflow-hidden bg-[#EDE8E0] border border-[#C9C0B3] mb-5">
-                            <img src="images/table-1.jpg" alt="Solid Natural Oak Table" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                            <img src="images/tables/table1.jpg" alt="Solid Natural Oak Table" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                             <span class="absolute top-3 left-3 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-[#DFD8CD] text-[#362F2A] border border-[#C9C0B3]">
                                 Dining Centerpiece
                             </span>
@@ -558,7 +558,7 @@ require_once __DIR__ . '/components/connection.php';
             <!-- LEFT: FEATURED LEAD EDITORIAL STORY -->
             <article class="lg:col-span-7 rounded-3xl bg-[#F6F3EE] border border-[#C9C0B3] overflow-hidden shadow-md hover:shadow-xl hover:border-[#8A5A44] transition-all flex flex-col justify-between group">
                 <a href="blog_detail.php?id=1" class="relative aspect-[16/10] overflow-hidden bg-[#EDE8E0] block border-b border-[#C9C0B3]">
-                    <img src="images/blog-minimalist-spaces.jpg" alt="The Philosophy of Wabi-Sabi in Modern Interiors" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                    <img src="images/blogs/blog1.jpg" alt="The Philosophy of Wabi-Sabi in Modern Interiors" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-[11px] font-semibold bg-[#DFD8CD] text-[#362F2A] border border-[#C9C0B3]">
                         Lead Editorial Essay
                     </span>

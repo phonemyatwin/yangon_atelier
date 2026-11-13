@@ -37,7 +37,7 @@ require_once __DIR__ . '/components/connection.php';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Our Studio | Yangon Atelier</title>
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="images/favicon/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>
 
@@ -70,15 +70,15 @@ require_once __DIR__ . '/components/connection.php';
             <!-- Left Editorial Image Collage -->
             <div class="lg:col-span-6 space-y-6">
                 <div class="relative rounded-3xl overflow-hidden aspect-[4/3] bg-[#F6F3EE] shadow-md border border-[#C9C0B3]">
-                    <img src="images/about-showroom.jpg" alt="Yangon Atelier Showroom Atmosphere" class="w-full h-full object-cover" loading="lazy">
+                    <img src="images/about/about1.jpg" alt="Yangon Atelier Showroom Atmosphere" class="w-full h-full object-cover" loading="lazy">
                     <div class="absolute inset-0 bg-[#362F2A]/10"></div>
                 </div>
                 <div class="grid grid-cols-2 gap-4 sm:gap-6">
                     <div class="rounded-2xl overflow-hidden aspect-square bg-[#F6F3EE] shadow-sm border border-[#C9C0B3]">
-                        <img src="images/banner-workspace.jpg" alt="Design Atelier & Workspace" class="w-full h-full object-cover" loading="lazy">
+                        <img src="images/about/workshop1.jpg" alt="Design Atelier & Workspace" class="w-full h-full object-cover" loading="lazy">
                     </div>
                     <div class="rounded-2xl overflow-hidden aspect-square bg-[#F6F3EE] shadow-sm border border-[#C9C0B3]">
-                        <img src="images/banner-dining-room.jpg" alt="Craft Workshop" class="w-full h-full object-cover" loading="lazy">
+                        <img src="images/about/workshop2.jpg" alt="Craft Workshop" class="w-full h-full object-cover" loading="lazy">
                     </div>
                 </div>
             </div>

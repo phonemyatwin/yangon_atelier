@@ -84,7 +84,7 @@ require_once __DIR__ . '/components/connection.php';
          <title><?= htmlspecialchars($product['name'] ?? 'Product Detail') ?> | Yangon Atelier</title>
          ================================================================== -->
     <title>Nordic Solid Wood Armchair | Yangon Atelier</title>
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="images/favicon/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>
 
@@ -132,22 +132,22 @@ require_once __DIR__ . '/components/connection.php';
                         <span><?= ($product['stock'] ?? 25) > 0 ? 'In Stock & Ready for White-Glove Delivery' : 'Crafted to Order' ?></span>
                     </span>
                     <!-- PHP Guideline: src="images/<?= htmlspecialchars($product['image'] ?? 'chair-1.jpg') ?>" -->
-                    <img id="main-product-img" src="images/chair-1.jpg" alt="Nordic Solid Wood Armchair" class="w-full h-full object-cover transition-all duration-300" loading="eager">
+                    <img id="main-product-img" src="images/chairs/chair1.jpg" alt="Nordic Solid Wood Armchair" class="w-full h-full object-cover transition-all duration-300" loading="eager">
                 </div>
 
                 <!-- Gallery Thumbnails (Atelier Perspectives) -->
                 <div class="grid grid-cols-4 gap-4" id="gallery-thumbs">
-                    <button type="button" data-src="images/chair-1.jpg" class="thumb-btn aspect-[4/3] rounded-2xl bg-[#EDE8E0] border-2 border-[#8A5A44] overflow-hidden shadow-sm transition-all">
-                        <img src="images/chair-1.jpg" alt="Front angle" class="w-full h-full object-cover pointer-events-none">
+                    <button type="button" data-src="images/chairs/chair1.jpg" class="thumb-btn aspect-[4/3] rounded-2xl bg-[#EDE8E0] border-2 border-[#8A5A44] overflow-hidden shadow-sm transition-all">
+                        <img src="images/chairs/chair1.jpg" alt="Front angle" class="w-full h-full object-cover pointer-events-none">
                     </button>
-                    <button type="button" data-src="images/chair-2.jpg" class="thumb-btn aspect-[4/3] rounded-2xl bg-[#EDE8E0] border border-[#C9C0B3] hover:border-[#8A5A44] overflow-hidden transition-all">
-                        <img src="images/chair-2.jpg" alt="Curved profile angle" class="w-full h-full object-cover pointer-events-none">
+                    <button type="button" data-src="images/chairs/chair2.jpg" class="thumb-btn aspect-[4/3] rounded-2xl bg-[#EDE8E0] border border-[#C9C0B3] hover:border-[#8A5A44] overflow-hidden transition-all">
+                        <img src="images/chairs/chair2.jpg" alt="Curved profile angle" class="w-full h-full object-cover pointer-events-none">
                     </button>
-                    <button type="button" data-src="images/chair-3.jpg" class="thumb-btn aspect-[4/3] rounded-2xl bg-[#EDE8E0] border border-[#C9C0B3] hover:border-[#8A5A44] overflow-hidden transition-all">
-                        <img src="images/chair-3.jpg" alt="Joinery craft detail" class="w-full h-full object-cover pointer-events-none">
+                    <button type="button" data-src="images/chairs/chair3.jpg" class="thumb-btn aspect-[4/3] rounded-2xl bg-[#EDE8E0] border border-[#C9C0B3] hover:border-[#8A5A44] overflow-hidden transition-all">
+                        <img src="images/chairs/chair3.jpg" alt="Joinery craft detail" class="w-full h-full object-cover pointer-events-none">
                     </button>
-                    <button type="button" data-src="images/banner-living-room.jpg" class="thumb-btn aspect-[4/3] rounded-2xl bg-[#EDE8E0] border border-[#C9C0B3] hover:border-[#8A5A44] overflow-hidden transition-all">
-                        <img src="images/banner-living-room.jpg" alt="Atmospheric room view" class="w-full h-full object-cover pointer-events-none">
+                    <button type="button" data-src="images/about/about2.jpg" class="thumb-btn aspect-[4/3] rounded-2xl bg-[#EDE8E0] border border-[#C9C0B3] hover:border-[#8A5A44] overflow-hidden transition-all">
+                        <img src="images/about/about2.jpg" alt="Atmospheric room view" class="w-full h-full object-cover pointer-events-none">
                     </button>
                 </div>
 
@@ -338,7 +338,7 @@ require_once __DIR__ . '/components/connection.php';
                 <div class="group bg-[#F6F3EE] rounded-3xl border border-[#C9C0B3] overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-[#8A5A44] flex flex-col justify-between">
                     <div class="relative w-full aspect-[4/3] bg-[#EDE8E0] border-b border-[#C9C0B3] overflow-hidden flex items-center justify-center">
                         <a href="product_detail.php?id=2" class="w-full h-full block">
-                            <img src="images/chair-2.jpg" alt="Curved Lounge Armchair" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                            <img src="images/chairs/chair2.jpg" alt="Curved Lounge Armchair" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                         </a>
                     </div>
                     <div class="p-4">
@@ -356,7 +356,7 @@ require_once __DIR__ . '/components/connection.php';
                 <div class="group bg-[#F6F3EE] rounded-3xl border border-[#C9C0B3] overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-[#8A5A44] flex flex-col justify-between">
                     <div class="relative w-full aspect-[4/3] bg-[#EDE8E0] border-b border-[#C9C0B3] overflow-hidden flex items-center justify-center">
                         <a href="product_detail.php?id=3" class="w-full h-full block">
-                            <img src="images/sofa-1.jpg" alt="Bouclé Modular Sofa" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                            <img src="images/couches/couch1.jpg" alt="Bouclé Modular Sofa" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                         </a>
                     </div>
                     <div class="p-4">
@@ -374,7 +374,7 @@ require_once __DIR__ . '/components/connection.php';
                 <div class="group bg-[#F6F3EE] rounded-3xl border border-[#C9C0B3] overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-[#8A5A44] flex flex-col justify-between">
                     <div class="relative w-full aspect-[4/3] bg-[#EDE8E0] border-b border-[#C9C0B3] overflow-hidden flex items-center justify-center">
                         <a href="product_detail.php?id=4" class="w-full h-full block">
-                            <img src="images/table-1.jpg" alt="Solid Oak Dining Table" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                            <img src="images/tables/table1.jpg" alt="Solid Oak Dining Table" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                         </a>
                     </div>
                     <div class="p-4">
@@ -392,7 +392,7 @@ require_once __DIR__ . '/components/connection.php';
                 <div class="group bg-[#F6F3EE] rounded-3xl border border-[#C9C0B3] overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-[#8A5A44] flex flex-col justify-between">
                     <div class="relative w-full aspect-[4/3] bg-[#EDE8E0] border-b border-[#C9C0B3] overflow-hidden flex items-center justify-center">
                         <a href="product_detail.php?id=8" class="w-full h-full block">
-                            <img src="images/table-3.jpg" alt="Polished Marble Low Coffee Table" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                            <img src="images/tables/table3.jpg" alt="Polished Marble Low Coffee Table" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                         </a>
                     </div>
                     <div class="p-4">

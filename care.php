@@ -13,7 +13,7 @@ require_once __DIR__ . '/components/connection.php';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Material Care &amp; Maintenance Handbook | Yangon Atelier</title>
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="images/favicon/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>
 
@@ -79,7 +79,7 @@ require_once __DIR__ . '/components/connection.php';
                 </div>
             </div>
             <div class="lg:col-span-5 relative min-h-[280px] bg-[#DFD8CD]">
-                <img src="images/blog-modern-styling.jpg" alt="Botanical plant wax application on solid wood" class="w-full h-full object-cover">
+                <img src="images/blogs/blog5.jpg" alt="Botanical plant wax application on solid wood" class="w-full h-full object-cover">
                 <div class="absolute bottom-4 left-4 right-4 bg-stone-950/70 backdrop-blur-md rounded-2xl p-4 text-white text-xs">
                     <span class="font-serif text-amber-200 block text-sm">Cold-Pressed Linseed &amp; Carnauba Wax</span>
                     <p class="text-stone-300 text-[11px] mt-0.5">Hand-rubbed finishes celebrate natural grain texture and tactile warmth.</p>
@@ -192,7 +192,7 @@ require_once __DIR__ . '/components/connection.php';
                     <!-- Concierge Card -->
                     <div class="mt-8 pt-6 border-t border-[#C9C0B3] text-xs text-[#6E6359] space-y-3">
                         <div class="flex items-center gap-3">
-                            <img src="images/team-5.jpg" alt="Nyi Nyi Aung" class="w-11 h-11 rounded-full object-cover border border-[#C9C0B3]">
+                            <img src="images/team/nyinyiaung.jpg" alt="Nyi Nyi Aung" class="w-11 h-11 rounded-full object-cover border border-[#C9C0B3]">
                             <div>
                                 <span class="text-[11px] uppercase tracking-wider text-[#8A5A44] font-semibold block">Craft Concierge</span>
                                 <p class="font-medium text-[#362F2A]">Nyi Nyi Aung</p>

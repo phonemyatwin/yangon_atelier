@@ -2,13 +2,13 @@
 -- FURNISHME ATELIER - COMPLETE DATABASE SCHEMA & SAMPLE DATA
 -- ============================================================================
 -- Import this SQL script into your MySQL database server:
--- 1. Create database: CREATE DATABASE IF NOT EXISTS `furnishme` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
--- 2. Select database: USE `furnishme`;
+-- 1. Create database: CREATE DATABASE IF NOT EXISTS `yangon_atelier` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+-- 2. Select database: USE `yangon_atelier`;
 -- 3. Run/import this file.
 -- ============================================================================
 
-CREATE DATABASE IF NOT EXISTS `furnishme` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE `furnishme`;
+CREATE DATABASE IF NOT EXISTS `yangon_atelier` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE `yangon_atelier`;
 
 -- ----------------------------------------------------------------------------
 -- Table: users (Storefront client accounts)
@@ -54,14 +54,14 @@ CREATE TABLE IF NOT EXISTS `products` (
 
 -- Seed initial products matching the atelier catalog
 INSERT IGNORE INTO `products` (`id`, `name`, `price`, `stock`, `image`, `description`, `category`) VALUES
-(1, 'Nordic Solid Wood Armchair', 420000, 25, 'chair-1.jpg', 'A sculptural meditation in Danish ergonomics and Japanese joint assembly. Shaped from certified American walnut, with curved continuous armrests hand-planed to invite the palm natural resting curvature.', 'chairs'),
-(2, 'Curved Bouclé Lounge Chair', 550000, 18, 'chair-2.jpg', 'Cocooning organic silhouette upholstered in heavyweight Belgian ivory bouclé wool. Resting upon an oiled oak plinth.', 'chairs'),
-(3, 'Minimalist Teak Dining Chair', 280000, 32, 'chair-3.jpg', 'Crafted from reclaimed Burmese golden teak with mortise and tenon joinery. Lightweight yet extraordinarily durable.', 'chairs'),
-(4, 'Low-Slung Velvet Club Chair', 620000, 12, 'chair-4.jpg', 'Deep seating comfort with custom brass feet accents and emerald mohair velvet upholstery.', 'chairs'),
-(5, 'Linear Ash Spindle Armchair', 490000, 15, 'chair-5.jpg', 'Architectural spindle backrest in natural white ash with linen seat cushions.', 'chairs'),
-(6, 'Rattan Cane Accent Armchair', 390000, 20, 'chair-6.jpg', 'Hand-woven French cane back with steam-bent teak frame and feather-down cushion.', 'chairs'),
-(7, 'Organic Bouclé Modular Sofa', 1850000, 8, 'sofa-1.jpg', 'Three-piece low-profile modular sofa offering fluid spatial arrangements and tactile softness.', 'sofas'),
-(8, 'Sculptural Teak Credenza', 1450000, 10, 'table-1.jpg', 'Four-door fluted credenza featuring soft-close Japanese hinges and natural hardwax oil finish.', 'tables');
+(1, 'Nordic Solid Wood Armchair', 420000, 25, 'chairs/chair1.jpg', 'A sculptural meditation in Danish ergonomics and Japanese joint assembly. Shaped from certified American walnut, with curved continuous armrests hand-planed to invite the palm natural resting curvature.', 'chairs'),
+(2, 'Curved Bouclé Lounge Chair', 550000, 18, 'chairs/chair2.jpg', 'Cocooning organic silhouette upholstered in heavyweight Belgian ivory bouclé wool. Resting upon an oiled oak plinth.', 'chairs'),
+(3, 'Minimalist Teak Dining Chair', 280000, 32, 'chairs/chair3.jpg', 'Crafted from reclaimed Burmese golden teak with mortise and tenon joinery. Lightweight yet extraordinarily durable.', 'chairs'),
+(4, 'Low-Slung Velvet Club Chair', 620000, 12, 'chairs/chair4.jpg', 'Deep seating comfort with custom brass feet accents and emerald mohair velvet upholstery.', 'chairs'),
+(5, 'Linear Ash Spindle Armchair', 490000, 15, 'chairs/chair5.jpg', 'Architectural spindle backrest in natural white ash with linen seat cushions.', 'chairs'),
+(6, 'Rattan Cane Accent Armchair', 390000, 20, 'chairs/chair7.jpg', 'Hand-woven French cane back with steam-bent teak frame and feather-down cushion.', 'chairs'),
+(7, 'Organic Bouclé Modular Sofa', 1850000, 8, 'couches/couch1.jpg', 'Three-piece low-profile modular sofa offering fluid spatial arrangements and tactile softness.', 'sofas'),
+(8, 'Sculptural Teak Credenza', 1450000, 10, 'tables/table1.jpg', 'Four-door fluted credenza featuring soft-close Japanese hinges and natural hardwax oil finish.', 'tables');
 
 -- ----------------------------------------------------------------------------
 -- Table: blogs (Journal editorial essays and articles)
@@ -78,10 +78,10 @@ CREATE TABLE IF NOT EXISTS `blogs` (
 
 -- Seed initial journal essays
 INSERT IGNORE INTO `blogs` (`id`, `title`, `author`, `image`, `content`, `category`) VALUES
-(1, 'The Philosophy of Wabi-Sabi in Modern Interiors', 'Atelier Editorial', 'blog-minimalist-spaces.jpg', 'In an era saturated by industrial high-gloss surfaces, clinical lines, and the constant digital flicker of notifications, our domestic environments have frequently sacrificed soul for sterile uniformity. Japanese philosophy offers an enduring antidote through the worldview of wabi-sabi: the appreciation of beauty that is imperfect, impermanent, and incomplete.', 'Philosophy'),
-(2, 'Sustainable Forestry: Sourcing Reclaimed Teak & Oak', 'Senior Timber Curator', 'blog-sustainable-wood.jpg', 'Understanding the lifecycle of timber is central to ethical atelier furniture craft. We partner directly with certified forest stewardships to source responsibly felled walnut and salvaged historical teak.', 'Craftsmanship'),
-(3, 'Lighting Architecture: Sculpting Shadow and Warmth', 'Lighting Design Lead', 'blog-lighting-guide.jpg', 'Direct overhead downlights create clinical glare. In this spatial guide, we explore how low-profile floor lanterns, washi paper pendants, and indirect wall sconces establish restorative evening sanctuaries.', 'Spatial Design'),
-(4, 'The Palette of Quietude: Earth Pigments in Living Spaces', 'Textile Conservator', 'blog-color-palettes.jpg', 'Moving beyond sterile monochrome whites. How chalky lime-wash mineral paints, raw linen, and terracotta nuances bring organic depth to contemporary interior architecture.', 'Interior Styling');
+(1, 'The Philosophy of Wabi-Sabi in Modern Interiors', 'Atelier Editorial', 'blogs/blog1.jpg', 'In an era saturated by industrial high-gloss surfaces, clinical lines, and the constant digital flicker of notifications, our domestic environments have frequently sacrificed soul for sterile uniformity. Japanese philosophy offers an enduring antidote through the worldview of wabi-sabi: the appreciation of beauty that is imperfect, impermanent, and incomplete.', 'Philosophy'),
+(2, 'Sustainable Forestry: Sourcing Reclaimed Teak & Oak', 'Senior Timber Curator', 'blogs/blog2.jpg', 'Understanding the lifecycle of timber is central to ethical atelier furniture craft. We partner directly with certified forest stewardships to source responsibly felled walnut and salvaged historical teak.', 'Craftsmanship'),
+(3, 'Lighting Architecture: Sculpting Shadow and Warmth', 'Lighting Design Lead', 'blogs/blog3.jpg', 'Direct overhead downlights create clinical glare. In this spatial guide, we explore how low-profile floor lanterns, washi paper pendants, and indirect wall sconces establish restorative evening sanctuaries.', 'Spatial Design'),
+(4, 'The Palette of Quietude: Earth Pigments in Living Spaces', 'Textile Conservator', 'blogs/blog6.jpg', 'Moving beyond sterile monochrome whites. How chalky lime-wash mineral paints, raw linen, and terracotta nuances bring organic depth to contemporary interior architecture.', 'Interior Styling');
 
 -- ----------------------------------------------------------------------------
 -- Table: team (Guild of master artisans and spatial curators)
@@ -96,12 +96,12 @@ CREATE TABLE IF NOT EXISTS `team` (
 
 -- Seed initial team members
 INSERT IGNORE INTO `team` (`id`, `name`, `position`, `image`) VALUES
-(1, 'Phone Myat Win', 'Founder & Principal Architect', 'team-1.jpg'),
-(2, 'Thae Nay Nwe Soe', 'Master Joinery Lead & Cabinetmaker', 'team-2.jpg'),
-(3, 'Su Thinzar Htet', 'Head of Timber Procurement & Forestry', 'team-3.jpg'),
-(4, 'Myat Chal Oo', 'Lead Spatial & Interior Architect', 'team-4.jpg'),
-(5, 'Nyi Nyi Aung', 'Textile Conservator & Finishing Artisan', 'team-5.jpg'),
-(6, 'Min Khant Naung', 'Showroom Director & Client Concierge', 'team-6.jpg');
+(1, 'Phone Myat Win', 'Founder & Principal Architect', 'team/phonemyatwin.jpg'),
+(2, 'Thae Nay Nwe Soe', 'Master Joinery Lead & Cabinetmaker', 'team/thaenaynwesoe.jpg'),
+(3, 'Su Thinzar Htet', 'Head of Timber Procurement & Forestry', 'team/suthinzarhtet.jpg'),
+(4, 'Myat Chal Oo', 'Lead Spatial & Interior Architect', 'team/myatchaloo.jpg'),
+(5, 'Nyi Nyi Aung', 'Textile Conservator & Finishing Artisan', 'team/nyinyiaung.jpg'),
+(6, 'Min Khant Naung', 'Showroom Director & Client Concierge', 'team/minkhantnaung.jpg');
 
 -- ----------------------------------------------------------------------------
 -- Table: contacts (Showroom inquiries & bespoke commission requests)
@@ -118,9 +118,9 @@ CREATE TABLE IF NOT EXISTS `contacts` (
 
 -- Seed sample contacts
 INSERT IGNORE INTO `contacts` (`id`, `name`, `number`, `email`, `message`, `status`) VALUES
-(3, 'Ye Win', '095173969', 'yewinswe@gmail.com', 'Do you offer private weekend showroom viewings for bespoke walnut platform beds?', 'Archived');
+(3, 'Ye Win', '095173969', 'yewinswe@gmail.com', 'Do you offer private weekend showroom viewings for bespoke walnut platform beds?', 'Archived'),
 (2, 'Thida Htun', '095173903', 'thidahtun@gmail.com', 'Inquiring about trade discounts for our interior architecture studio in Bahan. We have three upcoming residential projects requiring custom dining tables.', 'Followed Up'),
-(1, 'Aung Min Htun', '09788327884', 'aungminhtun@gmail.com', 'Hello, I would like to know more about your modern sofa collection and delivery options in Yangon. We are currently finishing an architectural residence in Yankin and looking for 2 living room modular lounge chairs and an oak dining set.', 'Pending Review'),
+(1, 'Aung Min Htun', '09788327884', 'aungminhtun@gmail.com', 'Hello, I would like to know more about your modern sofa collection and delivery options in Yangon. We are currently finishing an architectural residence in Yankin and looking for 2 living room modular lounge chairs and an oak dining set.', 'Pending Review');
 
 -- ----------------------------------------------------------------------------
 -- Table: subscribers (Journal newsletter subscribers)

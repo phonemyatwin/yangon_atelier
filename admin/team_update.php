@@ -26,7 +26,7 @@ require_once __DIR__ . '/../components/connection.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Team Member | Yangon Atelier Admin</title>
-    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="../images/favicon/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>
 
@@ -98,7 +98,7 @@ require_once __DIR__ . '/../components/connection.php';
                             </label>
                             <div class="flex flex-col sm:flex-row items-center gap-6 p-4 rounded-2xl bg-[#EDE8E0] border border-[#C9C0B3]">
                                 <div class="w-20 h-24 rounded-xl bg-[#F6F3EE] border border-[#C9C0B3] overflow-hidden flex-shrink-0">
-                                    <img id="team-preview" src="../images/team-1.jpg" alt="Current portrait" class="w-full h-full object-cover">
+                                    <img id="team-preview" src="../images/team/phonemyatwin.jpg" alt="Current portrait" class="w-full h-full object-cover">
                                 </div>
                                 <div class="flex-1 space-y-1 text-center sm:text-left">
                                     <span class="text-xs font-semibold text-[#362F2A] block">Replace Portrait (Optional)</span>

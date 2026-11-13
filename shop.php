@@ -82,7 +82,7 @@ $category = $_GET['category'] ?? 'all';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop Atelier Furniture | Yangon Atelier</title>
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="images/favicon/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>
 
@@ -220,7 +220,7 @@ $category = $_GET['category'] ?? 'all';
                         In Stock
                     </span>
                     <a href="product_detail.php?id=1" class="w-full h-full block">
-                        <img src="images/chair-1.jpg" alt="Nordic Solid Wood Armchair" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        <img src="images/chairs/chair1.jpg" alt="Nordic Solid Wood Armchair" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     </a>
                     <div class="absolute inset-0 bg-[#362F2A]/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                         <a href="product_detail.php?id=1" class="w-10 h-10 rounded-full bg-[#8A5A44] text-[#F6F3EE] hover:bg-[#704735] hover:text-[#F6F3EE] flex items-center justify-center shadow-md transition-colors" title="View Details">
@@ -249,7 +249,7 @@ $category = $_GET['category'] ?? 'all';
                         In Stock
                     </span>
                     <a href="product_detail.php?id=2" class="w-full h-full block">
-                        <img src="images/chair-2.jpg" alt="Curved Lounge Armchair" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        <img src="images/chairs/chair2.jpg" alt="Curved Lounge Armchair" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     </a>
                     <div class="absolute inset-0 bg-[#362F2A]/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                         <a href="product_detail.php?id=2" class="w-10 h-10 rounded-full bg-[#8A5A44] text-[#F6F3EE] hover:bg-[#704735] hover:text-[#F6F3EE] flex items-center justify-center shadow-md transition-colors" title="View Details">
@@ -278,7 +278,7 @@ $category = $_GET['category'] ?? 'all';
                         In Stock
                     </span>
                     <a href="product_detail.php?id=3" class="w-full h-full block">
-                        <img src="images/chair-3.jpg" alt="Scandi Minimalist Dining Chair" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        <img src="images/chairs/chair3.jpg" alt="Scandi Minimalist Dining Chair" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     </a>
                     <div class="absolute inset-0 bg-[#362F2A]/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                         <a href="product_detail.php?id=3" class="w-10 h-10 rounded-full bg-[#8A5A44] text-[#F6F3EE] hover:bg-[#704735] hover:text-[#F6F3EE] flex items-center justify-center shadow-md transition-colors" title="View Details">
@@ -307,7 +307,7 @@ $category = $_GET['category'] ?? 'all';
                         In Stock
                     </span>
                     <a href="product_detail.php?id=4" class="w-full h-full block">
-                        <img src="images/chair-4.jpg" alt="Rattan Occasional Lounge Chair" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        <img src="images/chairs/chair4.jpg" alt="Rattan Occasional Lounge Chair" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     </a>
                     <div class="absolute inset-0 bg-[#362F2A]/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                         <a href="product_detail.php?id=4" class="w-10 h-10 rounded-full bg-[#8A5A44] text-[#F6F3EE] hover:bg-[#704735] hover:text-[#F6F3EE] flex items-center justify-center shadow-md transition-colors" title="View Details">
@@ -336,7 +336,7 @@ $category = $_GET['category'] ?? 'all';
                         Low Stock
                     </span>
                     <a href="product_detail.php?id=5" class="w-full h-full block">
-                        <img src="images/chair-5.jpg" alt="Velvet Accent Atelier Chair" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        <img src="images/chairs/chair5.jpg" alt="Velvet Accent Atelier Chair" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     </a>
                     <div class="absolute inset-0 bg-[#362F2A]/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                         <a href="product_detail.php?id=5" class="w-10 h-10 rounded-full bg-[#8A5A44] text-[#F6F3EE] hover:bg-[#704735] hover:text-[#F6F3EE] flex items-center justify-center shadow-md transition-colors" title="View Details">
@@ -365,7 +365,7 @@ $category = $_GET['category'] ?? 'all';
                         In Stock
                     </span>
                     <a href="product_detail.php?id=6" class="w-full h-full block">
-                        <img src="images/chair-6.jpg" alt="Minimalist Turned Wooden Stool" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        <img src="images/chairs/chair7.jpg" alt="Minimalist Turned Wooden Stool" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     </a>
                     <div class="absolute inset-0 bg-[#362F2A]/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                         <a href="product_detail.php?id=6" class="w-10 h-10 rounded-full bg-[#8A5A44] text-[#F6F3EE] hover:bg-[#704735] hover:text-[#F6F3EE] flex items-center justify-center shadow-md transition-colors" title="View Details">
@@ -394,7 +394,7 @@ $category = $_GET['category'] ?? 'all';
                         Low Stock
                     </span>
                     <a href="product_detail.php?id=7" class="w-full h-full block">
-                        <img src="images/sofa-1.jpg" alt="Bouclé Modular Sofa" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        <img src="images/couches/couch1.jpg" alt="Bouclé Modular Sofa" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     </a>
                     <div class="absolute inset-0 bg-[#362F2A]/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                         <a href="product_detail.php?id=7" class="w-10 h-10 rounded-full bg-[#8A5A44] text-[#F6F3EE] hover:bg-[#704735] hover:text-[#F6F3EE] flex items-center justify-center shadow-md transition-colors" title="View Details">
@@ -423,7 +423,7 @@ $category = $_GET['category'] ?? 'all';
                         In Stock
                     </span>
                     <a href="product_detail.php?id=8" class="w-full h-full block">
-                        <img src="images/sofa-2.jpg" alt="Curved Sculptural Lounge Sofa" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        <img src="images/couches/couch2.jpg" alt="Curved Sculptural Lounge Sofa" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     </a>
                     <div class="absolute inset-0 bg-[#362F2A]/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                         <a href="product_detail.php?id=8" class="w-10 h-10 rounded-full bg-[#8A5A44] text-[#F6F3EE] hover:bg-[#704735] hover:text-[#F6F3EE] flex items-center justify-center shadow-md transition-colors" title="View Details">
@@ -452,7 +452,7 @@ $category = $_GET['category'] ?? 'all';
                         In Stock
                     </span>
                     <a href="product_detail.php?id=9" class="w-full h-full block">
-                        <img src="images/sofa-3.jpg" alt="Minimalist Linen Three-Seater" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        <img src="images/couches/couch3.jpg" alt="Minimalist Linen Three-Seater" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     </a>
                     <div class="absolute inset-0 bg-[#362F2A]/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                         <a href="product_detail.php?id=9" class="w-10 h-10 rounded-full bg-[#8A5A44] text-[#F6F3EE] hover:bg-[#704735] hover:text-[#F6F3EE] flex items-center justify-center shadow-md transition-colors" title="View Details">
@@ -481,7 +481,7 @@ $category = $_GET['category'] ?? 'all';
                         Low Stock
                     </span>
                     <a href="product_detail.php?id=10" class="w-full h-full block">
-                        <img src="images/sofa-4.jpg" alt="Caramel Leather Chaise Longue" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        <img src="images/couches/couch4.jpg" alt="Caramel Leather Chaise Longue" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     </a>
                     <div class="absolute inset-0 bg-[#362F2A]/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                         <a href="product_detail.php?id=10" class="w-10 h-10 rounded-full bg-[#8A5A44] text-[#F6F3EE] hover:bg-[#704735] hover:text-[#F6F3EE] flex items-center justify-center shadow-md transition-colors" title="View Details">
@@ -510,7 +510,7 @@ $category = $_GET['category'] ?? 'all';
                         In Stock
                     </span>
                     <a href="product_detail.php?id=11" class="w-full h-full block">
-                        <img src="images/sofa-5.jpg" alt="Compact Nordic Loveseat" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        <img src="images/couches/couch5.jpg" alt="Compact Nordic Loveseat" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     </a>
                     <div class="absolute inset-0 bg-[#362F2A]/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                         <a href="product_detail.php?id=11" class="w-10 h-10 rounded-full bg-[#8A5A44] text-[#F6F3EE] hover:bg-[#704735] hover:text-[#F6F3EE] flex items-center justify-center shadow-md transition-colors" title="View Details">
@@ -539,7 +539,7 @@ $category = $_GET['category'] ?? 'all';
                         In Stock
                     </span>
                     <a href="product_detail.php?id=12" class="w-full h-full block">
-                        <img src="images/table-1.jpg" alt="Solid Natural Oak Dining Table" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        <img src="images/tables/table1.jpg" alt="Solid Natural Oak Dining Table" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     </a>
                     <div class="absolute inset-0 bg-[#362F2A]/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                         <a href="product_detail.php?id=12" class="w-10 h-10 rounded-full bg-[#8A5A44] text-[#F6F3EE] hover:bg-[#704735] hover:text-[#F6F3EE] flex items-center justify-center shadow-md transition-colors" title="View Details">
@@ -568,7 +568,7 @@ $category = $_GET['category'] ?? 'all';
                         In Stock
                     </span>
                     <a href="product_detail.php?id=13" class="w-full h-full block">
-                        <img src="images/table-2.jpg" alt="Solid Walnut Executive Table" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        <img src="images/tables/table2.jpg" alt="Solid Walnut Executive Table" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     </a>
                     <div class="absolute inset-0 bg-[#362F2A]/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                         <a href="product_detail.php?id=13" class="w-10 h-10 rounded-full bg-[#8A5A44] text-[#F6F3EE] hover:bg-[#704735] hover:text-[#F6F3EE] flex items-center justify-center shadow-md transition-colors" title="View Details">
@@ -597,7 +597,7 @@ $category = $_GET['category'] ?? 'all';
                         In Stock
                     </span>
                     <a href="product_detail.php?id=14" class="w-full h-full block">
-                        <img src="images/table-3.jpg" alt="Marble Low Coffee Table" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        <img src="images/tables/table3.jpg" alt="Marble Low Coffee Table" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     </a>
                     <div class="absolute inset-0 bg-[#362F2A]/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                         <a href="product_detail.php?id=14" class="w-10 h-10 rounded-full bg-[#8A5A44] text-[#F6F3EE] hover:bg-[#704735] hover:text-[#F6F3EE] flex items-center justify-center shadow-md transition-colors" title="View Details">
@@ -626,7 +626,7 @@ $category = $_GET['category'] ?? 'all';
                         In Stock
                     </span>
                     <a href="product_detail.php?id=15" class="w-full h-full block">
-                        <img src="images/table-4.jpg" alt="Travertine Architectural Side Table" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        <img src="images/tables/table4.jpg" alt="Travertine Architectural Side Table" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     </a>
                     <div class="absolute inset-0 bg-[#362F2A]/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                         <a href="product_detail.php?id=15" class="w-10 h-10 rounded-full bg-[#8A5A44] text-[#F6F3EE] hover:bg-[#704735] hover:text-[#F6F3EE] flex items-center justify-center shadow-md transition-colors" title="View Details">
@@ -655,7 +655,7 @@ $category = $_GET['category'] ?? 'all';
                         In Stock
                     </span>
                     <a href="product_detail.php?id=16" class="w-full h-full block">
-                        <img src="images/table-5.jpg" alt="Round Oak Bistro Dining Table" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        <img src="images/tables/table5.jpg" alt="Round Oak Bistro Dining Table" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     </a>
                     <div class="absolute inset-0 bg-[#362F2A]/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                         <a href="product_detail.php?id=16" class="w-10 h-10 rounded-full bg-[#8A5A44] text-[#F6F3EE] hover:bg-[#704735] hover:text-[#F6F3EE] flex items-center justify-center shadow-md transition-colors" title="View Details">
@@ -684,7 +684,7 @@ $category = $_GET['category'] ?? 'all';
                         In Stock
                     </span>
                     <a href="product_detail.php?id=17" class="w-full h-full block">
-                        <img src="images/table-6.jpg" alt="Minimalist Solid Wood Desk" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        <img src="images/tables/table6.jpg" alt="Minimalist Solid Wood Desk" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     </a>
                     <div class="absolute inset-0 bg-[#362F2A]/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                         <a href="product_detail.php?id=17" class="w-10 h-10 rounded-full bg-[#8A5A44] text-[#F6F3EE] hover:bg-[#704735] hover:text-[#F6F3EE] flex items-center justify-center shadow-md transition-colors" title="View Details">
@@ -713,7 +713,7 @@ $category = $_GET['category'] ?? 'all';
                         In Stock
                     </span>
                     <a href="product_detail.php?id=18" class="w-full h-full block">
-                        <img src="images/bed-1.jpg" alt="Upholstered Platform Bed" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        <img src="images/beds/bed1.jpg" alt="Upholstered Platform Bed" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     </a>
                     <div class="absolute inset-0 bg-[#362F2A]/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                         <a href="product_detail.php?id=18" class="w-10 h-10 rounded-full bg-[#8A5A44] text-[#F6F3EE] hover:bg-[#704735] hover:text-[#F6F3EE] flex items-center justify-center shadow-md transition-colors" title="View Details">
@@ -742,7 +742,7 @@ $category = $_GET['category'] ?? 'all';
                         Low Stock
                     </span>
                     <a href="product_detail.php?id=19" class="w-full h-full block">
-                        <img src="images/bed-2.jpg" alt="Japandi Low Tatami Bed" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        <img src="images/beds/bed2.jpg" alt="Japandi Low Tatami Bed" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     </a>
                     <div class="absolute inset-0 bg-[#362F2A]/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                         <a href="product_detail.php?id=19" class="w-10 h-10 rounded-full bg-[#8A5A44] text-[#F6F3EE] hover:bg-[#704735] hover:text-[#F6F3EE] flex items-center justify-center shadow-md transition-colors" title="View Details">
@@ -771,7 +771,7 @@ $category = $_GET['category'] ?? 'all';
                         In Stock
                     </span>
                     <a href="product_detail.php?id=20" class="w-full h-full block">
-                        <img src="images/bed-3.jpg" alt="Solid Oak Frame King Bed" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        <img src="images/beds/bed3.jpg" alt="Solid Oak Frame King Bed" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     </a>
                     <div class="absolute inset-0 bg-[#362F2A]/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                         <a href="product_detail.php?id=20" class="w-10 h-10 rounded-full bg-[#8A5A44] text-[#F6F3EE] hover:bg-[#704735] hover:text-[#F6F3EE] flex items-center justify-center shadow-md transition-colors" title="View Details">
@@ -800,7 +800,7 @@ $category = $_GET['category'] ?? 'all';
                         In Stock
                     </span>
                     <a href="product_detail.php?id=21" class="w-full h-full block">
-                        <img src="images/bed-4.jpg" alt="Walnut Floating Low Bed" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        <img src="images/beds/bed4.jpg" alt="Walnut Floating Low Bed" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     </a>
                     <div class="absolute inset-0 bg-[#362F2A]/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                         <a href="product_detail.php?id=21" class="w-10 h-10 rounded-full bg-[#8A5A44] text-[#F6F3EE] hover:bg-[#704735] hover:text-[#F6F3EE] flex items-center justify-center shadow-md transition-colors" title="View Details">
@@ -829,7 +829,7 @@ $category = $_GET['category'] ?? 'all';
                         Low Stock
                     </span>
                     <a href="product_detail.php?id=22" class="w-full h-full block">
-                        <img src="images/bed-5.jpg" alt="Natural Linen Canopy Bed" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        <img src="images/beds/bed5.jpg" alt="Natural Linen Canopy Bed" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     </a>
                     <div class="absolute inset-0 bg-[#362F2A]/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                         <a href="product_detail.php?id=22" class="w-10 h-10 rounded-full bg-[#8A5A44] text-[#F6F3EE] hover:bg-[#704735] hover:text-[#F6F3EE] flex items-center justify-center shadow-md transition-colors" title="View Details">
@@ -858,7 +858,7 @@ $category = $_GET['category'] ?? 'all';
                         In Stock
                     </span>
                     <a href="product_detail.php?id=23" class="w-full h-full block">
-                        <img src="images/bed-6.jpg" alt="Minimalist Queen Platform Bed" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        <img src="images/beds/bed6.jpg" alt="Minimalist Queen Platform Bed" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     </a>
                     <div class="absolute inset-0 bg-[#362F2A]/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                         <a href="product_detail.php?id=23" class="w-10 h-10 rounded-full bg-[#8A5A44] text-[#F6F3EE] hover:bg-[#704735] hover:text-[#F6F3EE] flex items-center justify-center shadow-md transition-colors" title="View Details">
@@ -887,7 +887,7 @@ $category = $_GET['category'] ?? 'all';
                         In Stock
                     </span>
                     <a href="product_detail.php?id=24" class="w-full h-full block">
-                        <img src="images/bed-7.jpg" alt="Nordic Timber Storage Bed" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        <img src="images/beds/bed7.jpg" alt="Nordic Timber Storage Bed" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     </a>
                     <div class="absolute inset-0 bg-[#362F2A]/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                         <a href="product_detail.php?id=24" class="w-10 h-10 rounded-full bg-[#8A5A44] text-[#F6F3EE] hover:bg-[#704735] hover:text-[#F6F3EE] flex items-center justify-center shadow-md transition-colors" title="View Details">
@@ -916,7 +916,7 @@ $category = $_GET['category'] ?? 'all';
                         In Stock
                     </span>
                     <a href="product_detail.php?id=25" class="w-full h-full block">
-                        <img src="images/bed-8.jpg" alt="Coastal Retreat Woven Bed" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        <img src="images/beds/bed8.jpg" alt="Coastal Retreat Woven Bed" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     </a>
                     <div class="absolute inset-0 bg-[#362F2A]/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                         <a href="product_detail.php?id=25" class="w-10 h-10 rounded-full bg-[#8A5A44] text-[#F6F3EE] hover:bg-[#704735] hover:text-[#F6F3EE] flex items-center justify-center shadow-md transition-colors" title="View Details">
@@ -945,7 +945,7 @@ $category = $_GET['category'] ?? 'all';
                         In Stock
                     </span>
                     <a href="product_detail.php?id=26" class="w-full h-full block">
-                        <img src="images/bed-9.jpg" alt="Woven Rattan Headboard Bed" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        <img src="images/beds/bed9.jpg" alt="Woven Rattan Headboard Bed" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     </a>
                     <div class="absolute inset-0 bg-[#362F2A]/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                         <a href="product_detail.php?id=26" class="w-10 h-10 rounded-full bg-[#8A5A44] text-[#F6F3EE] hover:bg-[#704735] hover:text-[#F6F3EE] flex items-center justify-center shadow-md transition-colors" title="View Details">
@@ -974,7 +974,7 @@ $category = $_GET['category'] ?? 'all';
                         Low Stock
                     </span>
                     <a href="product_detail.php?id=27" class="w-full h-full block">
-                        <img src="images/bed-10.jpg" alt="Modern Slate Upholstered Bed" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        <img src="images/beds/bed10.jpg" alt="Modern Slate Upholstered Bed" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     </a>
                     <div class="absolute inset-0 bg-[#362F2A]/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                         <a href="product_detail.php?id=27" class="w-10 h-10 rounded-full bg-[#8A5A44] text-[#F6F3EE] hover:bg-[#704735] hover:text-[#F6F3EE] flex items-center justify-center shadow-md transition-colors" title="View Details">
@@ -1003,7 +1003,7 @@ $category = $_GET['category'] ?? 'all';
                         In Stock
                     </span>
                     <a href="product_detail.php?id=28" class="w-full h-full block">
-                        <img src="images/lamp-1.jpg" alt="Sculptural Ceramic Table Lamp" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        <img src="images/tables/table8.jpg" alt="Sculptural Ceramic Table Lamp" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     </a>
                     <div class="absolute inset-0 bg-[#362F2A]/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                         <a href="product_detail.php?id=28" class="w-10 h-10 rounded-full bg-[#8A5A44] text-[#F6F3EE] hover:bg-[#704735] hover:text-[#F6F3EE] flex items-center justify-center shadow-md transition-colors" title="View Details">
@@ -1032,7 +1032,7 @@ $category = $_GET['category'] ?? 'all';
                         In Stock
                     </span>
                     <a href="product_detail.php?id=29" class="w-full h-full block">
-                        <img src="images/decor-1.jpg" alt="Handcrafted Wabi-Sabi Ceramic Vase" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        <img src="images/about/about3.jpg" alt="Handcrafted Wabi-Sabi Ceramic Vase" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                     </a>
                     <div class="absolute inset-0 bg-[#362F2A]/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                         <a href="product_detail.php?id=29" class="w-10 h-10 rounded-full bg-[#8A5A44] text-[#F6F3EE] hover:bg-[#704735] hover:text-[#F6F3EE] flex items-center justify-center shadow-md transition-colors" title="View Details">

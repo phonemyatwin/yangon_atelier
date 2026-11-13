@@ -38,7 +38,7 @@ if (isset($_GET['msg'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products Management | Yangon Atelier Admin</title>
-    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="../images/favicon/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>
 
@@ -106,7 +106,7 @@ if (isset($_GET['msg'])) {
                                     <td class="py-4 px-6 text-[#6E6359]">#1</td>
                                     <td class="py-4 px-6">
                                         <div class="w-14 h-11 rounded-xl bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden flex items-center justify-center">
-                                            <img src="../images/chair-1.jpg" alt="Nordic Solid Wood Armchair" class="w-full h-full object-cover">
+                                            <img src="../images/chairs/chair1.jpg" alt="Nordic Solid Wood Armchair" class="w-full h-full object-cover">
                                         </div>
                                     </td>
                                     <td class="py-4 px-6">
@@ -136,7 +136,7 @@ if (isset($_GET['msg'])) {
                                     <td class="py-4 px-6 text-[#6E6359]">#2</td>
                                     <td class="py-4 px-6">
                                         <div class="w-14 h-11 rounded-xl bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden flex items-center justify-center">
-                                            <img src="../images/chair-2.jpg" alt="Curved Lounge Armchair" class="w-full h-full object-cover">
+                                            <img src="../images/chairs/chair2.jpg" alt="Curved Lounge Armchair" class="w-full h-full object-cover">
                                         </div>
                                     </td>
                                     <td class="py-4 px-6">
@@ -166,7 +166,7 @@ if (isset($_GET['msg'])) {
                                     <td class="py-4 px-6 text-[#6E6359]">#3</td>
                                     <td class="py-4 px-6">
                                         <div class="w-14 h-11 rounded-xl bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden flex items-center justify-center">
-                                            <img src="../images/sofa-1.jpg" alt="Bouclé Modular Sofa" class="w-full h-full object-cover">
+                                            <img src="../images/couches/couch1.jpg" alt="Bouclé Modular Sofa" class="w-full h-full object-cover">
                                         </div>
                                     </td>
                                     <td class="py-4 px-6">
@@ -196,7 +196,7 @@ if (isset($_GET['msg'])) {
                                     <td class="py-4 px-6 text-[#6E6359]">#4</td>
                                     <td class="py-4 px-6">
                                         <div class="w-14 h-11 rounded-xl bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden flex items-center justify-center">
-                                            <img src="../images/table-1.jpg" alt="Solid Natural Oak Dining Table" class="w-full h-full object-cover">
+                                            <img src="../images/tables/table1.jpg" alt="Solid Natural Oak Dining Table" class="w-full h-full object-cover">
                                         </div>
                                     </td>
                                     <td class="py-4 px-6">
@@ -226,7 +226,7 @@ if (isset($_GET['msg'])) {
                                     <td class="py-4 px-6 text-[#6E6359]">#5</td>
                                     <td class="py-4 px-6">
                                         <div class="w-14 h-11 rounded-xl bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden flex items-center justify-center">
-                                            <img src="../images/bed-1.jpg" alt="Upholstered Platform Bed" class="w-full h-full object-cover">
+                                            <img src="../images/beds/bed1.jpg" alt="Upholstered Platform Bed" class="w-full h-full object-cover">
                                         </div>
                                     </td>
                                     <td class="py-4 px-6">
@@ -256,7 +256,7 @@ if (isset($_GET['msg'])) {
                                     <td class="py-4 px-6 text-[#6E6359]">#6</td>
                                     <td class="py-4 px-6">
                                         <div class="w-14 h-11 rounded-xl bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden flex items-center justify-center">
-                                            <img src="../images/table-3.jpg" alt="Marble Low Coffee Table" class="w-full h-full object-cover">
+                                            <img src="../images/tables/table3.jpg" alt="Marble Low Coffee Table" class="w-full h-full object-cover">
                                         </div>
                                     </td>
                                     <td class="py-4 px-6">
@@ -286,7 +286,7 @@ if (isset($_GET['msg'])) {
                                     <td class="py-4 px-6 text-[#6E6359]">#7</td>
                                     <td class="py-4 px-6">
                                         <div class="w-14 h-11 rounded-xl bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden flex items-center justify-center">
-                                            <img src="../images/bed-2.jpg" alt="Japandi Low Tatami Bed" class="w-full h-full object-cover">
+                                            <img src="../images/beds/bed2.jpg" alt="Japandi Low Tatami Bed" class="w-full h-full object-cover">
                                         </div>
                                     </td>
                                     <td class="py-4 px-6">
@@ -316,7 +316,7 @@ if (isset($_GET['msg'])) {
                                     <td class="py-4 px-6 text-[#6E6359]">#8</td>
                                     <td class="py-4 px-6">
                                         <div class="w-14 h-11 rounded-xl bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden flex items-center justify-center">
-                                            <img src="../images/lamp-1.jpg" alt="Sculptural Ceramic Table Lamp" class="w-full h-full object-cover">
+                                            <img src="../images/tables/table8.jpg" alt="Sculptural Ceramic Table Lamp" class="w-full h-full object-cover">
                                         </div>
                                     </td>
                                     <td class="py-4 px-6">

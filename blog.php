@@ -42,7 +42,7 @@ require_once __DIR__ . '/components/connection.php';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Atelier Journal | Yangon Atelier</title>
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="images/favicon/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>
 
@@ -122,7 +122,7 @@ require_once __DIR__ . '/components/connection.php';
             <article class="group bg-[#F6F3EE] rounded-3xl border border-[#C9C0B3] overflow-hidden shadow-sm hover:shadow-xl hover:border-[#8A5A44] transition-all duration-500 flex flex-col justify-between">
                 <div>
                     <a href="blog_detail.php?id=1" class="relative aspect-[16/10] overflow-hidden bg-[#EDE8E0] border-b border-[#C9C0B3] block">
-                        <img src="images/blog-minimalist-spaces.jpg" alt="The Philosophy of Wabi-Sabi in Modern Interiors" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        <img src="images/blogs/blog1.jpg" alt="The Philosophy of Wabi-Sabi in Modern Interiors" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                         <span class="absolute top-4 left-4 inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold bg-[#F6F3EE]/95 backdrop-blur-md text-[#8A5A44] border border-[#C9C0B3] shadow-xs">
                             Philosophy
                         </span>
@@ -157,7 +157,7 @@ require_once __DIR__ . '/components/connection.php';
             <article class="group bg-[#F6F3EE] rounded-3xl border border-[#C9C0B3] overflow-hidden shadow-sm hover:shadow-xl hover:border-[#8A5A44] transition-all duration-500 flex flex-col justify-between">
                 <div>
                     <a href="blog_detail.php?id=2" class="relative aspect-[16/10] overflow-hidden bg-[#EDE8E0] border-b border-[#C9C0B3] block">
-                        <img src="images/blog-sustainable-wood.jpg" alt="Joinery Without Nails: The Heritage of Wood Craft" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        <img src="images/blogs/blog2.jpg" alt="Joinery Without Nails: The Heritage of Wood Craft" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                         <span class="absolute top-4 left-4 inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold bg-[#F6F3EE]/95 backdrop-blur-md text-[#8A5A44] border border-[#C9C0B3] shadow-xs">
                             Artisanship
                         </span>
@@ -192,7 +192,7 @@ require_once __DIR__ . '/components/connection.php';
             <article class="group bg-[#F6F3EE] rounded-3xl border border-[#C9C0B3] overflow-hidden shadow-sm hover:shadow-xl hover:border-[#8A5A44] transition-all duration-500 flex flex-col justify-between">
                 <div>
                     <a href="blog_detail.php?id=3" class="relative aspect-[16/10] overflow-hidden bg-[#EDE8E0] border-b border-[#C9C0B3] block">
-                        <img src="images/blog-lighting-guide.jpg" alt="Sculpting Ambient Light in Living Rooms" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        <img src="images/blogs/blog3.jpg" alt="Sculpting Ambient Light in Living Rooms" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                         <span class="absolute top-4 left-4 inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold bg-[#F6F3EE]/95 backdrop-blur-md text-[#8A5A44] border border-[#C9C0B3] shadow-xs">
                             Lighting
                         </span>
@@ -227,7 +227,7 @@ require_once __DIR__ . '/components/connection.php';
             <article class="group bg-[#F6F3EE] rounded-3xl border border-[#C9C0B3] overflow-hidden shadow-sm hover:shadow-xl hover:border-[#8A5A44] transition-all duration-500 flex flex-col justify-between">
                 <div>
                     <a href="blog_detail.php?id=4" class="relative aspect-[16/10] overflow-hidden bg-[#EDE8E0] border-b border-[#C9C0B3] block">
-                        <img src="images/blog-interior-tips.jpg" alt="The Ritual of Morning Tea & Minimalist Dining" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        <img src="images/blogs/blog4.jpg" alt="The Ritual of Morning Tea & Minimalist Dining" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                         <span class="absolute top-4 left-4 inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold bg-[#F6F3EE]/95 backdrop-blur-md text-[#8A5A44] border border-[#C9C0B3] shadow-xs">
                             Living Rituals
                         </span>
@@ -262,7 +262,7 @@ require_once __DIR__ . '/components/connection.php';
             <article class="group bg-[#F6F3EE] rounded-3xl border border-[#C9C0B3] overflow-hidden shadow-sm hover:shadow-xl hover:border-[#8A5A44] transition-all duration-500 flex flex-col justify-between">
                 <div>
                     <a href="blog_detail.php?id=5" class="relative aspect-[16/10] overflow-hidden bg-[#EDE8E0] border-b border-[#C9C0B3] block">
-                        <img src="images/blog-modern-styling.jpg" alt="Botanical Plant Waxes: Caring for Solid Wood" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        <img src="images/blogs/blog5.jpg" alt="Botanical Plant Waxes: Caring for Solid Wood" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                         <span class="absolute top-4 left-4 inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold bg-[#F6F3EE]/95 backdrop-blur-md text-[#8A5A44] border border-[#C9C0B3] shadow-xs">
                             Maintenance
                         </span>
@@ -297,7 +297,7 @@ require_once __DIR__ . '/components/connection.php';
             <article class="group bg-[#F6F3EE] rounded-3xl border border-[#C9C0B3] overflow-hidden shadow-sm hover:shadow-xl hover:border-[#8A5A44] transition-all duration-500 flex flex-col justify-between">
                 <div>
                     <a href="blog_detail.php?id=6" class="relative aspect-[16/10] overflow-hidden bg-[#EDE8E0] border-b border-[#C9C0B3] block">
-                        <img src="images/blog-color-palettes.jpg" alt="Designing Quiet Havens in High-Density Cities" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        <img src="images/blogs/blog6.jpg" alt="Designing Quiet Havens in High-Density Cities" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                         <span class="absolute top-4 left-4 inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold bg-[#F6F3EE]/95 backdrop-blur-md text-[#8A5A44] border border-[#C9C0B3] shadow-xs">
                             Architecture
                         </span>

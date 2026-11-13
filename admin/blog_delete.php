@@ -26,7 +26,7 @@ require_once __DIR__ . '/../components/connection.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delete Journal Article | Yangon Atelier Admin</title>
-    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="../images/favicon/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>
 
@@ -71,7 +71,7 @@ require_once __DIR__ . '/../components/connection.php';
                     <!-- Article Details Summary -->
                     <div class="border border-[#C9C0B3] bg-[#EDE8E0] rounded-2xl p-5 mb-8 flex items-center gap-5">
                         <div class="w-24 h-16 rounded-xl bg-[#F6F3EE] border border-[#C9C0B3] overflow-hidden flex-shrink-0">
-                            <img src="../images/blog-minimalist-spaces.jpg" alt="Article cover" class="w-full h-full object-cover">
+                            <img src="../images/blogs/blog1.jpg" alt="Article cover" class="w-full h-full object-cover">
                         </div>
                         <div class="space-y-1 text-xs">
                             <span class="text-[#6E6359] font-mono">Article #<?= htmlspecialchars($_GET['id'] ?? '1') ?></span>

@@ -27,7 +27,7 @@ require_once __DIR__ . '/../components/connection.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Atelier Product | Yangon Atelier Admin</title>
-    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="../images/favicon/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>
 
@@ -105,7 +105,7 @@ require_once __DIR__ . '/../components/connection.php';
                             </label>
                             <div class="flex flex-col sm:flex-row items-center gap-6 p-4 rounded-2xl bg-[#EDE8E0] border border-[#C9C0B3]">
                                 <div class="w-24 h-24 rounded-xl bg-[#F6F3EE] border border-[#C9C0B3] p-2 flex items-center justify-center flex-shrink-0">
-                                    <img id="product-preview" src="../images/chair-1.jpg" alt="Current Piece" class="max-h-full max-w-full object-contain">
+                                    <img id="product-preview" src="../images/chairs/chair1.jpg" alt="Current Piece" class="max-h-full max-w-full object-contain">
                                 </div>
                                 <div class="flex-1 space-y-1 text-center sm:text-left">
                                     <span class="text-xs font-semibold text-[#362F2A] block">Replace Image (Optional)</span>

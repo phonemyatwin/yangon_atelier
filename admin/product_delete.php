@@ -26,7 +26,7 @@ require_once __DIR__ . '/../components/connection.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delete Atelier Product | Yangon Atelier Admin</title>
-    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="../images/favicon/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>
 
@@ -71,7 +71,7 @@ require_once __DIR__ . '/../components/connection.php';
                     <!-- Piece Details Summary -->
                     <div class="border border-[#C9C0B3] bg-[#EDE8E0] rounded-2xl p-5 mb-8 flex items-center gap-6">
                         <div class="w-20 h-20 rounded-xl bg-[#F6F3EE] border border-[#C9C0B3] p-2 flex items-center justify-center flex-shrink-0">
-                            <img src="../images/chair-1.jpg" alt="Lounge Armchair" class="max-h-full max-w-full object-contain">
+                            <img src="../images/chairs/chair1.jpg" alt="Lounge Armchair" class="max-h-full max-w-full object-contain">
                         </div>
                         <div class="space-y-1 text-xs">
                             <span class="text-[#6E6359] font-mono">Product #<?= htmlspecialchars($_GET['id'] ?? '1') ?></span>

@@ -38,7 +38,7 @@ if (isset($_GET['msg'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Journal Management | Yangon Atelier Admin</title>
-    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="../images/favicon/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>
 
@@ -106,7 +106,7 @@ if (isset($_GET['msg'])) {
                                     <td class="py-4 px-6 text-[#6E6359]">#1</td>
                                     <td class="py-4 px-6">
                                         <div class="w-16 h-11 rounded-lg bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden">
-                                            <img src="../images/blog-minimalist-spaces.jpg" alt="Article image" class="w-full h-full object-cover">
+                                            <img src="../images/blogs/blog1.jpg" alt="Article image" class="w-full h-full object-cover">
                                         </div>
                                     </td>
                                     <td class="py-4 px-6">
@@ -132,7 +132,7 @@ if (isset($_GET['msg'])) {
                                     <td class="py-4 px-6 text-[#6E6359]">#2</td>
                                     <td class="py-4 px-6">
                                         <div class="w-16 h-11 rounded-lg bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden">
-                                            <img src="../images/blog-sustainable-wood.jpg" alt="Article image" class="w-full h-full object-cover">
+                                            <img src="../images/blogs/blog2.jpg" alt="Article image" class="w-full h-full object-cover">
                                         </div>
                                     </td>
                                     <td class="py-4 px-6">
@@ -158,7 +158,7 @@ if (isset($_GET['msg'])) {
                                     <td class="py-4 px-6 text-[#6E6359]">#3</td>
                                     <td class="py-4 px-6">
                                         <div class="w-16 h-11 rounded-lg bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden">
-                                            <img src="../images/blog-lighting-guide.jpg" alt="Article image" class="w-full h-full object-cover">
+                                            <img src="../images/blogs/blog3.jpg" alt="Article image" class="w-full h-full object-cover">
                                         </div>
                                     </td>
                                     <td class="py-4 px-6">
@@ -184,7 +184,7 @@ if (isset($_GET['msg'])) {
                                     <td class="py-4 px-6 text-[#6E6359]">#4</td>
                                     <td class="py-4 px-6">
                                         <div class="w-16 h-11 rounded-lg bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden">
-                                            <img src="../images/blog-interior-tips.jpg" alt="Article image" class="w-full h-full object-cover">
+                                            <img src="../images/blogs/blog4.jpg" alt="Article image" class="w-full h-full object-cover">
                                         </div>
                                     </td>
                                     <td class="py-4 px-6">
@@ -210,7 +210,7 @@ if (isset($_GET['msg'])) {
                                     <td class="py-4 px-6 text-[#6E6359]">#5</td>
                                     <td class="py-4 px-6">
                                         <div class="w-16 h-11 rounded-lg bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden">
-                                            <img src="../images/blog-modern-styling.jpg" alt="Article image" class="w-full h-full object-cover">
+                                            <img src="../images/blogs/blog5.jpg" alt="Article image" class="w-full h-full object-cover">
                                         </div>
                                     </td>
                                     <td class="py-4 px-6">
@@ -236,7 +236,7 @@ if (isset($_GET['msg'])) {
                                     <td class="py-4 px-6 text-[#6E6359]">#6</td>
                                     <td class="py-4 px-6">
                                         <div class="w-16 h-11 rounded-lg bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden">
-                                            <img src="../images/blog-color-palettes.jpg" alt="Article image" class="w-full h-full object-cover">
+                                            <img src="../images/blogs/blog6.jpg" alt="Article image" class="w-full h-full object-cover">
                                         </div>
                                     </td>
                                     <td class="py-4 px-6">

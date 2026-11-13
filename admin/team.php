@@ -38,7 +38,7 @@ if (isset($_GET['msg'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Design Team | Yangon Atelier Admin</title>
-    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="../images/favicon/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>
 
@@ -105,7 +105,7 @@ if (isset($_GET['msg'])) {
                                     <td class="py-4 px-6 text-[#6E6359]">#1</td>
                                     <td class="py-4 px-6">
                                         <div class="w-10 h-10 rounded-full bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden">
-                                            <img src="../images/team-1.jpg" alt="Phone Myat Win" class="w-full h-full object-cover">
+                                            <img src="../images/team/phonemyatwin.jpg" alt="Phone Myat Win" class="w-full h-full object-cover">
                                         </div>
                                     </td>
                                     <td class="py-4 px-6 font-semibold text-[#362F2A] text-sm">Phone Myat Win</td>
@@ -127,7 +127,7 @@ if (isset($_GET['msg'])) {
                                     <td class="py-4 px-6 text-[#6E6359]">#2</td>
                                     <td class="py-4 px-6">
                                         <div class="w-10 h-10 rounded-full bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden">
-                                            <img src="../images/team-2.jpg" alt="Thae Nay Nwe Soe" class="w-full h-full object-cover">
+                                            <img src="../images/team/thaenaynwesoe.jpg" alt="Thae Nay Nwe Soe" class="w-full h-full object-cover">
                                         </div>
                                     </td>
                                     <td class="py-4 px-6 font-semibold text-[#362F2A] text-sm">Thae Nay Nwe Soe</td>
@@ -149,7 +149,7 @@ if (isset($_GET['msg'])) {
                                     <td class="py-4 px-6 text-[#6E6359]">#3</td>
                                     <td class="py-4 px-6">
                                         <div class="w-10 h-10 rounded-full bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden">
-                                            <img src="../images/team-3.jpg" alt="Su Thinzar Htet" class="w-full h-full object-cover">
+                                            <img src="../images/team/suthinzarhtet.jpg" alt="Su Thinzar Htet" class="w-full h-full object-cover">
                                         </div>
                                     </td>
                                     <td class="py-4 px-6 font-semibold text-[#362F2A] text-sm">Su Thinzar Htet</td>
@@ -171,7 +171,7 @@ if (isset($_GET['msg'])) {
                                     <td class="py-4 px-6 text-[#6E6359]">#4</td>
                                     <td class="py-4 px-6">
                                         <div class="w-10 h-10 rounded-full bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden">
-                                            <img src="../images/team-4.jpg" alt="Myat Chal Oo" class="w-full h-full object-cover">
+                                            <img src="../images/team/myatchaloo.jpg" alt="Myat Chal Oo" class="w-full h-full object-cover">
                                         </div>
                                     </td>
                                     <td class="py-4 px-6 font-semibold text-[#362F2A] text-sm">Myat Chal Oo</td>
@@ -193,7 +193,7 @@ if (isset($_GET['msg'])) {
                                     <td class="py-4 px-6 text-[#6E6359]">#5</td>
                                     <td class="py-4 px-6">
                                         <div class="w-10 h-10 rounded-full bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden">
-                                            <img src="../images/team-5.jpg" alt="Nyi Nyi Aung" class="w-full h-full object-cover">
+                                            <img src="../images/team/nyinyiaung.jpg" alt="Nyi Nyi Aung" class="w-full h-full object-cover">
                                         </div>
                                     </td>
                                     <td class="py-4 px-6 font-semibold text-[#362F2A] text-sm">Nyi Nyi Aung</td>
@@ -215,7 +215,7 @@ if (isset($_GET['msg'])) {
                                     <td class="py-4 px-6 text-[#6E6359]">#6</td>
                                     <td class="py-4 px-6">
                                         <div class="w-10 h-10 rounded-full bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden">
-                                            <img src="../images/team-6.jpg" alt="Min Khant Naung" class="w-full h-full object-cover">
+                                            <img src="../images/team/minkhantnaung.jpg" alt="Min Khant Naung" class="w-full h-full object-cover">
                                         </div>
                                     </td>
                                     <td class="py-4 px-6 font-semibold text-[#362F2A] text-sm">Min Khant Naung</td>
