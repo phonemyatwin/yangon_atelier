@@ -16,48 +16,30 @@ if (isset($_SESSION['admin_user'])) {
 // Connect database
 require_once __DIR__ . '/../components/connection.php';
 
-$error = '';
+$errors = [];
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
+    $email = strtolower(trim($_POST['email'] ?? ''));
+    $password = $_POST['password'] ?? '';
+    $remember = isset($_POST['remember']);
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['admin_login'])) {
-    require_once __DIR__ . '/../components/connection.php';
-    $email          = trim($_POST['email'] ?? '');
-    $admin_password = $_POST['password'] ?? '';
-    $remember       = isset($_POST['remember']);
+    $sql = 'SELECT * FROM admins WHERE email = :email LIMIT 1';
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([':email' => $email]);
+    $admin = $stmt->fetch();
 
-    if (empty($email) || empty($admin_password)) {
-        $error = "Please enter both administrator email and password.";
+    if ($admin && !empty($password) && password_verify($password, $admin['password'])) {
+        require_once __DIR__ . '/../components/remember_me.php';
+        session_regenerate_id(true);
+        $_SESSION['admin_user'] = [
+            'id' => $admin['id'],
+            'name' => $admin['name'],
+            'email' => $admin['email'],
+            'role' => $admin['role']
+        ];
+        header('Location: dashboard.php');
+        exit;
     } else {
-        try {
-            $stmt = $pdo->prepare("SELECT id, name, email, password, role FROM admins WHERE email = ? LIMIT 1");
-            $stmt->execute([$email]);
-            $admin = $stmt->fetch();
-
-            if ($admin && (password_verify($admin_password, $admin['password']) || ($admin_password === 'password' && $email === 'admin@gmail.com'))) {
-                session_regenerate_id(true);
-                // Remember me
-                require_once __DIR__ . '/../components/remember_me.php';
-                $thirty_days = time() + (60 * 60 * 24 * 30);
-                setcookie('admin_email_cookie', $remember ? $email : '', [
-                    'expires' => $remember ? $thirty_days : time() - 3600,
-                    'path' => '/',
-                    'httponly' => true,
-                    'samesite' => 'Lax'
-                ]);
-
-                $_SESSION['admin_user'] = [
-                    'id'    => $admin['id'],
-                    'name'  => $admin['name'],
-                    'email' => $admin['email'],
-                    'role'  => $admin['role'] ?? 'Senior Curator'
-                ];
-                header("Location: dashboard.php");
-                exit;
-            } else {
-                $error = "Invalid administrator credentials.";
-            }
-        } catch (PDOException $e) {
-            $error = "Database query error: " . $e->getMessage();
-        }
+        $errors['login'] = 'The login information you entered is incorrect. Please try again.';
     }
 }
 ?>
@@ -91,14 +73,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['admin_login'])) {
                 <p class="text-xs text-[#6E6359] mt-1">Enter your administrator credentials to manage products, editorial, and clients.</p>
             </div>
 
-            <!-- Error Notification -->
-            <?php if (!empty($error)): ?>
-                <div class="mb-5 p-4 rounded-xl bg-[#EFE0E0] border border-[#DFC8C8] text-[#8C3B3B] text-xs flex items-center gap-2.5">
-                    <i class="ri-error-warning-line text-lg flex-shrink-0"></i>
-                    <span><?= htmlspecialchars($error) ?></span>
-                </div>
-            <?php endif; ?>
-
             <form action="" method="POST" class="space-y-5">
                 <!-- Email -->
                 <div class="space-y-1.5">
@@ -107,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['admin_login'])) {
                     </label>
                     <div class="relative">
                         <i class="ri-mail-line absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base"></i>
-                        <input type="email" id="email" name="email" required placeholder="admin@yangonatelier.com" value="<?= htmlspecialchars($_POST['email'] ?? $_COOKIE['admin_email_cookie'] ?? $_COOKIE['email_cookie'] ?? 'admin@gmail.com') ?>" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                        <input type="email" id="email" name="email" required placeholder="admin@yangonatelier.com" value="<?= htmlspecialchars($email ?? $_COOKIE['admin_email_cookie'] ?? '') ?>" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                     </div>
                 </div>
 
@@ -118,20 +92,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['admin_login'])) {
                     </label>
                     <div class="relative">
                         <i class="ri-lock-2-line absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base"></i>
-                        <input type="password" id="password" name="password" required placeholder="••••••••" value="password" class="w-full pl-11 pr-11 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                        <input type="password" id="password" name="password" required class="w-full pl-11 pr-11 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                     </div>
                 </div>
 
                 <!-- Remember Me Option -->
                 <div class="flex items-center justify-between text-xs pt-1">
                     <label class="flex items-center gap-2.5 text-[#6E6359] hover:text-[#362F2A] cursor-pointer select-none transition-colors" for="remember-me">
-                        <input type="checkbox" name="remember" id="remember-me" class="atelier-checkbox" <?= (isset($_COOKIE['admin_email_cookie']) || isset($_COOKIE['email_cookie'])) ? 'checked' : '' ?>>
+                        <input type="checkbox" name="remember" id="remember-me" class="atelier-checkbox" <?= (isset($_COOKIE['admin_email_cookie']) || isset($_COOKIE['admin_email_cookie'])) ? 'checked' : '' ?>>
                         <span>Remember me</span>
                     </label>
                 </div>
 
                 <!-- Submit Button -->
-                <button type="submit" name="admin_login" class="w-full py-3.5 px-6 rounded-xl bg-[#8A5A44] hover:bg-[#704735] text-[#F6F3EE] font-semibold text-sm transition-all shadow-md flex items-center justify-center gap-2 mt-2">
+                <button type="submit" name="login" class="w-full py-3.5 px-6 rounded-xl bg-[#8A5A44] hover:bg-[#704735] text-[#F6F3EE] font-semibold text-sm transition-all shadow-md flex items-center justify-center gap-2 mt-2">
                     <i class="ri-login-circle-line text-lg"></i>
                     <span>Access Dashboard</span>
                 </button>
@@ -146,11 +120,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['admin_login'])) {
         </div>
 
         <p class="text-center text-[11px] text-[#6E6359] mt-6">
-            Yangon Atelier &copy; <?php echo date("Y"); ?> • Restricted Atelier Access
+            Yangon Atelier &copy; <?= date("Y"); ?> • Restricted Atelier Access
         </p>
     </div>
 
     <?php include "components/js.php"; ?>
+    <?php if (!empty($errors)): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                showToast(<?= json_encode($errors['login']); ?>, 'error');
+            });
+        </script>
+    <?php endif; ?>
 </body>
 
 </html>

@@ -83,7 +83,7 @@ $current_admin_page = basename($_SERVER['PHP_SELF'] ?? 'dashboard.php');
                         <i class="ri-external-link-line text-base"></i>
                         <span>View Storefront</span>
                     </a>
-                    <a href="index.php?logout=1" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[#EFE0E0] hover:bg-[#8C3B3B]/30 hover:text-[#FFFFFF] transition-colors">
+                    <a href="logout.php" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[#EFE0E0] hover:bg-[#8C3B3B]/30 hover:text-[#FFFFFF] transition-colors">
                         <i class="ri-logout-box-r-line text-base text-[#8C3B3B]"></i>
                         <span>Sign Out</span>
                     </a>

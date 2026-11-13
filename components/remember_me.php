@@ -1,7 +1,7 @@
 <?php
 $thirty_days = time() + (60 * 60 * 24 * 30);
 
-setcookie('email_cookie', $remember ? $email : '', [
+setcookie('user_email_cookie', $remember ? $email : '', [
     'expires' => $remember ? $thirty_days : time() - 3600,
     'path' => '/',
     'httponly' => true,
