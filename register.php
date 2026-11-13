@@ -64,17 +64,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
 
     // Approve registration
     if (empty($errors)) {
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-        $sql = 'INSERT INTO users(username, email, password) VALUES(:username, :email, :hashed_password)';
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([
-            ':username' => $username,
-            ':email' => $email,
-            ':hashed_password' => $hashed_password
-        ]);
-        $_SESSION['success'] = 'Account created successfully! Please sign in.';
-        header('Location: login.php');
-        exit;
+        try {
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+            $sql = 'INSERT INTO users(username, email, password) VALUES(:username, :email, :password)';
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([
+                ':username' => $username,
+                ':email' => $email,
+                ':password' => $hashed_password
+            ]);
+            $_SESSION['success'] = 'Account created successfully! Please sign in.';
+            header('Location: login.php');
+            exit;
+        } catch (PDOException $e) {
+            error_log('Register form error: ' . $e->getMessage() . '\n', 3, __DIR__ . '/error.log');
+            $errors['register'] = 'Unable to register at the moment. Please try again later.';
+        }
     }
 }
 ?>

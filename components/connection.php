@@ -16,7 +16,7 @@ $options = [
 try {
     $pdo = new PDO($dsn, $username, $password, $options);
 } catch (PDOException $e) {
-    error_log("Database connection failed: " . $e->getMessage());
+    error_log("Database connection failed: " . $e->getMessage() . '\n', 3, __DIR__ . '/error.log');
     http_response_code(500);
     die("A database connection error occurred. Please try again later.");
 }

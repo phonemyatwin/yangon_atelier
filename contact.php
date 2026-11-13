@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['send'])) {
             $success = "Thank you {$safe_name}. Your inquiry has been received. Our concierge will reach out promptly.";
             $name = $number = $email = $message = '';
         } catch (PDOException $e) {
-            error_log('Contact form error: ' . $e->getMessage());
+            error_log('Contact form error: ' . $e->getMessage() . '\n', 3, __DIR__ . '/error.log');
             $errors['connection'] = 'Unable to send your inquiry at this moment. Please try again later.';
         }
     }
