@@ -143,11 +143,40 @@ document.addEventListener("DOMContentLoaded", () => {
   if (searchCloseBtn) searchCloseBtn.addEventListener("click", closeSearchModal);
   if (searchModalBackdrop) searchModalBackdrop.addEventListener("click", closeSearchModal);
 
+  // --- Client Sanctuary Profile Dropdown Toggle ---
+  const userMenuBtn = document.getElementById("user-menu-btn");
+  const userDropdown = document.getElementById("user-dropdown");
+
+  if (userMenuBtn && userDropdown) {
+    userMenuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const isVisible = userDropdown.classList.contains("!visible");
+      if (isVisible) {
+        userDropdown.classList.remove("!visible", "!opacity-100", "!translate-y-0", "!pointer-events-auto");
+        userMenuBtn.setAttribute("aria-expanded", "false");
+      } else {
+        userDropdown.classList.add("!visible", "!opacity-100", "!translate-y-0", "!pointer-events-auto");
+        userMenuBtn.setAttribute("aria-expanded", "true");
+      }
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!userDropdown.contains(e.target) && !userMenuBtn.contains(e.target)) {
+        userDropdown.classList.remove("!visible", "!opacity-100", "!translate-y-0", "!pointer-events-auto");
+        userMenuBtn.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
+
   // Close modals on Escape key
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       closeDrawer();
       closeSearchModal();
+      if (userDropdown && userMenuBtn) {
+        userDropdown.classList.remove("!visible", "!opacity-100", "!translate-y-0", "!pointer-events-auto");
+        userMenuBtn.setAttribute("aria-expanded", "false");
+      }
     }
   });
 

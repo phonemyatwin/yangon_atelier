@@ -244,8 +244,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['send'])) {
     </main>
 
     <?php include "components/footer.php"; ?>
-    <?php include "components/js.php"; ?>
-
+    <script src="js/user.js"></script>
     <!-- Errors pop-up like a toaster -->
     <?php if (!empty($errors)): ?>
         <script>

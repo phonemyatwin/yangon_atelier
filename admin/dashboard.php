@@ -249,13 +249,12 @@ require_once __DIR__ . '/../components/connection.php';
         </div>
     </div>
 
-    <?php include "components/js.php"; ?>
-
+    <script src="js/admin.js"></script>
 
     <?php if (isset($_SESSION['admin_user'])): ?>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                showToast('Welcome back! '.<?= json_encode($_SESSION['name']); ?>, 'success');
+                showToast('Welcome back! '.<?= json_encode($_SESSION['admin_user']['name']); ?>, 'success');
             });
         </script>
     <?php endif; ?>

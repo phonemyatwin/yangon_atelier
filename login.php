@@ -146,8 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
     </main>
 
     <?php include "components/footer.php"; ?>
-    <?php include "components/js.php"; ?>
-
+    <script src="js/user.js"></script>
     <!-- Toaster pop-ups -->
     <?php if (isset($_SESSION['success'])): ?>
         <script>

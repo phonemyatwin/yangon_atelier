@@ -12,7 +12,7 @@ if (ini_get('session.use_cookies')) {
         'expires' => time() - 3600,
         'path' => $params['path'],
         'httponly' => $params['httponly'],
-        'samesite' => $params['path']
+        'samesite' => $params['samesite']
     ]);
 }
 

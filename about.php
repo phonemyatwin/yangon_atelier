@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ============================================================================
  * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - ABOUT ATELIER
@@ -234,7 +235,7 @@ require_once __DIR__ . '/components/connection.php';
     </section>
 
     <?php include "components/footer.php"; ?>
-    <?php include "components/js.php"; ?>
+    <script src="js/user.js"></script>
 </body>
 
 </html>

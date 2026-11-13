@@ -1085,8 +1085,7 @@ $category = $_GET['category'] ?? 'all';
     </main>
 
     <?php include "components/footer.php"; ?>
-    <?php include "components/js.php"; ?>
-
+    <script src="js/user.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const filterBtns = document.querySelectorAll(".filter-btn");

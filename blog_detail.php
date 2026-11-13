@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ============================================================================
  * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - JOURNAL ESSAY DETAIL
@@ -75,7 +76,7 @@ require_once __DIR__ . '/components/connection.php';
          ================================================================== -->
     <article class="py-12 lg:py-16">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            
+
             <!-- Back Navigation & Meta -->
             <div class="flex items-center justify-between mb-8">
                 <a href="blog.php" class="inline-flex items-center gap-2 text-xs font-semibold text-[#6E6359] hover:text-[#362F2A] transition-colors">
@@ -137,15 +138,15 @@ require_once __DIR__ . '/components/connection.php';
 
                 <ul class="space-y-4 pl-6 list-disc list-outside text-[#362F2A] text-base">
                     <li>
-                        <strong class="text-[#362F2A]">Embracing the Breath of Empty Space (<em>Ma</em>):</strong> 
+                        <strong class="text-[#362F2A]">Embracing the Breath of Empty Space (<em>Ma</em>):</strong>
                         Allow furniture pieces room to breathe. A single sculpted armchair bathed in the angled amber glow of afternoon light exerts far more grounding power than a crowded cluster of furnishings.
                     </li>
                     <li>
-                        <strong class="text-[#362F2A]">Honest Materials Over Mimicry:</strong> 
+                        <strong class="text-[#362F2A]">Honest Materials Over Mimicry:</strong>
                         Reject synthetic veneers and laminate imitations. Solid timber reacts to the climate, accepts patina, and can be sanded or oiled after a decade of memories rather than discarded into a landfill.
                     </li>
                     <li>
-                        <strong class="text-[#362F2A]">Subtle Illumination:</strong> 
+                        <strong class="text-[#362F2A]">Subtle Illumination:</strong>
                         Replace glaring ceiling downlights with low-slung paper pendants and table lamps that cast warm, tranquil pools of indirect ambient light.
                     </li>
                 </ul>
@@ -184,7 +185,7 @@ require_once __DIR__ . '/components/connection.php';
     </article>
 
     <?php include "components/footer.php"; ?>
-    <?php include "components/js.php"; ?>
+    <script src="js/user.js"></script>
 </body>
 
 </html>

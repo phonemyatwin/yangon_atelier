@@ -2,11 +2,6 @@
 // Initialize session
 require_once __DIR__ . '/../components/session_start.php';
 
-// Handle logout parameter
-if (isset($_GET['logout'])) {
-    unset($_SESSION['admin_user']);
-}
-
 // Redirect if already logged in as admin
 if (isset($_SESSION['admin_user'])) {
     header("Location: dashboard.php");
@@ -28,14 +23,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
     $admin = $stmt->fetch();
 
     if ($admin && !empty($password) && password_verify($password, $admin['password'])) {
-        require_once __DIR__ . '/../components/remember_me.php';
         session_regenerate_id(true);
+        require_once __DIR__ . '/components/remember_me.php';
         $_SESSION['admin_user'] = [
             'id' => $admin['id'],
             'name' => $admin['name'],
             'email' => $admin['email'],
             'role' => $admin['role']
         ];
+
         header('Location: dashboard.php');
         exit;
     } else {
@@ -99,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
                 <!-- Remember Me Option -->
                 <div class="flex items-center justify-between text-xs pt-1">
                     <label class="flex items-center gap-2.5 text-[#6E6359] hover:text-[#362F2A] cursor-pointer select-none transition-colors" for="remember-me">
-                        <input type="checkbox" name="remember" id="remember-me" class="atelier-checkbox" <?= (isset($_COOKIE['admin_email_cookie']) || isset($_COOKIE['admin_email_cookie'])) ? 'checked' : '' ?>>
+                        <input type="checkbox" name="remember" id="remember-me" class="atelier-checkbox" <?= isset($_COOKIE['admin_email_cookie']) ? 'checked' : '' ?>>
                         <span>Remember me</span>
                     </label>
                 </div>
@@ -124,7 +120,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
         </p>
     </div>
 
-    <?php include "components/js.php"; ?>
+    <script src="js/admin.js"></script> 
+    <script src="../js/user.js"></script> 
+
     <?php if (!empty($errors)): ?>
         <script>
             document.addEventListener('DOMContentLoaded', function() {

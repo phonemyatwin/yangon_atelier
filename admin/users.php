@@ -135,7 +135,7 @@ if (isset($_GET['msg'])) {
         </div>
     </div>
 
-    <?php include "components/js.php"; ?>
+    <script src="js/user.js"></script>
 </body>
 
 </html>

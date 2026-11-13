@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ============================================================================
  * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - JOURNAL / BLOG ARCHIVES
@@ -117,7 +118,7 @@ require_once __DIR__ . '/components/connection.php';
              */ ?>
              ================================================================== -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
-            
+
             <!-- Journal Post 1 -->
             <article class="group bg-[#F6F3EE] rounded-3xl border border-[#C9C0B3] overflow-hidden shadow-sm hover:shadow-xl hover:border-[#8A5A44] transition-all duration-500 flex flex-col justify-between">
                 <div>
@@ -341,7 +342,7 @@ require_once __DIR__ . '/components/connection.php';
     </main>
 
     <?php include "components/footer.php"; ?>
-    <?php include "components/js.php"; ?>
+    <script src="js/user.js"></script>
 </body>
 
 </html>
