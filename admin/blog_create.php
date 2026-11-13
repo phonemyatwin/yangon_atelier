@@ -2,7 +2,7 @@
 
 /**
  * ============================================================================
- * FURNISHME BACKEND INSTRUCTION GUIDELINE - CREATE JOURNAL ARTICLE
+ * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - CREATE JOURNAL ARTICLE
  * ============================================================================
  * FILE: admin/blog_create.php
  * PURPOSE: Handles creation of editorial blog articles, processes header image
@@ -28,7 +28,7 @@ $error = '';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Journal Article | FurnishMe Admin</title>
+    <title>Create Journal Article | Yangon Atelier Admin</title>
     <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>

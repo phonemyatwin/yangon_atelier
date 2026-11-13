@@ -1,5 +1,5 @@
 /**
- * FurnishMe Atelier — Main Frontend Scripts
+ * Yangon Atelier — Main Frontend Scripts
  * Luxury Warm Travertine & Smoked Clay Atelier Interactions
  */
 

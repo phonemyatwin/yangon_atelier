@@ -2,7 +2,7 @@
 
 /**
  * ============================================================================
- * FURNISHME BACKEND INSTRUCTION GUIDELINE - PRODUCT DETAIL PAGE
+ * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - PRODUCT DETAIL PAGE
  * ============================================================================
  * FILE: product_detail.php
  * PURPOSE: Queries and presents high-fidelity specifications for a single
@@ -81,9 +81,9 @@ require_once __DIR__ . '/components/connection.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- ==================================================================
          PHP BACKEND GUIDELINE: Dynamic Page Title
-         <title><?= htmlspecialchars($product['name'] ?? 'Product Detail') ?> | FurnishMe Atelier</title>
+         <title><?= htmlspecialchars($product['name'] ?? 'Product Detail') ?> | Yangon Atelier</title>
          ================================================================== -->
-    <title>Nordic Solid Wood Armchair | FurnishMe Atelier</title>
+    <title>Nordic Solid Wood Armchair | Yangon Atelier</title>
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>

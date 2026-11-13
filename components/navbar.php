@@ -1,7 +1,7 @@
 <?php
 /**
  * ============================================================================
- * FURNISHME BACKEND INSTRUCTION GUIDELINE - MOBILE NAVIGATION DRAWER
+ * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - MOBILE NAVIGATION DRAWER
  * ============================================================================
  * FILE: components/navbar.php
  * 
@@ -25,8 +25,8 @@ $current_page = basename($_SERVER['PHP_SELF'] ?? 'index.php');
         <!-- Drawer Header -->
         <div class="flex items-center justify-between pb-6 border-b border-[#C9C0B3]">
             <div class="flex items-center gap-2.5">
-                <span class="w-8 h-8 rounded-lg bg-[#8A5A44] text-[#F6F3EE] border border-[#704735] flex items-center justify-center font-serif text-sm font-bold">F</span>
-                <span class="font-serif text-lg font-semibold tracking-tight text-[#362F2A]">FurnishMe</span>
+                <span class="w-8 h-8 rounded-lg bg-[#8A5A44] text-[#F6F3EE] border border-[#704735] flex items-center justify-center font-serif text-sm font-bold">Y</span>
+                <span class="font-serif text-lg font-semibold tracking-tight text-[#362F2A]">Yangon Atelier</span>
             </div>
             <!-- Accessible Close Button with legacy id "closer" -->
             <button type="button" id="closer" aria-label="Close navigation" class="w-9 h-9 rounded-full flex items-center justify-center text-[#6E6359] hover:text-[#362F2A] hover:bg-[#DFD8CD] transition-colors">

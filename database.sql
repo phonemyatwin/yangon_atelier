@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `admins` (
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Seed default admin (email: admin@furnishme.com or admin@gmail.com, password: password)
+-- Seed default admin (email: admin@yangonatelier.com or admin@gmail.com, password: password)
 INSERT IGNORE INTO `admins` (`id`, `name`, `email`, `password`, `role`) VALUES
 (1, 'Senior Curator', 'admin@gmail.com', '$2y$10$4B9YF/fP905e9h8Y2kY2.u9n5F9B7X2I1Z5H9Q3L7M8V6W5X4Y3Z2', 'Senior Curator');
 

@@ -12,7 +12,7 @@ require_once __DIR__ . '/components/connection.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms of Service &amp; Craft Agreement | FurnishMe Atelier</title>
+    <title>Terms of Service &amp; Craft Agreement | Yangon Atelier</title>
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>
@@ -59,7 +59,7 @@ require_once __DIR__ . '/components/connection.php';
                 <h2 class="font-serif text-xl sm:text-2xl font-normal text-[#362F2A]">Commercial &amp; Craft Pillars</h2>
             </div>
             <p class="text-[#6E6359] text-sm leading-relaxed mb-6">
-                When you acquire an heirloom piece from FurnishMe Atelier, you enter into a partnership rooted in mutual respect, architectural precision, and traditional craft integrity. Below is an executive overview of our core client protections:
+                When you acquire an heirloom piece from Yangon Atelier, you enter into a partnership rooted in mutual respect, architectural precision, and traditional craft integrity. Below is an executive overview of our core client protections:
             </p>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 border-t border-[#C9C0B3] text-xs">
                 <div class="p-4 rounded-2xl bg-[#EDE8E0] border border-[#C9C0B3]">
@@ -137,11 +137,11 @@ require_once __DIR__ . '/components/connection.php';
                     <!-- Concierge Card -->
                     <div class="mt-8 pt-6 border-t border-[#C9C0B3] text-xs text-[#6E6359] space-y-2">
                         <span class="text-[11px] uppercase tracking-wider text-[#8A5A44] font-semibold block">Legal &amp; Concierge Desk</span>
-                        <p class="font-medium text-[#362F2A]">FurnishMe Atelier Legal</p>
+                        <p class="font-medium text-[#362F2A]">Yangon Atelier Legal</p>
                         <p class="text-[#6E6359]">Commercial &amp; Contract Administration</p>
-                        <a href="mailto:legal@furnishme.com" class="inline-flex items-center gap-1.5 text-[#362F2A] hover:text-[#8A5A44] font-medium transition-colors pt-1">
+                        <a href="mailto:legal@yangonatelier.com" class="inline-flex items-center gap-1.5 text-[#362F2A] hover:text-[#8A5A44] font-medium transition-colors pt-1">
                             <i class="ri-mail-line"></i>
-                            <span>legal@furnishme.com</span>
+                            <span>legal@yangonatelier.com</span>
                         </a>
                     </div>
                 </div>
@@ -155,7 +155,7 @@ require_once __DIR__ . '/components/connection.php';
                     <span class="text-xs uppercase tracking-wider text-[#8A5A44] font-semibold">Section 1</span>
                     <h2 class="font-serif text-2xl font-normal text-[#362F2A] tracking-tight">Acceptance &amp; Atelier Jurisdiction</h2>
                     <p>
-                        These Terms of Service ("Terms") constitute a legally binding agreement between you ("Client", "you", or "your") and FurnishMe Atelier ("FurnishMe", "we", "us", or "our"), governing your access to and use of our website, catalog ordering platform, private showroom consultations, bespoke fabrication contracts, and post-purchase white-glove services.
+                        These Terms of Service ("Terms") constitute a legally binding agreement between you ("Client", "you", or "your") and Yangon Atelier ("Yangon Atelier", "we", "us", or "our"), governing your access to and use of our website, catalog ordering platform, private showroom consultations, bespoke fabrication contracts, and post-purchase white-glove services.
                     </p>
                     <p>
                         By visiting our digital atelier, submitting orders, or confirming bespoke joinery deposits, you agree to comply with and be bound by these Terms in their entirety. If you do not accept these provisions, we respectfully ask that you refrain from placing orders or utilizing our digital services.
@@ -262,7 +262,7 @@ require_once __DIR__ . '/components/connection.php';
                     </p>
                     <ul class="list-disc pl-5 space-y-2 text-[#6E6359]">
                         <li>
-                            <strong class="text-[#362F2A]">14-Day Notice:</strong> Notify our concierge at <a href="mailto:atelier@furnishme.com" class="text-[#8A5A44] underline font-medium">atelier@furnishme.com</a> within 14 calendar days of delivery.
+                            <strong class="text-[#362F2A]">14-Day Notice:</strong> Notify our concierge at <a href="mailto:atelier@yangonatelier.com" class="text-[#8A5A44] underline font-medium">atelier@yangonatelier.com</a> within 14 calendar days of delivery.
                         </li>
                         <li>
                             <strong class="text-[#362F2A]">Pristine Condition:</strong> Returned items must be entirely unblemished, free from scratches, pet hair, or fabric stains, and include original documentation.
@@ -281,7 +281,7 @@ require_once __DIR__ . '/components/connection.php';
                     <span class="text-xs uppercase tracking-wider text-[#8A5A44] font-semibold">Section 7</span>
                     <h2 class="font-serif text-2xl font-normal text-[#362F2A] tracking-tight">Intellectual Property &amp; Designs</h2>
                     <p>
-                        All original furniture profiles, CAD joinery elevations, design sketches, brand typography, high-resolution photography, lookbooks, and editorial journal prose featured on this website are the proprietary intellectual property of FurnishMe Atelier and protected under domestic and international copyright laws.
+                        All original furniture profiles, CAD joinery elevations, design sketches, brand typography, high-resolution photography, lookbooks, and editorial journal prose featured on this website are the proprietary intellectual property of Yangon Atelier and protected under domestic and international copyright laws.
                     </p>
                     <p>
                         Reproduction, commercial replication, unauthorized commercial mirroring, or industrial reverse-engineering of our proprietary silhouettes is strictly prohibited without prior written license from our design directors.
@@ -302,7 +302,7 @@ require_once __DIR__ . '/components/connection.php';
                     <span class="text-xs uppercase tracking-wider text-[#8A5A44] font-semibold">Section 9</span>
                     <h2 class="font-serif text-2xl font-normal text-[#362F2A] tracking-tight">Limitation of Liability &amp; Force Majeure</h2>
                     <p>
-                        To the maximum extent permitted by applicable law, FurnishMe Atelier shall not be held liable for indirect, incidental, punitive, or consequential damages resulting from delays in transit or temporary stock unavailability. Our aggregate liability for any proven claim shall in no event exceed the purchase price remitted for the specific furniture piece in dispute.
+                        To the maximum extent permitted by applicable law, Yangon Atelier shall not be held liable for indirect, incidental, punitive, or consequential damages resulting from delays in transit or temporary stock unavailability. Our aggregate liability for any proven claim shall in no event exceed the purchase price remitted for the specific furniture piece in dispute.
                     </p>
                     <p>
                         We are excused from performance obligations in the event of Force Majeure occurrences beyond reasonable control, including extreme weather delays, raw timber quota embargoes, regional infrastructure failures, or government regulations.
@@ -320,7 +320,7 @@ require_once __DIR__ . '/components/connection.php';
                     <div class="bg-[#F4EFE8] rounded-3xl p-6 sm:p-8 border border-[#C9C0B3] space-y-6">
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#C9C0B3]/80">
                             <div>
-                                <h3 class="font-serif text-lg font-semibold text-[#362F2A]">FurnishMe Atelier — Commercial Governance</h3>
+                                <h3 class="font-serif text-lg font-semibold text-[#362F2A]">Yangon Atelier — Commercial Governance</h3>
                                 <p class="text-xs text-[#6E6359] mt-1">Supervised by Phone Myat Win, Principal Architect</p>
                             </div>
                             <a href="contact.php" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-stone-900 text-white text-xs font-medium hover:bg-amber-900 transition-colors shadow-xs">
@@ -348,8 +348,8 @@ require_once __DIR__ . '/components/connection.php';
                             <div>
                                 <span class="font-semibold text-[#362F2A] block mb-1">Formal Legal Correspondence</span>
                                 <p class="text-[#6E6359] leading-relaxed">
-                                    Contracts: <a href="mailto:legal@furnishme.com" class="text-[#8A5A44] font-medium hover:underline">legal@furnishme.com</a><br>
-                                    Concierge: <a href="mailto:atelier@furnishme.com" class="text-[#8A5A44] font-medium hover:underline">atelier@furnishme.com</a>
+                                    Contracts: <a href="mailto:legal@yangonatelier.com" class="text-[#8A5A44] font-medium hover:underline">legal@yangonatelier.com</a><br>
+                                    Concierge: <a href="mailto:atelier@yangonatelier.com" class="text-[#8A5A44] font-medium hover:underline">atelier@yangonatelier.com</a>
                                 </p>
                             </div>
                         </div>

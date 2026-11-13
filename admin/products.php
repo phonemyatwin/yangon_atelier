@@ -2,7 +2,7 @@
 
 /**
  * ============================================================================
- * FURNISHME BACKEND INSTRUCTION GUIDELINE - ADMIN PRODUCTS LIST
+ * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - ADMIN PRODUCTS LIST
  * ============================================================================
  * FILE: admin/products.php
  * PURPOSE: Lists all products from the 'products' table, provides search filtering,
@@ -37,7 +37,7 @@ if (isset($_GET['msg'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products Management | FurnishMe Atelier Admin</title>
+    <title>Products Management | Yangon Atelier Admin</title>
     <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>

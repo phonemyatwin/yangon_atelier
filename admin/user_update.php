@@ -2,7 +2,7 @@
 
 /**
  * ============================================================================
- * FURNISHME BACKEND INSTRUCTION GUIDELINE - UPDATE USER
+ * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - UPDATE USER
  * ============================================================================
  * FILE: admin/user_update.php
  * PURPOSE: Updates user accounts, handles optional password reset, and persists
@@ -25,7 +25,7 @@ require_once __DIR__ . '/../components/connection.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit User Account | FurnishMe Admin</title>
+    <title>Edit User Account | Yangon Atelier Admin</title>
     <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>

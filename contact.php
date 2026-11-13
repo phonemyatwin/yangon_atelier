@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['send'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact &amp; Showroom Inquiries | FurnishMe</title>
+    <title>Contact &amp; Showroom Inquiries | Yangon Atelier</title>
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>
@@ -149,8 +149,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['send'])) {
                         </div>
                         <div class="text-sm">
                             <strong class="text-[#362F2A] font-medium block">Electronic Correspondence</strong>
-                            <a href="mailto:concierge@furnishme.com" class="text-[#6E6359] hover:text-[#8A5A44] transition-colors mt-0.5 block">concierge@furnishme.com</a>
-                            <a href="mailto:orders@furnishme.com" class="text-[#6E6359] hover:text-[#8A5A44] transition-colors block">orders@furnishme.com</a>
+                            <a href="mailto:concierge@yangonatelier.com" class="text-[#6E6359] hover:text-[#8A5A44] transition-colors mt-0.5 block">concierge@yangonatelier.com</a>
+                            <a href="mailto:orders@yangonatelier.com" class="text-[#6E6359] hover:text-[#8A5A44] transition-colors block">orders@yangonatelier.com</a>
                         </div>
                     </div>
                 </div>
@@ -236,7 +236,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['send'])) {
                 <h3 class="font-serif text-xl font-normal text-[#362F2A]">Locate Our Yankin Atelier</h3>
             </div>
             <div class="w-full h-96 sm:h-[450px] rounded-3xl overflow-hidden border border-[#C9C0B3] shadow-md bg-[#EDE8E0]">
-                <iframe title="FurnishMe Yangon Atelier Location" class="w-full h-full border-0"
+                <iframe title="Yangon Atelier Yangon Atelier Location" class="w-full h-full border-0"
                     src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3818.839551851325!2d96.16721207535012!3d16.834313983961668!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTbCsDUwJzAzLjUiTiA5NsKwMTAnMTEuMiJF!5e0!3m2!1sen!2sch!4v1794417196576!5m2!1sen!2sch"
                     allowfullscreen="" loading="lazy"></iframe>
             </div>

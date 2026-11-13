@@ -2,7 +2,7 @@
 
 /**
  * ============================================================================
- * FURNISHME BACKEND INSTRUCTION GUIDELINE - DELETE JOURNAL ARTICLE
+ * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - DELETE JOURNAL ARTICLE
  * ============================================================================
  * FILE: admin/blog_delete.php
  * PURPOSE: Confirms deletion of an article, unlinks its cover image, and executes
@@ -25,7 +25,7 @@ require_once __DIR__ . '/../components/connection.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delete Journal Article | FurnishMe Atelier Admin</title>
+    <title>Delete Journal Article | Yangon Atelier Admin</title>
     <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>

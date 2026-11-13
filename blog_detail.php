@@ -1,7 +1,7 @@
 <?php
 /**
  * ============================================================================
- * FURNISHME BACKEND INSTRUCTION GUIDELINE - JOURNAL ESSAY DETAIL
+ * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - JOURNAL ESSAY DETAIL
  * ============================================================================
  * FILE: blog_detail.php
  * PURPOSE: Queries and renders a single editorial journal essay based on the
@@ -52,9 +52,9 @@ require_once __DIR__ . '/components/connection.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- ==================================================================
          PHP BACKEND GUIDELINE: Dynamic Page Title
-         <title><?= htmlspecialchars($blog['title'] ?? 'Journal Article') ?> | FurnishMe Atelier Journal</title>
+         <title><?= htmlspecialchars($blog['title'] ?? 'Journal Article') ?> | Yangon Atelier Journal</title>
          ================================================================== -->
-    <title>The Philosophy of Wabi-Sabi in Modern Interiors | FurnishMe Atelier Journal</title>
+    <title>The Philosophy of Wabi-Sabi in Modern Interiors | Yangon Atelier Journal</title>
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>
@@ -161,7 +161,7 @@ require_once __DIR__ . '/components/connection.php';
                     ED
                 </span>
                 <div class="space-y-2 text-center sm:text-left">
-                    <h3 class="font-serif text-lg font-semibold text-[#362F2A]">FurnishMe Editorial Collective</h3>
+                    <h3 class="font-serif text-lg font-semibold text-[#362F2A]">Yangon Atelier Editorial Collective</h3>
                     <p class="text-xs text-[#6E6359] leading-relaxed">
                         Curated by our resident architects and wood craft historians based in Yangon. We document material studies, sustainable forestry reports, and spatial philosophy.
                     </p>

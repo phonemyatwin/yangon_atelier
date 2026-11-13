@@ -12,7 +12,7 @@ require_once __DIR__ . '/components/connection.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy &amp; Data Stewardship | FurnishMe Atelier</title>
+    <title>Privacy Policy &amp; Data Stewardship | Yangon Atelier</title>
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>
@@ -59,7 +59,7 @@ require_once __DIR__ . '/components/connection.php';
                 <h2 class="font-serif text-xl sm:text-2xl font-normal text-[#362F2A]">Executive Privacy Commitment</h2>
             </div>
             <p class="text-[#6E6359] text-sm leading-relaxed mb-6">
-                At FurnishMe Atelier ("FurnishMe", "we", "our", or "us"), we operate with the same deliberate mindfulness in our digital infrastructure as we do when hand-planing solid teak and walnut timbers. We treat your personal data with profound reverence. We do not sell, rent, monetize, or broker your personal information to third-party data brokers under any circumstance.
+                At Yangon Atelier ("Yangon Atelier", "we", "our", or "us"), we operate with the same deliberate mindfulness in our digital infrastructure as we do when hand-planing solid teak and walnut timbers. We treat your personal data with profound reverence. We do not sell, rent, monetize, or broker your personal information to third-party data brokers under any circumstance.
             </p>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 border-t border-[#C9C0B3] text-xs">
                 <div class="p-4 rounded-2xl bg-[#EDE8E0] border border-[#C9C0B3]">
@@ -139,9 +139,9 @@ require_once __DIR__ . '/components/connection.php';
                         <span class="text-[11px] uppercase tracking-wider text-[#8A5A44] font-semibold block">Data Protection Office</span>
                         <p class="font-medium text-[#362F2A]">Min Khant Naung</p>
                         <p class="text-[#6E6359]">Showroom Concierge &amp; Governance</p>
-                        <a href="mailto:privacy@furnishme.com" class="inline-flex items-center gap-1.5 text-[#362F2A] hover:text-[#8A5A44] font-medium transition-colors pt-1">
+                        <a href="mailto:privacy@yangonatelier.com" class="inline-flex items-center gap-1.5 text-[#362F2A] hover:text-[#8A5A44] font-medium transition-colors pt-1">
                             <i class="ri-mail-line"></i>
-                            <span>privacy@furnishme.com</span>
+                            <span>privacy@yangonatelier.com</span>
                         </a>
                     </div>
                 </div>
@@ -155,7 +155,7 @@ require_once __DIR__ . '/components/connection.php';
                     <span class="text-xs uppercase tracking-wider text-[#8A5A44] font-semibold">Section 1</span>
                     <h2 class="font-serif text-2xl font-normal text-[#362F2A] tracking-tight">Scope &amp; Atelier Introduction</h2>
                     <p>
-                        This Privacy Policy applies to personal data collected by FurnishMe through our digital boutique at <code>furnishme.com</code>, our local atelier communications, private client consultations, architectural bespoke commissions, and physical visits to our Yangon Flagship showroom located at No. 55A, Maggin Street, Yankin Township, Yangon, Myanmar.
+                        This Privacy Policy applies to personal data collected by Yangon Atelier through our digital boutique at <code>yangonatelier.com</code>, our local atelier communications, private client consultations, architectural bespoke commissions, and physical visits to our Yangon Flagship showroom located at No. 55A, Maggin Street, Yankin Township, Yangon, Myanmar.
                     </p>
                     <p>
                         By visiting our website, engaging our bespoke joinery team, creating an atelier account, or transacting for furniture acquisitions, you acknowledge the data handling practices set forth in this document.
@@ -226,7 +226,7 @@ require_once __DIR__ . '/components/connection.php';
                     <span class="text-xs uppercase tracking-wider text-[#8A5A44] font-semibold">Section 4</span>
                     <h2 class="font-serif text-2xl font-normal text-[#362F2A] tracking-tight">Logistics &amp; Service Partners</h2>
                     <p>
-                        FurnishMe does not distribute your information to marketers. We share selective data solely with trusted operational partners bound by strict confidentiality agreements:
+                        Yangon Atelier does not distribute your information to marketers. We share selective data solely with trusted operational partners bound by strict confidentiality agreements:
                     </p>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
                         <div class="p-5 rounded-2xl bg-white border border-[#C9C0B3] shadow-xs">
@@ -302,7 +302,7 @@ require_once __DIR__ . '/components/connection.php';
                     <span class="text-xs uppercase tracking-wider text-[#8A5A44] font-semibold">Section 8</span>
                     <h2 class="font-serif text-2xl font-normal text-[#362F2A] tracking-tight">Your Privacy Rights &amp; Recourse</h2>
                     <p>
-                        Regardless of where you reside, FurnishMe accords you fundamental data privacy rights:
+                        Regardless of where you reside, Yangon Atelier accords you fundamental data privacy rights:
                     </p>
                     <div class="space-y-3">
                         <div class="flex items-start gap-3 p-4 rounded-2xl bg-white border border-[#C9C0B3]">
@@ -328,7 +328,7 @@ require_once __DIR__ . '/components/connection.php';
                         </div>
                     </div>
                     <p class="text-xs text-[#6E6359] pt-2">
-                        To exercise any of these privileges, please send an electronic request to <a href="mailto:privacy@furnishme.com" class="text-[#8A5A44] underline font-medium">privacy@furnishme.com</a>. We respond to all verified inquiries within 5 business days.
+                        To exercise any of these privileges, please send an electronic request to <a href="mailto:privacy@yangonatelier.com" class="text-[#8A5A44] underline font-medium">privacy@yangonatelier.com</a>. We respond to all verified inquiries within 5 business days.
                     </p>
                 </section>
 
@@ -337,7 +337,7 @@ require_once __DIR__ . '/components/connection.php';
                     <span class="text-xs uppercase tracking-wider text-[#8A5A44] font-semibold">Section 9</span>
                     <h2 class="font-serif text-2xl font-normal text-[#362F2A] tracking-tight">Children's Privacy Notice</h2>
                     <p>
-                        FurnishMe Atelier specializes in heirloom residential furniture and architectural interiors conceived for discerning adult homeowners and design professionals. Our digital services are not directed toward children under the age of 18, and we do not knowingly collect personal data from minors. If you believe a minor has submitted personal information through our forms, please alert our concierge immediately for immediate deletion.
+                        Yangon Atelier specializes in heirloom residential furniture and architectural interiors conceived for discerning adult homeowners and design professionals. Our digital services are not directed toward children under the age of 18, and we do not knowingly collect personal data from minors. If you believe a minor has submitted personal information through our forms, please alert our concierge immediately for immediate deletion.
                     </p>
                 </section>
 
@@ -352,7 +352,7 @@ require_once __DIR__ . '/components/connection.php';
                     <div class="bg-[#F4EFE8] rounded-3xl p-6 sm:p-8 border border-[#C9C0B3] space-y-6">
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#C9C0B3]/80">
                             <div>
-                                <h3 class="font-serif text-lg font-semibold text-[#362F2A]">FurnishMe Atelier — Data Governance Desk</h3>
+                                <h3 class="font-serif text-lg font-semibold text-[#362F2A]">Yangon Atelier — Data Governance Desk</h3>
                                 <p class="text-xs text-[#6E6359] mt-1">Supervised by Min Khant Naung, Showroom Concierge Director</p>
                             </div>
                             <a href="contact.php" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-stone-900 text-white text-xs font-medium hover:bg-amber-900 transition-colors shadow-xs">
@@ -380,8 +380,8 @@ require_once __DIR__ . '/components/connection.php';
                             <div>
                                 <span class="font-semibold text-[#362F2A] block mb-1">Electronic Correspondence</span>
                                 <p class="text-[#6E6359] leading-relaxed">
-                                    Privacy Officer: <a href="mailto:privacy@furnishme.com" class="text-[#8A5A44] font-medium hover:underline">privacy@furnishme.com</a><br>
-                                    General Atelier: <a href="mailto:atelier@furnishme.com" class="text-[#8A5A44] font-medium hover:underline">atelier@furnishme.com</a>
+                                    Privacy Officer: <a href="mailto:privacy@yangonatelier.com" class="text-[#8A5A44] font-medium hover:underline">privacy@yangonatelier.com</a><br>
+                                    General Atelier: <a href="mailto:atelier@yangonatelier.com" class="text-[#8A5A44] font-medium hover:underline">atelier@yangonatelier.com</a>
                                 </p>
                             </div>
                         </div>

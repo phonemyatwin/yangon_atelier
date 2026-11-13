@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client Sign In | FurnishMe Atelier</title>
+    <title>Client Sign In | Yangon Atelier</title>
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>
@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
             <div class="md:col-span-7 p-8 sm:p-12 flex flex-col justify-center">
                 <div class="mb-8">
                     <span class="text-xs uppercase tracking-widest text-[#8A5A44] font-semibold block mb-1">Account Authentication</span>
-                    <h1 class="font-serif text-3xl font-normal text-[#362F2A]">Sign in to FurnishMe</h1>
+                    <h1 class="font-serif text-3xl font-normal text-[#362F2A]">Sign in to Yangon Atelier</h1>
                     <p class="text-xs text-[#6E6359] mt-1">Please enter your verified email and password.</p>
                 </div>
 
@@ -132,7 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
 
                     <!-- Link to Register -->
                     <p class="text-center text-xs text-[#6E6359] pt-2">
-                        New to FurnishMe Atelier?
+                        New to Yangon Atelier?
                         <a href="register.php" class="font-semibold text-[#8A5A44] hover:underline">Create an account</a>
                     </p>
                 </form>

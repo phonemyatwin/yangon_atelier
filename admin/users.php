@@ -2,7 +2,7 @@
 
 /**
  * ============================================================================
- * FURNISHME BACKEND INSTRUCTION GUIDELINE - ADMIN USERS LIST
+ * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - ADMIN USERS LIST
  * ============================================================================
  * FILE: admin/users.php
  * PURPOSE: Lists all user accounts, displays account details, and links to
@@ -37,7 +37,7 @@ if (isset($_GET['msg'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Accounts | FurnishMe Atelier Admin</title>
+    <title>User Accounts | Yangon Atelier Admin</title>
     <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>

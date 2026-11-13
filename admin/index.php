@@ -2,7 +2,7 @@
 
 /**
  * ============================================================================
- * FURNISHME BACKEND INSTRUCTION GUIDELINE - ADMIN AUTHENTICATION
+ * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - ADMIN AUTHENTICATION
  * ============================================================================
  * FILE: admin/index.php
  * PURPOSE: Secure gatekeeper for the administrative control panel. Verifies
@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['admin_login'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Authentication | FurnishMe Atelier</title>
+    <title>Admin Authentication | Yangon Atelier</title>
     <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>
@@ -82,9 +82,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['admin_login'])) {
         <!-- Brand Header -->
         <div class="text-center mb-8">
             <div class="inline-flex w-14 h-14 rounded-2xl bg-[#8A5A44] items-center justify-center font-serif text-2xl text-[#F6F3EE] mb-4 shadow-md font-semibold">
-                F
+                Y
             </div>
-            <h1 class="font-serif text-2xl sm:text-3xl font-medium tracking-tight text-[#362F2A]">FurnishMe Atelier</h1>
+            <h1 class="font-serif text-2xl sm:text-3xl font-medium tracking-tight text-[#362F2A]">Yangon Atelier</h1>
             <p class="text-xs text-[#8A5A44] uppercase tracking-[0.2em] mt-1.5 font-semibold">Administrative Gateway</p>
         </div>
 
@@ -111,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['admin_login'])) {
                     </label>
                     <div class="relative">
                         <i class="ri-mail-line absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base"></i>
-                        <input type="email" id="email" name="email" required placeholder="admin@furnishme.com" value="<?= htmlspecialchars($_POST['email'] ?? 'admin@gmail.com') ?>" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                        <input type="email" id="email" name="email" required placeholder="admin@yangonatelier.com" value="<?= htmlspecialchars($_POST['email'] ?? 'admin@gmail.com') ?>" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                     </div>
                 </div>
 
@@ -142,7 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['admin_login'])) {
         </div>
 
         <p class="text-center text-[11px] text-[#6E6359] mt-6">
-            FurnishMe &copy; <?php echo date("Y"); ?> • Restricted Atelier Access
+            Yangon Atelier &copy; <?php echo date("Y"); ?> • Restricted Atelier Access
         </p>
     </div>
 

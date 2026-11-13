@@ -2,7 +2,7 @@
 
 /**
  * ============================================================================
- * FURNISHME BACKEND INSTRUCTION GUIDELINE - DELETE SUBSCRIBER
+ * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - DELETE SUBSCRIBER
  * ============================================================================
  * FILE: admin/subscriber_delete.php
  * PURPOSE: Confirms deletion of a subscriber and removes email from 'subscribers'.
@@ -31,7 +31,7 @@ $sub_id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delete Subscriber | FurnishMe Atelier Admin</title>
+    <title>Delete Subscriber | Yangon Atelier Admin</title>
     <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>

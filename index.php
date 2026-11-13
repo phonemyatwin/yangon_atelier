@@ -2,7 +2,7 @@
 
 /**
  * ============================================================================
- * FURNISHME BACKEND INSTRUCTION GUIDELINE - STOREFRONT HOMEPAGE
+ * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - STOREFRONT HOMEPAGE
  * ============================================================================
  * FILE: index.php
  * PURPOSE: Showcases featured hero lookbooks, curated product masterpieces,
@@ -39,7 +39,7 @@ require_once __DIR__ . '/components/connection.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FurnishMe Atelier — Warm Minimalist Furniture &amp; Objects</title>
+    <title>Yangon Atelier — Warm Minimalist Furniture &amp; Objects</title>
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>

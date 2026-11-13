@@ -2,7 +2,7 @@
 
 /**
  * ============================================================================
- * FURNISHME BACKEND INSTRUCTION GUIDELINE - CREATE TEAM MEMBER
+ * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - CREATE TEAM MEMBER
  * ============================================================================
  * FILE: admin/team_create.php
  * PURPOSE: Adds a new artisan or collective specialist profile to 'team' table
@@ -25,7 +25,7 @@ require_once __DIR__ . '/../components/connection.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Team Member | FurnishMe Admin</title>
+    <title>Create Team Member | Yangon Atelier Admin</title>
     <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>

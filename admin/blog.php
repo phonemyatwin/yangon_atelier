@@ -2,7 +2,7 @@
 
 /**
  * ============================================================================
- * FURNISHME BACKEND INSTRUCTION GUIDELINE - ADMIN JOURNAL / BLOG LIST
+ * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - ADMIN JOURNAL / BLOG LIST
  * ============================================================================
  * FILE: admin/blog.php
  * PURPOSE: Lists all editorial essays from the 'blogs' table and provides links
@@ -37,7 +37,7 @@ if (isset($_GET['msg'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Journal Management | FurnishMe Atelier Admin</title>
+    <title>Journal Management | Yangon Atelier Admin</title>
     <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>

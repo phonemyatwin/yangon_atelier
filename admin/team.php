@@ -2,7 +2,7 @@
 
 /**
  * ============================================================================
- * FURNISHME BACKEND INSTRUCTION GUIDELINE - ADMIN TEAM LIST
+ * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - ADMIN TEAM LIST
  * ============================================================================
  * FILE: admin/team.php
  * PURPOSE: Lists all collective artisans and team members from the 'team' table
@@ -37,7 +37,7 @@ if (isset($_GET['msg'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Design Team | FurnishMe Atelier Admin</title>
+    <title>Design Team | Yangon Atelier Admin</title>
     <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>

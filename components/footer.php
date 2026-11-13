@@ -1,7 +1,7 @@
 <?php
 /**
  * ============================================================================
- * FURNISHME BACKEND INSTRUCTION GUIDELINE - GLOBAL STOREFRONT FOOTER
+ * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - GLOBAL STOREFRONT FOOTER
  * ============================================================================
  * FILE: components/footer.php
  * 
@@ -25,9 +25,9 @@
             <div class="space-y-4">
                 <div class="flex items-center gap-3">
                     <span class="w-8 h-8 rounded-xl bg-[#8A5A44] text-[#F6F3EE] flex items-center justify-center font-serif text-base font-bold shadow-xs">
-                        F
+                        Y
                     </span>
-                    <span class="font-serif text-xl tracking-tight text-[#F6F3EE] font-semibold">FurnishMe</span>
+                    <span class="font-serif text-xl tracking-tight text-[#F6F3EE] font-semibold">Yangon Atelier</span>
                 </div>
                 <p class="text-xs sm:text-sm text-[#DFD8CD] leading-relaxed">
                     A Yangon-based design studio crafting architectural furniture, quiet lighting, and tactile domestic sanctuaries. Hand-finished with certified organic timber oils.
@@ -75,7 +75,7 @@
                     <p class="pt-1">
                         <span class="block text-[#F6F3EE] font-medium">Direct Inquiries</span>
                         <a href="tel:+959973383719" class="hover:text-[#FFFFFF] transition-colors">+95 9 973 383 719</a><br>
-                        <a href="mailto:atelier@furnishme.com" class="hover:text-[#FFFFFF] transition-colors">atelier@furnishme.com</a>
+                        <a href="mailto:atelier@yangonatelier.com" class="hover:text-[#FFFFFF] transition-colors">atelier@yangonatelier.com</a>
                     </p>
                 </div>
             </div>
@@ -100,7 +100,7 @@
 
         <!-- Bottom Copyright & Credits -->
         <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-[#C9C0B3] gap-4">
-            <p>&copy; <?php echo date("Y"); ?> FurnishMe Atelier. All rights reserved.</p>
+            <p>&copy; <?php echo date("Y"); ?> Yangon Atelier. All rights reserved.</p>
             <div class="flex items-center gap-6">
                 <a href="privacy.php" class="hover:text-[#FFFFFF] transition-colors">Privacy Policy</a>
                 <a href="terms.php" class="hover:text-[#FFFFFF] transition-colors">Terms of Service</a>

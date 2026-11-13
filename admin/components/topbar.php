@@ -1,7 +1,7 @@
 <?php
 /**
  * ============================================================================
- * FURNISHME BACKEND INSTRUCTION GUIDELINE - ADMIN TOPBAR
+ * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - ADMIN TOPBAR
  * ============================================================================
  * FILE: admin/components/topbar.php
  * PURPOSE: Global sticky admin top navigation bar, quick link to public storefront,
@@ -31,7 +31,7 @@ $admin_initials = strtoupper(substr($admin_name, 0, 2));
                 <span>/</span>
                 <span class="text-[#362F2A]">Workspace</span>
             </div>
-            <h1 class="font-serif text-lg sm:text-xl font-medium text-[#362F2A] leading-tight">FurnishMe Management</h1>
+            <h1 class="font-serif text-lg sm:text-xl font-medium text-[#362F2A] leading-tight">Yangon Atelier Management</h1>
         </div>
     </div>
 

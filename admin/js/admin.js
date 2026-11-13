@@ -1,5 +1,5 @@
 /**
- * FurnishMe Admin Panel — Vanilla JavaScript
+ * Yangon Atelier Admin Panel — Vanilla JavaScript
  * Clean mobile sidebar toggle, overlay backdrop, and dropzone image previews
  */
 

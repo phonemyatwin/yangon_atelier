@@ -2,7 +2,7 @@
 
 /**
  * ============================================================================
- * FURNISHME BACKEND INSTRUCTION GUIDELINE - DELETE PRODUCT
+ * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - DELETE PRODUCT
  * ============================================================================
  * FILE: admin/product_delete.php
  * PURPOSE: Confirms deletion of a product, unlinks associated image files from
@@ -25,7 +25,7 @@ require_once __DIR__ . '/../components/connection.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delete Atelier Product | FurnishMe Admin</title>
+    <title>Delete Atelier Product | Yangon Atelier Admin</title>
     <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>

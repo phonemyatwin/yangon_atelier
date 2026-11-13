@@ -2,7 +2,7 @@
 
 /**
  * ============================================================================
- * FURNISHME BACKEND INSTRUCTION GUIDELINE - ADMIN CONTACT INQUIRIES LIST
+ * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - ADMIN CONTACT INQUIRIES LIST
  * ============================================================================
  * FILE: admin/contacts.php
  * PURPOSE: Lists client showroom inquiries from 'contacts' table and provides
@@ -35,7 +35,7 @@ if (isset($_GET['msg']) && $_GET['msg'] === 'deleted') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inquiries &amp; Messages | FurnishMe Atelier Admin</title>
+    <title>Inquiries &amp; Messages | Yangon Atelier Admin</title>
     <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>

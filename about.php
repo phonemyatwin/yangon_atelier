@@ -1,7 +1,7 @@
 <?php
 /**
  * ============================================================================
- * FURNISHME BACKEND INSTRUCTION GUIDELINE - ABOUT ATELIER
+ * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - ABOUT ATELIER
  * ============================================================================
  * FILE: about.php
  * PURPOSE: Brand heritage narrative, master workshop timeline, and sustainability
@@ -36,7 +36,7 @@ require_once __DIR__ . '/components/connection.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Our Atelier | FurnishMe</title>
+    <title>About Our Studio | Yangon Atelier</title>
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>
@@ -58,7 +58,7 @@ require_once __DIR__ . '/components/connection.php';
                     Quiet Forms, Honest Timber, Lasting Companions.
                 </h1>
                 <p class="text-sm sm:text-base text-[#6E6359] mt-3 leading-relaxed">
-                    FurnishMe was founded in 2021 as a quiet reaction to the ephemeral speed of disposable design. We engineer living pieces that invite touch, stillness, and human warmth.
+                    Yangon Atelier was founded in 2026 as a quiet reaction to the ephemeral speed of disposable design. We engineer living pieces that invite touch, stillness, and human warmth.
                 </p>
             </div>
         </div>
@@ -70,7 +70,7 @@ require_once __DIR__ . '/components/connection.php';
             <!-- Left Editorial Image Collage -->
             <div class="lg:col-span-6 space-y-6">
                 <div class="relative rounded-3xl overflow-hidden aspect-[4/3] bg-[#F6F3EE] shadow-md border border-[#C9C0B3]">
-                    <img src="images/about-showroom.jpg" alt="FurnishMe Showroom Atmosphere" class="w-full h-full object-cover" loading="lazy">
+                    <img src="images/about-showroom.jpg" alt="Yangon Atelier Showroom Atmosphere" class="w-full h-full object-cover" loading="lazy">
                     <div class="absolute inset-0 bg-[#362F2A]/10"></div>
                 </div>
                 <div class="grid grid-cols-2 gap-4 sm:gap-6">
@@ -94,7 +94,7 @@ require_once __DIR__ . '/components/connection.php';
                 </h2>
                 <div class="space-y-4 text-[#6E6359] text-sm sm:text-base leading-relaxed">
                     <p>
-                        At the heart of FurnishMe is the reverence for organic materials. We view wood grain not as an arbitrary pattern, but as the biographical recording of a tree's decades in wind, rain, and sun.
+                        At the heart of Yangon Atelier is the reverence for organic materials. We view wood grain not as an arbitrary pattern, but as the biographical recording of a tree's decades in wind, rain, and sun.
                     </p>
                     <p>
                         Our design language marries the minimal silhouettes of Danish modernism with the Japanese philosophy of <em>shibui</em>—subtle, unobtrusive beauty that reveals itself gradually through tactile engagement over years of everyday rituals.

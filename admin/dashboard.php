@@ -2,7 +2,7 @@
 
 /**
  * ============================================================================
- * FURNISHME BACKEND INSTRUCTION GUIDELINE - ADMIN DASHBOARD
+ * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - ADMIN DASHBOARD
  * ============================================================================
  * FILE: admin/dashboard.php
  * PURPOSE: Central executive summary for the atelier. Displays real-time counts
@@ -33,7 +33,7 @@ if (!isset($_SESSION['admin_user'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard | FurnishMe Atelier</title>
+    <title>Admin Dashboard | Yangon Atelier</title>
     <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>

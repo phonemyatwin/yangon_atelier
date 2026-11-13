@@ -2,7 +2,7 @@
 
 /**
  * ============================================================================
- * FURNISHME BACKEND INSTRUCTION GUIDELINE - DELETE INQUIRY
+ * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - DELETE INQUIRY
  * ============================================================================
  * FILE: admin/contact_delete.php
  * PURPOSE: Confirms deletion of an inquiry and executes DELETE query against
@@ -32,7 +32,7 @@ $contact_id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delete Inquiry | FurnishMe Atelier Admin</title>
+    <title>Delete Inquiry | Yangon Atelier Admin</title>
     <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>

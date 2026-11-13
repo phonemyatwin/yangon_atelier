@@ -2,7 +2,7 @@
 
 /**
  * ============================================================================
- * FURNISHME BACKEND INSTRUCTION GUIDELINE - CREATE USER
+ * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - CREATE USER
  * ============================================================================
  * FILE: admin/user_create.php
  * PURPOSE: Secure user registration from admin panel. Hashes user passwords
@@ -25,7 +25,7 @@ require_once __DIR__ . '/../components/connection.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create User Account | FurnishMe Admin</title>
+    <title>Create User Account | Yangon Atelier Admin</title>
     <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>

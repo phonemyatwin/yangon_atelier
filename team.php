@@ -2,7 +2,7 @@
 
 /**
  * ============================================================================
- * FURNISHME BACKEND INSTRUCTION GUIDELINE - DESIGN COLLECTIVE & TEAM
+ * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - DESIGN COLLECTIVE & TEAM
  * ============================================================================
  * FILE: team.php
  * PURPOSE: Queries and showcases the master artisans, spatial curators, and
@@ -38,7 +38,7 @@ require_once __DIR__ . '/components/connection.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Design Collective &amp; Master Artisans | FurnishMe Atelier</title>
+    <title>Design Collective &amp; Master Artisans | Yangon Atelier</title>
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>
@@ -83,7 +83,7 @@ require_once __DIR__ . '/components/connection.php';
                         <div class="absolute inset-0 bg-gradient-to-t from-[#362F2A]/80 via-transparent to-transparent"></div>
                         <div class="absolute bottom-6 left-6 right-6 flex items-center justify-between text-white">
                             <span class="text-xs uppercase tracking-widest text-[#F6F3EE] font-medium">Archival Portrait № 01</span>
-                            <span class="text-xs text-[#DFD8CD]">Est. 2021</span>
+                            <span class="text-xs text-[#DFD8CD]">Est. 2026</span>
                         </div>
                     </div>
                     <div class="absolute -bottom-3 -right-3 w-full h-full border border-[#8A5A44]/30 rounded-2xl -z-10 pointer-events-none hidden sm:block"></div>
@@ -109,7 +109,7 @@ require_once __DIR__ . '/components/connection.php';
                     </blockquote>
 
                     <p class="text-sm sm:text-base text-[#6E6359] leading-relaxed">
-                        Formally trained across classical joinery studios in Kyoto and architectural institutions in Copenhagen, Phone Myat Win founded FurnishMe to resurrect the sacred harmony between human sanctuary and sustainably harvested timber. He personally inspects every timber batch arriving from regional certified concessions.
+                        Formally trained across classical joinery studios in Kyoto and architectural institutions in Copenhagen, Phone Myat Win founded Yangon Atelier to resurrect the sacred harmony between human sanctuary and sustainably harvested timber. He personally inspects every timber batch arriving from regional certified concessions.
                     </p>
 
                     <!-- Lineage & Credentials Matrix -->

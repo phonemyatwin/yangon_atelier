@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$dbname = 'furnishme';
+$dbname = 'yangon_atelier';
 $charset = 'utf8mb4';
 $username = 'nexus';
 $password = 'thuyumyat';

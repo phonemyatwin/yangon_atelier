@@ -2,7 +2,7 @@
 
 /**
  * ============================================================================
- * FURNISHME BACKEND INSTRUCTION GUIDELINE - UPDATE PRODUCT
+ * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - UPDATE PRODUCT
  * ============================================================================
  * FILE: admin/product_update.php
  * PURPOSE: Retrieves an existing product by ID, displays current values in the form,
@@ -26,7 +26,7 @@ require_once __DIR__ . '/../components/connection.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Atelier Product | FurnishMe Admin</title>
+    <title>Edit Atelier Product | Yangon Atelier Admin</title>
     <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>

@@ -2,7 +2,7 @@
 
 /**
  * ============================================================================
- * FURNISHME BACKEND INSTRUCTION GUIDELINE - UPDATE TEAM MEMBER
+ * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - UPDATE TEAM MEMBER
  * ============================================================================
  * FILE: admin/team_update.php
  * PURPOSE: Retrieves an existing team member by ID, populates the editing form,
@@ -25,7 +25,7 @@ require_once __DIR__ . '/../components/connection.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Team Member | FurnishMe Admin</title>
+    <title>Edit Team Member | Yangon Atelier Admin</title>
     <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>

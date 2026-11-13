@@ -1,7 +1,7 @@
 <?php
 /**
  * ============================================================================
- * FURNISHME BACKEND INSTRUCTION GUIDELINE - GLOBAL STOREFRONT HEADER
+ * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - GLOBAL STOREFRONT HEADER
  * ============================================================================
  * FILE: components/header.php
  * 
@@ -49,11 +49,11 @@ $current_page = basename($_SERVER['PHP_SELF'] ?? 'index.php');
         <!-- Atelier Brand Logo -->
         <a href="index.php" class="group flex items-center gap-3 focus:outline-none">
             <span class="w-9 h-9 rounded-xl bg-[#8A5A44] text-[#F6F3EE] border border-[#704735] flex items-center justify-center font-serif text-lg font-bold tracking-wider group-hover:bg-[#704735] transition-all shadow-sm">
-                F
+                Y
             </span>
             <div class="flex flex-col">
-                <span class="font-serif text-xl tracking-tight text-[#362F2A] font-semibold leading-none">FurnishMe</span>
-                <span class="text-[9px] tracking-[0.25em] uppercase text-[#8A5A44] font-semibold mt-1">Design Atelier</span>
+                <span class="font-serif text-xl tracking-tight text-[#362F2A] font-semibold leading-none">Yangon Atelier</span>
+                <span class="text-[9px] tracking-[0.25em] uppercase text-[#8A5A44] font-semibold mt-1">Furniture Studio</span>
             </div>
         </a>
 

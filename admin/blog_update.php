@@ -2,7 +2,7 @@
 
 /**
  * ============================================================================
- * FURNISHME BACKEND INSTRUCTION GUIDELINE - UPDATE JOURNAL ARTICLE
+ * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - UPDATE JOURNAL ARTICLE
  * ============================================================================
  * FILE: admin/blog_update.php
  * PURPOSE: Retrieves an existing blog article by ID, pre-fills form fields,
@@ -25,7 +25,7 @@ require_once __DIR__ . '/../components/connection.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Journal Article | FurnishMe Admin</title>
+    <title>Edit Journal Article | Yangon Atelier Admin</title>
     <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>

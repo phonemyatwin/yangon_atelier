@@ -2,7 +2,7 @@
 
 /**
  * ============================================================================
- * FURNISHME BACKEND INSTRUCTION GUIDELINE - VIEW INQUIRY
+ * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - VIEW INQUIRY
  * ============================================================================
  * FILE: admin/contact_view.php
  * PURPOSE: Displays full message content and sender info for a specific inquiry.
@@ -31,7 +31,7 @@ $contact_id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Inquiry #<?= (int)$contact_id ?> | FurnishMe Atelier Admin</title>
+    <title>View Inquiry #<?= (int)$contact_id ?> | Yangon Atelier Admin</title>
     <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>
@@ -108,7 +108,7 @@ $contact_id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
                     <div class="pt-6 border-t border-[#C9C0B3] flex flex-wrap items-center justify-between gap-4">
                         <span class="text-xs text-[#6E6359]">Status: <strong class="text-[#8C5327]">Requires Follow-up</strong></span>
                         <div class="flex items-center gap-3">
-                            <a href="mailto:aungmin@gmail.com?subject=Regarding%20Your%20FurnishMe%20Showroom%20Inquiry" class="px-6 py-2.5 rounded-xl bg-[#8A5A44] hover:bg-[#704735] text-[#F6F3EE] font-semibold text-xs transition-colors shadow-xs flex items-center gap-2">
+                            <a href="mailto:aungmin@gmail.com?subject=Regarding%20Your%20Yangon Atelier%20Showroom%20Inquiry" class="px-6 py-2.5 rounded-xl bg-[#8A5A44] hover:bg-[#704735] text-[#F6F3EE] font-semibold text-xs transition-colors shadow-xs flex items-center gap-2">
                                 <i class="ri-reply-line text-sm"></i>
                                 <span>Reply via Email</span>
                             </a>

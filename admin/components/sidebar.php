@@ -1,7 +1,7 @@
 <?php
 /**
  * ============================================================================
- * FURNISHME BACKEND INSTRUCTION GUIDELINE - ADMIN SIDEBAR
+ * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - ADMIN SIDEBAR
  * ============================================================================
  * FILE: admin/components/sidebar.php
  * PURPOSE: Administrative panel navigation menu with dynamic active link states.
@@ -23,11 +23,11 @@ $current_admin_page = basename($_SERVER['PHP_SELF'] ?? 'dashboard.php');
         <!-- Brand Header -->
         <div class="h-20 flex items-center gap-3 px-6 border-b border-[#3A322B]">
             <span class="w-9 h-9 rounded-xl bg-[#8A5A44] text-[#F6F3EE] font-bold flex items-center justify-center font-serif text-lg font-semibold shadow-xs">
-                F
+                Y
             </span>
             <div class="flex flex-col">
-                <span class="font-serif text-lg font-semibold tracking-tight text-[#F6F3EE] leading-none">FurnishMe</span>
-                <span class="text-[10px] tracking-[0.2em] uppercase text-[#DFD8CD] font-medium mt-1">Admin Atelier</span>
+                <span class="font-serif text-lg font-semibold tracking-tight text-[#F6F3EE] leading-none">Yangon Atelier</span>
+                <span class="text-[10px] tracking-[0.2em] uppercase text-[#DFD8CD] font-medium mt-1">Management Portal</span>
             </div>
         </div>
 
@@ -94,7 +94,7 @@ $current_admin_page = basename($_SERVER['PHP_SELF'] ?? 'dashboard.php');
 
     <!-- Sidebar Footer -->
     <div class="p-4 border-t border-[#3A322B] text-[11px] text-[#C9C0B3]">
-        <p class="font-medium text-[#F6F3EE]">FurnishMe Atelier v2.4</p>
+        <p class="font-medium text-[#F6F3EE]">Yangon Atelier v2.4</p>
         <p class="text-[#DFD8CD] mt-0.5">Admin Control Panel</p>
     </div>
 </aside>

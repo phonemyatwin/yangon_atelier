@@ -12,7 +12,7 @@ require_once __DIR__ . '/components/connection.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Material Care &amp; Maintenance Handbook | FurnishMe Atelier</title>
+    <title>Material Care &amp; Maintenance Handbook | Yangon Atelier</title>
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>
@@ -59,7 +59,7 @@ require_once __DIR__ . '/components/connection.php';
                         Furniture designed to breathe, settle, and grow richer with time.
                     </h2>
                     <p class="text-sm text-[#6E6359] leading-relaxed mt-4">
-                        Unlike mass-manufactured synthetic furniture coated in impervious plastic varnishes, FurnishMe pieces are alive. We finish our white oak, black walnut, and golden teak with organic plant waxes and breathable oils. Proper stewardship is not a burden—it is a tactile, grounding ritual that connects you directly to the life of the timber.
+                        Unlike mass-manufactured synthetic furniture coated in impervious plastic varnishes, Yangon Atelier pieces are alive. We finish our white oak, black walnut, and golden teak with organic plant waxes and breathable oils. Proper stewardship is not a burden—it is a tactile, grounding ritual that connects you directly to the life of the timber.
                     </p>
                 </div>
 
@@ -235,7 +235,7 @@ require_once __DIR__ . '/components/connection.php';
                         <div class="space-y-2 pt-4 border-t border-[#C9C0B3]">
                             <h3 class="font-serif text-base font-semibold text-[#362F2A]">Bi-Annual Re-Oiling Ritual</h3>
                             <p class="text-xs text-[#6E6359]">
-                                Once or twice per year (preferably before the dry season and after monsoon), apply a thin coat of FurnishMe Botanical Hardwax Oil using a soft cotton pad. Allow the oil to absorb for 15 minutes, then vigorously buff away all excess surface residue with a dry cloth until the timber feels dry and silky.
+                                Once or twice per year (preferably before the dry season and after monsoon), apply a thin coat of Yangon Atelier Botanical Hardwax Oil using a soft cotton pad. Allow the oil to absorb for 15 minutes, then vigorously buff away all excess surface residue with a dry cloth until the timber feels dry and silky.
                             </p>
                         </div>
 
@@ -311,7 +311,7 @@ require_once __DIR__ . '/components/connection.php';
                     </div>
                     <h2 class="font-serif text-2xl sm:text-3xl font-normal text-[#362F2A] tracking-tight">Honed Marble &amp; Travertine Stone</h2>
                     <p>
-                        FurnishMe low coffee tables and architectural pedestals feature natural Italian Carrara marble and unfilled Roman travertine. We hand-hone their surfaces to a matte, non-glossy finish that honors their geological sediment.
+                        Yangon Atelier low coffee tables and architectural pedestals feature natural Italian Carrara marble and unfilled Roman travertine. We hand-hone their surfaces to a matte, non-glossy finish that honors their geological sediment.
                     </p>
 
                     <div class="bg-white rounded-3xl p-6 sm:p-8 border border-[#C9C0B3] shadow-xs space-y-4 text-xs text-[#6E6359]">
