@@ -20,7 +20,7 @@ require_once __DIR__ . '/components/session_check.php';
 require_once __DIR__ . '/../components/connection.php';
 
 
-$error = '';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

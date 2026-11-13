@@ -19,12 +19,6 @@ require_once __DIR__ . '/components/session_check.php';
 
 // Connect database
 require_once __DIR__ . '/../components/connection.php';
-
-// Access Control Guard
-if (!isset($_SESSION['admin_user'])) {
-    header("Location: index.php");
-    exit;
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">

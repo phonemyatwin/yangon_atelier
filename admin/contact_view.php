@@ -18,11 +18,6 @@ require_once __DIR__ . '/components/session_check.php';
 // Connect database
 require_once __DIR__ . '/../components/connection.php';
 
-if (!isset($_SESSION['admin_user'])) {
-    header("Location: index.php");
-    exit;
-}
-
 $contact_id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
 ?>
 <!DOCTYPE html>

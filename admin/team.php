@@ -19,11 +19,6 @@ require_once __DIR__ . '/components/session_check.php';
 // Connect database
 require_once __DIR__ . '/../components/connection.php';
 
-if (!isset($_SESSION['admin_user'])) {
-    header("Location: index.php");
-    exit;
-}
-
 $success = '';
 if (isset($_GET['msg'])) {
     if ($_GET['msg'] === 'created') $success = "Team member profile added successfully.";
