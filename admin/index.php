@@ -1,21 +1,12 @@
 <?php
-
-/**
- * ============================================================================
- * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - ADMIN AUTHENTICATION
- * ============================================================================
- * FILE: admin/index.php
- * PURPOSE: Secure gatekeeper for the administrative control panel. Verifies
- *          administrator credentials against the 'admins' table and establishes
- *          an active $_SESSION['admin_user'] context.
- * ============================================================================
- */
-
 // Initialize session
 require_once __DIR__ . '/../components/session_start.php';
 
-// Check session
-require_once __DIR__ . '/components/session_check.php';
+// Redirect if already logged in as admin
+if (isset($_SESSION['admin_user'])) {
+    header("Location: dashboard.php");
+    exit;
+}
 
 // Connect database
 require_once __DIR__ . '/../components/connection.php';
@@ -23,12 +14,6 @@ require_once __DIR__ . '/../components/connection.php';
 // Handle logout parameter
 if (isset($_GET['logout'])) {
     unset($_SESSION['admin_user']);
-}
-
-// Redirect if already logged in as admin
-if (isset($_SESSION['admin_user'])) {
-    header("Location: dashboard.php");
-    exit;
 }
 
 $error = '';

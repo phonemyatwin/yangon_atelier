@@ -2,6 +2,7 @@
 // Initialize session
 require_once __DIR__ . '/components/session_start.php';
 
+// Redirect if already logged in as user
 if (isset($_SESSION['user_id'])) {
     header('Location: index.php');
     exit;
