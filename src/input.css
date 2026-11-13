@@ -7,11 +7,6 @@
     @apply bg-[#EDE8E0] text-[#362F2A] antialiased font-sans selection:bg-[#8A5A44] selection:text-[#F6F3EE];
   }
 
-  /* ==========================================================================
-     BROWSER AUTOFILL STYLING (Warm Travertine & Smoked Clay Palette)
-     Prevents harsh browser default blue/white color jumps on autocomplete
-     ========================================================================== */
-
   /* 1. Global Base Form Autofill - Travertine (#EDE8E0) */
   input:-webkit-autofill,
   input:-webkit-autofill:hover, 
