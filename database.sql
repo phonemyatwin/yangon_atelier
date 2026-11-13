@@ -15,9 +15,9 @@ USE `furnishme`;
 -- ----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `users` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
-    `username` VARCHAR(100) NOT NULL,
-    `email` VARCHAR(191) NOT NULL UNIQUE,
-    `password` VARCHAR(255) NOT NULL,
+    `username` VARCHAR(50) NOT NULL,
+    `email` VARCHAR(50) NOT NULL UNIQUE,
+    `password` VARCHAR(50) NOT NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -27,9 +27,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- ----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `admins` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
-    `name` VARCHAR(100) NOT NULL,
-    `email` VARCHAR(191) NOT NULL UNIQUE,
-    `password` VARCHAR(255) NOT NULL,
+    `name` VARCHAR(50) NOT NULL,
+    `email` VARCHAR(50) NOT NULL UNIQUE,
+    `password` VARCHAR(50) NOT NULL,
     `role` VARCHAR(50) DEFAULT 'Senior Curator',
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -43,10 +43,10 @@ INSERT IGNORE INTO `admins` (`id`, `name`, `email`, `password`, `role`) VALUES
 -- ----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `products` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
-    `name` VARCHAR(255) NOT NULL,
+    `name` VARCHAR(50) NOT NULL,
     `price` INT NOT NULL,
     `stock` INT NOT NULL DEFAULT 0,
-    `image` VARCHAR(255) NOT NULL,
+    `image` VARCHAR(100) NOT NULL,
     `description` TEXT NULL,
     `category` VARCHAR(100) NOT NULL DEFAULT 'chairs',
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -68,9 +68,9 @@ INSERT IGNORE INTO `products` (`id`, `name`, `price`, `stock`, `image`, `descrip
 -- ----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `blogs` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
-    `title` VARCHAR(255) NOT NULL,
-    `author` VARCHAR(100) NOT NULL DEFAULT 'Atelier Editorial',
-    `image` VARCHAR(255) NOT NULL,
+    `title` VARCHAR(50) NOT NULL,
+    `author` VARCHAR(50) NOT NULL DEFAULT 'Atelier Editorial',
+    `image` VARCHAR(100) NOT NULL,
     `content` LONGTEXT NOT NULL,
     `category` VARCHAR(100) DEFAULT 'Philosophy',
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -88,9 +88,9 @@ INSERT IGNORE INTO `blogs` (`id`, `title`, `author`, `image`, `content`, `catego
 -- ----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `team` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
-    `name` VARCHAR(255) NOT NULL,
-    `position` VARCHAR(255) NOT NULL,
-    `image` VARCHAR(255) NOT NULL,
+    `name` VARCHAR(50) NOT NULL,
+    `position` VARCHAR(50) NOT NULL,
+    `image` VARCHAR(100) NOT NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -98,19 +98,19 @@ CREATE TABLE IF NOT EXISTS `team` (
 INSERT IGNORE INTO `team` (`id`, `name`, `position`, `image`) VALUES
 (1, 'Phone Myat Win', 'Founder & Principal Architect', 'team-1.jpg'),
 (2, 'Thae Nay Nwe Soe', 'Master Joinery Lead & Cabinetmaker', 'team-2.jpg'),
-(3, 'Aung Kyaw Moe', 'Head of Timber Procurement & Forestry', 'team-3.jpg'),
-(4, 'May Zin Phyo', 'Lead Spatial & Interior Architect', 'team-4.jpg'),
-(5, 'Htet Arkar', 'Textile Conservator & Finishing Artisan', 'team-5.jpg'),
-(6, 'Lin Htut Zaw', 'Showroom Director & Client Concierge', 'team-6.jpg');
+(3, 'Su Thinzar Htet', 'Head of Timber Procurement & Forestry', 'team-3.jpg'),
+(4, 'Myat Chal Oo', 'Lead Spatial & Interior Architect', 'team-4.jpg'),
+(5, 'Nyi Nyi Aung', 'Textile Conservator & Finishing Artisan', 'team-5.jpg'),
+(6, 'Min Khant Naung', 'Showroom Director & Client Concierge', 'team-6.jpg');
 
 -- ----------------------------------------------------------------------------
 -- Table: contacts (Showroom inquiries & bespoke commission requests)
 -- ----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `contacts` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
-    `name` VARCHAR(255) NOT NULL,
+    `name` VARCHAR(50) NOT NULL,
     `number` VARCHAR(50) NOT NULL,
-    `email` VARCHAR(191) NOT NULL,
+    `email` VARCHAR(50) NOT NULL,
     `message` TEXT NOT NULL,
     `status` VARCHAR(50) DEFAULT 'Pending Review',
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -118,16 +118,16 @@ CREATE TABLE IF NOT EXISTS `contacts` (
 
 -- Seed sample contacts
 INSERT IGNORE INTO `contacts` (`id`, `name`, `number`, `email`, `message`, `status`) VALUES
-(1, 'Aung Min', '09973383719', 'aungmin@gmail.com', 'Hello, I would like to know more about your modern sofa collection and delivery options in Yangon. We are currently finishing an architectural residence in Yankin and looking for 2 living room modular lounge chairs and an oak dining set.', 'Pending Review'),
-(2, 'Su Su', '09421122846', 'susu@gmail.com', 'Inquiring about trade discounts for our interior architecture studio in Bahan. We have three upcoming residential projects requiring custom dining tables.', 'Followed Up'),
-(3, 'Ko Ko', '09456123789', 'koko@gmail.com', 'Do you offer private weekend showroom viewings for bespoke walnut platform beds?', 'Archived');
+(3, 'Ye Win', '095173969', 'yewinswe@gmail.com', 'Do you offer private weekend showroom viewings for bespoke walnut platform beds?', 'Archived');
+(2, 'Thida Htun', '095173903', 'thidahtun@gmail.com', 'Inquiring about trade discounts for our interior architecture studio in Bahan. We have three upcoming residential projects requiring custom dining tables.', 'Followed Up'),
+(1, 'Aung Min Htun', '09788327884', 'aungminhtun@gmail.com', 'Hello, I would like to know more about your modern sofa collection and delivery options in Yangon. We are currently finishing an architectural residence in Yankin and looking for 2 living room modular lounge chairs and an oak dining set.', 'Pending Review'),
 
 -- ----------------------------------------------------------------------------
 -- Table: subscribers (Journal newsletter subscribers)
 -- ----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `subscribers` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
-    `email` VARCHAR(191) NOT NULL UNIQUE,
+    `email` VARCHAR(50) NOT NULL UNIQUE,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 

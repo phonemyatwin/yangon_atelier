@@ -1,57 +1,59 @@
 <?php
-/**
- * ============================================================================
- * FURNISHME BACKEND INSTRUCTION GUIDELINE - CONTACT & INQUIRIES
- * ============================================================================
- * FILE: contact.php
- * PURPOSE: Processes direct showroom inquiries, bespoke dimension requests,
- *          and stores client messages in the 'contacts' table for admin review.
- * 
- * STEP-BY-STEP IMPLEMENTATION GUIDE:
- * 1. Initialize Session:
- *    if (session_status() === PHP_SESSION_NONE) {
- *        session_start();
- *    }
- * 
- * 2. Include Database Connection:
- *    require_once "components/connection.php";
- * 
- * 3. Process POST Inquiry Submission:
- *    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['send'])) {
- *        $name    = trim($_POST['name'] ?? '');
- *        $number  = trim($_POST['number'] ?? '');
- *        $email   = trim($_POST['email'] ?? '');
- *        $message = trim($_POST['message'] ?? '');
- * 
- *        // Validation
- *        if (empty($name) || empty($number) || empty($email) || empty($message)) {
- *            $error = "All fields are required. Please complete the form.";
- *        } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
- *            $error = "Please provide a valid email address.";
- *        } else {
- *            // Insert inquiry record into contacts table
- *            $stmt = $connection->prepare("INSERT INTO contacts (name, number, email, message, status) VALUES (?, ?, ?, ?, 'Pending Review')");
- *            $stmt->bind_param("ssss", $name, $number, $email, $message);
- * 
- *            if ($stmt->execute()) {
- *                $success = "Thank you, " . htmlspecialchars($name) . ". Your inquiry has been received. Our concierge will reach out promptly.";
- *                // Clear fields on success
- *                $name = $number = $email = $message = '';
- *            } else {
- *                $error = "Failed to record message: " . $connection->error;
- *            }
- *            $stmt->close();
- *        }
- *    }
- * ============================================================================
- */
+// Initialize session
+require_once __DIR__ . '/components/session_start.php';
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+// Check session
+require_once __DIR__ . '/components/session_check.php';
+
+// Connect database
+require_once __DIR__ . '/components/connection.php';
+
+$errors = [];
+$success = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['send'])) {
+    $name = trim($_POST['name'] ?? '');
+    $number = trim($_POST['number'] ?? '');
+    $email = strtolower(trim($_POST['email'] ?? ''));
+    $message = trim($_POST['message'] ?? '');
+
+    // Form check
+    if (empty($name) || empty($number) || empty($email) || empty($message)) {
+        $errors['form'] = 'All fields are required. Please complete the form.';
+    } else {
+        // Phone number check
+        // if (!filter_var($number, FILTER_VALIDATE_INT)) {
+        // I use regular expression(regex) pattern here cuz the above one doesn't work. 
+        if (!preg_match('/^[0-9+\-\s()]{7,20}$/', $number)) {
+            $errors['number'] = 'Please enter a valid phone number.';
+        }
+
+        // Check email
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $errors['email'] = 'Please enter a valid email address.';
+        }
+    }
+
+    if (empty($errors)) {
+        try {
+            $sql = 'INSERT INTO contacts(name, number, email, message) VALUES(:name, :number, :email, :message)';
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([
+                ':name' => $name,
+                ':number' => $number,
+                ':email' => $email,
+                ':message' => $message
+            ]);
+            $safe_name = htmlspecialchars($name);
+            $success = "Thank you {$safe_name}. Your inquiry has been received. Our concierge will reach out promptly.";
+            $name = $number = $email = $message = '';
+        } catch (PDOException $e) {
+            error_log('Contact form error: ' . $e->getMessage());
+            $errors['connection'] = 'Unable to send your inquiry at this moment. Please try again later.';
+        }
+    }
 }
 
-$error = '';
-$success = '';
 ?>
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
@@ -91,7 +93,7 @@ $success = '';
     <!-- CONTACT DETAILS & FORM TWO-COLUMN LAYOUT -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-            
+
             <!-- Left Column: Showroom Contact Information -->
             <div class="lg:col-span-5 space-y-8">
                 <div>
@@ -169,33 +171,7 @@ $success = '';
                         <p class="text-xs text-[#6E6359] mt-1">Our team typically responds within four business hours.</p>
                     </div>
 
-                    <!-- ==============================================================
-                         PHP BACKEND GUIDELINE: Alert Messages
-                         Output feedback notification if form submission succeeds or fails
-                         ============================================================== -->
-                    <?php if (!empty($error)): ?>
-                        <div class="mb-6 p-4 rounded-xl bg-[#EFE0E0] border border-[#DFC8C8] text-[#8C3B3B] text-xs flex items-center gap-3">
-                            <i class="ri-error-warning-line text-lg flex-shrink-0"></i>
-                            <span><?= htmlspecialchars($error) ?></span>
-                        </div>
-                    <?php endif; ?>
-
-                    <?php if (!empty($success)): ?>
-                        <div class="mb-6 p-4 rounded-xl bg-[#DCE5DF] border border-[#C6D6CB] text-[#3F624D] text-xs flex items-center gap-3">
-                            <i class="ri-checkbox-circle-line text-lg flex-shrink-0"></i>
-                            <span><?= htmlspecialchars($success) ?></span>
-                        </div>
-                    <?php endif; ?>
-
-                    <!-- ==============================================================
-                         PHP BACKEND GUIDELINE: Contact Form Handler
-                         - Action: action="" (submits to self)
-                         - Method: POST
-                         - Trigger: name="send" on submit button
-                         - Retains entered values on validation error
-                         ============================================================== -->
-                    <form action="" method="POST" data-toast-success="Your message has been sent. Our team will contact you shortly." class="space-y-6">
-                        
+                    <form action="" method="POST" class="space-y-6">
                         <!-- Name Field -->
                         <div class="space-y-2">
                             <label for="name" class="block text-xs font-semibold uppercase tracking-wider text-[#362F2A]">
@@ -203,7 +179,7 @@ $success = '';
                             </label>
                             <div class="relative">
                                 <i class="ri-user-line absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base"></i>
-                                <input type="text" id="name" name="name" required value="<?= htmlspecialchars($_POST['name'] ?? '') ?>" placeholder="e.g. Daw Khin Hnin" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                                <input type="text" id="name" name="name" required value="<?= htmlspecialchars($name ?? '') ?>" placeholder="e.g. Phone Myat Win" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                             </div>
                         </div>
 
@@ -216,7 +192,7 @@ $success = '';
                                 </label>
                                 <div class="relative">
                                     <i class="ri-phone-line absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base"></i>
-                                    <input type="tel" id="number" name="number" required value="<?= htmlspecialchars($_POST['number'] ?? '') ?>" placeholder="09 973 383 719" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                                    <input type="tel" id="number" name="number" required value="<?= htmlspecialchars($number ?? '') ?>" placeholder="09 973 383 719" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                                 </div>
                             </div>
 
@@ -227,7 +203,7 @@ $success = '';
                                 </label>
                                 <div class="relative">
                                     <i class="ri-mail-line absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base"></i>
-                                    <input type="email" id="email" name="email" required value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" placeholder="you@domain.com" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                                    <input type="email" id="email" name="email" required value="<?= htmlspecialchars($email ?? '') ?>" placeholder="you@domain.com" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                                 </div>
                             </div>
                         </div>
@@ -238,7 +214,7 @@ $success = '';
                                 Inquiry or Piece of Interest <span class="text-rose-600">*</span>
                             </label>
                             <div class="relative">
-                                <textarea id="message" name="message" rows="5" required placeholder="Tell us about your spatial project, requested piece specifications, or desired delivery timing..." class="w-full p-4 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all"><?= htmlspecialchars($_POST['message'] ?? '') ?></textarea>
+                                <textarea id="message" name="message" rows="5" required placeholder="Tell us about your spatial project, requested piece specifications, or desired delivery timing..." class="w-full p-4 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all"><?= htmlspecialchars($message ?? '') ?></textarea>
                             </div>
                         </div>
 
@@ -260,7 +236,7 @@ $success = '';
                 <h3 class="font-serif text-xl font-normal text-[#362F2A]">Locate Our Yankin Atelier</h3>
             </div>
             <div class="w-full h-96 sm:h-[450px] rounded-3xl overflow-hidden border border-[#C9C0B3] shadow-md bg-[#EDE8E0]">
-                <iframe class="w-full h-full border-0"
+                <iframe title="FurnishMe Yangon Atelier Location" class="w-full h-full border-0"
                     src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3818.839551851325!2d96.16721207535012!3d16.834313983961668!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTbCsDUwJzAzLjUiTiA5NsKwMTAnMTEuMiJF!5e0!3m2!1sen!2sch!4v1794417196576!5m2!1sen!2sch"
                     allowfullscreen="" loading="lazy"></iframe>
             </div>
@@ -269,6 +245,26 @@ $success = '';
 
     <?php include "components/footer.php"; ?>
     <?php include "components/js.php"; ?>
+
+    <!-- Errors pop-up like a toaster -->
+    <?php if (!empty($errors)): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                <?php foreach ($errors as $error): ?>
+                    showToast(<?= json_encode($error); ?>, 'error');
+                <?php endforeach; ?>
+            });
+        </script>
+    <?php endif; ?>
+
+    <!-- Success pop-up -->
+    <?php if (!empty($success)): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                showToast(<?= json_encode($success); ?>, 'success');
+            });
+        </script>
+    <?php endif; ?>
 </body>
 
 </html>

@@ -2,10 +2,12 @@
 // Initialize session
 require_once __DIR__ . '/components/session_start.php';
 
-// Session check
-require_once __DIR__ . '/components/session_check.php';
+if (isset($_SESSION['user_id'])) {
+    header('Location: index.php');
+    exit;
+}
 
-// Database connection
+// Connect database
 require_once __DIR__ . '/components/connection.php';
 
 $errors = [];
@@ -93,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
                         </label>
                         <div class="relative">
                             <i class="ri-mail-line absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base"></i>
-                            <input type="email" id="email" name="email" required value="<?= htmlspecialchars($_POST['email'] ?? $_COOKIE['email_cookie'] ?? '') ?>" placeholder="client@example.com" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                            <input type="email" id="email" name="email" required value="<?= htmlspecialchars($email ?? $_COOKIE['email_cookie'] ?? '') ?>" placeholder="client@example.com" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                         </div>
                     </div>
 
@@ -152,6 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
         <?php unset($_SESSION['success']); ?>
     <?php endif; ?>
 
+    <!-- Errors -->
     <?php if (!empty($errors)): ?>
         <script>
             document.addEventListener('DOMContentLoaded', function() {

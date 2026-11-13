@@ -2,10 +2,12 @@
 // Initialize session
 require_once __DIR__ . '/components/session_start.php';
 
-// Session check
-require_once __DIR__ . '/components/session_check.php';
+if (isset($_SESSION['user_id'])) {
+    header('Location: index.php');
+    exit;
+}
 
-// Database connection
+// Connect database
 require_once __DIR__ . '/components/connection.php';
 
 $errors = [];
@@ -16,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
     $password = $_POST['password'] ?? '';
     $confirm_password = $_POST['confirm_password'] ?? '';
 
-    // Username check
+    // Check username
     if (empty($username)) {
         $errors['username'] = 'Username is required.';
     } else if (strlen($username) < 3 || strlen($username) > 30) {
@@ -31,11 +33,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
         }
     }
 
-    // Email check
+    // Check email
     if (empty($email)) {
         $errors['email'] = 'Email is required.';
     } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errors['email'] = 'Please enter a valid email.';
+        $errors['email'] = 'Please enter a valid email address.';
     }
     if (!isset($errors['email'])) {
         $sql = 'SELECT 1 FROM users WHERE email = :email LIMIT 1';
@@ -46,14 +48,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
         }
     }
 
-    // Password check
+    // Check password
     if (empty($password)) {
         $errors['password'] = 'Password is required.';
     } else if (strlen($password) < 8) {
         $errors['password'] = 'Password must be at least 8 characters.';
     }
 
-    // Confirm password check
+    // Check confirm password
     if (empty($confirm_password)) {
         $errors['confirm_password'] = 'Please confirm your password.';
     } else if ($password !== $confirm_password) {
@@ -132,7 +134,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
                         </label>
                         <div class="relative">
                             <i class="ri-user-line absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base"></i>
-                            <input type="text" id="username" name="username" required value="<?= htmlspecialchars($_POST['username'] ?? '') ?>" placeholder="Choose a username" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                            <input type="text" id="username" name="username" required value="<?= htmlspecialchars($username ?? '') ?>" placeholder="Choose a username" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                         </div>
                     </div>
 
@@ -143,7 +145,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
                         </label>
                         <div class="relative">
                             <i class="ri-mail-line absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base"></i>
-                            <input type="email" id="email" name="email" required value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" placeholder="client@example.com" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                            <input type="email" id="email" name="email" required value="<?= htmlspecialchars($email ?? '') ?>" placeholder="client@example.com" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                         </div>
                     </div>
 
