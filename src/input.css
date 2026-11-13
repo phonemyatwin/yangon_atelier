@@ -7,15 +7,124 @@
     @apply bg-[#EDE8E0] text-[#362F2A] antialiased font-sans selection:bg-[#8A5A44] selection:text-[#F6F3EE];
   }
 
-  /* Browser autofill styling to match warm travertine raw linen */
+  /* ==========================================================================
+     BROWSER AUTOFILL STYLING (Warm Travertine & Smoked Clay Palette)
+     Prevents harsh browser default blue/white color jumps on autocomplete
+     ========================================================================== */
+
+  /* 1. Global Base Form Autofill - Travertine (#EDE8E0) */
   input:-webkit-autofill,
   input:-webkit-autofill:hover, 
   input:-webkit-autofill:focus, 
-  input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 1000px #F6F3EE inset !important;
+  input:-webkit-autofill:active,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  textarea:-webkit-autofill:active,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus,
+  select:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px #EDE8E0 inset !important;
+    box-shadow: 0 0 0 1000px #EDE8E0 inset !important;
     -webkit-text-fill-color: #362F2A !important;
     caret-color: #362F2A !important;
-    transition: background-color 5000s ease-in-out 0s;
+    color: #362F2A !important;
+    transition: background-color 5000000s ease-in-out 0s, color 5000000s ease-in-out 0s;
+  }
+
+  /* Focus ring for standard autofilled inputs */
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px #EDE8E0 inset, 0 0 0 1px #8A5A44 !important;
+    box-shadow: 0 0 0 1000px #EDE8E0 inset, 0 0 0 1px #8A5A44 !important;
+    border-color: #8A5A44 !important;
+  }
+
+  /* 2. Raw Linen Inputs Autofill (#F6F3EE) if explicitly assigned */
+  input[class*="bg-[#F6F3EE]"]:-webkit-autofill,
+  input[class*="bg-[#F6F3EE]"]:-webkit-autofill:hover,
+  input[class*="bg-[#F6F3EE]"]:-webkit-autofill:focus,
+  input[class*="bg-[#F6F3EE]"]:-webkit-autofill:active,
+  textarea[class*="bg-[#F6F3EE]"]:-webkit-autofill,
+  select[class*="bg-[#F6F3EE]"]:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #F6F3EE inset !important;
+    box-shadow: 0 0 0 1000px #F6F3EE inset !important;
+    -webkit-text-fill-color: #362F2A !important;
+    caret-color: #362F2A !important;
+    color: #362F2A !important;
+    transition: background-color 5000000s ease-in-out 0s, color 5000000s ease-in-out 0s;
+  }
+
+  input[class*="bg-[#F6F3EE]"]:-webkit-autofill:focus,
+  textarea[class*="bg-[#F6F3EE]"]:-webkit-autofill:focus,
+  select[class*="bg-[#F6F3EE]"]:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px #F6F3EE inset, 0 0 0 1px #8A5A44 !important;
+    box-shadow: 0 0 0 1000px #F6F3EE inset, 0 0 0 1px #8A5A44 !important;
+    border-color: #8A5A44 !important;
+  }
+
+  /* 3. Global Footer & Dark Surfaces Autofill - Smoked Walnut (#3A322B) */
+  footer input:-webkit-autofill,
+  footer input:-webkit-autofill:hover,
+  footer input:-webkit-autofill:focus,
+  footer input:-webkit-autofill:active,
+  input[name="subscriber_email"]:-webkit-autofill,
+  input[name="subscriber_email"]:-webkit-autofill:hover,
+  input[name="subscriber_email"]:-webkit-autofill:focus,
+  input[name="subscriber_email"]:-webkit-autofill:active,
+  input[class*="bg-[#3A322B]"]:-webkit-autofill,
+  input[class*="bg-[#3A322B]"]:-webkit-autofill:hover,
+  input[class*="bg-[#3A322B]"]:-webkit-autofill:focus,
+  input[class*="bg-[#3A322B]"]:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px #3A322B inset !important;
+    box-shadow: 0 0 0 1000px #3A322B inset !important;
+    -webkit-text-fill-color: #F6F3EE !important;
+    caret-color: #F6F3EE !important;
+    color: #F6F3EE !important;
+    transition: background-color 5000000s ease-in-out 0s, color 5000000s ease-in-out 0s;
+  }
+
+  footer input:-webkit-autofill:focus,
+  input[name="subscriber_email"]:-webkit-autofill:focus,
+  input[class*="bg-[#3A322B]"]:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px #3A322B inset, 0 0 0 1px #8A5A44 !important;
+    box-shadow: 0 0 0 1000px #3A322B inset, 0 0 0 1px #8A5A44 !important;
+    border-color: #8A5A44 !important;
+  }
+
+  /* 4. Standards-compliant :autofill (Separate blocks to avoid invalidating selectors) */
+  input:autofill,
+  textarea:autofill,
+  select:autofill {
+    box-shadow: 0 0 0 1000px #EDE8E0 inset !important;
+    -webkit-text-fill-color: #362F2A !important;
+    caret-color: #362F2A !important;
+    color: #362F2A !important;
+  }
+
+  input:autofill:focus,
+  textarea:autofill:focus,
+  select:autofill:focus {
+    box-shadow: 0 0 0 1000px #EDE8E0 inset, 0 0 0 1px #8A5A44 !important;
+    border-color: #8A5A44 !important;
+  }
+
+  footer input:autofill,
+  input[name="subscriber_email"]:autofill,
+  input[class*="bg-[#3A322B]"]:autofill {
+    box-shadow: 0 0 0 1000px #3A322B inset !important;
+    -webkit-text-fill-color: #F6F3EE !important;
+    caret-color: #F6F3EE !important;
+    color: #F6F3EE !important;
+  }
+
+  footer input:autofill:focus,
+  input[name="subscriber_email"]:autofill:focus,
+  input[class*="bg-[#3A322B]"]:autofill:focus {
+    box-shadow: 0 0 0 1000px #3A322B inset, 0 0 0 1px #8A5A44 !important;
+    border-color: #8A5A44 !important;
   }
 }
 
