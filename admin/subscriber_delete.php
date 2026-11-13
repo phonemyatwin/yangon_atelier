@@ -1,3 +1,60 @@
+<?php
+/**
+ * ============================================================================
+ * FURNISHME BACKEND INSTRUCTION GUIDELINE - DELETE NEWSLETTER SUBSCRIBER
+ * ============================================================================
+ * FILE: admin/subscriber_delete.php
+ * PURPOSE: Unsubscribes and permanently removes an email address from the
+ *          'subscribers' table by ID.
+ * 
+ * STEP-BY-STEP IMPLEMENTATION GUIDE:
+ * 1. Initialize Session & Enforce Authentication Guard:
+ *    if (session_status() === PHP_SESSION_NONE) { session_start(); }
+ *    if (!isset($_SESSION['admin_user'])) {
+ *        header("Location: index.php");
+ *        exit;
+ *    }
+ * 
+ * 2. Include Database Connection:
+ *    require_once "../components/connection.php";
+ * 
+ * 3. Handle POST Deletion Request:
+ *    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'])) {
+ *        $id = (int)($_POST['id'] ?? 0);
+ *        if ($id > 0) {
+ *            $stmt = $connection->prepare("DELETE FROM subscribers WHERE id = ?");
+ *            $stmt->bind_param("i", $id);
+ *            $stmt->execute();
+ *            header("Location: subscribers.php?msg=deleted");
+ *            exit;
+ *        }
+ *    }
+ * 
+ * 4. Fetch Subscriber Summary for Confirmation:
+ *    $sub_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+ *    $stmt = $connection->prepare("SELECT id, email, created_at FROM subscribers WHERE id = ? LIMIT 1");
+ *    $stmt->bind_param("i", $sub_id);
+ *    $stmt->execute();
+ *    $subscriber = $stmt->get_result()->fetch_assoc();
+ *    if (!$subscriber) {
+ *        header("Location: subscribers.php");
+ *        exit;
+ *    }
+ * ============================================================================
+ */
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (!isset($_SESSION['admin_user'])) {
+    header("Location: index.php");
+    exit;
+}
+
+$error = '';
+$sub_id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,7 +87,7 @@
                         </div>
                         <h2 class="font-serif text-2xl sm:text-3xl font-medium text-[#FAF6EE]">Confirm Subscriber Removal</h2>
                     </div>
-                    <a href="subscribers.php" class="px-4 py-2 rounded-xl border border-[#2A231C] text-xs font-medium text-[#D6C8B4] hover:bg-white transition-colors">
+                    <a href="subscribers.php" class="px-4 py-2 rounded-xl border border-[#2A231C] text-xs font-medium text-[#D6C8B4] hover:bg-[#161310] transition-colors">
                         Cancel
                     </a>
                 </div>
@@ -48,19 +105,32 @@
                     </div>
 
                     <!-- Subscriber Details Summary -->
-                    <!-- [PHP_BACKEND_HOOK: Query subscriber by ID for deletion confirmation (SELECT * FROM subscribers WHERE id = :id)] -->
+                    <!-- ==========================================================
+                         PHP BACKEND GUIDELINE: Display Subscriber Summary
+                         Fetch via: SELECT id, email, created_at FROM subscribers WHERE id = ?
+                         Fields to render:
+                         - ID:    #<?= (int)$sub_id ?>
+                         - Date:  <?= htmlspecialchars($subscriber['created_at'] ?? '2026-11-01') ?>
+                         - Email: <?= htmlspecialchars($subscriber['email'] ?? 'aungmin@gmail.com') ?>
+                         ========================================================== -->
                     <div class="border border-[#2A231C] rounded-2xl p-5 mb-8 space-y-2 text-xs">
                         <div class="flex items-center justify-between border-b border-[#2A231C] pb-2">
-                            <span class="text-stone-400 font-mono">Subscriber #1</span>
-                            <span class="text-stone-400">Subscribed on 2026-11-01</span>
+                            <span class="text-stone-400 font-mono">Subscriber #<?= (int)$sub_id ?></span>
+                            <span class="text-stone-400">Subscribed on <?= htmlspecialchars($subscriber['created_at'] ?? '2026-11-01') ?></span>
                         </div>
-                        <h4 class="font-mono font-semibold text-[#FAF6EE] text-sm">aungmin@gmail.com</h4>
+                        <h4 class="font-mono font-semibold text-stone-900 text-sm"><?= htmlspecialchars($subscriber['email'] ?? 'aungmin@gmail.com') ?></h4>
                     </div>
 
-                    <!-- [PHP_BACKEND_HOOK: Subscriber deletion handler. POST method, execute DELETE FROM subscribers WHERE id = :id] -->
-                    <form method="POST" class="flex items-center justify-end gap-3 pt-4 border-t border-[#2A231C]">
-                        <input type="hidden" name="id" value="1">
-                        <a href="subscribers.php" class="px-5 py-2.5 rounded-xl border border-[#2A231C] text-xs font-medium text-[#D6C8B4] hover:bg-[#0D0B09] transition-colors">
+                    <!-- ==========================================================
+                         PHP BACKEND GUIDELINE: Subscriber Deletion Form Handler
+                         Method: POST
+                         Action: subscriber_delete.php
+                         Target SQL: DELETE FROM subscribers WHERE id = ?
+                         On success: Redirect to subscribers.php?msg=deleted
+                         ========================================================== -->
+                    <form method="POST" action="subscriber_delete.php" class="flex items-center justify-end gap-3 pt-4 border-t border-stone-200">
+                        <input type="hidden" name="id" value="<?= (int)$sub_id ?>">
+                        <a href="subscribers.php" class="px-5 py-2.5 rounded-xl border border-[#2A231C] text-xs font-medium text-stone-700 hover:bg-stone-100 transition-colors">
                             Cancel
                         </a>
                         <button type="submit" name="delete" class="px-5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-medium transition-colors shadow-xs flex items-center gap-2">

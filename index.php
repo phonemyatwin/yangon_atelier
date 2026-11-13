@@ -1,3 +1,35 @@
+<?php
+
+/**
+ * ============================================================================
+ * FURNISHME BACKEND INSTRUCTION GUIDELINE - STOREFRONT HOMEPAGE
+ * ============================================================================
+ * FILE: index.php
+ * PURPOSE: Showcases featured hero lookbooks, curated product masterpieces,
+ *          craftsmanship narratives, and recent journal editorial essays.
+ * 
+ * STEP-BY-STEP IMPLEMENTATION GUIDE:
+ * 1. Initialize Session & Database Connection:
+ *    if (session_status() === PHP_SESSION_NONE) { session_start(); }
+ *    require_once "components/connection.php";
+ * 
+ * 2. Query Curated Masterpiece Products:
+ *    $product_stmt = $connection->query("SELECT id, name, price, stock, image, category FROM products ORDER BY id DESC LIMIT 4");
+ *    $featured_products = $product_stmt ? $product_stmt->fetch_all(MYSQLI_ASSOC) : [];
+ * 
+ * 3. Query Recent Journal Articles:
+ *    $blog_stmt = $connection->query("SELECT id, title, author, image, content, category, created_at FROM blogs ORDER BY id DESC LIMIT 4");
+ *    $recent_blogs = $blog_stmt ? $blog_stmt->fetch_all(MYSQLI_ASSOC) : [];
+ * ============================================================================
+ */
+// Initialize session
+require_once __DIR__ . '/components/session_start.php';
+
+// Database connection
+require_once __DIR__ . '/components/connection.php';
+
+
+?>
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 
@@ -15,10 +47,15 @@
     <?php include "components/navbar.php"; ?>
 
     <!-- HERO SLIDER SECTION (7 MASTER CURATED SLIDES) -->
-    <!-- [PHP_BACKEND_HOOK: Featured Hero Slider Query (e.g., SELECT * FROM hero_slides WHERE active = 1 ORDER BY sort_order ASC)] -->
+    <!-- ==================================================================
+         PHP BACKEND GUIDELINE: Hero Slider Configuration
+         Hero slides can be rendered dynamically from a `hero_slides` table or
+         configured statically as curated aesthetic lookbooks.
+         Query pattern: SELECT * FROM hero_slides WHERE active = 1 ORDER BY sort_order ASC
+         ================================================================== -->
     <section class="relative bg-stone-950 text-white overflow-hidden">
         <div class="relative min-h-[620px] lg:min-h-[720px] flex items-center">
-            
+
             <!-- Slide 1: Heirloom Private Library Suite (Active by default) -->
             <div class="hero-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-100 z-10">
                 <div class="absolute inset-0">
@@ -324,11 +361,18 @@
         </div>
     </section>
 
-    <!-- CURATED SALON ACQUISITIONS (BESPOKE EDITORIAL SPOTLIGHT & CURATED TRIO - NO WALL OF CARDS!) -->
-    <!-- [PHP_BACKEND_HOOK: Dynamic product loop. Use foreach($products as $product) to render: $product['id'], $product['image'], $product['name'], $product['price'], $product['stock']] -->
+    <!-- CURATED SALON ACQUISITIONS (BESPOKE EDITORIAL SPOTLIGHT & CURATED TRIO) -->
+    <!-- ==================================================================
+         PHP BACKEND GUIDELINE: Featured Products Loop
+         Query: SELECT * FROM products ORDER BY id DESC LIMIT 4
+         Use $featured_products to dynamically populate:
+         - Masterpiece spotlight ($featured_products[0])
+         - Trio grid ($featured_products[1..3])
+         - Data attributes: name, price, stock, category
+         ================================================================== -->
     <section class="bg-[#110E0C] border-y border-[#221C16] py-20 lg:py-28">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-            
+
             <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
                 <div>
                     <span class="text-xs uppercase tracking-[0.25em] text-[#C5A059] font-semibold block mb-2">Private Acquisitions</span>
@@ -509,8 +553,14 @@
         </div>
     </section>
 
-    <!-- THE ATELIER JOURNAL (MAGAZINE SPREAD & CHRONOLOGICAL LEDGER - NO REPETITIVE CARDS!) -->
-    <!-- [PHP_BACKEND_HOOK: Dynamic blog posts query (SELECT * FROM blogs ORDER BY created_at DESC LIMIT 4)] -->
+    <!-- THE ATELIER JOURNAL (MAGAZINE SPREAD & CHRONOLOGICAL LEDGER) -->
+    <!-- ==================================================================
+         PHP BACKEND GUIDELINE: Recent Journal Articles Query
+         Query: SELECT * FROM blogs ORDER BY created_at DESC LIMIT 4
+         Use $recent_blogs to dynamically populate:
+         - Lead essay ($recent_blogs[0]): Title, content excerpt, cover image
+         - Secondary list ($recent_blogs[1..3]): Links, dates, authors
+         ================================================================== -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
             <div>
@@ -524,7 +574,7 @@
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
-            
+
             <!-- LEFT: FEATURED LEAD EDITORIAL STORY -->
             <article class="lg:col-span-7 rounded-3xl bg-[#161310] border border-[#2A231C] overflow-hidden shadow-2xl flex flex-col justify-between group">
                 <a href="blog_detail.php?id=1" class="relative aspect-[16/10] overflow-hidden bg-[#0D0B09] block border-b border-[#221C16]">

@@ -1,19 +1,24 @@
-<!-- [PHP_BACKEND_HOOK: Session termination handler (session_destroy, unset auth cookies, redirect to login.php)] -->
-<!DOCTYPE html>
-<html lang="en">
+<?php
+// Initialize session
+require_once __DIR__ . '/components/session_start.php';
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0;url=login.php">
-    <title>Logout | FurnishMe</title>
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-</head>
+// Clear all session values
+$_SESSION = [];
 
-<body class="bg-[#FAF8F5] text-stone-900 font-sans p-8 flex items-center justify-center min-h-screen">
-    <div class="text-center">
-        <p class="text-sm text-stone-600">Signing out of FurnishMe Atelier...</p>
-        <p class="text-xs text-stone-400 mt-2">Redirecting to <a href="login.php" class="underline">login</a>...</p>
-    </div>
-</body>
+// Delete session cookie
+if (ini_get("session.use_cookies")) {
+    $params = session_get_cookie_params();
+    setcookie(session_name(), '', [
+        'expires' => time() - 3600,
+        'path' => $params['path'],
+        'httponly' => $params['httponly'],
+        'samesite' => $params['samesite']
+    ]);
+}
 
-</html>
+// Destroy session data storage
+session_destroy();
+
+// Redirect to login page
+header("Location: login.php");
+exit;

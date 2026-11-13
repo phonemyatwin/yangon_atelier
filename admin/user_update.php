@@ -1,10 +1,91 @@
+<?php
+/**
+ * ============================================================================
+ * FURNISHME BACKEND INSTRUCTION GUIDELINE - UPDATE USER ACCOUNT
+ * ============================================================================
+ * FILE: admin/user_update.php
+ * PURPOSE: Queries existing user account by ID, populates the form, handles
+ *          optional password reset, and updates the 'users' table.
+ * 
+ * STEP-BY-STEP IMPLEMENTATION GUIDE:
+ * 1. Initialize Session & Enforce Authentication Guard:
+ *    if (session_status() === PHP_SESSION_NONE) { session_start(); }
+ *    if (!isset($_SESSION['admin_user'])) {
+ *        header("Location: index.php");
+ *        exit;
+ *    }
+ * 
+ * 2. Include Database Connection:
+ *    require_once "../components/connection.php";
+ * 
+ * 3. Validate and Query Existing User Record:
+ *    $id = isset($_GET['id']) ? (int)$_GET['id'] : (isset($_POST['id']) ? (int)$_POST['id'] : 0);
+ *    if ($id <= 0) {
+ *        header("Location: users.php");
+ *        exit;
+ *    }
+ *    $stmt = $connection->prepare("SELECT id, username, email FROM users WHERE id = ? LIMIT 1");
+ *    $stmt->bind_param("i", $id);
+ *    $stmt->execute();
+ *    $user = $stmt->get_result()->fetch_assoc();
+ *    $stmt->close();
+ *    if (!$user) {
+ *        header("Location: users.php?error=not_found");
+ *        exit;
+ *    }
+ * 
+ * 4. Process POST Update:
+ *    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+ *        $username = trim($_POST['username'] ?? '');
+ *        $email    = trim($_POST['email'] ?? '');
+ *        $password = $_POST['password'] ?? '';
+ * 
+ *        if (empty($username) || empty($email)) {
+ *            $error = "Username and email cannot be empty.";
+ *        } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+ *            $error = "Please provide a valid email address.";
+ *        } else {
+ *            if (!empty($password)) {
+ *                // User provided new password to reset
+ *                $hashed = password_hash($password, PASSWORD_DEFAULT);
+ *                $update_stmt = $connection->prepare("UPDATE users SET username = ?, email = ?, password = ? WHERE id = ?");
+ *                $update_stmt->bind_param("sssi", $username, $email, $hashed, $id);
+ *            } else {
+ *                // Retain current password
+ *                $update_stmt = $connection->prepare("UPDATE users SET username = ?, email = ? WHERE id = ?");
+ *                $update_stmt->bind_param("ssi", $username, $email, $id);
+ *            }
+ * 
+ *            if ($update_stmt->execute()) {
+ *                $update_stmt->close();
+ *                header("Location: users.php?msg=updated");
+ *                exit;
+ *            } else {
+ *                $error = "Failed to update user account: " . $connection->error;
+ *            }
+ *        }
+ *    }
+ * ============================================================================
+ */
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (!isset($_SESSION['admin_user'])) {
+    header("Location: index.php");
+    exit;
+}
+
+$error = '';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit User | FurnishMe Atelier Admin</title>
+    <title>Edit User Account | FurnishMe Admin</title>
     <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>
@@ -28,18 +109,32 @@
                             <span>/</span>
                             <span class="text-[#FAF6EE] font-medium">Edit User</span>
                         </div>
-                        <h2 class="font-serif text-2xl sm:text-3xl font-medium text-[#FAF6EE]">Edit User Account</h2>
+                        <h2 class="font-serif text-2xl sm:text-3xl font-medium text-[#FAF6EE]">Edit Client Account</h2>
                     </div>
                     <a href="users.php" class="px-4 py-2 rounded-xl border border-[#2A231C] text-xs font-medium text-[#D6C8B4] hover:bg-white transition-colors">
                         Back to List
                     </a>
                 </div>
 
+                <!-- Error Notification Banner -->
+                <?php if (!empty($error)): ?>
+                    <div class="p-4 rounded-2xl bg-rose-950/60 border border-rose-800 text-rose-300 text-xs flex items-center gap-2.5">
+                        <i class="ri-error-warning-line text-lg flex-shrink-0"></i>
+                        <span><?= htmlspecialchars($error) ?></span>
+                    </div>
+                <?php endif; ?>
+
                 <!-- Form Card -->
                 <div class="bg-[#161310] rounded-3xl border border-[#2A231C] p-6 sm:p-10 shadow-xs">
-                    <!-- [PHP_BACKEND_HOOK: User update handler. Method: POST. Sanitize inputs, check if password changed (if so hash new password), UPDATE users SET username = :username, email = :email WHERE id = :id] -->
-                    <form method="POST" class="space-y-5">
-                        <input type="hidden" name="id" value="1">
+                    <!-- ==========================================================
+                         PHP BACKEND GUIDELINE: User Update Form
+                         - Action: action="" (submits to self)
+                         - Method: POST
+                         - Hidden id input: <input type="hidden" name="id" value="<?= $user['id'] ?? 1 ?>">
+                         - Prefill inputs with current record values
+                         ========================================================== -->
+                    <form action="" method="POST" class="space-y-5">
+                        <input type="hidden" name="id" value="<?= htmlspecialchars($_GET['id'] ?? '1') ?>">
 
                         <!-- Username -->
                         <div class="space-y-1.5">
@@ -75,17 +170,16 @@
                             <span class="text-[11px] text-stone-400">Only fill this if you want to replace the user's password.</span>
                         </div>
 
-                        <!-- Form Actions -->
+                        <!-- Actions -->
                         <div class="pt-4 border-t border-[#2A231C] flex items-center justify-end gap-3">
                             <a href="users.php" class="px-5 py-3 rounded-xl border border-[#2A231C] text-xs font-medium text-[#D6C8B4] hover:bg-[#0D0B09] transition-colors">
                                 Cancel
                             </a>
-                            <button type="submit" name="update" class="px-6 py-3 rounded-xl bg-[#C5A059] hover:bg-[#D4AF37] text-[#0D0B09] font-semibold text-xs font-medium transition-colors shadow-xs flex items-center gap-2">
-                                <i class="ri-save-line text-sm"></i>
-                                <span>Save Changes</span>
+                            <button type="submit" name="update_user" class="px-6 py-3 rounded-xl bg-[#C5A059] hover:bg-[#D4AF37] text-[#0D0B09] text-xs font-semibold transition-colors shadow-xs flex items-center gap-2">
+                                <i class="ri-save-line text-base"></i>
+                                <span>Save User Changes</span>
                             </button>
                         </div>
-
                     </form>
                 </div>
 

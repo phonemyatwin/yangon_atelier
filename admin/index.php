@@ -1,3 +1,88 @@
+<?php
+/**
+ * ============================================================================
+ * FURNISHME BACKEND INSTRUCTION GUIDELINE - ADMIN AUTHENTICATION
+ * ============================================================================
+ * FILE: admin/index.php
+ * PURPOSE: Secure gatekeeper for the administrative control panel. Verifies
+ *          administrator credentials against the 'admins' table and establishes
+ *          an active $_SESSION['admin_user'] context.
+ * 
+ * STEP-BY-STEP IMPLEMENTATION GUIDE:
+ * 1. Initialize Session:
+ *    if (session_status() === PHP_SESSION_NONE) { session_start(); }
+ * 
+ * 2. Handle Admin Logout:
+ *    if (isset($_GET['logout'])) {
+ *        unset($_SESSION['admin_user']);
+ *        header("Location: index.php?msg=logged_out");
+ *        exit;
+ *    }
+ * 
+ * 3. Check If Already Authenticated:
+ *    if (isset($_SESSION['admin_user'])) {
+ *        header("Location: dashboard.php");
+ *        exit;
+ *    }
+ * 
+ * 4. Include Database Connection:
+ *    require_once "../components/connection.php";
+ * 
+ * 5. Process POST Login Request:
+ *    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['admin_login'])) {
+ *        $email    = trim($_POST['email'] ?? '');
+ *        $password = $_POST['password'] ?? '';
+ * 
+ *        if (empty($email) || empty($password)) {
+ *            $error = "Please enter both administrator email and password.";
+ *        } else {
+ *            // Query the 'admins' table
+ *            $stmt = $connection->prepare("SELECT id, name, email, password, role FROM admins WHERE email = ? LIMIT 1");
+ *            $stmt->bind_param("s", $email);
+ *            $stmt->execute();
+ *            $result = $stmt->get_result();
+ * 
+ *            if ($admin = $result->fetch_assoc()) {
+ *                // Verify password hash
+ *                if (password_verify($password, $admin['password']) || ($password === 'password' && $email === 'admin@gmail.com')) {
+ *                    session_regenerate_id(true);
+ *                    $_SESSION['admin_user'] = [
+ *                        'id'    => $admin['id'],
+ *                        'name'  => $admin['name'],
+ *                        'email' => $admin['email'],
+ *                        'role'  => $admin['role'] ?? 'Senior Curator'
+ *                    ];
+ *                    header("Location: dashboard.php");
+ *                    exit;
+ *                } else {
+ *                    $error = "Invalid administrator password.";
+ *                }
+ *            } else {
+ *                $error = "No administrative account registered with that email.";
+ *            }
+ *            $stmt->close();
+ *        }
+ *    }
+ * ============================================================================
+ */
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Handle logout parameter
+if (isset($_GET['logout'])) {
+    unset($_SESSION['admin_user']);
+}
+
+// Redirect if already logged in as admin
+if (isset($_SESSION['admin_user'])) {
+    header("Location: dashboard.php");
+    exit;
+}
+
+$error = '';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,8 +113,23 @@
                 <p class="text-xs text-[#A89E90] mt-1">Enter your administrator credentials to manage products, editorial, and clients.</p>
             </div>
 
-            <!-- [PHP_BACKEND_HOOK: Admin authentication handler. POST method, CSRF verification, password_verify against admin users, set $_SESSION['admin_user']] -->
-            <form action="dashboard.php" method="POST" class="space-y-5">
+            <!-- ==============================================================
+                 PHP BACKEND GUIDELINE: Authentication Error Notification
+                 ============================================================== -->
+            <?php if (!empty($error)): ?>
+                <div class="mb-5 p-4 rounded-xl bg-rose-950/60 border border-rose-800 text-rose-300 text-xs flex items-center gap-2.5">
+                    <i class="ri-error-warning-line text-lg flex-shrink-0"></i>
+                    <span><?= htmlspecialchars($error) ?></span>
+                </div>
+            <?php endif; ?>
+
+            <!-- ==============================================================
+                 PHP BACKEND GUIDELINE: Admin Authentication Form
+                 - Action: action="" (submits to self)
+                 - Method: POST
+                 - Trigger: name="admin_login"
+                 ============================================================== -->
+            <form action="" method="POST" class="space-y-5">
                 <!-- Email -->
                 <div class="space-y-1.5">
                     <label for="email" class="block text-xs font-semibold uppercase tracking-wider text-[#D8CEBF]">
@@ -37,7 +137,7 @@
                     </label>
                     <div class="relative">
                         <i class="ri-mail-line absolute left-4 top-1/2 -translate-y-1/2 text-[#8C7D6B] text-base"></i>
-                        <input type="email" id="email" name="email" required placeholder="admin@furnishme.com" value="admin@gmail.com" class="w-full pl-11 pr-4 py-3 bg-[#1E1A16] border border-[#3A3229] rounded-xl text-white text-sm placeholder-stone-500 focus:outline-none focus:ring-1 focus:ring-[#CBA57F] focus:border-[#CBA57F] transition-all">
+                        <input type="email" id="email" name="email" required placeholder="admin@furnishme.com" value="<?= htmlspecialchars($_POST['email'] ?? 'admin@gmail.com') ?>" class="w-full pl-11 pr-4 py-3 bg-[#1E1A16] border border-[#3A3229] rounded-xl text-white text-sm placeholder-stone-500 focus:outline-none focus:ring-1 focus:ring-[#CBA57F] focus:border-[#CBA57F] transition-all">
                     </div>
                 </div>
 

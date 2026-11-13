@@ -1,3 +1,55 @@
+<?php
+/**
+ * ============================================================================
+ * FURNISHME BACKEND INSTRUCTION GUIDELINE - NEWSLETTER SUBSCRIBERS LIST
+ * ============================================================================
+ * FILE: admin/subscribers.php
+ * PURPOSE: Lists all newsletter email subscribers from the 'subscribers' table.
+ * 
+ * STEP-BY-STEP IMPLEMENTATION GUIDE:
+ * 1. Initialize Session & Enforce Authentication Guard:
+ *    if (session_status() === PHP_SESSION_NONE) { session_start(); }
+ *    if (!isset($_SESSION['admin_user'])) {
+ *        header("Location: index.php");
+ *        exit;
+ *    }
+ * 
+ * 2. Include Database Connection:
+ *    require_once "../components/connection.php";
+ * 
+ * 3. Handle Flash Notifications:
+ *    $msg = $_GET['msg'] ?? '';
+ *    if ($msg === 'deleted') $success = "Subscriber email removed successfully.";
+ * 
+ * 4. Query Subscribers from Database:
+ *    $search = trim($_GET['search'] ?? '');
+ *    if (!empty($search)) {
+ *        $stmt = $connection->prepare("SELECT id, email, created_at FROM subscribers WHERE email LIKE ? ORDER BY id DESC");
+ *        $wildcard = "%$search%";
+ *        $stmt->bind_param("s", $wildcard);
+ *        $stmt->execute();
+ *        $subscribers = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+ *    } else {
+ *        $res = $connection->query("SELECT id, email, created_at FROM subscribers ORDER BY id DESC");
+ *        $subscribers = $res ? $res->fetch_all(MYSQLI_ASSOC) : [];
+ *    }
+ * ============================================================================
+ */
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (!isset($_SESSION['admin_user'])) {
+    header("Location: index.php");
+    exit;
+}
+
+$success = '';
+if (isset($_GET['msg']) && $_GET['msg'] === 'deleted') {
+    $success = "Subscriber email removed successfully.";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,11 +82,21 @@
                     </div>
                 </div>
 
+                <!-- ==============================================================
+                     PHP BACKEND GUIDELINE: Success Notification Banner
+                     ============================================================== -->
+                <?php if (!empty($success)): ?>
+                    <div class="p-4 rounded-2xl bg-emerald-950/60 border border-emerald-800 text-emerald-300 text-xs flex items-center gap-2.5">
+                        <i class="ri-checkbox-circle-line text-lg flex-shrink-0"></i>
+                        <span><?= htmlspecialchars($success) ?></span>
+                    </div>
+                <?php endif; ?>
+
                 <!-- Table Card -->
                 <div class="bg-[#161310] rounded-3xl border border-[#2A231C] overflow-hidden shadow-xs">
                     <div class="p-5 border-b border-[#2A231C] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                         <div class="text-xs text-[#8C7D6B]">
-                            Showing verified email subscribers
+                            Showing <strong><?= count($subscribers ?? []) ?></strong> verified email subscribers
                         </div>
                         <div class="relative sm:w-64">
                             <i class="ri-search-line absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 text-xs"></i>
@@ -42,7 +104,36 @@
                         </div>
                     </div>
 
-                    <!-- [PHP_BACKEND_HOOK: Dynamic subscribers table loop: SELECT * FROM subscribers ORDER BY id DESC. Use foreach($subscribers as $sub) to render: $sub['id'], $sub['email'], $sub['created_at']] -->
+                    <!-- ==========================================================
+                         PHP BACKEND GUIDELINE: Dynamic Subscribers Table Loop
+                         Query: SELECT id, email, created_at FROM subscribers ORDER BY id DESC
+                         Loop through $subscribers:
+                         <?php /*
+                         if (!empty($subscribers)) {
+                             foreach ($subscribers as $sub) {
+                                 ?>
+                                 <tr class="hover:bg-[#161310] transition-colors">
+                                     <td class="py-4 px-6 text-stone-400">#<?= (int)$sub['id'] ?></td>
+                                     <td class="py-4 px-6 font-mono text-[#FAF6EE] text-xs font-semibold"><?= htmlspecialchars($sub['email']) ?></td>
+                                     <td class="py-4 px-6 text-[#8C7D6B]"><?= htmlspecialchars(date('M j, Y', strtotime($sub['created_at'] ?? 'now'))) ?></td>
+                                     <td class="py-4 px-6">
+                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-950/40 text-emerald-300 border border-emerald-800/60">
+                                             Active
+                                         </span>
+                                     </td>
+                                     <td class="py-4 px-6 text-right">
+                                         <a href="subscriber_delete.php?id=<?= (int)$sub['id'] ?>" class="px-2.5 py-1 rounded-lg border border-rose-900/60 hover:bg-rose-950/50 text-rose-400 transition-colors inline-flex items-center gap-1">
+                                             <i class="ri-delete-bin-line"></i> Remove
+                                         </a>
+                                     </td>
+                                 </tr>
+                                 <?php
+                             }
+                         } else {
+                             echo '<tr><td colspan="5" class="py-8 text-center text-xs text-[#8C7D6B]">No newsletter subscribers found in the registry.</td></tr>';
+                         }
+                         */ ?>
+                         ========================================================== -->
                     <div class="overflow-x-auto">
                         <table class="w-full text-left border-collapse text-xs">
                             <thead>

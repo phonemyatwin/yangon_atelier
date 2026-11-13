@@ -1,3 +1,33 @@
+<?php
+/**
+ * ============================================================================
+ * FURNISHME BACKEND INSTRUCTION GUIDELINE - DESIGN COLLECTIVE & TEAM
+ * ============================================================================
+ * FILE: team.php
+ * PURPOSE: Queries and showcases the master artisans, spatial curators, and
+ *          architects from the 'team' table.
+ * 
+ * STEP-BY-STEP IMPLEMENTATION GUIDE:
+ * 1. Initialize Session & Database:
+ *    if (session_status() === PHP_SESSION_NONE) { session_start(); }
+ *    require_once "components/connection.php";
+ * 
+ * 2. Execute Query to Retrieve Team Members:
+ *    $stmt = $connection->query("SELECT id, name, position, image FROM team ORDER BY id ASC");
+ *    $team = [];
+ *    if ($stmt) {
+ *        $team = $stmt->fetch_all(MYSQLI_ASSOC);
+ *    }
+ * 
+ * 3. Render Dynamic Artisan Dossiers:
+ *    Loop through $team to render name, position/title, and portrait photo.
+ * ============================================================================
+ */
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 
@@ -43,7 +73,26 @@
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 space-y-24">
 
-        <!-- [PHP_BACKEND_HOOK: Dynamic team members loop: SELECT * FROM team ORDER BY id ASC. Use foreach($team as $member) to render: $member['id'], $member['name'], $member['position'], $member['image']] -->
+        <!-- ==================================================================
+             PHP BACKEND GUIDELINE: Dynamic Team Members Loop
+             Query: SELECT * FROM team ORDER BY id ASC
+             Example dynamic loop:
+             <?php /*
+             if (!empty($team)) {
+                 foreach ($team as $member) {
+                     ?>
+                     <div class="rounded-3xl bg-[#161310] border border-[#2A231C] p-6 flex items-center gap-6">
+                         <img src="images/<?= htmlspecialchars($member['image']) ?>" alt="<?= htmlspecialchars($member['name']) ?>" class="w-20 h-20 rounded-2xl object-cover">
+                         <div>
+                             <h3 class="font-serif text-xl font-normal text-[#FAF6EE]"><?= htmlspecialchars($member['name']) ?></h3>
+                             <p class="text-xs text-[#C5A059] uppercase tracking-wider font-semibold"><?= htmlspecialchars($member['position']) ?></p>
+                         </div>
+                     </div>
+                     <?php
+                 }
+             }
+             */ ?>
+             ================================================================== -->
 
         <!-- 1. FEATURED MASTER ARTISAN SPOTLIGHT: FOUNDER & PRINCIPAL ARCHITECT -->
         <section class="relative rounded-3xl bg-[#15120F] border border-[#2A231C] overflow-hidden shadow-2xl p-8 sm:p-12 lg:p-16">

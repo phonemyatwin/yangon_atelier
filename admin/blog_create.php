@@ -1,3 +1,75 @@
+<?php
+/**
+ * ============================================================================
+ * FURNISHME BACKEND INSTRUCTION GUIDELINE - COMPOSE JOURNAL ARTICLE
+ * ============================================================================
+ * FILE: admin/blog_create.php
+ * PURPOSE: Handles creation of new journal editorial essays, processes cover
+ *          photograph uploads, and inserts records into the 'blogs' table.
+ * 
+ * STEP-BY-STEP IMPLEMENTATION GUIDE:
+ * 1. Initialize Session & Enforce Authentication Guard:
+ *    if (session_status() === PHP_SESSION_NONE) { session_start(); }
+ *    if (!isset($_SESSION['admin_user'])) {
+ *        header("Location: index.php");
+ *        exit;
+ *    }
+ * 
+ * 2. Include Database Connection:
+ *    require_once "../components/connection.php";
+ * 
+ * 3. Handle POST Request with File Upload:
+ *    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+ *        $title   = trim($_POST['title'] ?? '');
+ *        $author  = trim($_POST['author'] ?? 'Atelier Editorial Staff');
+ *        $content = trim($_POST['content'] ?? '');
+ * 
+ *        // Validation
+ *        if (empty($title) || empty($content)) {
+ *            $error = "Both article title and body content are required.";
+ *        } elseif (!isset($_FILES['image']) || $_FILES['image']['error'] !== UPLOAD_ERR_OK) {
+ *            $error = "Please upload a high-resolution article cover visual.";
+ *        } else {
+ *            $ext = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
+ *            $allowed_exts = ['jpg', 'jpeg', 'png', 'webp'];
+ * 
+ *            if (!in_array($ext, $allowed_exts)) {
+ *                $error = "Only JPG, PNG, and WEBP image formats are supported.";
+ *            } else {
+ *                $unique_image = 'blog-' . time() . '-' . rand(100, 999) . '.' . $ext;
+ *                $destination  = '../images/' . $unique_image;
+ * 
+ *                if (move_uploaded_file($_FILES['image']['tmp_name'], $destination)) {
+ *                    $stmt = $connection->prepare("INSERT INTO blogs (title, author, image, content) VALUES (?, ?, ?, ?)");
+ *                    $stmt->bind_param("ssss", $title, $author, $unique_image, $content);
+ *                    
+ *                    if ($stmt->execute()) {
+ *                        $stmt->close();
+ *                        header("Location: blog.php?msg=created");
+ *                        exit;
+ *                    } else {
+ *                        $error = "Failed to save journal article: " . $connection->error;
+ *                    }
+ *                } else {
+ *                    $error = "Failed to move uploaded visual to ../images/";
+ *                }
+ *            }
+ *        }
+ *    }
+ * ============================================================================
+ */
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (!isset($_SESSION['admin_user'])) {
+    header("Location: index.php");
+    exit;
+}
+
+$error = '';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,17 +107,30 @@
                     </a>
                 </div>
 
+                <!-- Error Notification Banner -->
+                <?php if (!empty($error)): ?>
+                    <div class="p-4 rounded-2xl bg-rose-950/60 border border-rose-800 text-rose-300 text-xs flex items-center gap-2.5">
+                        <i class="ri-error-warning-line text-lg flex-shrink-0"></i>
+                        <span><?= htmlspecialchars($error) ?></span>
+                    </div>
+                <?php endif; ?>
+
                 <!-- Form Card -->
                 <div class="bg-[#161310] rounded-3xl border border-[#2A231C] p-6 sm:p-10 shadow-xs">
-                    <!-- [PHP_BACKEND_HOOK: Blog post creation handler. Method: POST, enctype="multipart/form-data". Upload cover image to images/ directory, sanitize inputs, execute INSERT INTO blogs (title, author, image, content, created_at)] -->
-                    <form method="POST" enctype="multipart/form-data" class="space-y-6">
+                    <!-- ==========================================================
+                         PHP BACKEND GUIDELINE: Blog Post Creation Form
+                         - Action: action="" (submits to self)
+                         - Method: POST
+                         - Enctype: multipart/form-data
+                         ========================================================== -->
+                    <form action="" method="POST" enctype="multipart/form-data" class="space-y-6">
                         
                         <!-- Title -->
                         <div class="space-y-1.5">
                             <label for="title" class="block text-xs font-semibold uppercase tracking-wider text-[#D6C8B4]">
                                 Article Title <span class="text-rose-600">*</span>
                             </label>
-                            <input type="text" id="title" name="title" required placeholder="e.g. The Philosophy of Wabi-Sabi in Modern Interiors" class="w-full px-4 py-3 bg-[#0D0B09] border border-[#2A231C] rounded-xl text-[#FAF6EE] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-2 focus:ring-[#C5A059] focus:border-[#C5A059] transition-all">
+                            <input type="text" id="title" name="title" required value="<?= htmlspecialchars($_POST['title'] ?? '') ?>" placeholder="e.g. The Philosophy of Wabi-Sabi in Modern Interiors" class="w-full px-4 py-3 bg-[#0D0B09] border border-[#2A231C] rounded-xl text-[#FAF6EE] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-2 focus:ring-[#C5A059] focus:border-[#C5A059] transition-all">
                         </div>
 
                         <!-- Author -->
@@ -55,7 +140,7 @@
                             </label>
                             <div class="relative">
                                 <i class="ri-user-line absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 text-base"></i>
-                                <input type="text" id="author" name="author" required placeholder="e.g. Atelier Editorial Staff" value="admin" class="w-full pl-11 pr-4 py-3 bg-[#0D0B09] border border-[#2A231C] rounded-xl text-[#FAF6EE] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-2 focus:ring-[#C5A059] focus:border-[#C5A059] transition-all">
+                                <input type="text" id="author" name="author" required placeholder="e.g. Atelier Editorial Staff" value="<?= htmlspecialchars($_POST['author'] ?? 'Atelier Editorial Staff') ?>" class="w-full pl-11 pr-4 py-3 bg-[#0D0B09] border border-[#2A231C] rounded-xl text-[#FAF6EE] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-2 focus:ring-[#C5A059] focus:border-[#C5A059] transition-all">
                             </div>
                         </div>
 
@@ -68,34 +153,33 @@
                                 <div class="max-w-xs mx-auto flex flex-col items-center">
                                     <i class="ri-image-add-line text-3xl text-[#C5A059] mb-2"></i>
                                     <span class="text-xs font-medium text-[#D6C8B4]">Upload high-resolution article visual</span>
-                                    <span class="text-[11px] text-stone-400 mt-0.5">JPG or PNG (recommended aspect ratio 16:10)</span>
+                                    <span class="text-[11px] text-stone-400 mt-0.5">Recommended landscape ratio 16:10</span>
                                     <input type="file" id="image" name="image" accept="image/*" required data-preview-target="blog-preview" class="mt-4 text-xs text-[#8C7D6B] file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-medium file:bg-stone-900 file:text-white hover:file:bg-amber-900 file:cursor-pointer cursor-pointer">
                                 </div>
                                 <div class="mt-4 flex justify-center">
-                                    <img id="blog-preview" src="" alt="Cover preview" class="hidden w-40 h-24 object-cover rounded-xl border border-[#2A231C] shadow-xs">
+                                    <img id="blog-preview" src="" alt="Cover preview" class="hidden w-40 h-24 object-cover rounded-xl border border-[#2A231C]">
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Content -->
+                        <!-- Content Body -->
                         <div class="space-y-1.5">
                             <label for="content" class="block text-xs font-semibold uppercase tracking-wider text-[#D6C8B4]">
-                                Article Content &amp; Essay Text <span class="text-rose-600">*</span>
+                                Journal Essay Body <span class="text-rose-600">*</span>
                             </label>
-                            <textarea id="content" name="content" rows="8" required placeholder="Write the editorial essay, material exploration, or interview text..." class="w-full p-4 bg-[#0D0B09] border border-[#2A231C] rounded-xl text-[#FAF6EE] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-2 focus:ring-[#C5A059] focus:border-[#C5A059] transition-all"></textarea>
+                            <textarea id="content" name="content" rows="8" required placeholder="Write your long-form craft essay, reflections on natural materials, and spatial philosophies..." class="w-full p-4 bg-[#0D0B09] border border-[#2A231C] rounded-xl text-[#FAF6EE] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-2 focus:ring-[#C5A059] focus:border-[#C5A059] transition-all"><?= htmlspecialchars($_POST['content'] ?? '') ?></textarea>
                         </div>
 
-                        <!-- Form Actions -->
+                        <!-- Actions -->
                         <div class="pt-4 border-t border-[#2A231C] flex items-center justify-end gap-3">
                             <a href="blog.php" class="px-5 py-3 rounded-xl border border-[#2A231C] text-xs font-medium text-[#D6C8B4] hover:bg-[#0D0B09] transition-colors">
                                 Cancel
                             </a>
-                            <button type="submit" name="create" class="px-6 py-3 rounded-xl bg-[#C5A059] hover:bg-[#D4AF37] text-[#0D0B09] font-semibold text-xs font-medium transition-colors shadow-xs flex items-center gap-2">
-                                <i class="ri-check-line text-sm"></i>
+                            <button type="submit" name="submit" class="px-6 py-3 rounded-xl bg-[#C5A059] hover:bg-[#D4AF37] text-[#0D0B09] text-xs font-semibold transition-colors shadow-xs flex items-center gap-2">
+                                <i class="ri-check-line text-base"></i>
                                 <span>Publish Journal Post</span>
                             </button>
                         </div>
-
                     </form>
                 </div>
 

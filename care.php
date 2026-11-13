@@ -1,3 +1,22 @@
+<?php
+/**
+ * ============================================================================
+ * FURNISHME BACKEND INSTRUCTION GUIDELINE - CARE & MAINTENANCE
+ * ============================================================================
+ * FILE: care.php
+ * PURPOSE: Solid timber, tactile fabric, and natural oil maintenance guide.
+ * 
+ * STEP-BY-STEP IMPLEMENTATION GUIDE:
+ * 1. Initialize Session & Database Connection:
+ *    if (session_status() === PHP_SESSION_NONE) { session_start(); }
+ *    require_once "components/connection.php";
+ * ============================================================================
+ */
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 

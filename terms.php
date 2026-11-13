@@ -1,3 +1,22 @@
+<?php
+/**
+ * ============================================================================
+ * FURNISHME BACKEND INSTRUCTION GUIDELINE - TERMS OF SERVICE
+ * ============================================================================
+ * FILE: terms.php
+ * PURPOSE: Terms of service, bespoke commission contracts, and delivery policies.
+ * 
+ * STEP-BY-STEP IMPLEMENTATION GUIDE:
+ * 1. Initialize Session & Database Connection:
+ *    if (session_status() === PHP_SESSION_NONE) { session_start(); }
+ *    require_once "components/connection.php";
+ * ============================================================================
+ */
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 

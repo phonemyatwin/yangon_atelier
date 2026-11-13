@@ -1,3 +1,58 @@
+<?php
+/**
+ * ============================================================================
+ * FURNISHME BACKEND INSTRUCTION GUIDELINE - CONTACT & INQUIRIES
+ * ============================================================================
+ * FILE: contact.php
+ * PURPOSE: Processes direct showroom inquiries, bespoke dimension requests,
+ *          and stores client messages in the 'contacts' table for admin review.
+ * 
+ * STEP-BY-STEP IMPLEMENTATION GUIDE:
+ * 1. Initialize Session:
+ *    if (session_status() === PHP_SESSION_NONE) {
+ *        session_start();
+ *    }
+ * 
+ * 2. Include Database Connection:
+ *    require_once "components/connection.php";
+ * 
+ * 3. Process POST Inquiry Submission:
+ *    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['send'])) {
+ *        $name    = trim($_POST['name'] ?? '');
+ *        $number  = trim($_POST['number'] ?? '');
+ *        $email   = trim($_POST['email'] ?? '');
+ *        $message = trim($_POST['message'] ?? '');
+ * 
+ *        // Validation
+ *        if (empty($name) || empty($number) || empty($email) || empty($message)) {
+ *            $error = "All fields are required. Please complete the form.";
+ *        } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+ *            $error = "Please provide a valid email address.";
+ *        } else {
+ *            // Insert inquiry record into contacts table
+ *            $stmt = $connection->prepare("INSERT INTO contacts (name, number, email, message, status) VALUES (?, ?, ?, ?, 'Pending Review')");
+ *            $stmt->bind_param("ssss", $name, $number, $email, $message);
+ * 
+ *            if ($stmt->execute()) {
+ *                $success = "Thank you, " . htmlspecialchars($name) . ". Your inquiry has been received. Our concierge will reach out promptly.";
+ *                // Clear fields on success
+ *                $name = $number = $email = $message = '';
+ *            } else {
+ *                $error = "Failed to record message: " . $connection->error;
+ *            }
+ *            $stmt->close();
+ *        }
+ *    }
+ * ============================================================================
+ */
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$error = '';
+$success = '';
+?>
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 
@@ -114,8 +169,32 @@
                         <p class="text-xs text-[#8C7D6B] mt-1">Our team typically responds within four business hours.</p>
                     </div>
 
-                    <!-- [PHP_BACKEND_HOOK: Contact form submission handler. Post method, CSRF token verification, input sanitization: INSERT INTO contacts (name, number, email, message)] -->
-                    <form action="#" method="POST" data-toast-success="Your message has been sent. Our team will contact you shortly." class="space-y-6">
+                    <!-- ==============================================================
+                         PHP BACKEND GUIDELINE: Alert Messages
+                         Output feedback notification if form submission succeeds or fails
+                         ============================================================== -->
+                    <?php if (!empty($error)): ?>
+                        <div class="mb-6 p-4 rounded-xl bg-rose-950/50 border border-rose-800 text-rose-300 text-xs flex items-center gap-3">
+                            <i class="ri-error-warning-line text-lg flex-shrink-0"></i>
+                            <span><?= htmlspecialchars($error) ?></span>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if (!empty($success)): ?>
+                        <div class="mb-6 p-4 rounded-xl bg-emerald-950/50 border border-emerald-800 text-emerald-300 text-xs flex items-center gap-3">
+                            <i class="ri-checkbox-circle-line text-lg flex-shrink-0"></i>
+                            <span><?= htmlspecialchars($success) ?></span>
+                        </div>
+                    <?php endif; ?>
+
+                    <!-- ==============================================================
+                         PHP BACKEND GUIDELINE: Contact Form Handler
+                         - Action: action="" (submits to self)
+                         - Method: POST
+                         - Trigger: name="send" on submit button
+                         - Retains entered values on validation error
+                         ============================================================== -->
+                    <form action="" method="POST" data-toast-success="Your message has been sent. Our team will contact you shortly." class="space-y-6">
                         
                         <!-- Name Field -->
                         <div class="space-y-2">
@@ -124,7 +203,7 @@
                             </label>
                             <div class="relative">
                                 <i class="ri-user-line absolute left-4 top-1/2 -translate-y-1/2 text-[#8C7D6B] text-base"></i>
-                                <input type="text" id="name" name="name" required placeholder="e.g. Daw Khin Hnin" class="w-full pl-11 pr-4 py-3 bg-[#0D0B09] border border-[#2E241B] rounded-xl text-[#FAF6EE] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#C5A059] focus:border-[#C5A059] transition-all">
+                                <input type="text" id="name" name="name" required value="<?= htmlspecialchars($_POST['name'] ?? '') ?>" placeholder="e.g. Daw Khin Hnin" class="w-full pl-11 pr-4 py-3 bg-[#0D0B09] border border-[#2E241B] rounded-xl text-[#FAF6EE] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#C5A059] focus:border-[#C5A059] transition-all">
                             </div>
                         </div>
 
@@ -137,7 +216,7 @@
                                 </label>
                                 <div class="relative">
                                     <i class="ri-phone-line absolute left-4 top-1/2 -translate-y-1/2 text-[#8C7D6B] text-base"></i>
-                                    <input type="tel" id="number" name="number" required placeholder="09 973 383 719" class="w-full pl-11 pr-4 py-3 bg-[#0D0B09] border border-[#2E241B] rounded-xl text-[#FAF6EE] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#C5A059] focus:border-[#C5A059] transition-all">
+                                    <input type="tel" id="number" name="number" required value="<?= htmlspecialchars($_POST['number'] ?? '') ?>" placeholder="09 973 383 719" class="w-full pl-11 pr-4 py-3 bg-[#0D0B09] border border-[#2E241B] rounded-xl text-[#FAF6EE] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#C5A059] focus:border-[#C5A059] transition-all">
                                 </div>
                             </div>
 
@@ -148,7 +227,7 @@
                                 </label>
                                 <div class="relative">
                                     <i class="ri-mail-line absolute left-4 top-1/2 -translate-y-1/2 text-[#8C7D6B] text-base"></i>
-                                    <input type="email" id="email" name="email" required placeholder="you@domain.com" class="w-full pl-11 pr-4 py-3 bg-[#0D0B09] border border-[#2E241B] rounded-xl text-[#FAF6EE] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#C5A059] focus:border-[#C5A059] transition-all">
+                                    <input type="email" id="email" name="email" required value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" placeholder="you@domain.com" class="w-full pl-11 pr-4 py-3 bg-[#0D0B09] border border-[#2E241B] rounded-xl text-[#FAF6EE] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#C5A059] focus:border-[#C5A059] transition-all">
                                 </div>
                             </div>
                         </div>
@@ -159,7 +238,7 @@
                                 Inquiry or Piece of Interest <span class="text-rose-600">*</span>
                             </label>
                             <div class="relative">
-                                <textarea id="message" name="message" rows="5" required placeholder="Tell us about your spatial project, requested piece specifications, or desired delivery timing..." class="w-full p-4 bg-[#0D0B09] border border-[#2E241B] rounded-xl text-[#FAF6EE] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#C5A059] focus:border-[#C5A059] transition-all"></textarea>
+                                <textarea id="message" name="message" rows="5" required placeholder="Tell us about your spatial project, requested piece specifications, or desired delivery timing..." class="w-full p-4 bg-[#0D0B09] border border-[#2E241B] rounded-xl text-[#FAF6EE] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#C5A059] focus:border-[#C5A059] transition-all"><?= htmlspecialchars($_POST['message'] ?? '') ?></textarea>
                             </div>
                         </div>
 

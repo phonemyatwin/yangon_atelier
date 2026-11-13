@@ -1,3 +1,43 @@
+<?php
+// Initialize session
+require_once __DIR__ . '/components/session_start.php';
+
+// Session check
+require_once __DIR__ . '/components/session_check.php';
+
+// Database connection
+require_once __DIR__ . '/components/connection.php';
+
+$errors = [];
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
+    $email = strtolower(trim($_POST['email'] ?? ''));
+    $password = $_POST['password'] ?? '';
+    $remember = isset($_POST['remember']);
+
+    $sql = 'SELECT * FROM users WHERE email = :email LIMIT 1';
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([':email' => $email]);
+    $user = $stmt->fetch();
+
+    // I check all of the credentials in a single if statement and output only one error information as I've learnt that it is the industry standard to prevent the malicious attack called User Enumeration(Account Harvesting).
+    if ($user && !empty($password) && password_verify($password, $user['password'])) {
+        // Regenerate new session id to prevent malicious attack called Session Fixation(session hijacking).
+        session_regenerate_id(true);
+        // Remember me
+        require_once __DIR__ . '/components/remember_me.php';
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['username'] = $user['username'];
+        $_SESSION['email'] = $user['email'];
+        header('Location: index.php');
+        exit;
+    } else {
+        $errors['login'] = 'The login information you entered is incorrect.';
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 
@@ -17,14 +57,14 @@
     <!-- MAIN AUTH SECTION -->
     <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20 w-full flex-1 flex items-center justify-center">
         <div class="w-full bg-[#161310] rounded-3xl border border-[#2A231C] shadow-2xl overflow-hidden grid grid-cols-1 md:grid-cols-12">
-            
+
             <!-- Left Column: Visual Illustration & Brand Note -->
             <div class="md:col-span-5 bg-[#110E0C] p-8 sm:p-10 flex flex-col justify-between items-center text-center border-b md:border-b-0 md:border-r border-[#221C16]">
                 <div class="w-full text-left">
                     <span class="text-xs uppercase tracking-[0.2em] text-[#C5A059] font-semibold block mb-1">Client Sanctuary</span>
                     <h2 class="font-serif text-2xl font-normal text-[#FAF6EE]">Welcome Back</h2>
                 </div>
-                
+
                 <div class="my-8 max-w-xs flex items-center justify-center">
                     <img src="images/auth-login.svg" alt="Client sign in illustration" width="300" height="300" class="max-h-60 w-auto object-contain drop-shadow-sm" loading="lazy">
                 </div>
@@ -44,9 +84,8 @@
                     <p class="text-xs text-[#8C7D6B] mt-1">Please enter your verified email and password.</p>
                 </div>
 
-                <!-- [PHP_BACKEND_HOOK: Authentication handler. POST method, CSRF verification, password_verify against users table, session initiation] -->
-                <form action="#" method="POST" data-toast-success="Sign in successful. Welcome back to FurnishMe." class="space-y-5">
-                    
+                <form action="" method="POST" class="space-y-5">
+
                     <!-- Email Field -->
                     <div class="space-y-1.5">
                         <label for="email" class="block text-xs font-semibold uppercase tracking-wider text-[#FAF6EE]">
@@ -54,7 +93,7 @@
                         </label>
                         <div class="relative">
                             <i class="ri-mail-line absolute left-4 top-1/2 -translate-y-1/2 text-[#8C7D6B] text-base"></i>
-                            <input type="email" id="email" name="email" required placeholder="client@example.com" class="w-full pl-11 pr-4 py-3 bg-[#0D0B09] border border-[#2E241B] rounded-xl text-[#FAF6EE] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#C5A059] focus:border-[#C5A059] transition-all">
+                            <input type="email" id="email" name="email" required value="<?= htmlspecialchars($_POST['email'] ?? $_COOKIE['email_cookie'] ?? '') ?>" placeholder="client@example.com" class="w-full pl-11 pr-4 py-3 bg-[#0D0B09] border border-[#2E241B] rounded-xl text-[#FAF6EE] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#C5A059] focus:border-[#C5A059] transition-all">
                         </div>
                     </div>
 
@@ -78,7 +117,7 @@
                     <!-- Remember Me Option -->
                     <div class="flex items-center justify-between text-xs pt-1">
                         <label class="flex items-center gap-2 text-[#8C7D6B] cursor-pointer select-none" for="remember-me">
-                            <input type="checkbox" name="remember" id="remember-me" class="rounded border-stone-300 text-[#C5A059] focus:ring-amber-900 w-4 h-4">
+                            <input type="checkbox" name="remember" id="remember-me" class="rounded border-stone-300 text-[#C5A059] focus:ring-amber-900 w-4 h-4" <?= isset($_COOKIE['email_cookie']) ? 'checked' : '' ?>>
                             <span>Keep me signed in on this device</span>
                         </label>
                     </div>
@@ -91,7 +130,7 @@
 
                     <!-- Link to Register -->
                     <p class="text-center text-xs text-[#8C7D6B] pt-2">
-                        New to FurnishMe Atelier? 
+                        New to FurnishMe Atelier?
                         <a href="register.php" class="font-semibold text-[#C5A059] hover:underline">Create an account</a>
                     </p>
                 </form>
@@ -102,6 +141,24 @@
 
     <?php include "components/footer.php"; ?>
     <?php include "components/js.php"; ?>
+
+    <!-- Toaster pop-ups -->
+    <?php if (isset($_SESSION['success'])): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                showToast(<?= json_encode($_SESSION['success']); ?>, 'success');
+            });
+        </script>
+        <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
+
+    <?php if (!empty($errors)): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                showToast(<?= json_encode($errors['login']); ?>, 'error');
+            });
+        </script>
+    <?php endif; ?>
 </body>
 
 </html>

@@ -1,4 +1,30 @@
-<!-- [PHP_BACKEND_HOOK: Global storefront header with navigation and search overlay] -->
+<?php
+/**
+ * ============================================================================
+ * FURNISHME BACKEND INSTRUCTION GUIDELINE - GLOBAL STOREFRONT HEADER
+ * ============================================================================
+ * FILE: components/header.php
+ * 
+ * BACKEND LOGIC REQUIREMENTS:
+ * 1. Current Active Page Detection:
+ *    - Determine active page via basename($_SERVER['PHP_SELF']) to conditionally
+ *      apply active CSS classes (e.g., text-[#FAF6EE] after:w-full) to nav links.
+ * 
+ * 2. User Authentication State:
+ *    - Check if client is logged in via isset($_SESSION['user_id']) or $_SESSION['username'].
+ *    - If authenticated: Display client username / avatar and link to logout or profile.
+ *    - If guest: Display login link pointing to login.php.
+ * 
+ * 3. Search Form Handler:
+ *    - Search form submits to 'shop.php' using method="GET".
+ *    - Query parameter is 'search' (e.g., shop.php?search=walnut).
+ * ============================================================================
+ */
+
+// Example helper: get current script name for active link highlighting
+$current_page = basename($_SERVER['PHP_SELF'] ?? 'index.php');
+?>
+<!-- Announcement / Top Atelier Bar -->
 <div class="bg-[#080705] text-[#B5A591] text-[11px] py-2 px-4 sm:px-6 lg:px-8 border-b border-[#1F1914]">
     <div class="max-w-7xl mx-auto flex items-center justify-between tracking-wide">
         <div class="flex items-center gap-2">
@@ -33,13 +59,19 @@
         </a>
 
         <!-- Desktop Navigation Bar -->
+        <!-- ==================================================================
+             PHP BACKEND GUIDELINE: Dynamic Active Menu State
+             Compare $current_page with the link target to conditionally add
+             active styling.
+             Example: class="<?= $current_page == 'index.php' ? 'text-[#FAF6EE] after:w-full' : 'text-[#D6C8B4]' ?> ..."
+             ================================================================== -->
         <nav class="hidden md:flex items-center gap-8 text-sm tracking-wide font-medium text-[#D6C8B4]">
-            <a href="index.php" class="hover:text-[#FAF6EE] transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[1.5px] after:bg-[#C5A059] after:transition-all">Home</a>
-            <a href="shop.php" class="hover:text-[#FAF6EE] transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[1.5px] after:bg-[#C5A059] after:transition-all">Shop</a>
-            <a href="about.php" class="hover:text-[#FAF6EE] transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[1.5px] after:bg-[#C5A059] after:transition-all">About</a>
-            <a href="team.php" class="hover:text-[#FAF6EE] transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[1.5px] after:bg-[#C5A059] after:transition-all">Team</a>
-            <a href="blog.php" class="hover:text-[#FAF6EE] transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[1.5px] after:bg-[#C5A059] after:transition-all">Journal</a>
-            <a href="contact.php" class="hover:text-[#FAF6EE] transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[1.5px] after:bg-[#C5A059] after:transition-all">Contact</a>
+            <a href="index.php" class="<?= ($current_page == 'index.php') ? 'text-[#FAF6EE] after:w-full' : '' ?> hover:text-[#FAF6EE] transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[1.5px] after:bg-[#C5A059] after:transition-all">Home</a>
+            <a href="shop.php" class="<?= ($current_page == 'shop.php' || $current_page == 'product_detail.php') ? 'text-[#FAF6EE] after:w-full' : '' ?> hover:text-[#FAF6EE] transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[1.5px] after:bg-[#C5A059] after:transition-all">Shop</a>
+            <a href="about.php" class="<?= ($current_page == 'about.php') ? 'text-[#FAF6EE] after:w-full' : '' ?> hover:text-[#FAF6EE] transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[1.5px] after:bg-[#C5A059] after:transition-all">About</a>
+            <a href="team.php" class="<?= ($current_page == 'team.php') ? 'text-[#FAF6EE] after:w-full' : '' ?> hover:text-[#FAF6EE] transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[1.5px] after:bg-[#C5A059] after:transition-all">Team</a>
+            <a href="blog.php" class="<?= ($current_page == 'blog.php' || $current_page == 'blog_detail.php') ? 'text-[#FAF6EE] after:w-full' : '' ?> hover:text-[#FAF6EE] transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[1.5px] after:bg-[#C5A059] after:transition-all">Journal</a>
+            <a href="contact.php" class="<?= ($current_page == 'contact.php') ? 'text-[#FAF6EE] after:w-full' : '' ?> hover:text-[#FAF6EE] transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[1.5px] after:bg-[#C5A059] after:transition-all">Contact</a>
         </nav>
 
         <!-- Right Action Cluster -->
@@ -49,11 +81,35 @@
                 <i class="ri-search-line text-lg"></i>
             </button>
 
-            <!-- User Account Link -->
-            <!-- [PHP_BACKEND_HOOK: Dynamic user state. If authenticated, link to account/profile, else to login.php] -->
-            <a href="login.php" id="login-btn" aria-label="Account Login" class="w-10 h-10 rounded-xl flex items-center justify-center text-[#D6C8B4] hover:text-[#FAF6EE] hover:bg-[#1D1914] transition-colors" title="Account">
-                <i class="ri-user-line text-lg"></i>
-            </a>
+            <!-- ==============================================================
+                 PHP BACKEND GUIDELINE: Dynamic Authentication Indicator
+                 Check if user session is active:
+                 <?php if (isset($_SESSION['user_id'])): ?>
+                     <div class="relative group">
+                         <a href="logout.php" title="Sign Out (<?= htmlspecialchars($_SESSION['username'] ?? '') ?>)" class="w-10 h-10 rounded-xl flex items-center justify-center text-[#C5A059] hover:bg-[#1D1914] transition-colors">
+                             <i class="ri-logout-box-r-line text-lg"></i>
+                         </a>
+                     </div>
+                 <?php else: ?>
+                     <a href="login.php" id="login-btn" aria-label="Account Login" class="w-10 h-10 rounded-xl flex items-center justify-center text-[#D6C8B4] hover:text-[#FAF6EE] hover:bg-[#1D1914] transition-colors" title="Account">
+                         <i class="ri-user-line text-lg"></i>
+                     </a>
+                 <?php endif; ?>
+                 ============================================================== -->
+            <?php if (isset($_SESSION['user_id'])): ?>
+                <div class="flex items-center gap-2">
+                    <span class="hidden sm:inline text-xs text-[#FAF6EE] font-medium font-serif">
+                        <?= htmlspecialchars($_SESSION['username'] ?? 'Client') ?>
+                    </span>
+                    <a href="logout.php" aria-label="Sign Out" class="w-10 h-10 rounded-xl flex items-center justify-center text-[#C5A059] hover:text-rose-400 hover:bg-[#1D1914] transition-colors" title="Sign Out">
+                        <i class="ri-logout-box-r-line text-lg"></i>
+                    </a>
+                </div>
+            <?php else: ?>
+                <a href="login.php" id="login-btn" aria-label="Account Login" class="w-10 h-10 rounded-xl flex items-center justify-center text-[#D6C8B4] hover:text-[#FAF6EE] hover:bg-[#1D1914] transition-colors" title="Account">
+                    <i class="ri-user-line text-lg"></i>
+                </a>
+            <?php endif; ?>
 
             <!-- Mobile Drawer Menu Toggle -->
             <button type="button" id="menu-btn" aria-label="Toggle Mobile Navigation" class="md:hidden w-10 h-10 rounded-xl flex items-center justify-center text-[#D6C8B4] hover:text-[#FAF6EE] hover:bg-[#1D1914] transition-colors">
@@ -79,11 +135,16 @@
                 </button>
             </div>
 
-            <!-- [PHP_BACKEND_HOOK: Search query submission handler. Target action="shop.php" method="GET" with input name="search"] -->
+            <!-- ==============================================================
+                 PHP BACKEND GUIDELINE: Search Form Submission Target
+                 - Submits GET request to shop.php with ?search=term
+                 - Handled in shop.php via: $search = trim($_GET['search'] ?? '');
+                   SQL: WHERE name LIKE ? OR description LIKE ?
+                 ============================================================== -->
             <form action="shop.php" method="GET" class="mt-6">
                 <div class="relative flex items-center">
                     <i class="ri-search-line absolute left-4 text-[#8C7D6B] text-lg"></i>
-                    <input type="search" name="search" id="search-box" placeholder="Search by piece, wood type, designer..." class="w-full pl-12 pr-4 py-3.5 bg-[#0D0B09] border border-[#2E241B] rounded-xl text-[#FAF6EE] placeholder-[#8C7D6B] focus:outline-none focus:ring-2 focus:ring-[#C5A059] focus:border-[#C5A059] text-sm transition-all">
+                    <input type="search" name="search" id="search-box" value="<?= htmlspecialchars($_GET['search'] ?? '') ?>" placeholder="Search by piece, wood type, designer..." class="w-full pl-12 pr-4 py-3.5 bg-[#0D0B09] border border-[#2E241B] rounded-xl text-[#FAF6EE] placeholder-[#8C7D6B] focus:outline-none focus:ring-2 focus:ring-[#C5A059] focus:border-[#C5A059] text-sm transition-all">
                 </div>
             </form>
 

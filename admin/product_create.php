@@ -1,3 +1,79 @@
+<?php
+/**
+ * ============================================================================
+ * FURNISHME BACKEND INSTRUCTION GUIDELINE - CREATE PRODUCT
+ * ============================================================================
+ * FILE: admin/product_create.php
+ * PURPOSE: Handles creation of new furniture catalog items, processes image
+ *          uploads to the ../images/ directory, and inserts records into 'products'.
+ * 
+ * STEP-BY-STEP IMPLEMENTATION GUIDE:
+ * 1. Initialize Session & Enforce Authentication Guard:
+ *    if (session_status() === PHP_SESSION_NONE) { session_start(); }
+ *    if (!isset($_SESSION['admin_user'])) {
+ *        header("Location: index.php");
+ *        exit;
+ *    }
+ * 
+ * 2. Include Database Connection:
+ *    require_once "../components/connection.php";
+ * 
+ * 3. Handle POST Request with File Upload (enctype="multipart/form-data"):
+ *    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+ *        $name        = trim($_POST['name'] ?? '');
+ *        $price       = (int)($_POST['price'] ?? 0);
+ *        $stock       = (int)($_POST['stock'] ?? 0);
+ *        $description = trim($_POST['description'] ?? '');
+ *        $category    = trim($_POST['category'] ?? 'chairs');
+ * 
+ *        // Validation
+ *        if (empty($name) || $price <= 0) {
+ *            $error = "Please provide a valid product title and price.";
+ *        } elseif (!isset($_FILES['image']) || $_FILES['image']['error'] !== UPLOAD_ERR_OK) {
+ *            $error = "Please select a product photograph to upload.";
+ *        } else {
+ *            // Process Image Upload
+ *            $ext = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
+ *            $allowed_exts = ['jpg', 'jpeg', 'png', 'webp'];
+ * 
+ *            if (!in_array($ext, $allowed_exts)) {
+ *                $error = "Only JPG, PNG, and WEBP image formats are supported.";
+ *            } else {
+ *                $unique_image_name = 'product-' . time() . '-' . rand(100, 999) . '.' . $ext;
+ *                $target_destination = '../images/' . $unique_image_name;
+ * 
+ *                if (move_uploaded_file($_FILES['image']['tmp_name'], $target_destination)) {
+ *                    // Insert into products table
+ *                    $stmt = $connection->prepare("INSERT INTO products (name, price, stock, image, description, category) VALUES (?, ?, ?, ?, ?, ?)");
+ *                    $stmt->bind_param("siisss", $name, $price, $stock, $unique_image_name, $description, $category);
+ *                    
+ *                    if ($stmt->execute()) {
+ *                        $stmt->close();
+ *                        header("Location: products.php?msg=created");
+ *                        exit;
+ *                    } else {
+ *                        $error = "Database insertion failed: " . $connection->error;
+ *                    }
+ *                } else {
+ *                    $error = "Failed to save uploaded image. Check folder permissions for ../images/";
+ *                }
+ *            }
+ *        }
+ *    }
+ * ============================================================================
+ */
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (!isset($_SESSION['admin_user'])) {
+    header("Location: index.php");
+    exit;
+}
+
+$error = '';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,17 +111,30 @@
                     </a>
                 </div>
 
+                <!-- Error Notification Banner -->
+                <?php if (!empty($error)): ?>
+                    <div class="p-4 rounded-2xl bg-rose-950/60 border border-rose-800 text-rose-300 text-xs flex items-center gap-2.5">
+                        <i class="ri-error-warning-line text-lg flex-shrink-0"></i>
+                        <span><?= htmlspecialchars($error) ?></span>
+                    </div>
+                <?php endif; ?>
+
                 <!-- Form Card -->
                 <div class="bg-[#161310] rounded-3xl border border-[#2A231C] p-6 sm:p-10 shadow-xs">
-                    <!-- [PHP_BACKEND_HOOK: Product creation handler. Method: POST, enctype="multipart/form-data". Handle image upload to images/ directory, sanitize inputs, execute INSERT INTO products (name, price, stock, image, description)] -->
-                    <form method="POST" enctype="multipart/form-data" class="space-y-6">
+                    <!-- ==========================================================
+                         PHP BACKEND GUIDELINE: Product Creation Form
+                         - Action: action="" (submits to self)
+                         - Method: POST
+                         - Enctype: multipart/form-data (Required for file upload)
+                         ========================================================== -->
+                    <form action="" method="POST" enctype="multipart/form-data" class="space-y-6">
                         
                         <!-- Name & Category -->
                         <div class="space-y-1.5">
                             <label for="name" class="block text-xs font-semibold uppercase tracking-wider text-[#D6C8B4]">
                                 Product Title <span class="text-rose-600">*</span>
                             </label>
-                            <input type="text" id="name" name="name" required placeholder="e.g. Sculptural Lounge Armchair" class="w-full px-4 py-3 bg-[#0D0B09] border border-[#2A231C] rounded-xl text-[#FAF6EE] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-2 focus:ring-[#C5A059] focus:border-[#C5A059] transition-all">
+                            <input type="text" id="name" name="name" required value="<?= htmlspecialchars($_POST['name'] ?? '') ?>" placeholder="e.g. Sculptural Lounge Armchair" class="w-full px-4 py-3 bg-[#0D0B09] border border-[#2A231C] rounded-xl text-[#FAF6EE] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-2 focus:ring-[#C5A059] focus:border-[#C5A059] transition-all">
                         </div>
 
                         <!-- Price and Stock Grid -->
@@ -56,7 +145,7 @@
                                 </label>
                                 <div class="relative">
                                     <span class="absolute left-4 top-1/2 -translate-y-1/2 text-xs font-semibold text-stone-400">MMK</span>
-                                    <input type="number" step="1" id="price" name="price" required placeholder="40000" class="w-full pl-14 pr-4 py-3 bg-[#0D0B09] border border-[#2A231C] rounded-xl text-[#FAF6EE] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-2 focus:ring-[#C5A059] focus:border-[#C5A059] transition-all">
+                                    <input type="number" step="1" id="price" name="price" required value="<?= htmlspecialchars($_POST['price'] ?? '') ?>" placeholder="40000" class="w-full pl-14 pr-4 py-3 bg-[#0D0B09] border border-[#2A231C] rounded-xl text-[#FAF6EE] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-2 focus:ring-[#C5A059] focus:border-[#C5A059] transition-all">
                                 </div>
                             </div>
 
@@ -64,7 +153,7 @@
                                 <label for="stock" class="block text-xs font-semibold uppercase tracking-wider text-[#D6C8B4]">
                                     Initial Inventory Count <span class="text-rose-600">*</span>
                                 </label>
-                                <input type="number" id="stock" name="stock" required placeholder="e.g. 25" class="w-full px-4 py-3 bg-[#0D0B09] border border-[#2A231C] rounded-xl text-[#FAF6EE] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-2 focus:ring-[#C5A059] focus:border-[#C5A059] transition-all">
+                                <input type="number" id="stock" name="stock" required value="<?= htmlspecialchars($_POST['stock'] ?? '25') ?>" placeholder="e.g. 25" class="w-full px-4 py-3 bg-[#0D0B09] border border-[#2A231C] rounded-xl text-[#FAF6EE] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-2 focus:ring-[#C5A059] focus:border-[#C5A059] transition-all">
                             </div>
                         </div>
 
@@ -91,7 +180,7 @@
                             <label for="description" class="block text-xs font-semibold uppercase tracking-wider text-[#D6C8B4]">
                                 Piece Narrative &amp; Specifications
                             </label>
-                            <textarea id="description" name="description" rows="4" placeholder="Detail the timber source, joinery style, finish oils, and ergonomic proportions..." class="w-full p-4 bg-[#0D0B09] border border-[#2A231C] rounded-xl text-[#FAF6EE] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-2 focus:ring-[#C5A059] focus:border-[#C5A059] transition-all"></textarea>
+                            <textarea id="description" name="description" rows="4" placeholder="Detail the timber source, joinery style, finish oils, and ergonomic proportions..." class="w-full p-4 bg-[#0D0B09] border border-[#2A231C] rounded-xl text-[#FAF6EE] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-2 focus:ring-[#C5A059] focus:border-[#C5A059] transition-all"><?= htmlspecialchars($_POST['description'] ?? '') ?></textarea>
                         </div>
 
                         <!-- Form Actions -->
@@ -99,12 +188,11 @@
                             <a href="products.php" class="px-5 py-3 rounded-xl border border-[#2A231C] text-xs font-medium text-[#D6C8B4] hover:bg-[#0D0B09] transition-colors">
                                 Cancel
                             </a>
-                            <button type="submit" name="create" class="px-6 py-3 rounded-xl bg-[#C5A059] hover:bg-[#D4AF37] text-[#0D0B09] font-semibold text-xs font-medium transition-colors shadow-xs flex items-center gap-2">
-                                <i class="ri-check-line text-sm"></i>
-                                <span>Publish Piece to Catalog</span>
+                            <button type="submit" name="submit" class="px-6 py-3 rounded-xl bg-[#C5A059] hover:bg-[#D4AF37] text-[#0D0B09] text-xs font-semibold transition-colors shadow-xs flex items-center gap-2">
+                                <i class="ri-check-line text-base"></i>
+                                <span>Save &amp; Publish Piece</span>
                             </button>
                         </div>
-
                     </form>
                 </div>
 

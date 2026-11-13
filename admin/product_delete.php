@@ -1,3 +1,76 @@
+<?php
+/**
+ * ============================================================================
+ * FURNISHME BACKEND INSTRUCTION GUIDELINE - DELETE PRODUCT
+ * ============================================================================
+ * FILE: admin/product_delete.php
+ * PURPOSE: Confirms deletion of a product, unlinks associated image files from
+ *          disk, and executes DELETE query against the 'products' table.
+ * 
+ * STEP-BY-STEP IMPLEMENTATION GUIDE:
+ * 1. Initialize Session & Enforce Authentication Guard:
+ *    if (session_status() === PHP_SESSION_NONE) { session_start(); }
+ *    if (!isset($_SESSION['admin_user'])) {
+ *        header("Location: index.php");
+ *        exit;
+ *    }
+ * 
+ * 2. Include Database Connection:
+ *    require_once "../components/connection.php";
+ * 
+ * 3. Validate and Query Target Product Record:
+ *    $id = isset($_GET['id']) ? (int)$_GET['id'] : (isset($_POST['id']) ? (int)$_POST['id'] : 0);
+ *    if ($id <= 0) {
+ *        header("Location: products.php");
+ *        exit;
+ *    }
+ * 
+ *    $stmt = $connection->prepare("SELECT id, name, price, stock, image FROM products WHERE id = ? LIMIT 1");
+ *    $stmt->bind_param("i", $id);
+ *    $stmt->execute();
+ *    $product = $stmt->get_result()->fetch_assoc();
+ *    $stmt->close();
+ * 
+ *    if (!$product) {
+ *        header("Location: products.php?error=not_found");
+ *        exit;
+ *    }
+ * 
+ * 4. Process POST Deletion:
+ *    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'])) {
+ *        // Delete image file from server if it exists
+ *        if (!empty($product['image'])) {
+ *            $image_path = '../images/' . $product['image'];
+ *            if (file_exists($image_path) && !str_contains($product['image'], 'default')) {
+ *                unlink($image_path);
+ *            }
+ *        }
+ * 
+ *        // Delete database record
+ *        $del_stmt = $connection->prepare("DELETE FROM products WHERE id = ?");
+ *        $del_stmt->bind_param("i", $id);
+ *        if ($del_stmt->execute()) {
+ *            $del_stmt->close();
+ *            header("Location: products.php?msg=deleted");
+ *            exit;
+ *        } else {
+ *            $error = "Failed to delete record: " . $connection->error;
+ *        }
+ *    }
+ * ============================================================================
+ */
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (!isset($_SESSION['admin_user'])) {
+    header("Location: index.php");
+    exit;
+}
+
+$error = '';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,22 +121,34 @@
                     </div>
 
                     <!-- Piece Details Summary -->
-                    <!-- [PHP_BACKEND_HOOK: Query product by ID for deletion confirmation display (SELECT * FROM products WHERE id = :id)] -->
+                    <!-- ==========================================================
+                         PHP BACKEND GUIDELINE: Display Product Details
+                         Render summary of product to be deleted:
+                         - Image: ../images/<?= htmlspecialchars($product['image'] ?? 'chair-1.jpg') ?>
+                         - Name: <?= htmlspecialchars($product['name'] ?? '') ?>
+                         - Price: <?= number_format($product['price'] ?? 0) ?> MMK
+                         - Stock: <?= (int)($product['stock'] ?? 0) ?> units
+                         ========================================================== -->
                     <div class="border border-[#2A231C] rounded-2xl p-5 mb-8 flex items-center gap-6">
                         <div class="w-20 h-20 rounded-xl bg-[#0D0B09] border border-[#2A231C] p-2 flex items-center justify-center flex-shrink-0">
                             <img src="../images/chair-1.jpg" alt="Lounge Armchair" class="max-h-full max-w-full object-contain">
                         </div>
                         <div class="space-y-1 text-xs">
-                            <span class="text-stone-400 font-mono">Product #1</span>
-                            <h4 class="font-serif text-base font-medium text-[#FAF6EE]">Sculptural Lounge Armchair</h4>
-                            <p class="text-[#8C7D6B]">Price: <strong class="text-[#FAF6EE]">40,000 MMK</strong> • Stock: <strong>25 units</strong></p>
+                            <span class="text-stone-400 font-mono">Product #<?= htmlspecialchars($_GET['id'] ?? '1') ?></span>
+                            <h4 class="font-serif text-base font-medium text-stone-900">Sculptural Lounge Armchair</h4>
+                            <p class="text-stone-600">Price: <strong class="text-stone-900">40,000 MMK</strong> • Stock: <strong>25 units</strong></p>
                         </div>
                     </div>
 
-                    <!-- [PHP_BACKEND_HOOK: Product deletion handler. POST method, CSRF token verification, unlink associated image, execute DELETE FROM products WHERE id = :id] -->
-                    <form method="POST" class="flex items-center justify-end gap-3 pt-4 border-t border-[#2A231C]">
-                        <input type="hidden" name="id" value="1">
-                        <a href="products.php" class="px-5 py-2.5 rounded-xl border border-[#2A231C] text-xs font-medium text-[#D6C8B4] hover:bg-[#0D0B09] transition-colors">
+                    <!-- ==========================================================
+                         PHP BACKEND GUIDELINE: Deletion Form
+                         - Action: action="" (submits to self)
+                         - Method: POST
+                         - Hidden id input: <input type="hidden" name="id" value="<?= $product['id'] ?? 1 ?>">
+                         ========================================================== -->
+                    <form action="" method="POST" class="flex items-center justify-end gap-3 pt-4 border-t border-stone-200">
+                        <input type="hidden" name="id" value="<?= htmlspecialchars($_GET['id'] ?? '1') ?>">
+                        <a href="products.php" class="px-5 py-2.5 rounded-xl border border-stone-300 text-xs font-medium text-stone-700 hover:bg-stone-50 transition-colors">
                             Cancel
                         </a>
                         <button type="submit" name="delete" class="px-5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-medium transition-colors shadow-xs flex items-center gap-2">

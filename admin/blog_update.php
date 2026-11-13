@@ -1,3 +1,80 @@
+<?php
+/**
+ * ============================================================================
+ * FURNISHME BACKEND INSTRUCTION GUIDELINE - UPDATE JOURNAL ARTICLE
+ * ============================================================================
+ * FILE: admin/blog_update.php
+ * PURPOSE: Queries existing blog essay by ID, populates the edit form, handles
+ *          optional cover visual replacement, and updates the 'blogs' table.
+ * 
+ * STEP-BY-STEP IMPLEMENTATION GUIDE:
+ * 1. Initialize Session & Enforce Authentication Guard:
+ *    if (session_status() === PHP_SESSION_NONE) { session_start(); }
+ *    if (!isset($_SESSION['admin_user'])) {
+ *        header("Location: index.php");
+ *        exit;
+ *    }
+ * 
+ * 2. Include Database Connection:
+ *    require_once "../components/connection.php";
+ * 
+ * 3. Validate and Query Existing Article:
+ *    $id = isset($_GET['id']) ? (int)$_GET['id'] : (isset($_POST['id']) ? (int)$_POST['id'] : 0);
+ *    if ($id <= 0) {
+ *        header("Location: blog.php");
+ *        exit;
+ *    }
+ *    $stmt = $connection->prepare("SELECT * FROM blogs WHERE id = ? LIMIT 1");
+ *    $stmt->bind_param("i", $id);
+ *    $stmt->execute();
+ *    $blog = $stmt->get_result()->fetch_assoc();
+ *    $stmt->close();
+ *    if (!$blog) {
+ *        header("Location: blog.php?error=not_found");
+ *        exit;
+ *    }
+ * 
+ * 4. Process POST Update:
+ *    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+ *        $title   = trim($_POST['title'] ?? '');
+ *        $author  = trim($_POST['author'] ?? '');
+ *        $content = trim($_POST['content'] ?? '');
+ * 
+ *        // Handle Optional Visual Upload
+ *        if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+ *            $ext = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
+ *            $new_image = 'blog-' . time() . '-' . rand(100, 999) . '.' . $ext;
+ *            move_uploaded_file($_FILES['image']['tmp_name'], '../images/' . $new_image);
+ * 
+ *            $update_stmt = $connection->prepare("UPDATE blogs SET title = ?, author = ?, image = ?, content = ? WHERE id = ?");
+ *            $update_stmt->bind_param("ssssi", $title, $author, $new_image, $content, $id);
+ *        } else {
+ *            $update_stmt = $connection->prepare("UPDATE blogs SET title = ?, author = ?, content = ? WHERE id = ?");
+ *            $update_stmt->bind_param("sssi", $title, $author, $content, $id);
+ *        }
+ * 
+ *        if ($update_stmt->execute()) {
+ *            $update_stmt->close();
+ *            header("Location: blog.php?msg=updated");
+ *            exit;
+ *        } else {
+ *            $error = "Failed to update article: " . $connection->error;
+ *        }
+ *    }
+ * ============================================================================
+ */
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (!isset($_SESSION['admin_user'])) {
+    header("Location: index.php");
+    exit;
+}
+
+$error = '';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,10 +112,24 @@
                     </a>
                 </div>
 
+                <!-- Error Notification Banner -->
+                <?php if (!empty($error)): ?>
+                    <div class="p-4 rounded-2xl bg-rose-950/60 border border-rose-800 text-rose-300 text-xs flex items-center gap-2.5">
+                        <i class="ri-error-warning-line text-lg flex-shrink-0"></i>
+                        <span><?= htmlspecialchars($error) ?></span>
+                    </div>
+                <?php endif; ?>
+
                 <!-- Form Card -->
                 <div class="bg-[#161310] rounded-3xl border border-[#2A231C] p-6 sm:p-10 shadow-xs">
-                    <!-- [PHP_BACKEND_HOOK: Blog update handler. Method: POST, enctype="multipart/form-data". Optional cover image upload, UPDATE blogs SET title = :title, author = :author, content = :content WHERE id = :id] -->
-                    <form method="POST" enctype="multipart/form-data" class="space-y-6">
+                    <!-- ==========================================================
+                         PHP BACKEND GUIDELINE: Blog Update Form
+                         - Action: action="" (submits to self)
+                         - Method: POST
+                         - Hidden input: <input type="hidden" name="id" value="<?= $blog['id'] ?? 1 ?>">
+                         - Prefill inputs with current record values
+                         ========================================================== -->
+                    <form action="" method="POST" enctype="multipart/form-data" class="space-y-6">
                         <input type="hidden" name="id" value="1">
 
                         <!-- Title -->
@@ -67,7 +158,7 @@
                             </label>
                             <div class="flex flex-col sm:flex-row items-center gap-6 p-4 rounded-2xl bg-[#0D0B09] border border-[#2A231C]">
                                 <div class="w-32 h-20 rounded-xl bg-[#161310] border border-[#2A231C] overflow-hidden flex-shrink-0">
-                                    <!-- [PHP_BACKEND_HOOK: Display current blog post cover image] -->
+                                    <!-- PHP Guideline: src="../images/<?= htmlspecialchars($blog['image'] ?? 'blog-minimalist-spaces.jpg') ?>" -->
                                     <img id="blog-preview" src="../images/blog-minimalist-spaces.jpg" alt="Cover visual" class="w-full h-full object-cover">
                                 </div>
                                 <div class="flex-1 space-y-1 text-center sm:text-left">
@@ -83,20 +174,19 @@
                             <label for="content" class="block text-xs font-semibold uppercase tracking-wider text-[#D6C8B4]">
                                 Article Content &amp; Essay Text <span class="text-rose-600">*</span>
                             </label>
-                            <textarea id="content" name="content" rows="8" required class="w-full p-4 bg-[#0D0B09] border border-[#2A231C] rounded-xl text-[#FAF6EE] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-2 focus:ring-[#C5A059] focus:border-[#C5A059] transition-all">In an era saturated by industrial high-gloss surfaces, clinical lines, and the constant digital flicker of notifications, our domestic environments have frequently sacrificed soul for sterile uniformity. Japanese philosophy offers an enduring antidote through the worldview of wabi-sabi...</textarea>
+                            <textarea id="content" name="content" rows="8" required class="w-full p-4 bg-[#0D0B09] border border-[#2A231C] rounded-xl text-[#FAF6EE] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-2 focus:ring-[#C5A059] focus:border-[#C5A059] transition-all">In an era saturated by industrial high-gloss surfaces, clinical lines, and the constant digital flicker of notifications, our domestic environments have frequently sacrificed soul for sterile uniformity. Japanese philosophy offers an enduring antidote through the worldview of wabi-sabi: the appreciation of beauty that is imperfect, impermanent, and incomplete.</textarea>
                         </div>
 
-                        <!-- Form Actions -->
+                        <!-- Actions -->
                         <div class="pt-4 border-t border-[#2A231C] flex items-center justify-end gap-3">
                             <a href="blog.php" class="px-5 py-3 rounded-xl border border-[#2A231C] text-xs font-medium text-[#D6C8B4] hover:bg-[#0D0B09] transition-colors">
                                 Cancel
                             </a>
-                            <button type="submit" name="update" class="px-6 py-3 rounded-xl bg-[#C5A059] hover:bg-[#D4AF37] text-[#0D0B09] font-semibold text-xs font-medium transition-colors shadow-xs flex items-center gap-2">
-                                <i class="ri-save-line text-sm"></i>
+                            <button type="submit" name="update" class="px-6 py-3 rounded-xl bg-[#C5A059] hover:bg-[#D4AF37] text-[#0D0B09] text-xs font-semibold transition-colors shadow-xs flex items-center gap-2">
+                                <i class="ri-save-line text-base"></i>
                                 <span>Save Changes</span>
                             </button>
                         </div>
-
                     </form>
                 </div>
 

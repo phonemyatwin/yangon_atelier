@@ -1,3 +1,51 @@
+<?php
+/**
+ * ============================================================================
+ * FURNISHME BACKEND INSTRUCTION GUIDELINE - ADMIN TEAM LIST
+ * ============================================================================
+ * FILE: admin/team.php
+ * PURPOSE: Lists all design collective members and master artisans from the
+ *          'team' table, with links to add, edit, or delete staff profiles.
+ * 
+ * STEP-BY-STEP IMPLEMENTATION GUIDE:
+ * 1. Initialize Session & Enforce Authentication Guard:
+ *    if (session_status() === PHP_SESSION_NONE) { session_start(); }
+ *    if (!isset($_SESSION['admin_user'])) {
+ *        header("Location: index.php");
+ *        exit;
+ *    }
+ * 
+ * 2. Include Database Connection:
+ *    require_once "../components/connection.php";
+ * 
+ * 3. Handle Flash Notifications:
+ *    $msg = $_GET['msg'] ?? '';
+ *    if ($msg === 'created') $success = "Team member profile created successfully.";
+ *    if ($msg === 'updated') $success = "Team member profile updated successfully.";
+ *    if ($msg === 'deleted') $success = "Team member profile removed successfully.";
+ * 
+ * 4. Query Team Members:
+ *    $res = $connection->query("SELECT id, name, position, image FROM team ORDER BY id ASC");
+ *    $team = $res ? $res->fetch_all(MYSQLI_ASSOC) : [];
+ * ============================================================================
+ */
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (!isset($_SESSION['admin_user'])) {
+    header("Location: index.php");
+    exit;
+}
+
+$success = '';
+if (isset($_GET['msg'])) {
+    if ($_GET['msg'] === 'created') $success = "Team member added successfully.";
+    if ($_GET['msg'] === 'updated') $success = "Team member updated successfully.";
+    if ($_GET['msg'] === 'deleted') $success = "Team member deleted successfully.";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,11 +82,21 @@
                     </a>
                 </div>
 
+                <!-- ==============================================================
+                     PHP BACKEND GUIDELINE: Success Notification Banner
+                     ============================================================== -->
+                <?php if (!empty($success)): ?>
+                    <div class="p-4 rounded-2xl bg-emerald-950/60 border border-emerald-800 text-emerald-300 text-xs flex items-center gap-2.5">
+                        <i class="ri-checkbox-circle-line text-lg flex-shrink-0"></i>
+                        <span><?= htmlspecialchars($success) ?></span>
+                    </div>
+                <?php endif; ?>
+
                 <!-- Table Card -->
                 <div class="bg-[#161310] rounded-3xl border border-[#2A231C] overflow-hidden shadow-xs">
                     <div class="p-5 border-b border-[#2A231C] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                         <div class="text-xs text-[#8C7D6B]">
-                            Showing active collective artisans &amp; curators
+                            Showing <strong><?= count($team ?? []) ?></strong> active collective artisans &amp; curators
                         </div>
                         <div class="relative sm:w-64">
                             <i class="ri-search-line absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 text-xs"></i>
@@ -46,7 +104,41 @@
                         </div>
                     </div>
 
-                    <!-- [PHP_BACKEND_HOOK: Dynamic team table loop: SELECT * FROM team ORDER BY id ASC. Use foreach($team as $member) to render: $member['id'], $member['image'], $member['name'], $member['position']] -->
+                    <!-- ==========================================================
+                         PHP BACKEND GUIDELINE: Dynamic Team Members Loop
+                         Query: SELECT * FROM team ORDER BY id ASC
+                         Loop through $team and output table rows:
+                         <?php /*
+                         if (!empty($team)) {
+                             foreach ($team as $member) {
+                                 ?>
+                                 <tr class="hover:bg-[#161310] transition-colors">
+                                     <td class="py-4 px-6 text-stone-400">#<?= $member['id'] ?></td>
+                                     <td class="py-4 px-6">
+                                         <div class="w-10 h-10 rounded-full bg-[#0D0B09] border border-[#2A231C] overflow-hidden">
+                                             <img src="../images/<?= htmlspecialchars($member['image']) ?>" alt="<?= htmlspecialchars($member['name']) ?>" class="w-full h-full object-cover">
+                                         </div>
+                                     </td>
+                                     <td class="py-4 px-6 font-semibold text-[#FAF6EE] text-sm"><?= htmlspecialchars($member['name']) ?></td>
+                                     <td class="py-4 px-6 text-[#8C7D6B]"><?= htmlspecialchars($member['position']) ?></td>
+                                     <td class="py-4 px-6 text-right">
+                                         <div class="inline-flex items-center gap-2">
+                                             <a href="team_update.php?id=<?= $member['id'] ?>" class="px-2.5 py-1 rounded-lg border border-[#2A231C] hover:bg-[#0D0B09] text-[#D6C8B4] transition-colors flex items-center gap-1">
+                                                 <i class="ri-pencil-line"></i> Edit
+                                             </a>
+                                             <a href="team_delete.php?id=<?= $member['id'] ?>" class="px-2.5 py-1 rounded-lg border border-rose-200 hover:bg-rose-50 text-rose-600 transition-colors flex items-center gap-1">
+                                                 <i class="ri-delete-bin-line"></i> Delete
+                                             </a>
+                                         </div>
+                                     </td>
+                                 </tr>
+                                 <?php
+                             }
+                         } else {
+                             echo '<tr><td colspan="5" class="py-8 text-center text-stone-400">No team members added yet.</td></tr>';
+                         }
+                         */ ?>
+                         ========================================================== -->
                     <div class="overflow-x-auto">
                         <table class="w-full text-left border-collapse text-xs">
                             <thead>

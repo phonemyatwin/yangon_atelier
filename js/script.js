@@ -285,3 +285,4 @@ if (document.querySelector(".hero-slide")) {
     }
   }, 6500);
 }
+ynwesoe

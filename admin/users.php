@@ -1,3 +1,60 @@
+<?php
+/**
+ * ============================================================================
+ * FURNISHME BACKEND INSTRUCTION GUIDELINE - ADMIN USERS LIST
+ * ============================================================================
+ * FILE: admin/users.php
+ * PURPOSE: Lists all registered client accounts from the 'users' table, allows
+ *          keyword searching, and provides links to create, edit, or delete users.
+ * 
+ * STEP-BY-STEP IMPLEMENTATION GUIDE:
+ * 1. Initialize Session & Enforce Authentication Guard:
+ *    if (session_status() === PHP_SESSION_NONE) { session_start(); }
+ *    if (!isset($_SESSION['admin_user'])) {
+ *        header("Location: index.php");
+ *        exit;
+ *    }
+ * 
+ * 2. Include Database Connection:
+ *    require_once "../components/connection.php";
+ * 
+ * 3. Handle Flash Notifications:
+ *    $msg = $_GET['msg'] ?? '';
+ *    if ($msg === 'created') $success = "User account created successfully.";
+ *    if ($msg === 'updated') $success = "User account updated successfully.";
+ *    if ($msg === 'deleted') $success = "User account deleted successfully.";
+ * 
+ * 4. Query Registered Users:
+ *    $search = trim($_GET['search'] ?? '');
+ *    if (!empty($search)) {
+ *        $stmt = $connection->prepare("SELECT id, username, email, created_at FROM users WHERE username LIKE ? OR email LIKE ? ORDER BY id DESC");
+ *        $wildcard = "%$search%";
+ *        $stmt->bind_param("ss", $wildcard, $wildcard);
+ *        $stmt->execute();
+ *        $users = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+ *    } else {
+ *        $res = $connection->query("SELECT id, username, email, created_at FROM users ORDER BY id DESC");
+ *        $users = $res ? $res->fetch_all(MYSQLI_ASSOC) : [];
+ *    }
+ * ============================================================================
+ */
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (!isset($_SESSION['admin_user'])) {
+    header("Location: index.php");
+    exit;
+}
+
+$success = '';
+if (isset($_GET['msg'])) {
+    if ($_GET['msg'] === 'created') $success = "User account created successfully.";
+    if ($_GET['msg'] === 'updated') $success = "User account updated successfully.";
+    if ($_GET['msg'] === 'deleted') $success = "User account deleted successfully.";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,11 +91,21 @@
                     </a>
                 </div>
 
+                <!-- ==============================================================
+                     PHP BACKEND GUIDELINE: Success Notification Banner
+                     ============================================================== -->
+                <?php if (!empty($success)): ?>
+                    <div class="p-4 rounded-2xl bg-emerald-950/60 border border-emerald-800 text-emerald-300 text-xs flex items-center gap-2.5">
+                        <i class="ri-checkbox-circle-line text-lg flex-shrink-0"></i>
+                        <span><?= htmlspecialchars($success) ?></span>
+                    </div>
+                <?php endif; ?>
+
                 <!-- Table Card -->
                 <div class="bg-[#161310] rounded-3xl border border-[#2A231C] overflow-hidden shadow-xs">
                     <div class="p-5 border-b border-[#2A231C] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                         <div class="text-xs text-[#8C7D6B]">
-                            Showing registered accounts
+                            Showing <strong><?= count($users ?? []) ?></strong> registered accounts
                         </div>
                         <div class="relative sm:w-64">
                             <i class="ri-search-line absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 text-xs"></i>
@@ -46,7 +113,52 @@
                         </div>
                     </div>
 
-                    <!-- [PHP_BACKEND_HOOK: Dynamic users table loop: SELECT * FROM users ORDER BY id DESC. Use foreach($users as $user) to render: $user['id'], $user['username'], $user['email']] -->
+                    <!-- ==========================================================
+                         PHP BACKEND GUIDELINE: Dynamic Users Table Loop
+                         Query: SELECT id, username, email FROM users ORDER BY id DESC
+                         Loop through $users:
+                         <?php /*
+                         if (!empty($users)) {
+                             foreach ($users as $user) {
+                                 $initials = strtoupper(substr($user['username'], 0, 2));
+                                 ?>
+                                 <tr class="hover:bg-[#161310] transition-colors">
+                                     <td class="py-4 px-6 text-stone-400">#<?= $user['id'] ?></td>
+                                     <td class="py-4 px-6">
+                                         <div class="flex items-center gap-3">
+                                             <span class="w-9 h-9 rounded-full bg-[#1C1814] text-[#C5A059] flex items-center justify-center font-serif text-xs font-semibold">
+                                                 <?= htmlspecialchars($initials) ?>
+                                             </span>
+                                             <div>
+                                                 <span class="font-semibold text-[#FAF6EE] block text-sm"><?= htmlspecialchars($user['username']) ?></span>
+                                                 <span class="text-[10px] text-[#8C7D6B] uppercase tracking-wider">Client Member</span>
+                                             </div>
+                                         </div>
+                                     </td>
+                                     <td class="py-4 px-6 text-[#8C7D6B] font-mono text-xs"><?= htmlspecialchars($user['email']) ?></td>
+                                     <td class="py-4 px-6">
+                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                             Verified
+                                         </span>
+                                     </td>
+                                     <td class="py-4 px-6 text-right">
+                                         <div class="inline-flex items-center gap-2">
+                                             <a href="user_update.php?id=<?= $user['id'] ?>" class="px-2.5 py-1 rounded-lg border border-[#2A231C] hover:bg-[#0D0B09] text-[#D6C8B4] transition-colors flex items-center gap-1">
+                                                 <i class="ri-pencil-line"></i> Edit
+                                             </a>
+                                             <a href="user_delete.php?id=<?= $user['id'] ?>" class="px-2.5 py-1 rounded-lg border border-rose-200 hover:bg-rose-50 text-rose-600 transition-colors flex items-center gap-1">
+                                                 <i class="ri-delete-bin-line"></i> Delete
+                                             </a>
+                                         </div>
+                                     </td>
+                                 </tr>
+                                 <?php
+                             }
+                         } else {
+                             echo '<tr><td colspan="5" class="py-8 text-center text-stone-400">No user accounts found.</td></tr>';
+                         }
+                         */ ?>
+                         ========================================================== -->
                     <div class="overflow-x-auto">
                         <table class="w-full text-left border-collapse text-xs">
                             <thead>

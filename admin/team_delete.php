@@ -1,10 +1,74 @@
+<?php
+/**
+ * ============================================================================
+ * FURNISHME BACKEND INSTRUCTION GUIDELINE - DELETE TEAM MEMBER
+ * ============================================================================
+ * FILE: admin/team_delete.php
+ * PURPOSE: Confirms removal of a collective artisan, deletes portrait visual,
+ *          and executes DELETE query against the 'team' table.
+ * 
+ * STEP-BY-STEP IMPLEMENTATION GUIDE:
+ * 1. Initialize Session & Enforce Authentication Guard:
+ *    if (session_status() === PHP_SESSION_NONE) { session_start(); }
+ *    if (!isset($_SESSION['admin_user'])) {
+ *        header("Location: index.php");
+ *        exit;
+ *    }
+ * 
+ * 2. Include Database Connection:
+ *    require_once "../components/connection.php";
+ * 
+ * 3. Validate and Query Target Member Record:
+ *    $id = isset($_GET['id']) ? (int)$_GET['id'] : (isset($_POST['id']) ? (int)$_POST['id'] : 0);
+ *    if ($id <= 0) {
+ *        header("Location: team.php");
+ *        exit;
+ *    }
+ *    $stmt = $connection->prepare("SELECT id, name, position, image FROM team WHERE id = ? LIMIT 1");
+ *    $stmt->bind_param("i", $id);
+ *    $stmt->execute();
+ *    $member = $stmt->get_result()->fetch_assoc();
+ *    $stmt->close();
+ *    if (!$member) {
+ *        header("Location: team.php?error=not_found");
+ *        exit;
+ *    }
+ * 
+ * 4. Process POST Deletion:
+ *    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'])) {
+ *        if (!empty($member['image'])) {
+ *            $file = '../images/' . $member['image'];
+ *            if (file_exists($file)) { unlink($file); }
+ *        }
+ *        $del_stmt = $connection->prepare("DELETE FROM team WHERE id = ?");
+ *        $del_stmt->bind_param("i", $id);
+ *        if ($del_stmt->execute()) {
+ *            $del_stmt->close();
+ *            header("Location: team.php?msg=deleted");
+ *            exit;
+ *        }
+ *    }
+ * ============================================================================
+ */
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (!isset($_SESSION['admin_user'])) {
+    header("Location: index.php");
+    exit;
+}
+
+$error = '';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delete Team Member | FurnishMe Admin</title>
+    <title>Delete Team Member | FurnishMe Atelier Admin</title>
     <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>
@@ -28,7 +92,7 @@
                             <span>/</span>
                             <span class="text-rose-600 font-medium">Delete</span>
                         </div>
-                        <h2 class="font-serif text-2xl sm:text-3xl font-medium text-[#FAF6EE]">Confirm Member Deletion</h2>
+                        <h2 class="font-serif text-2xl sm:text-3xl font-medium text-[#FAF6EE]">Confirm Member Removal</h2>
                     </div>
                     <a href="team.php" class="px-4 py-2 rounded-xl border border-[#2A231C] text-xs font-medium text-[#D6C8B4] hover:bg-white transition-colors">
                         Cancel
@@ -48,22 +112,33 @@
                     </div>
 
                     <!-- Member Details Summary -->
-                    <!-- [PHP_BACKEND_HOOK: Query team member by ID for deletion confirmation (SELECT * FROM team WHERE id = :id)] -->
+                    <!-- ==========================================================
+                         PHP BACKEND GUIDELINE: Display Member Details
+                         Render summary of member to be deleted:
+                         - Image: ../images/<?= htmlspecialchars($member['image'] ?? 'team-1.jpg') ?>
+                         - Name: <?= htmlspecialchars($member['name'] ?? '') ?>
+                         - Position: <?= htmlspecialchars($member['position'] ?? '') ?>
+                         ========================================================== -->
                     <div class="border border-[#2A231C] rounded-2xl p-5 mb-8 flex items-center gap-5">
                         <div class="w-16 h-20 rounded-xl bg-[#0D0B09] border border-[#2A231C] overflow-hidden flex-shrink-0">
                             <img src="../images/team-1.jpg" alt="Artisan portrait" class="w-full h-full object-cover">
                         </div>
                         <div class="space-y-1 text-xs">
-                            <span class="text-stone-400 font-mono">Member #1</span>
-                            <h4 class="font-serif text-base font-medium text-[#FAF6EE]">Phone Myat Win</h4>
-                            <p class="text-[#8C7D6B]">Role: <strong class="text-[#FAF6EE]">Principal Architect &amp; Founder</strong></p>
+                            <span class="text-stone-400 font-mono">Member #<?= htmlspecialchars($_GET['id'] ?? '1') ?></span>
+                            <h4 class="font-serif text-base font-medium text-stone-900">Phone Myat Win</h4>
+                            <p class="text-stone-600">Role: <strong class="text-stone-900">Principal Architect &amp; Founder</strong></p>
                         </div>
                     </div>
 
-                    <!-- [PHP_BACKEND_HOOK: Team member deletion handler. POST method, unlink image file if exists, execute DELETE FROM team WHERE id = :id] -->
-                    <form method="POST" class="flex items-center justify-end gap-3 pt-4 border-t border-[#2A231C]">
-                        <input type="hidden" name="id" value="1">
-                        <a href="team.php" class="px-5 py-2.5 rounded-xl border border-[#2A231C] text-xs font-medium text-[#D6C8B4] hover:bg-[#0D0B09] transition-colors">
+                    <!-- ==========================================================
+                         PHP BACKEND GUIDELINE: Deletion Form
+                         - Action: action="" (submits to self)
+                         - Method: POST
+                         - Hidden id input: <input type="hidden" name="id" value="<?= $member['id'] ?? 1 ?>">
+                         ========================================================== -->
+                    <form action="" method="POST" class="flex items-center justify-end gap-3 pt-4 border-t border-stone-200">
+                        <input type="hidden" name="id" value="<?= htmlspecialchars($_GET['id'] ?? '1') ?>">
+                        <a href="team.php" class="px-5 py-2.5 rounded-xl border border-stone-300 text-xs font-medium text-stone-700 hover:bg-stone-50 transition-colors">
                             Cancel
                         </a>
                         <button type="submit" name="delete" class="px-5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-medium transition-colors shadow-xs flex items-center gap-2">

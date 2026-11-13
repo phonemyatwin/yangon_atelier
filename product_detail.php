@@ -1,3 +1,71 @@
+<?php
+/**
+ * ============================================================================
+ * FURNISHME BACKEND INSTRUCTION GUIDELINE - PRODUCT DETAIL PAGE
+ * ============================================================================
+ * FILE: product_detail.php
+ * PURPOSE: Queries and presents high-fidelity specifications for a single
+ *          furniture piece, handles Add-to-Cart submissions, and fetches
+ *          complementary related pieces in the same category.
+ * 
+ * STEP-BY-STEP IMPLEMENTATION GUIDE:
+ * 1. Initialize Session & Database:
+ *    if (session_status() === PHP_SESSION_NONE) { session_start(); }
+ *    require_once "components/connection.php";
+ * 
+ * 2. Validate GET Parameter 'id':
+ *    $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+ *    if ($id <= 0) {
+ *        header("Location: shop.php");
+ *        exit;
+ *    }
+ * 
+ * 3. Query Single Product Record:
+ *    $stmt = $connection->prepare("SELECT * FROM products WHERE id = ? LIMIT 1");
+ *    $stmt->bind_param("i", $id);
+ *    $stmt->execute();
+ *    $result = $stmt->get_result();
+ *    $product = $result->fetch_assoc();
+ *    $stmt->close();
+ * 
+ *    if (!$product) {
+ *        header("Location: shop.php?error=not_found");
+ *        exit;
+ *    }
+ * 
+ * 4. Query Related Products (same category, excluding current):
+ *    $category = $product['category'] ?? 'chairs';
+ *    $rel_stmt = $connection->prepare("SELECT * FROM products WHERE category = ? AND id != ? ORDER BY id DESC LIMIT 4");
+ *    $rel_stmt->bind_param("si", $category, $id);
+ *    $rel_stmt->execute();
+ *    $related_products = $rel_stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+ *    $rel_stmt->close();
+ * 
+ * 5. Handle Add-to-Cart Form Submission:
+ *    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['quantity'])) {
+ *        $qty = max(1, min((int)$_POST['quantity'], (int)$product['stock']));
+ *        // Initialize session cart array:
+ *        if (!isset($_SESSION['cart'])) { $_SESSION['cart'] = []; }
+ *        if (isset($_SESSION['cart'][$id])) {
+ *            $_SESSION['cart'][$id]['quantity'] += $qty;
+ *        } else {
+ *            $_SESSION['cart'][$id] = [
+ *                'id'       => $product['id'],
+ *                'name'     => $product['name'],
+ *                'price'    => $product['price'],
+ *                'image'    => $product['image'],
+ *                'quantity' => $qty
+ *            ];
+ *        }
+ *        $cart_success = "Added " . htmlspecialchars($product['name']) . " to your cart.";
+ *    }
+ * ============================================================================
+ */
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 
@@ -5,7 +73,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- [PHP_BACKEND_HOOK: Dynamic page title with product name (e.g. $product['name'] . ' | FurnishMe Atelier')] -->
+    <!-- ==================================================================
+         PHP BACKEND GUIDELINE: Dynamic Page Title
+         <title><?= htmlspecialchars($product['name'] ?? 'Product Detail') ?> | FurnishMe Atelier</title>
+         ================================================================== -->
     <title>Nordic Solid Wood Armchair | FurnishMe Atelier</title>
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <?php include "components/css.php"; ?>
@@ -32,7 +103,17 @@
     </div>
 
     <!-- MAIN PRODUCT SHOWCASE SPLIT LAYOUT -->
-    <!-- [PHP_BACKEND_HOOK: Single product detail query (SELECT * FROM products WHERE id = :id)] -->
+    <!-- ==================================================================
+         PHP BACKEND GUIDELINE: Single Product Record
+         Fields available in $product:
+         - $product['id']
+         - $product['name']
+         - $product['price']
+         - $product['stock']
+         - $product['image']
+         - $product['description']
+         - $product['category']
+         ================================================================== -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             
@@ -42,9 +123,9 @@
                 <div class="relative w-full aspect-[4/3] bg-[#0D0B09] rounded-3xl border border-[#2A231C] overflow-hidden shadow-2xl flex items-center justify-center">
                     <span class="absolute top-5 left-5 z-10 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-[#132A1C] text-[#52D288] border border-[#1E4D32] shadow-md">
                         <span class="w-1.5 h-1.5 rounded-full bg-[#52D288]"></span>
-                        <span>In Stock &amp; Ready for White-Glove Delivery</span>
+                        <span><?= ($product['stock'] ?? 25) > 0 ? 'In Stock & Ready for White-Glove Delivery' : 'Crafted to Order' ?></span>
                     </span>
-                    <!-- [PHP_BACKEND_HOOK: Dynamic product main image: $product['image']] -->
+                    <!-- PHP Guideline: src="images/<?= htmlspecialchars($product['image'] ?? 'chair-1.jpg') ?>" -->
                     <img id="main-product-img" src="images/chair-1.jpg" alt="Nordic Solid Wood Armchair" class="w-full h-full object-cover transition-all duration-300" loading="eager">
                 </div>
 
@@ -108,8 +189,14 @@
                 </div>
 
                 <!-- Purchase Form Handler -->
-                <!-- [PHP_BACKEND_HOOK: Form submission handler target for Add-to-Cart (POST to cart_process.php or session cart array)] -->
-                <form action="#" method="POST" data-toast-success="Added Nordic Armchair to your cart." class="space-y-6">
+                <!-- ==============================================================
+                     PHP BACKEND GUIDELINE: Add to Cart Form
+                     - Set action="" (posts to current page or cart handler)
+                     - Method: POST
+                     - Hidden product_id: value="<?= $product['id'] ?>"
+                     - Quantity input: max="<?= (int)$product['stock'] ?>"
+                     ============================================================== -->
+                <form action="" method="POST" data-toast-success="Added piece to your cart." class="space-y-6">
                     <input type="hidden" name="product_id" value="1">
 
                     <!-- Stock Status & Quantity Stepper -->
@@ -211,7 +298,35 @@
                 </a>
             </div>
 
-            <!-- [PHP_BACKEND_HOOK: Related products query (WHERE category = :cat AND id != :current_id LIMIT 4)] -->
+            <!-- ==============================================================
+                 PHP BACKEND GUIDELINE: Related Products Loop
+                 Query: SELECT * FROM products WHERE category = ? AND id != ? LIMIT 4
+                 Loop over $related_products:
+                 <?php /*
+                 if (!empty($related_products)) {
+                     foreach ($related_products as $rel) {
+                         ?>
+                         <div class="group bg-[#161310] rounded-3xl border border-[#2A231C] overflow-hidden transition-all duration-300 hover:shadow-2xl hover:border-[#C5A059] flex flex-col justify-between">
+                             <div class="relative w-full aspect-[4/3] bg-[#0D0B09] border-b border-[#221C16] overflow-hidden flex items-center justify-center">
+                                 <a href="product_detail.php?id=<?= $rel['id'] ?>" class="w-full h-full block">
+                                     <img src="images/<?= htmlspecialchars($rel['image']) ?>" alt="<?= htmlspecialchars($rel['name']) ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                                 </a>
+                             </div>
+                             <div class="p-4">
+                                 <h4 class="font-serif text-sm font-medium text-[#FAF6EE] group-hover:text-[#C5A059] transition-colors">
+                                     <a href="product_detail.php?id=<?= $rel['id'] ?>"><?= htmlspecialchars($rel['name']) ?></a>
+                                 </h4>
+                                 <div class="pt-2 flex items-center justify-between text-xs">
+                                     <span class="font-semibold text-[#FAF6EE]"><?= number_format($rel['price']) ?> MMK</span>
+                                     <span class="text-[#8C7D6B]"><?= $rel['stock'] > 0 ? 'In stock' : 'Made to order' ?></span>
+                                 </div>
+                             </div>
+                         </div>
+                         <?php
+                     }
+                 }
+                 */ ?>
+                 ============================================================== -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- Related 1 -->
                 <div class="group bg-[#161310] rounded-3xl border border-[#2A231C] overflow-hidden transition-all duration-300 hover:shadow-2xl hover:border-[#C5A059] flex flex-col justify-between">

@@ -1,3 +1,72 @@
+<?php
+/**
+ * ============================================================================
+ * FURNISHME BACKEND INSTRUCTION GUIDELINE - PRODUCT CATALOG (SHOP)
+ * ============================================================================
+ * FILE: shop.php
+ * PURPOSE: Queries and renders the furniture catalog, provides multi-criteria
+ *          filtering (by category, keyword search, price/name sorting), and
+ *          handles server-side or hybrid pagination.
+ * 
+ * STEP-BY-STEP IMPLEMENTATION GUIDE:
+ * 1. Initialize Session & Database:
+ *    if (session_status() === PHP_SESSION_NONE) { session_start(); }
+ *    require_once "components/connection.php";
+ * 
+ * 2. Sanitize and Read GET Parameters:
+ *    $category = trim($_GET['category'] ?? 'all');
+ *    $search   = trim($_GET['search'] ?? '');
+ *    $sort     = trim($_GET['sort'] ?? 'featured');
+ *    $page     = max(1, (int)($_GET['page'] ?? 1));
+ *    $limit    = 8; // items per page
+ *    $offset   = ($page - 1) * $limit;
+ * 
+ * 3. Construct Dynamic SQL Query with Prepared Statements:
+ *    $where_sql = "WHERE 1=1";
+ *    $types = "";
+ *    $params = [];
+ * 
+ *    if (!empty($category) && $category !== 'all') {
+ *        $where_sql .= " AND category = ?";
+ *        $types .= "s";
+ *        $params[] = $category;
+ *    }
+ *    if (!empty($search)) {
+ *        $where_sql .= " AND (name LIKE ? OR description LIKE ?)";
+ *        $search_wildcard = "%" . $search . "%";
+ *        $types .= "ss";
+ *        $params[] = $search_wildcard;
+ *        $params[] = $search_wildcard;
+ *    }
+ * 
+ *    // Sorting Logic
+ *    switch ($sort) {
+ *        case 'price_asc':  $order_sql = "ORDER BY price ASC"; break;
+ *        case 'price_desc': $order_sql = "ORDER BY price DESC"; break;
+ *        case 'name_asc':   $order_sql = "ORDER BY name ASC"; break;
+ *        default:           $order_sql = "ORDER BY id DESC"; break;
+ *    }
+ * 
+ * 4. Execute Query and Fetch Results:
+ *    $sql = "SELECT id, name, price, stock, image, description, category FROM products $where_sql $order_sql LIMIT ?, ?";
+ *    $types .= "ii";
+ *    $params[] = $offset;
+ *    $params[] = $limit;
+ * 
+ *    $stmt = $connection->prepare($sql);
+ *    if (!empty($types)) {
+ *        $stmt->bind_param($types, ...$params);
+ *    }
+ *    $stmt->execute();
+ *    $products = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+ *    $stmt->close();
+ * ============================================================================
+ */
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 
@@ -40,33 +109,37 @@
 
     <!-- SHOPPING CONTROLS & FILTER BAR -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <!-- [PHP_BACKEND_HOOK: Category filter & Sorting handler form (GET params: category, sort, search)] -->
+        <!-- ==================================================================
+             PHP BACKEND GUIDELINE: Category Filter & Sorting
+             - Pass parameters via URL: shop.php?category=chairs&sort=price_asc
+             - Check active category to set the active styling:
+               class="<?= ($category == 'chairs') ? 'bg-[#C5A059] text-[#0D0B09]' : 'bg-[#1C1814] text-[#B5A591]' ?>"
+             ================================================================== -->
         <div class="bg-[#15120F] border border-[#2A231C] rounded-3xl p-4 sm:p-5 shadow-xl flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
             
             <!-- Category Filter Pills -->
-            <!-- [PHP_BACKEND_HOOK: Category filter query (e.g., WHERE category = :cat ORDER BY price ASC)] -->
             <div class="flex items-center gap-2 overflow-x-auto pb-2 lg:pb-0 scrollbar-none" id="category-filters">
-                <button type="button" data-filter="all" class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-[#C5A059] text-[#0D0B09] transition-colors whitespace-nowrap shadow-md">
+                <a href="shop.php?category=all" data-filter="all" class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-[#C5A059] text-[#0D0B09] transition-colors whitespace-nowrap shadow-md">
                     All Pieces
-                </button>
-                <button type="button" data-filter="chairs" class="filter-btn px-4 py-2 rounded-xl text-xs font-medium bg-[#1C1814] text-[#B5A591] hover:bg-[#2A231C] hover:text-[#FAF6EE] border border-[#2A231C] transition-colors whitespace-nowrap">
+                </a>
+                <a href="shop.php?category=chairs" data-filter="chairs" class="filter-btn px-4 py-2 rounded-xl text-xs font-medium bg-[#1C1814] text-[#B5A591] hover:bg-[#2A231C] hover:text-[#FAF6EE] border border-[#2A231C] transition-colors whitespace-nowrap">
                     Chairs
-                </button>
-                <button type="button" data-filter="sofas" class="filter-btn px-4 py-2 rounded-xl text-xs font-medium bg-[#1C1814] text-[#B5A591] hover:bg-[#2A231C] hover:text-[#FAF6EE] border border-[#2A231C] transition-colors whitespace-nowrap">
+                </a>
+                <a href="shop.php?category=sofas" data-filter="sofas" class="filter-btn px-4 py-2 rounded-xl text-xs font-medium bg-[#1C1814] text-[#B5A591] hover:bg-[#2A231C] hover:text-[#FAF6EE] border border-[#2A231C] transition-colors whitespace-nowrap">
                     Sofas &amp; Lounge
-                </button>
-                <button type="button" data-filter="tables" class="filter-btn px-4 py-2 rounded-xl text-xs font-medium bg-[#1C1814] text-[#B5A591] hover:bg-[#2A231C] hover:text-[#FAF6EE] border border-[#2A231C] transition-colors whitespace-nowrap">
+                </a>
+                <a href="shop.php?category=tables" data-filter="tables" class="filter-btn px-4 py-2 rounded-xl text-xs font-medium bg-[#1C1814] text-[#B5A591] hover:bg-[#2A231C] hover:text-[#FAF6EE] border border-[#2A231C] transition-colors whitespace-nowrap">
                     Tables &amp; Desks
-                </button>
-                <button type="button" data-filter="beds" class="filter-btn px-4 py-2 rounded-xl text-xs font-medium bg-[#1C1814] text-[#B5A591] hover:bg-[#2A231C] hover:text-[#FAF6EE] border border-[#2A231C] transition-colors whitespace-nowrap">
+                </a>
+                <a href="shop.php?category=beds" data-filter="beds" class="filter-btn px-4 py-2 rounded-xl text-xs font-medium bg-[#1C1814] text-[#B5A591] hover:bg-[#2A231C] hover:text-[#FAF6EE] border border-[#2A231C] transition-colors whitespace-nowrap">
                     Beds &amp; Tatami
-                </button>
-                <button type="button" data-filter="objects" class="filter-btn px-4 py-2 rounded-xl text-xs font-medium bg-[#1C1814] text-[#B5A591] hover:bg-[#2A231C] hover:text-[#FAF6EE] border border-[#2A231C] transition-colors whitespace-nowrap">
+                </a>
+                <a href="shop.php?category=objects" data-filter="objects" class="filter-btn px-4 py-2 rounded-xl text-xs font-medium bg-[#1C1814] text-[#B5A591] hover:bg-[#2A231C] hover:text-[#FAF6EE] border border-[#2A231C] transition-colors whitespace-nowrap">
                     Lighting &amp; Objects
-                </button>
+                </a>
             </div>
 
-            <!-- Search Mockup and Sort Dropdown -->
+            <!-- Search Input and Sort Dropdown -->
             <div class="flex items-center gap-3">
                 <div class="relative flex-1 sm:w-64">
                     <i class="ri-search-line absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400 text-sm"></i>
@@ -89,7 +162,49 @@
 
     <!-- PRODUCTS GRID -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
-        <!-- [PHP_BACKEND_HOOK: Dynamic product catalog loop. Use foreach($products as $product) to render: $product[id], $product[image], $product[name], $product[price], $product[stock], $product[category]] -->
+        <!-- ==================================================================
+             PHP BACKEND GUIDELINE: Dynamic Product Catalog Loop
+             Replace static cards below with a foreach loop over $products:
+             
+             <?php /*
+             if (!empty($products)) {
+                 foreach ($products as $product) {
+                     ?>
+                     <article class="product-card group bg-[#161310] rounded-3xl border border-[#2A231C] overflow-hidden transition-all duration-300 hover:shadow-2xl hover:border-[#C5A059] flex flex-col justify-between">
+                         <div class="relative w-full aspect-[4/3] bg-[#0D0B09] border-b border-[#221C16] overflow-hidden flex items-center justify-center">
+                             <?php if ($product['stock'] > 0): ?>
+                                 <span class="absolute top-3 left-3 z-10 inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium bg-[#132A1C] text-[#52D288] border border-[#1E4D32]">
+                                     <?= htmlspecialchars($product['stock']) ?> In Stock
+                                 </span>
+                             <?php else: ?>
+                                 <span class="absolute top-3 left-3 z-10 inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium bg-rose-950/80 text-rose-300 border border-rose-800">
+                                     Made to Order
+                                 </span>
+                             <?php endif; ?>
+                             <a href="product_detail.php?id=<?= $product['id'] ?>" class="w-full h-full block">
+                                 <img src="images/<?= htmlspecialchars($product['image']) ?>" alt="<?= htmlspecialchars($product['name']) ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                             </a>
+                         </div>
+                         <div class="p-5 flex flex-col flex-1 justify-between">
+                             <div>
+                                 <span class="text-[11px] uppercase tracking-wider text-[#C5A059] font-medium"><?= htmlspecialchars(ucfirst($product['category'] ?? 'Atelier Piece')) ?></span>
+                                 <h3 class="font-serif text-base font-normal text-[#FAF6EE] group-hover:text-[#C5A059] transition-colors mt-0.5">
+                                     <a href="product_detail.php?id=<?= $product['id'] ?>"><?= htmlspecialchars($product['name']) ?></a>
+                                 </h3>
+                             </div>
+                             <div class="mt-4 pt-4 border-t border-[#221C16] flex items-center justify-between">
+                                 <span class="text-sm font-semibold text-[#FAF6EE]"><?= number_format($product['price']) ?> MMK</span>
+                                 <a href="product_detail.php?id=<?= $product['id'] ?>" class="text-xs text-[#C5A059] hover:underline">View Piece &rarr;</a>
+                             </div>
+                         </div>
+                     </article>
+                     <?php
+                 }
+             } else {
+                 echo '<p class="col-span-full text-center py-12 text-stone-400">No furniture pieces found matching your criteria.</p>';
+             }
+             */ ?>
+             ================================================================== -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8" id="product-grid">
             <!-- Product Item 1: Nordic Solid Wood Armchair -->
             <article class="product-card group bg-[#161310] rounded-3xl border border-[#2A231C] overflow-hidden transition-all duration-300 hover:shadow-2xl hover:border-[#C5A059] flex flex-col justify-between" data-category="chairs" data-price="420000" data-name="nordic solid wood armchair">
@@ -943,7 +1058,22 @@
         </div>
 
         <!-- PAGINATION CONTROLS -->
-        <!-- [PHP_BACKEND_HOOK: Dynamic pagination links (e.g. for page 1..N based on total item count and limit)] -->
+        <!-- ==================================================================
+             PHP BACKEND GUIDELINE: Server-side Pagination
+             Calculate total pages:
+             $total_items = $count_result->fetch_row()[0];
+             $total_pages = ceil($total_items / $limit);
+             
+             Render page buttons:
+             <?php /*
+             for ($i = 1; $i <= $total_pages; $i++): ?>
+                 <a href="shop.php?category=<?= urlencode($category) ?>&page=<?= $i ?>"
+                    class="px-3.5 py-2 rounded-xl text-xs font-semibold <?= ($page == $i) ? 'bg-[#C5A059] text-[#0D0B09]' : 'bg-[#1C1814] text-[#D6C8B4] hover:bg-[#2A231C]' ?> transition-colors">
+                     <?= $i ?>
+                 </a>
+             <?php endfor;
+             */ ?>
+             ================================================================== -->
         <div id="catalog-pagination" class="mt-16 flex items-center justify-center gap-2 text-sm flex-wrap"></div>
     </main>
 

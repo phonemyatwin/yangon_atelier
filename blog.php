@@ -1,3 +1,34 @@
+<?php
+/**
+ * ============================================================================
+ * FURNISHME BACKEND INSTRUCTION GUIDELINE - JOURNAL / BLOG ARCHIVES
+ * ============================================================================
+ * FILE: blog.php
+ * PURPOSE: Queries and presents editorial journal essays, craft chronicles,
+ *          and design philosophy articles from the 'blogs' table.
+ * 
+ * STEP-BY-STEP IMPLEMENTATION GUIDE:
+ * 1. Initialize Session & Database:
+ *    if (session_status() === PHP_SESSION_NONE) { session_start(); }
+ *    require_once "components/connection.php";
+ * 
+ * 2. Execute Query to Retrieve All Blog Posts:
+ *    $query = "SELECT id, title, author, image, content, category, created_at FROM blogs ORDER BY id DESC";
+ *    $result = $connection->query($query);
+ *    $blogs = [];
+ *    if ($result) {
+ *        $blogs = $result->fetch_all(MYSQLI_ASSOC);
+ *    }
+ * 
+ * 3. Render Dynamic Articles:
+ *    Loop through $blogs and populate titles, dates, excerpts, and image paths.
+ * ============================================================================
+ */
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 
@@ -35,7 +66,51 @@
 
     <!-- MAIN JOURNAL CONTENT -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-        <!-- [PHP_BACKEND_HOOK: Dynamic blog posts loop: SELECT * FROM blogs ORDER BY id DESC. Use foreach($blogs as $blog) to render: $blog['id'], $blog['title'], $blog['content'], $blog['image'], $blog['created_at']] -->
+        <!-- ==================================================================
+             PHP BACKEND GUIDELINE: Dynamic Blog Posts Loop
+             Query: SELECT * FROM blogs ORDER BY id DESC
+             Replace static articles below with a foreach loop:
+             
+             <?php /*
+             if (!empty($blogs)) {
+                 foreach ($blogs as $blog) {
+                     ?>
+                     <article class="group bg-[#161310] rounded-3xl border border-[#2A231C] overflow-hidden shadow-xl hover:shadow-2xl hover:border-[#C5A059] transition-all duration-500 flex flex-col justify-between">
+                         <div>
+                             <a href="blog_detail.php?id=<?= $blog['id'] ?>" class="relative aspect-[16/10] overflow-hidden bg-[#0D0B09] border-b border-[#221C16] block">
+                                 <img src="images/<?= htmlspecialchars($blog['image']) ?>" alt="<?= htmlspecialchars($blog['title']) ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                                 <span class="absolute top-4 left-4 inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold bg-[#161310]/95 backdrop-blur-md text-[#C5A059] border border-[#2A231C] shadow-xs">
+                                     <?= htmlspecialchars($blog['category'] ?? 'Editorial') ?>
+                                 </span>
+                             </a>
+                             <div class="p-6">
+                                 <div class="flex items-center gap-3 text-xs text-[#8C7D6B] mb-3">
+                                     <span class="flex items-center gap-1"><i class="ri-calendar-line text-[#C5A059]"></i> <?= date("M d, Y", strtotime($blog['created_at'])) ?></span>
+                                     <span class="w-1 h-1 rounded-full bg-[#453A30]"></span>
+                                     <span>By <?= htmlspecialchars($blog['author'] ?? 'Atelier') ?></span>
+                                 </div>
+                                 <h2 class="font-serif text-xl font-normal text-[#FAF6EE] group-hover:text-[#C5A059] transition-colors leading-snug">
+                                     <a href="blog_detail.php?id=<?= $blog['id'] ?>"><?= htmlspecialchars($blog['title']) ?></a>
+                                 </h2>
+                                 <p class="text-sm text-[#8C7D6B] line-clamp-3 mt-3 leading-relaxed">
+                                     <?= htmlspecialchars(substr(strip_tags($blog['content']), 0, 150)) ?>...
+                                 </p>
+                             </div>
+                         </div>
+                         <div class="p-6 pt-0">
+                             <a href="blog_detail.php?id=<?= $blog['id'] ?>" class="text-xs font-semibold text-[#C5A059] hover:underline flex items-center gap-1">
+                                 <span>Read Full Essay</span>
+                                 <i class="ri-arrow-right-line"></i>
+                             </a>
+                         </div>
+                     </article>
+                     <?php
+                 }
+             } else {
+                 echo '<p class="col-span-full text-center py-12 text-stone-400">No journal essays published yet.</p>';
+             }
+             */ ?>
+             ================================================================== -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
             
             <!-- Journal Post 1 -->

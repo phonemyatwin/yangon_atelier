@@ -1,52 +1,72 @@
-<!-- [PHP_BACKEND_HOOK: Global storefront footer with atelier story and newsletter handler] -->
-<footer class="bg-[#070605] text-[#A89C8D] pt-16 pb-12 border-t border-[#1C1611]">
+<?php
+/**
+ * ============================================================================
+ * FURNISHME BACKEND INSTRUCTION GUIDELINE - GLOBAL STOREFRONT FOOTER
+ * ============================================================================
+ * FILE: components/footer.php
+ * 
+ * BACKEND LOGIC REQUIREMENTS:
+ * 1. Newsletter Subscription Handler:
+ *    - Triggered by POST submission of input 'subscriber_email'.
+ *    - Validate email format with filter_var($email, FILTER_VALIDATE_EMAIL).
+ *    - Check for duplicates before inserting into 'subscribers' table:
+ *      $stmt = $connection->prepare("INSERT IGNORE INTO subscribers (email) VALUES (?)");
+ *      $stmt->bind_param("s", $email);
+ *      $stmt->execute();
+ *    - Provide user feedback via toast or session flash message.
+ * ============================================================================
+ */
+?>
+<!-- GLOBAL STOREFRONT FOOTER -->
+<footer class="bg-[#090806] border-t border-[#1F1914] pt-16 pb-12 text-[#EDE4D7]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 pb-12 border-b border-[#1F1914]">
-            <!-- Col 1: Atelier Story & Mission -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 pb-16 border-b border-[#1F1914]">
+            
+            <!-- Col 1: Brand & Atelier Ethos -->
             <div class="space-y-4">
                 <div class="flex items-center gap-3">
-                    <span class="w-8 h-8 rounded-xl bg-[#C5A059] text-[#0D0B09] flex items-center justify-center font-serif text-base font-bold shadow-md">F</span>
+                    <span class="w-8 h-8 rounded-xl bg-[#C5A059] text-[#0D0B09] flex items-center justify-center font-serif text-base font-bold shadow-xs">
+                        F
+                    </span>
                     <span class="font-serif text-xl tracking-tight text-[#FAF6EE] font-semibold">FurnishMe</span>
                 </div>
                 <p class="text-xs sm:text-sm text-[#8C7D6B] leading-relaxed">
-                    A design atelier founded on the principles of Japanese simplicity and Scandinavian warmth. We curate tactile, sculptural furniture handcrafted from sustainably harvested woods and honest textiles.
+                    A Yangon-based design studio crafting architectural furniture, quiet lighting, and tactile domestic sanctuaries. Hand-finished with certified organic timber oils.
                 </p>
-                <div class="flex items-center gap-3 pt-2">
-                    <a href="#" aria-label="Instagram" class="w-9 h-9 rounded-xl bg-[#13100D] hover:bg-[#C5A059] text-[#B5A591] hover:text-[#0D0B09] flex items-center justify-center transition-colors border border-[#221C16] hover:border-[#C5A059]">
-                        <i class="ri-instagram-line text-lg"></i>
+                <div class="flex items-center gap-3 text-stone-400 pt-2">
+                    <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Atelier Instagram" class="w-8 h-8 rounded-full bg-[#161310] hover:bg-[#C5A059] hover:text-[#0D0B09] flex items-center justify-center transition-colors">
+                        <i class="ri-instagram-line text-sm"></i>
                     </a>
-                    <a href="#" aria-label="Pinterest" class="w-9 h-9 rounded-xl bg-[#13100D] hover:bg-[#C5A059] text-[#B5A591] hover:text-[#0D0B09] flex items-center justify-center transition-colors border border-[#221C16] hover:border-[#C5A059]">
-                        <i class="ri-pinterest-line text-lg"></i>
+                    <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Atelier Facebook" class="w-8 h-8 rounded-full bg-[#161310] hover:bg-[#C5A059] hover:text-[#0D0B09] flex items-center justify-center transition-colors">
+                        <i class="ri-facebook-fill text-sm"></i>
                     </a>
-                    <a href="#" aria-label="Facebook" class="w-9 h-9 rounded-xl bg-[#13100D] hover:bg-[#C5A059] text-[#B5A591] hover:text-[#0D0B09] flex items-center justify-center transition-colors border border-[#221C16] hover:border-[#C5A059]">
-                        <i class="ri-facebook-circle-line text-lg"></i>
-                    </a>
-                    <a href="#" aria-label="LinkedIn" class="w-9 h-9 rounded-xl bg-[#13100D] hover:bg-[#C5A059] text-[#B5A591] hover:text-[#0D0B09] flex items-center justify-center transition-colors border border-[#221C16] hover:border-[#C5A059]">
-                        <i class="ri-linkedin-box-line text-lg"></i>
+                    <a href="https://pinterest.com" target="_blank" rel="noopener" aria-label="Atelier Pinterest" class="w-8 h-8 rounded-full bg-[#161310] hover:bg-[#C5A059] hover:text-[#0D0B09] flex items-center justify-center transition-colors">
+                        <i class="ri-pinterest-line text-sm"></i>
                     </a>
                 </div>
             </div>
 
-            <!-- Col 2: Curated Links -->
+            <!-- Col 2: Navigation Quick Links -->
             <div>
-                <h4 class="text-xs uppercase tracking-[0.2em] text-[#C5A059] font-semibold mb-5">Atelier Collection</h4>
-                <ul class="space-y-3 text-xs sm:text-sm">
-                    <li><a href="index.php" class="text-[#8C7D6B] hover:text-[#FAF6EE] transition-colors">Home &amp; Highlights</a></li>
-                    <li><a href="shop.php" class="text-[#8C7D6B] hover:text-[#FAF6EE] transition-colors">All Furniture</a></li>
-                    <li><a href="about.php" class="text-[#8C7D6B] hover:text-[#FAF6EE] transition-colors">Our Philosophy</a></li>
-                    <li><a href="team.php" class="text-[#8C7D6B] hover:text-[#FAF6EE] transition-colors">Design Collective</a></li>
-                    <li><a href="blog.php" class="text-[#8C7D6B] hover:text-[#FAF6EE] transition-colors">Design Journal</a></li>
-                    <li><a href="contact.php" class="text-[#8C7D6B] hover:text-[#FAF6EE] transition-colors">Showroom Inquiries</a></li>
+                <h4 class="text-xs uppercase tracking-[0.2em] text-[#C5A059] font-semibold mb-5">Atelier Collections</h4>
+                <ul class="space-y-2.5 text-xs sm:text-sm text-[#8C7D6B]">
+                    <li><a href="shop.php?category=chairs" class="hover:text-[#FAF6EE] transition-colors">Chairs &amp; Lounges</a></li>
+                    <li><a href="shop.php?category=sofas" class="hover:text-[#FAF6EE] transition-colors">Sofas &amp; Daybeds</a></li>
+                    <li><a href="shop.php?category=tables" class="hover:text-[#FAF6EE] transition-colors">Dining &amp; Coffee Tables</a></li>
+                    <li><a href="shop.php?category=beds" class="hover:text-[#FAF6EE] transition-colors">Platform Beds &amp; Tatami</a></li>
+                    <li><a href="shop.php?category=objects" class="hover:text-[#FAF6EE] transition-colors">Sculptural Lighting</a></li>
+                    <li><a href="shop.php" class="text-[#C5A059] hover:underline font-medium pt-1 inline-block">Browse All Catalog &rarr;</a></li>
                 </ul>
             </div>
 
-            <!-- Col 3: Customer Care & Showroom Info -->
+            <!-- Col 3: Atelier Showroom & Contact -->
             <div>
-                <h4 class="text-xs uppercase tracking-[0.2em] text-[#C5A059] font-semibold mb-5">Concierge &amp; Showroom</h4>
-                <div class="space-y-3 text-xs sm:text-sm text-[#D6C8B4]">
-                    <p class="text-[#8C7D6B]">
-                        <strong class="text-[#FAF6EE] block font-medium">Yangon Flagship</strong>
-                        No. 55A, Maggin Street, Yankin Township,<br>Yangon, Myanmar
+                <h4 class="text-xs uppercase tracking-[0.2em] text-[#C5A059] font-semibold mb-5">Flagship Atelier</h4>
+                <div class="space-y-3 text-xs sm:text-sm text-[#8C7D6B] leading-relaxed">
+                    <p>
+                        <strong class="text-[#FAF6EE] block font-medium">Yangon Sanctuary</strong>
+                        No. 55A, Maggin Street, Yankin Township,<br>
+                        Yangon 11081, Myanmar
                     </p>
                     <p class="text-[#8C7D6B] pt-1">
                         <span class="block text-[#FAF6EE] font-medium">Visiting Hours</span>
@@ -67,12 +87,18 @@
                 <p class="text-xs sm:text-sm text-[#8C7D6B] leading-relaxed mb-4">
                     Subscribe for seasonal lookbooks, tactile wood release previews, and invitations to private showroom vernissages.
                 </p>
-                <!-- [PHP_BACKEND_HOOK: Newsletter subscription handler. Post email to subscribers table, validate format, prevent duplicates] -->
-                <form action="#" method="POST" data-toast-success="Thank you for subscribing to our journal." class="space-y-3">
+                <!-- ==========================================================
+                     PHP BACKEND GUIDELINE: Newsletter Subscription Form
+                     - Set action="" (posts to current page) or dedicated handler.
+                     - Use name="subscribe_newsletter" on submit button.
+                     - PHP SQL:
+                       INSERT IGNORE INTO subscribers (email) VALUES (?);
+                     ========================================================== -->
+                <form action="" method="POST" data-toast-success="Thank you for subscribing to our journal." class="space-y-3">
                     <div class="relative">
                         <input type="email" name="subscriber_email" placeholder="Enter your email address" required class="w-full px-4 py-3 bg-[#13100D] border border-[#2A221A] rounded-xl text-[#FAF6EE] placeholder-[#665849] text-xs sm:text-sm focus:outline-none focus:border-[#C5A059] focus:ring-1 focus:ring-[#C5A059] transition-all">
                     </div>
-                    <button type="submit" class="w-full py-3 px-4 rounded-xl bg-[#C5A059] hover:bg-[#D4AF37] text-[#0D0B09] font-semibold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 shadow-md">
+                    <button type="submit" name="subscribe_newsletter" class="w-full py-3 px-4 rounded-xl bg-[#C5A059] hover:bg-[#D4AF37] text-[#0D0B09] font-semibold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 shadow-md">
                         <span>Subscribe</span>
                         <i class="ri-arrow-right-line"></i>
                     </button>

@@ -1,3 +1,48 @@
+<?php
+/**
+ * ============================================================================
+ * FURNISHME BACKEND INSTRUCTION GUIDELINE - ADMIN DASHBOARD
+ * ============================================================================
+ * FILE: admin/dashboard.php
+ * PURPOSE: Central executive summary for the atelier. Displays real-time counts
+ *          from products, users, blogs, team, contacts, and subscribers tables,
+ *          along with the 5 most recent customer inquiries.
+ * 
+ * STEP-BY-STEP IMPLEMENTATION GUIDE:
+ * 1. Initialize Session & Enforce Authentication Guard:
+ *    if (session_status() === PHP_SESSION_NONE) { session_start(); }
+ *    if (!isset($_SESSION['admin_user'])) {
+ *        header("Location: index.php");
+ *        exit;
+ *    }
+ * 
+ * 2. Include Database Connection:
+ *    require_once "../components/connection.php";
+ * 
+ * 3. Query Real-Time KPI Metric Counts:
+ *    $count_products    = $connection->query("SELECT COUNT(*) FROM products")->fetch_row()[0] ?? 0;
+ *    $count_users       = $connection->query("SELECT COUNT(*) FROM users")->fetch_row()[0] ?? 0;
+ *    $count_blogs       = $connection->query("SELECT COUNT(*) FROM blogs")->fetch_row()[0] ?? 0;
+ *    $count_team        = $connection->query("SELECT COUNT(*) FROM team")->fetch_row()[0] ?? 0;
+ *    $count_contacts    = $connection->query("SELECT COUNT(*) FROM contacts")->fetch_row()[0] ?? 0;
+ *    $count_subscribers = $connection->query("SELECT COUNT(*) FROM subscribers")->fetch_row()[0] ?? 0;
+ * 
+ * 4. Query Recent 5 Inquiries:
+ *    $recent_res = $connection->query("SELECT id, name, email, number, status FROM contacts ORDER BY id DESC LIMIT 5");
+ *    $recent_contacts = $recent_res ? $recent_res->fetch_all(MYSQLI_ASSOC) : [];
+ * ============================================================================
+ */
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Access Control Guard
+if (!isset($_SESSION['admin_user'])) {
+    header("Location: index.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,7 +86,16 @@
                 </div>
 
                 <!-- KPI METRICS GRID -->
-                <!-- [PHP_BACKEND_HOOK: Aggregate count queries (e.g. SELECT count(*) FROM products, users, blogs, team, contacts, subscribers)] -->
+                <!-- ==========================================================
+                     PHP BACKEND GUIDELINE: Dynamic Aggregate KPI Cards
+                     Render real-time counts from database:
+                     - Products:    <?= $count_products ?>
+                     - Users:       <?= $count_users ?>
+                     - Blogs:       <?= $count_blogs ?>
+                     - Team:        <?= $count_team ?>
+                     - Inquiries:   <?= $count_contacts ?>
+                     - Subscribers: <?= $count_subscribers ?>
+                     ========================================================== -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 sm:gap-6">
                     <!-- KPI 1: Products -->
                     <div class="bg-[#161310] rounded-2xl border border-[#2A231C] p-5 shadow-xs flex flex-col justify-between hover:border-stone-400 transition-colors">
@@ -153,7 +207,38 @@
                         </a>
                     </div>
 
-                    <!-- [PHP_BACKEND_HOOK: Dynamic recent inquiries query (SELECT * FROM contacts ORDER BY id DESC LIMIT 5)] -->
+                    <!-- ==========================================================
+                         PHP BACKEND GUIDELINE: Recent Inquiries Table Loop
+                         Query: SELECT * FROM contacts ORDER BY id DESC LIMIT 5
+                         Loop through $recent_contacts:
+                         <?php /*
+                         if (!empty($recent_contacts)) {
+                             foreach ($recent_contacts as $inquiry) {
+                                 ?>
+                                 <tr class="hover:bg-[#161310] transition-colors">
+                                     <td class="py-4 px-6 text-stone-400">#<?= $inquiry['id'] ?></td>
+                                     <td class="py-4 px-6 font-semibold text-[#FAF6EE]"><?= htmlspecialchars($inquiry['name']) ?></td>
+                                     <td class="py-4 px-6 text-[#8C7D6B]"><?= htmlspecialchars($inquiry['email']) ?></td>
+                                     <td class="py-4 px-6 text-[#8C7D6B]"><?= htmlspecialchars($inquiry['number']) ?></td>
+                                     <td class="py-4 px-6">
+                                         <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-amber-50 text-[#C5A059] border border-amber-200">
+                                             <?= htmlspecialchars($inquiry['status'] ?? 'Pending Review') ?>
+                                         </span>
+                                     </td>
+                                     <td class="py-4 px-6 text-right">
+                                         <div class="inline-flex items-center gap-2">
+                                             <a href="contact_view.php?id=<?= $inquiry['id'] ?>" class="px-2.5 py-1 rounded-lg border border-[#2A231C] hover:bg-[#0D0B09] text-[#D6C8B4] transition-colors">View</a>
+                                             <a href="contact_delete.php?id=<?= $inquiry['id'] ?>" class="px-2.5 py-1 rounded-lg border border-rose-200 hover:bg-rose-50 text-rose-600 transition-colors">Delete</a>
+                                         </div>
+                                     </td>
+                                 </tr>
+                                 <?php
+                             }
+                         } else {
+                             echo '<tr><td colspan="6" class="py-8 text-center text-stone-400">No client inquiries found.</td></tr>';
+                         }
+                         */ ?>
+                         ========================================================== -->
                     <div class="overflow-x-auto">
                         <table class="w-full text-left border-collapse text-xs">
                             <thead>

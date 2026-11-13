@@ -1,10 +1,81 @@
+<?php
+/**
+ * ============================================================================
+ * FURNISHME BACKEND INSTRUCTION GUIDELINE - CREATE USER ACCOUNT
+ * ============================================================================
+ * FILE: admin/user_create.php
+ * PURPOSE: Allows administrators to create new client accounts, verifies unique
+ *          email addresses, hashes passwords, and inserts records into 'users'.
+ * 
+ * STEP-BY-STEP IMPLEMENTATION GUIDE:
+ * 1. Initialize Session & Enforce Authentication Guard:
+ *    if (session_status() === PHP_SESSION_NONE) { session_start(); }
+ *    if (!isset($_SESSION['admin_user'])) {
+ *        header("Location: index.php");
+ *        exit;
+ *    }
+ * 
+ * 2. Include Database Connection:
+ *    require_once "../components/connection.php";
+ * 
+ * 3. Handle POST Request:
+ *    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+ *        $username = trim($_POST['username'] ?? '');
+ *        $email    = trim($_POST['email'] ?? '');
+ *        $password = $_POST['password'] ?? '';
+ * 
+ *        if (empty($username) || empty($email) || empty($password)) {
+ *            $error = "All fields marked with an asterisk are required.";
+ *        } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+ *            $error = "Please enter a valid email address.";
+ *        } elseif (strlen($password) < 6) {
+ *            $error = "Password must be at least 6 characters long.";
+ *        } else {
+ *            // Unique email check
+ *            $stmt = $connection->prepare("SELECT id FROM users WHERE email = ? LIMIT 1");
+ *            $stmt->bind_param("s", $email);
+ *            $stmt->execute();
+ *            $stmt->store_result();
+ * 
+ *            if ($stmt->num_rows > 0) {
+ *                $error = "A user account with that email already exists.";
+ *            } else {
+ *                $stmt->close();
+ *                $hashed_pw = password_hash($password, PASSWORD_DEFAULT);
+ *                $insert_stmt = $connection->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
+ *                $insert_stmt->bind_param("sss", $username, $email, $hashed_pw);
+ * 
+ *                if ($insert_stmt->execute()) {
+ *                    $insert_stmt->close();
+ *                    header("Location: users.php?msg=created");
+ *                    exit;
+ *                } else {
+ *                    $error = "Failed to create user account: " . $connection->error;
+ *                }
+ *            }
+ *        }
+ *    }
+ * ============================================================================
+ */
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (!isset($_SESSION['admin_user'])) {
+    header("Location: index.php");
+    exit;
+}
+
+$error = '';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create User | FurnishMe Atelier Admin</title>
+    <title>Create User Account | FurnishMe Admin</title>
     <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>
@@ -28,17 +99,30 @@
                             <span>/</span>
                             <span class="text-[#FAF6EE] font-medium">New User</span>
                         </div>
-                        <h2 class="font-serif text-2xl sm:text-3xl font-medium text-[#FAF6EE]">Create User Account</h2>
+                        <h2 class="font-serif text-2xl sm:text-3xl font-medium text-[#FAF6EE]">Create Client Account</h2>
                     </div>
                     <a href="users.php" class="px-4 py-2 rounded-xl border border-[#2A231C] text-xs font-medium text-[#D6C8B4] hover:bg-white transition-colors">
                         Cancel &amp; Return
                     </a>
                 </div>
 
+                <!-- Error Notification Banner -->
+                <?php if (!empty($error)): ?>
+                    <div class="p-4 rounded-2xl bg-rose-950/60 border border-rose-800 text-rose-300 text-xs flex items-center gap-2.5">
+                        <i class="ri-error-warning-line text-lg flex-shrink-0"></i>
+                        <span><?= htmlspecialchars($error) ?></span>
+                    </div>
+                <?php endif; ?>
+
                 <!-- Form Card -->
                 <div class="bg-[#161310] rounded-3xl border border-[#2A231C] p-6 sm:p-10 shadow-xs">
-                    <!-- [PHP_BACKEND_HOOK: User creation handler. Method: POST. Verify CSRF, validate unique email, password_hash(), execute INSERT INTO users (username, email, password)] -->
-                    <form method="POST" class="space-y-5">
+                    <!-- ==========================================================
+                         PHP BACKEND GUIDELINE: User Creation Form
+                         - Action: action="" (submits to self)
+                         - Method: POST
+                         - Trigger: name="create_user"
+                         ========================================================== -->
+                    <form action="" method="POST" class="space-y-5">
                         
                         <!-- Username -->
                         <div class="space-y-1.5">
@@ -47,7 +131,7 @@
                             </label>
                             <div class="relative">
                                 <i class="ri-user-line absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 text-base"></i>
-                                <input type="text" id="username" name="username" required placeholder="e.g. ko_aung" class="w-full pl-11 pr-4 py-3 bg-[#0D0B09] border border-[#2A231C] rounded-xl text-[#FAF6EE] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-2 focus:ring-[#C5A059] focus:border-[#C5A059] transition-all">
+                                <input type="text" id="username" name="username" required value="<?= htmlspecialchars($_POST['username'] ?? '') ?>" placeholder="e.g. ko_aung" class="w-full pl-11 pr-4 py-3 bg-[#0D0B09] border border-[#2A231C] rounded-xl text-[#FAF6EE] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-2 focus:ring-[#C5A059] focus:border-[#C5A059] transition-all">
                             </div>
                         </div>
 
@@ -58,7 +142,7 @@
                             </label>
                             <div class="relative">
                                 <i class="ri-mail-line absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 text-base"></i>
-                                <input type="email" id="email" name="email" required placeholder="user@domain.com" class="w-full pl-11 pr-4 py-3 bg-[#0D0B09] border border-[#2A231C] rounded-xl text-[#FAF6EE] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-2 focus:ring-[#C5A059] focus:border-[#C5A059] transition-all">
+                                <input type="email" id="email" name="email" required value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" placeholder="user@domain.com" class="w-full pl-11 pr-4 py-3 bg-[#0D0B09] border border-[#2A231C] rounded-xl text-[#FAF6EE] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-2 focus:ring-[#C5A059] focus:border-[#C5A059] transition-all">
                             </div>
                         </div>
 
@@ -69,21 +153,20 @@
                             </label>
                             <div class="relative">
                                 <i class="ri-lock-2-line absolute left-4 top-1/2 -translate-y-1/2 text-stone-400 text-base"></i>
-                                <input type="password" id="password" name="password" required placeholder="Enter strong password" class="w-full pl-11 pr-4 py-3 bg-[#0D0B09] border border-[#2A231C] rounded-xl text-[#FAF6EE] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-2 focus:ring-[#C5A059] focus:border-[#C5A059] transition-all">
+                                <input type="password" id="password" name="password" required placeholder="Enter strong password (min 6 chars)" class="w-full pl-11 pr-4 py-3 bg-[#0D0B09] border border-[#2A231C] rounded-xl text-[#FAF6EE] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-2 focus:ring-[#C5A059] focus:border-[#C5A059] transition-all">
                             </div>
                         </div>
 
-                        <!-- Form Actions -->
+                        <!-- Actions -->
                         <div class="pt-4 border-t border-[#2A231C] flex items-center justify-end gap-3">
                             <a href="users.php" class="px-5 py-3 rounded-xl border border-[#2A231C] text-xs font-medium text-[#D6C8B4] hover:bg-[#0D0B09] transition-colors">
                                 Cancel
                             </a>
-                            <button type="submit" name="create" class="px-6 py-3 rounded-xl bg-[#C5A059] hover:bg-[#D4AF37] text-[#0D0B09] font-semibold text-xs font-medium transition-colors shadow-xs flex items-center gap-2">
-                                <i class="ri-check-line text-sm"></i>
-                                <span>Save User Account</span>
+                            <button type="submit" name="create_user" class="px-6 py-3 rounded-xl bg-[#C5A059] hover:bg-[#D4AF37] text-[#0D0B09] text-xs font-semibold transition-colors shadow-xs flex items-center gap-2">
+                                <i class="ri-user-add-line text-base"></i>
+                                <span>Create User Account</span>
                             </button>
                         </div>
-
                     </form>
                 </div>
 

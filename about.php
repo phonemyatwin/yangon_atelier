@@ -1,3 +1,29 @@
+<?php
+/**
+ * ============================================================================
+ * FURNISHME BACKEND INSTRUCTION GUIDELINE - ABOUT ATELIER
+ * ============================================================================
+ * FILE: about.php
+ * PURPOSE: Brand heritage narrative, master workshop timeline, and sustainability
+ *          commitments.
+ * 
+ * STEP-BY-STEP IMPLEMENTATION GUIDE:
+ * 1. Initialize Session & Database Connection:
+ *    if (session_status() === PHP_SESSION_NONE) { session_start(); }
+ *    require_once "components/connection.php";
+ * 
+ * 2. Optional Dynamic Metrics:
+ *    You can query dynamic metrics from the database (e.g. total bespoke commissions,
+ *    active artisans in `team`, total catalog pieces in `products`):
+ *    $stat_products = $connection->query("SELECT COUNT(*) FROM products")->fetch_row()[0] ?? 0;
+ *    $stat_artisans = $connection->query("SELECT COUNT(*) FROM team")->fetch_row()[0] ?? 0;
+ * ============================================================================
+ */
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 

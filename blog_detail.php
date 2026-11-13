@@ -1,3 +1,43 @@
+<?php
+/**
+ * ============================================================================
+ * FURNISHME BACKEND INSTRUCTION GUIDELINE - JOURNAL ESSAY DETAIL
+ * ============================================================================
+ * FILE: blog_detail.php
+ * PURPOSE: Queries and renders a single editorial journal essay based on the
+ *          provided GET parameter 'id'.
+ * 
+ * STEP-BY-STEP IMPLEMENTATION GUIDE:
+ * 1. Initialize Session & Database:
+ *    if (session_status() === PHP_SESSION_NONE) { session_start(); }
+ *    require_once "components/connection.php";
+ * 
+ * 2. Validate GET Parameter 'id':
+ *    $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+ *    if ($id <= 0) {
+ *        header("Location: blog.php");
+ *        exit;
+ *    }
+ * 
+ * 3. Query Single Article from 'blogs' table:
+ *    $stmt = $connection->prepare("SELECT * FROM blogs WHERE id = ? LIMIT 1");
+ *    $stmt->bind_param("i", $id);
+ *    $stmt->execute();
+ *    $result = $stmt->get_result();
+ *    $blog = $result->fetch_assoc();
+ *    $stmt->close();
+ * 
+ *    if (!$blog) {
+ *        header("Location: blog.php?error=article_not_found");
+ *        exit;
+ *    }
+ * ============================================================================
+ */
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 
@@ -5,7 +45,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- [PHP_BACKEND_HOOK: Dynamic page title with blog title: $blog['title'] . ' | FurnishMe Atelier Journal'] -->
+    <!-- ==================================================================
+         PHP BACKEND GUIDELINE: Dynamic Page Title
+         <title><?= htmlspecialchars($blog['title'] ?? 'Journal Article') ?> | FurnishMe Atelier Journal</title>
+         ================================================================== -->
     <title>The Philosophy of Wabi-Sabi in Modern Interiors | FurnishMe Atelier Journal</title>
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <?php include "components/css.php"; ?>
@@ -16,7 +59,15 @@
     <?php include "components/navbar.php"; ?>
 
     <!-- ARTICLE HEADER / HERO -->
-    <!-- [PHP_BACKEND_HOOK: Single blog post query (SELECT * FROM blogs WHERE id = :id)] -->
+    <!-- ==================================================================
+         PHP BACKEND GUIDELINE: Single Article Display
+         Use variables from $blog:
+         - <?= htmlspecialchars($blog['title']) ?>
+         - <?= htmlspecialchars($blog['author']) ?>
+         - <?= date("F j, Y", strtotime($blog['created_at'])) ?>
+         - src="images/<?= htmlspecialchars($blog['image']) ?>"
+         - <?= nl2br($blog['content']) ?> (or <?= $blog['content'] ?>)
+         ================================================================== -->
     <article class="py-12 lg:py-16">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             

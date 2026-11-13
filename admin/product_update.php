@@ -1,3 +1,86 @@
+<?php
+/**
+ * ============================================================================
+ * FURNISHME BACKEND INSTRUCTION GUIDELINE - UPDATE PRODUCT
+ * ============================================================================
+ * FILE: admin/product_update.php
+ * PURPOSE: Retrieves an existing product by ID, displays current values in the form,
+ *          processes modifications (including optional new image replacement), and
+ *          updates the 'products' database table.
+ * 
+ * STEP-BY-STEP IMPLEMENTATION GUIDE:
+ * 1. Initialize Session & Enforce Authentication Guard:
+ *    if (session_status() === PHP_SESSION_NONE) { session_start(); }
+ *    if (!isset($_SESSION['admin_user'])) {
+ *        header("Location: index.php");
+ *        exit;
+ *    }
+ * 
+ * 2. Include Database Connection:
+ *    require_once "../components/connection.php";
+ * 
+ * 3. Validate and Query Existing Record:
+ *    $id = isset($_GET['id']) ? (int)$_GET['id'] : (isset($_POST['id']) ? (int)$_POST['id'] : 0);
+ *    if ($id <= 0) {
+ *        header("Location: products.php");
+ *        exit;
+ *    }
+ *    $stmt = $connection->prepare("SELECT * FROM products WHERE id = ? LIMIT 1");
+ *    $stmt->bind_param("i", $id);
+ *    $stmt->execute();
+ *    $product = $stmt->get_result()->fetch_assoc();
+ *    $stmt->close();
+ *    if (!$product) {
+ *        header("Location: products.php?error=not_found");
+ *        exit;
+ *    }
+ * 
+ * 4. Process POST Update:
+ *    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+ *        $name        = trim($_POST['name'] ?? '');
+ *        $price       = (int)($_POST['price'] ?? 0);
+ *        $stock       = (int)($_POST['stock'] ?? 0);
+ *        $description = trim($_POST['description'] ?? '');
+ * 
+ *        // Handle Optional Image Upload
+ *        if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+ *            $ext = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
+ *            $new_image = 'product-' . time() . '-' . rand(100, 999) . '.' . $ext;
+ *            move_uploaded_file($_FILES['image']['tmp_name'], '../images/' . $new_image);
+ * 
+ *            // Optional: delete old image file if needed
+ *            // if (!empty($product['image']) && file_exists('../images/' . $product['image'])) { unlink('../images/' . $product['image']); }
+ * 
+ *            $update_stmt = $connection->prepare("UPDATE products SET name = ?, price = ?, stock = ?, image = ?, description = ? WHERE id = ?");
+ *            $update_stmt->bind_param("siissi", $name, $price, $stock, $new_image, $description, $id);
+ *        } else {
+ *            // Preserve existing image
+ *            $update_stmt = $connection->prepare("UPDATE products SET name = ?, price = ?, stock = ?, description = ? WHERE id = ?");
+ *            $update_stmt->bind_param("siisi", $name, $price, $stock, $description, $id);
+ *        }
+ * 
+ *        if ($update_stmt->execute()) {
+ *            $update_stmt->close();
+ *            header("Location: products.php?msg=updated");
+ *            exit;
+ *        } else {
+ *            $error = "Failed to update piece: " . $connection->error;
+ *        }
+ *    }
+ * ============================================================================
+ */
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (!isset($_SESSION['admin_user'])) {
+    header("Location: index.php");
+    exit;
+}
+
+$error = '';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,10 +118,24 @@
                     </a>
                 </div>
 
+                <!-- Error Notification Banner -->
+                <?php if (!empty($error)): ?>
+                    <div class="p-4 rounded-2xl bg-rose-950/60 border border-rose-800 text-rose-300 text-xs flex items-center gap-2.5">
+                        <i class="ri-error-warning-line text-lg flex-shrink-0"></i>
+                        <span><?= htmlspecialchars($error) ?></span>
+                    </div>
+                <?php endif; ?>
+
                 <!-- Form Card -->
                 <div class="bg-[#161310] rounded-3xl border border-[#2A231C] p-6 sm:p-10 shadow-xs">
-                    <!-- [PHP_BACKEND_HOOK: Product update handler. Method: POST, enctype="multipart/form-data". Handle optional new image upload or preserve existing, UPDATE products SET name = :name, price = :price, stock = :stock, description = :description WHERE id = :id] -->
-                    <form method="POST" enctype="multipart/form-data" class="space-y-6">
+                    <!-- ==========================================================
+                         PHP BACKEND GUIDELINE: Product Update Form
+                         - Action: action="" (submits to self)
+                         - Method: POST
+                         - Hidden input: <input type="hidden" name="id" value="<?= $product['id'] ?? 1 ?>">
+                         - Prefill inputs with values from $product array
+                         ========================================================== -->
+                    <form action="" method="POST" enctype="multipart/form-data" class="space-y-6">
                         <input type="hidden" name="id" value="1">
 
                         <!-- Name -->
@@ -76,7 +173,7 @@
                             </label>
                             <div class="flex flex-col sm:flex-row items-center gap-6 p-4 rounded-2xl bg-[#0D0B09] border border-[#2A231C]">
                                 <div class="w-24 h-24 rounded-xl bg-[#161310] border border-[#2A231C] p-2 flex items-center justify-center flex-shrink-0">
-                                    <!-- [PHP_BACKEND_HOOK: Display current product image thumbnail] -->
+                                    <!-- PHP Guideline: src="../images/<?= htmlspecialchars($product['image'] ?? 'chair-1.jpg') ?>" -->
                                     <img id="product-preview" src="../images/chair-1.jpg" alt="Current Piece" class="max-h-full max-w-full object-contain">
                                 </div>
                                 <div class="flex-1 space-y-1 text-center sm:text-left">
@@ -92,7 +189,7 @@
                             <label for="description" class="block text-xs font-semibold uppercase tracking-wider text-[#D6C8B4]">
                                 Piece Narrative &amp; Specifications
                             </label>
-                            <textarea id="description" name="description" rows="4" class="w-full p-4 bg-[#0D0B09] border border-[#2A231C] rounded-xl text-[#FAF6EE] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-2 focus:ring-[#C5A059] focus:border-[#C5A059] transition-all">The Sculptural Lounge Armchair merges Scandinavian ergonomic posture with the organic tranquility of Japanese joinery.</textarea>
+                            <textarea id="description" name="description" rows="4" class="w-full p-4 bg-[#0D0B09] border border-[#2A231C] rounded-xl text-[#FAF6EE] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-2 focus:ring-[#C5A059] focus:border-[#C5A059] transition-all">Sculptural lounge armchair shaped from certified American walnut with hand-rubbed organic oil finish.</textarea>
                         </div>
 
                         <!-- Form Actions -->
@@ -100,12 +197,11 @@
                             <a href="products.php" class="px-5 py-3 rounded-xl border border-[#2A231C] text-xs font-medium text-[#D6C8B4] hover:bg-[#0D0B09] transition-colors">
                                 Cancel
                             </a>
-                            <button type="submit" name="update" class="px-6 py-3 rounded-xl bg-[#C5A059] hover:bg-[#D4AF37] text-[#0D0B09] font-semibold text-xs font-medium transition-colors shadow-xs flex items-center gap-2">
-                                <i class="ri-save-line text-sm"></i>
+                            <button type="submit" name="update" class="px-6 py-3 rounded-xl bg-[#C5A059] hover:bg-[#D4AF37] text-[#0D0B09] text-xs font-semibold transition-colors shadow-xs flex items-center gap-2">
+                                <i class="ri-save-line text-base"></i>
                                 <span>Save Changes</span>
                             </button>
                         </div>
-
                     </form>
                 </div>
 
