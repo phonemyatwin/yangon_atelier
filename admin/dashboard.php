@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ============================================================================
  * FURNISHME BACKEND INSTRUCTION GUIDELINE - ADMIN DASHBOARD
@@ -10,9 +11,14 @@
  * ============================================================================
  */
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+// Initialize session
+require_once __DIR__ . '/components/session_start.php';
+
+// Check session
+require_once __DIR__ . '/components/session_check.php';
+
+// Connect database
+require_once __DIR__ . '/components/connection.php';
 
 // Access Control Guard
 if (!isset($_SESSION['admin_user'])) {
@@ -42,7 +48,7 @@ if (!isset($_SESSION['admin_user'])) {
             <?php include "components/topbar.php"; ?>
 
             <main class="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto space-y-8">
-                
+
                 <!-- Welcome Banner in Raw Linen (#F6F3EE) -->
                 <div class="bg-[#F6F3EE] rounded-3xl border border-[#C9C0B3] p-6 sm:p-8 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-6">
                     <div>

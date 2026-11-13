@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ============================================================================
  * FURNISHME BACKEND INSTRUCTION GUIDELINE - UPDATE PRODUCT
@@ -10,16 +11,14 @@
  * ============================================================================
  */
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+// Initialize session
+require_once __DIR__ . '/../components/session_start.php';
 
-if (!isset($_SESSION['admin_user'])) {
-    header("Location: index.php");
-    exit;
-}
+// Check session
+require_once __DIR__ . '/components/session_check.php';
 
-$error = '';
+// Connect database
+require_once __DIR__ . '/../components/connection.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +39,7 @@ $error = '';
             <?php include "components/topbar.php"; ?>
 
             <main class="flex-1 p-4 sm:p-6 lg:p-8 max-w-4xl w-full mx-auto space-y-6">
-                
+
                 <!-- Breadcrumbs & Heading -->
                 <div class="flex items-center justify-between">
                     <div>

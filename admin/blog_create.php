@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ============================================================================
  * FURNISHME BACKEND INSTRUCTION GUIDELINE - CREATE JOURNAL ARTICLE
@@ -9,14 +10,15 @@
  * ============================================================================
  */
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+// Initialize session
+require_once __DIR__ . '/../components/session_start.php';
 
-if (!isset($_SESSION['admin_user'])) {
-    header("Location: index.php");
-    exit;
-}
+// Check session
+require_once __DIR__ . '/components/session_check.php';
+
+// Connect database
+require_once __DIR__ . '/../components/connection.php';
+
 
 $error = '';
 ?>
@@ -39,7 +41,7 @@ $error = '';
             <?php include "components/topbar.php"; ?>
 
             <main class="flex-1 p-4 sm:p-6 lg:p-8 max-w-4xl w-full mx-auto space-y-6">
-                
+
                 <!-- Heading -->
                 <div class="flex items-center justify-between">
                     <div>
@@ -68,7 +70,7 @@ $error = '';
                 <!-- Form Card in Raw Linen (#F6F3EE) -->
                 <div class="bg-[#F6F3EE] rounded-3xl border border-[#C9C0B3] p-6 sm:p-10 shadow-xs">
                     <form action="" method="POST" enctype="multipart/form-data" class="space-y-6">
-                        
+
                         <!-- Title -->
                         <div class="space-y-1.5">
                             <label for="title" class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">

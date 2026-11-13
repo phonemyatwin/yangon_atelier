@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ============================================================================
  * FURNISHME BACKEND INSTRUCTION GUIDELINE - PRODUCT CATALOG (SHOP)
@@ -63,9 +64,14 @@
  * ============================================================================
  */
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+// Initialize session
+require_once __DIR__ . '/components/session_start.php';
+
+// Check session
+require_once __DIR__ . '/components/session_check.php';
+
+// Connect database
+require_once __DIR__ . '/components/connection.php';
 $category = $_GET['category'] ?? 'all';
 ?>
 <!DOCTYPE html>
@@ -117,7 +123,7 @@ $category = $_GET['category'] ?? 'all';
                class="<?= ($category == 'chairs') ? 'bg-[#8A5A44] text-[#F6F3EE]' : 'bg-[#DFD8CD] text-[#6E6359]' ?>"
              ================================================================== -->
         <div class="bg-[#F6F3EE] border border-[#C9C0B3] rounded-3xl p-4 sm:p-5 shadow-xl flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
-            
+
             <!-- Category Filter Pills -->
             <div class="flex items-center gap-2 overflow-x-auto pb-2 lg:pb-0 scrollbar-none" id="category-filters">
                 <a href="shop.php?category=all" data-filter="all" class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-[#8A5A44] text-[#F6F3EE] transition-colors whitespace-nowrap shadow-sm">
@@ -146,7 +152,7 @@ $category = $_GET['category'] ?? 'all';
                     <i class="ri-search-line absolute left-3.5 top-1/2 -translate-y-1/2 text-[#6E6359] text-sm"></i>
                     <input type="text" id="catalog-search" placeholder="Filter in catalog..." class="w-full pl-9 pr-3 py-2 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-xs text-[#362F2A] placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44]">
                 </div>
-                
+
                 <div class="relative">
                     <select id="catalog-sort" aria-label="Sort products" class="appearance-none pl-4 pr-9 py-2 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-xs font-medium text-[#362F2A] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] cursor-pointer">
                         <option value="featured">Sort: Featured</option>
@@ -1116,7 +1122,10 @@ $category = $_GET['category'] ?? 'all';
                     prevBtn.addEventListener("click", () => {
                         currentPage--;
                         updateView();
-                        productGrid.scrollIntoView({ behavior: "smooth", block: "start" });
+                        productGrid.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start"
+                        });
                     });
                 }
                 paginationEl.appendChild(prevBtn);
@@ -1133,7 +1142,10 @@ $category = $_GET['category'] ?? 'all';
                         pageBtn.addEventListener("click", () => {
                             currentPage = i;
                             updateView();
-                            productGrid.scrollIntoView({ behavior: "smooth", block: "start" });
+                            productGrid.scrollIntoView({
+                                behavior: "smooth",
+                                block: "start"
+                            });
                         });
                     }
                     paginationEl.appendChild(pageBtn);
@@ -1149,7 +1161,10 @@ $category = $_GET['category'] ?? 'all';
                     nextBtn.addEventListener("click", () => {
                         currentPage++;
                         updateView();
-                        productGrid.scrollIntoView({ behavior: "smooth", block: "start" });
+                        productGrid.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start"
+                        });
                     });
                 }
                 paginationEl.appendChild(nextBtn);

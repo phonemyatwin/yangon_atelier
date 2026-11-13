@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ============================================================================
  * FURNISHME BACKEND INSTRUCTION GUIDELINE - ADMIN CONTACT INQUIRIES LIST
@@ -9,9 +10,14 @@
  * ============================================================================
  */
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+// Initialize session
+require_once __DIR__ . '/components/session_start.php';
+
+// Check session
+require_once __DIR__ . '/components/session_check.php';
+
+// Connect database
+require_once __DIR__ . '/components/connection.php';
 
 if (!isset($_SESSION['admin_user'])) {
     header("Location: index.php");
@@ -42,7 +48,7 @@ if (isset($_GET['msg']) && $_GET['msg'] === 'deleted') {
             <?php include "components/topbar.php"; ?>
 
             <main class="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto space-y-6">
-                
+
                 <!-- Page Header -->
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
@@ -88,7 +94,7 @@ if (isset($_GET['msg']) && $_GET['msg'] === 'deleted') {
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-[#C9C0B3] text-[#6E6359] font-medium">
-                                
+
                                 <!-- Contact 1 -->
                                 <tr class="hover:bg-[#DFD8CD]/40 transition-colors">
                                     <td class="py-4 px-6 text-[#6E6359]">#1</td>
@@ -97,7 +103,7 @@ if (isset($_GET['msg']) && $_GET['msg'] === 'deleted') {
                                     <td class="py-4 px-6 text-[#6E6359]">09973383719</td>
                                     <td class="py-4 px-6">
                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold text-[#8C5327] bg-[#EFE2D5] border border-[#E0CFBF]">
-                                             New Message
+                                            New Message
                                         </span>
                                     </td>
                                     <td class="py-4 px-6 text-right">

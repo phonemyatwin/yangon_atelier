@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ============================================================================
  * FURNISHME BACKEND INSTRUCTION GUIDELINE - DELETE INQUIRY
@@ -9,9 +10,14 @@
  * ============================================================================
  */
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+// Initialize session
+require_once __DIR__ . '/components/session_start.php';
+
+// Check session
+require_once __DIR__ . '/components/session_check.php';
+
+// Connect database
+require_once __DIR__ . '/components/connection.php';
 
 if (!isset($_SESSION['admin_user'])) {
     header("Location: index.php");
@@ -39,7 +45,7 @@ $contact_id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
             <?php include "components/topbar.php"; ?>
 
             <main class="flex-1 p-4 sm:p-6 lg:p-8 max-w-3xl w-full mx-auto space-y-6">
-                
+
                 <!-- Heading -->
                 <div class="flex items-center justify-between">
                     <div>

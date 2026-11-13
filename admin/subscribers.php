@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ============================================================================
  * FURNISHME BACKEND INSTRUCTION GUIDELINE - ADMIN SUBSCRIBERS LIST
@@ -9,9 +10,14 @@
  * ============================================================================
  */
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+// Initialize session
+require_once __DIR__ . '/components/session_start.php';
+
+// Check session
+require_once __DIR__ . '/components/session_check.php';
+
+// Connect database
+require_once __DIR__ . '/components/connection.php';
 
 if (!isset($_SESSION['admin_user'])) {
     header("Location: index.php");
@@ -42,7 +48,7 @@ if (isset($_GET['msg']) && $_GET['msg'] === 'deleted') {
             <?php include "components/topbar.php"; ?>
 
             <main class="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto space-y-6">
-                
+
                 <!-- Page Header -->
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
@@ -87,7 +93,7 @@ if (isset($_GET['msg']) && $_GET['msg'] === 'deleted') {
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-[#C9C0B3] text-[#6E6359] font-medium">
-                                
+
                                 <!-- Sub 1 -->
                                 <tr class="hover:bg-[#DFD8CD]/40 transition-colors">
                                     <td class="py-4 px-6 text-[#6E6359]">#1</td>

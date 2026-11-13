@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ============================================================================
  * FURNISHME BACKEND INSTRUCTION GUIDELINE - VIEW INQUIRY
@@ -8,9 +9,14 @@
  * ============================================================================
  */
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+// Initialize session
+require_once __DIR__ . '/components/session_start.php';
+
+// Check session
+require_once __DIR__ . '/components/session_check.php';
+
+// Connect database
+require_once __DIR__ . '/components/connection.php';
 
 if (!isset($_SESSION['admin_user'])) {
     header("Location: index.php");
@@ -38,7 +44,7 @@ $contact_id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
             <?php include "components/topbar.php"; ?>
 
             <main class="flex-1 p-4 sm:p-6 lg:p-8 max-w-4xl w-full mx-auto space-y-6">
-                
+
                 <!-- Heading & Back Nav -->
                 <div class="flex items-center justify-between">
                     <div>
@@ -63,7 +69,7 @@ $contact_id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
 
                 <!-- Inquiry Card in Raw Linen (#F6F3EE) -->
                 <div class="bg-[#F6F3EE] rounded-3xl border border-[#C9C0B3] p-6 sm:p-10 shadow-xs space-y-8">
-                    
+
                     <!-- Metadata Grid -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-5 rounded-2xl bg-[#EDE8E0] border border-[#C9C0B3] text-xs">
                         <div>

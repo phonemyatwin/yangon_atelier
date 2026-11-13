@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ============================================================================
  * FURNISHME BACKEND INSTRUCTION GUIDELINE - CARE & MAINTENANCE
@@ -13,9 +14,14 @@
  * ============================================================================
  */
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+// Initialize session
+require_once __DIR__ . '/components/session_start.php';
+
+// Check session
+require_once __DIR__ . '/components/session_check.php';
+
+// Connect database
+require_once __DIR__ . '/components/connection.php';
 ?>
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
@@ -167,7 +173,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
         <!-- MATERIAL SPECIFIC SECTIONS -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-            
+
             <!-- STICKY TABLE OF CONTENTS -->
             <aside class="lg:col-span-4">
                 <div class="lg:sticky lg:top-28 bg-[#F6F3EE] border border-[#C9C0B3] rounded-3xl p-6 shadow-xs">

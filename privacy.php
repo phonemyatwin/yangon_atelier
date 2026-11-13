@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ============================================================================
  * FURNISHME BACKEND INSTRUCTION GUIDELINE - PRIVACY POLICY
@@ -13,9 +14,14 @@
  * ============================================================================
  */
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+// Initialize session
+require_once __DIR__ . '/components/session_start.php';
+
+// Check session
+require_once __DIR__ . '/components/session_check.php';
+
+// Connect database
+require_once __DIR__ . '/components/connection.php';
 ?>
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
@@ -61,7 +67,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
     <!-- MAIN POLICY CONTENT & STICKY NAVIGATION -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        
+
         <!-- EXECUTIVE OVERVIEW / ATELIER COMMITMENT -->
         <div class="mb-12 bg-[#F6F3EE] rounded-3xl p-6 sm:p-8 lg:p-10 border border-[#C9C0B3] shadow-xs">
             <div class="flex items-center gap-3 mb-4">
@@ -106,7 +112,7 @@ if (session_status() === PHP_SESSION_NONE) {
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-            
+
             <!-- STICKY TABLE OF CONTENTS -->
             <aside class="lg:col-span-4">
                 <div class="lg:sticky lg:top-28 bg-[#F6F3EE] border border-[#C9C0B3] rounded-3xl p-6 shadow-xs">
@@ -181,7 +187,7 @@ if (session_status() === PHP_SESSION_NONE) {
                     <p>
                         We deliberately limit data collection to that which is strictly essential for precision furniture fabrication, white-glove architectural delivery, customer warranty validation, and serene client communication:
                     </p>
-                    
+
                     <div class="space-y-4 pl-4 border-l-2 border-[#7C4E26]/60 mt-4">
                         <div>
                             <h3 class="font-serif text-base font-semibold text-[#362F2A]">A. Identity &amp; Contact Credentials</h3>
