@@ -2,6 +2,11 @@
 // Initialize session
 require_once __DIR__ . '/../components/session_start.php';
 
+// Handle logout parameter
+if (isset($_GET['logout'])) {
+    unset($_SESSION['admin_user']);
+}
+
 // Redirect if already logged in as admin
 if (isset($_SESSION['admin_user'])) {
     header("Location: dashboard.php");
@@ -11,17 +16,13 @@ if (isset($_SESSION['admin_user'])) {
 // Connect database
 require_once __DIR__ . '/../components/connection.php';
 
-// Handle logout parameter
-if (isset($_GET['logout'])) {
-    unset($_SESSION['admin_user']);
-}
-
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['admin_login'])) {
     require_once __DIR__ . '/../components/connection.php';
     $email          = trim($_POST['email'] ?? '');
     $admin_password = $_POST['password'] ?? '';
+    $remember       = isset($_POST['remember']);
 
     if (empty($email) || empty($admin_password)) {
         $error = "Please enter both administrator email and password.";
@@ -33,6 +34,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['admin_login'])) {
 
             if ($admin && (password_verify($admin_password, $admin['password']) || ($admin_password === 'password' && $email === 'admin@gmail.com'))) {
                 session_regenerate_id(true);
+                // Remember me
+                require_once __DIR__ . '/../components/remember_me.php';
+                $thirty_days = time() + (60 * 60 * 24 * 30);
+                setcookie('admin_email_cookie', $remember ? $email : '', [
+                    'expires' => $remember ? $thirty_days : time() - 3600,
+                    'path' => '/',
+                    'httponly' => true,
+                    'samesite' => 'Lax'
+                ]);
+
                 $_SESSION['admin_user'] = [
                     'id'    => $admin['id'],
                     'name'  => $admin['name'],
@@ -96,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['admin_login'])) {
                     </label>
                     <div class="relative">
                         <i class="ri-mail-line absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base"></i>
-                        <input type="email" id="email" name="email" required placeholder="admin@yangonatelier.com" value="<?= htmlspecialchars($_POST['email'] ?? 'admin@gmail.com') ?>" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                        <input type="email" id="email" name="email" required placeholder="admin@yangonatelier.com" value="<?= htmlspecialchars($_POST['email'] ?? $_COOKIE['admin_email_cookie'] ?? $_COOKIE['email_cookie'] ?? 'admin@gmail.com') ?>" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                     </div>
                 </div>
 
@@ -109,6 +120,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['admin_login'])) {
                         <i class="ri-lock-2-line absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base"></i>
                         <input type="password" id="password" name="password" required placeholder="••••••••" value="password" class="w-full pl-11 pr-11 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                     </div>
+                </div>
+
+                <!-- Remember Me Option -->
+                <div class="flex items-center justify-between text-xs pt-1">
+                    <label class="flex items-center gap-2.5 text-[#6E6359] hover:text-[#362F2A] cursor-pointer select-none transition-colors" for="remember-me">
+                        <input type="checkbox" name="remember" id="remember-me" class="atelier-checkbox" <?= (isset($_COOKIE['admin_email_cookie']) || isset($_COOKIE['email_cookie'])) ? 'checked' : '' ?>>
+                        <span>Remember me</span>
+                    </label>
                 </div>
 
                 <!-- Submit Button -->

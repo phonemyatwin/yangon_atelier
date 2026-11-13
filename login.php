@@ -3,7 +3,7 @@
 require_once __DIR__ . '/components/session_start.php';
 
 // Redirect if already logged in as user
-if (isset($_SESSION['user_id'])) {
+if (isset($_SESSION['user'])) {
     header('Location: index.php');
     exit;
 }
@@ -29,9 +29,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
         session_regenerate_id(true);
         // Remember me
         require_once __DIR__ . '/components/remember_me.php';
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['username'] = $user['username'];
-        $_SESSION['email'] = $user['email'];
+        $_SESSION['user'] = [
+            'id' => $user['id'],
+            'username' => $user['username'],
+            'email' => $user['email']
+        ];
+
         header('Location: index.php');
         exit;
     } else {
