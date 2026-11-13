@@ -104,8 +104,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
                     <h2 class="font-serif text-2xl font-normal text-[#FAF6EE]">Join the Atelier</h2>
                 </div>
 
-                <div class="my-8 max-w-xs flex items-center justify-center">
-                    <img src="images/auth-register.svg" alt="Client registration illustration" width="300" height="300" class="max-h-60 w-auto object-contain drop-shadow-sm" loading="lazy">
+                <div class="my-8 w-full max-w-xs flex items-center justify-center">
+                    <img src="images/auth_register.svg" alt="Client registration illustration" width="300" height="300" class="w-full max-h-60 h-auto object-contain drop-shadow-sm" loading="lazy">
                 </div>
 
                 <div class="text-left w-full border-t border-[#221C16] pt-4">

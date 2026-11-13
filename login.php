@@ -65,8 +65,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
                     <h2 class="font-serif text-2xl font-normal text-[#FAF6EE]">Welcome Back</h2>
                 </div>
 
-                <div class="my-8 max-w-xs flex items-center justify-center">
-                    <img src="images/auth-login.svg" alt="Client sign in illustration" width="300" height="300" class="max-h-60 w-auto object-contain drop-shadow-sm" loading="lazy">
+                <div class="my-8 w-full max-w-xs flex items-center justify-center">
+                    <img src="images/auth_login.svg" alt="Client sign in illustration" width="300" height="300" class="w-full max-h-60 h-auto object-contain drop-shadow-sm" loading="lazy">
                 </div>
 
                 <div class="text-left w-full border-t border-[#221C16] pt-4">
@@ -116,8 +116,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
 
                     <!-- Remember Me Option -->
                     <div class="flex items-center justify-between text-xs pt-1">
-                        <label class="flex items-center gap-2 text-[#8C7D6B] cursor-pointer select-none" for="remember-me">
-                            <input type="checkbox" name="remember" id="remember-me" class="rounded border-stone-300 text-[#C5A059] focus:ring-amber-900 w-4 h-4" <?= isset($_COOKIE['email_cookie']) ? 'checked' : '' ?>>
+                        <label class="flex items-center gap-2.5 text-[#8C7D6B] hover:text-[#FAF6EE] cursor-pointer select-none transition-colors" for="remember-me">
+                            <input type="checkbox" name="remember" id="remember-me" class="atelier-checkbox" <?= isset($_COOKIE['email_cookie']) ? 'checked' : '' ?>>
                             <span>Keep me signed in on this device</span>
                         </label>
                     </div>
