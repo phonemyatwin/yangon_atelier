@@ -207,66 +207,6 @@ require_once __DIR__ . '/components/connection.php';
                 </div>
             </div>
 
-            <!-- Slide 6: Warm Dining Room Interior -->
-            <div class="hero-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 pointer-events-none z-0">
-                <div class="absolute inset-0">
-                    <img src="images/hero/hero1.jpg" alt="Warm Dining Room Interior" class="w-full h-full object-cover" loading="lazy">
-                    <div class="absolute inset-0 bg-gradient-to-r from-[#362F2A]/90 via-[#362F2A]/50 to-transparent"></div>
-                </div>
-                <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex items-center py-20">
-                    <div class="max-w-2xl space-y-6">
-                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#DCE5DF]/30 backdrop-blur-md border border-[#DCE5DF]/40 text-xs tracking-wider uppercase font-medium text-[#F6F3EE]">
-                            <span class="w-2 h-2 rounded-full bg-[#3F624D]"></span>
-                            <span>Heritage Joinery</span>
-                        </div>
-                        <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal tracking-tight text-[#F6F3EE] leading-[1.12]">
-                            Grounded in Nature, Crafted to Endure.
-                        </h2>
-                        <p class="text-base sm:text-lg text-[#EDE8E0] font-normal leading-relaxed">
-                            Form follows serenity. Every piece honors natural timber grain, certified regional teak, and honest craftsmanship without nails.
-                        </p>
-                        <div class="flex flex-wrap items-center gap-4 pt-4">
-                            <a href="shop.php?category=tables" class="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-[#8A5A44] hover:bg-[#704735] text-[#F6F3EE] font-semibold text-sm transition-all shadow-md hover:shadow-lg">
-                                <span>Discover Dining</span>
-                                <i class="ri-arrow-right-line"></i>
-                            </a>
-                            <a href="product_detail.php?id=4" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#F6F3EE]/15 hover:bg-[#F6F3EE]/25 backdrop-blur-md text-[#F6F3EE] border border-[#F6F3EE]/30 text-sm font-medium transition-colors">
-                                <span>View Oak Table</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 7: Master Bedroom Sanctuary -->
-            <div class="hero-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 pointer-events-none z-0">
-                <div class="absolute inset-0">
-                    <img src="images/hero/hero2.jpg" alt="Master Bedroom Sanctuary" class="w-full h-full object-cover" loading="lazy">
-                    <div class="absolute inset-0 bg-gradient-to-r from-[#362F2A]/90 via-[#362F2A]/50 to-transparent"></div>
-                </div>
-                <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex items-center py-20">
-                    <div class="max-w-2xl space-y-6">
-                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F6F3EE]/20 backdrop-blur-md border border-[#F6F3EE]/30 text-xs tracking-wider uppercase font-medium text-[#F6F3EE]">
-                            <span class="w-2 h-2 rounded-full bg-[#8A5A44]"></span>
-                            <span>Rest &amp; Restoration</span>
-                        </div>
-                        <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal tracking-tight text-[#F6F3EE] leading-[1.12]">
-                            Sanctuary for Rest &amp; Reflection.
-                        </h2>
-                        <p class="text-base sm:text-lg text-[#EDE8E0] font-normal leading-relaxed">
-                            Low-profile Japanese tatami aesthetics harmonized with European linen upholstery for deep restorative slumber.
-                        </p>
-                        <div class="flex flex-wrap items-center gap-4 pt-4">
-                            <a href="shop.php?category=beds" class="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-[#8A5A44] hover:bg-[#704735] text-[#F6F3EE] font-semibold text-sm transition-all shadow-md hover:shadow-lg">
-                                <span>Explore Bedroom</span>
-                                <i class="ri-arrow-right-line"></i>
-                            </a>
-                            <a href="product_detail.php?id=5" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#F6F3EE]/15 hover:bg-[#F6F3EE]/25 backdrop-blur-md text-[#F6F3EE] border border-[#F6F3EE]/30 text-sm font-medium transition-colors">
-                                <span>View Platform Bed</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
             </div>
 
         </div>
@@ -274,15 +214,13 @@ require_once __DIR__ . '/components/connection.php';
         <!-- Slider Controls -->
         <div class="absolute bottom-8 left-0 right-0 z-20">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-                <!-- Dots / Indicators (7 slides) -->
+                <!-- Dots / Indicators (5 slides matching images/hero/hero1-5.jpg) -->
                 <div class="flex items-center gap-2.5">
                     <button type="button" aria-label="Slide 1" onclick="showSlide(0)" class="hero-dot h-2 w-8 rounded-full bg-[#8A5A44] transition-all"></button>
                     <button type="button" aria-label="Slide 2" onclick="showSlide(1)" class="hero-dot h-2 w-2.5 rounded-full bg-[#F6F3EE]/50 hover:bg-[#F6F3EE]/80 transition-all"></button>
                     <button type="button" aria-label="Slide 3" onclick="showSlide(2)" class="hero-dot h-2 w-2.5 rounded-full bg-[#F6F3EE]/50 hover:bg-[#F6F3EE]/80 transition-all"></button>
                     <button type="button" aria-label="Slide 4" onclick="showSlide(3)" class="hero-dot h-2 w-2.5 rounded-full bg-[#F6F3EE]/50 hover:bg-[#F6F3EE]/80 transition-all"></button>
                     <button type="button" aria-label="Slide 5" onclick="showSlide(4)" class="hero-dot h-2 w-2.5 rounded-full bg-[#F6F3EE]/50 hover:bg-[#F6F3EE]/80 transition-all"></button>
-                    <button type="button" aria-label="Slide 6" onclick="showSlide(5)" class="hero-dot h-2 w-2.5 rounded-full bg-[#F6F3EE]/50 hover:bg-[#F6F3EE]/80 transition-all"></button>
-                    <button type="button" aria-label="Slide 7" onclick="showSlide(6)" class="hero-dot h-2 w-2.5 rounded-full bg-[#F6F3EE]/50 hover:bg-[#F6F3EE]/80 transition-all"></button>
                 </div>
 
                 <!-- Navigation Arrow Buttons -->
@@ -431,22 +369,22 @@ require_once __DIR__ . '/components/connection.php';
 
             <!-- PART B: CURATED SALON TRIPTYCH -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Companion 1: Lounge Armchair -->
+                <!-- Companion 1: Curved Bouclé Lounge Chair -->
                 <article class="group rounded-2xl bg-[#F6F3EE] border border-[#C9C0B3] p-5 hover:border-[#8A5A44] transition-all duration-300 shadow-sm hover:shadow-md flex flex-col justify-between">
                     <div>
                         <div class="relative aspect-[4/3] rounded-xl overflow-hidden bg-[#EDE8E0] border border-[#C9C0B3] mb-5">
-                            <img src="images/chairs/chair2.jpg" alt="Curved Lounge Armchair" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                            <img src="images/chairs/chair2.jpg" alt="Curved Bouclé Lounge Chair" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                             <span class="absolute top-3 left-3 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-[#DFD8CD] text-[#362F2A] border border-[#C9C0B3]">
                                 Companion Piece
                             </span>
                         </div>
                         <span class="text-[10px] uppercase tracking-wider text-[#8A5A44] font-semibold block mb-1">Salon Seating</span>
                         <h4 class="font-serif text-lg font-normal text-[#362F2A] group-hover:text-[#8A5A44] transition-colors">
-                            <a href="product_detail.php?id=2">Curved Lounge Armchair</a>
+                            <a href="product_detail.php?id=2">Curved Bouclé Lounge Chair</a>
                         </h4>
                     </div>
                     <div class="pt-4 border-t border-[#C9C0B3] mt-4 flex items-center justify-between text-xs">
-                        <span class="font-serif font-medium text-[#362F2A]">580,000 MMK</span>
+                        <span class="font-serif font-medium text-[#362F2A]">550,000 MMK</span>
                         <a href="product_detail.php?id=2" class="text-[#8A5A44] hover:text-[#704735] font-medium flex items-center gap-1">
                             <span>Details</span>
                             <i class="ri-arrow-right-line"></i>
@@ -454,46 +392,46 @@ require_once __DIR__ . '/components/connection.php';
                     </div>
                 </article>
 
-                <!-- Companion 2: Modular Bouclé Sofa -->
+                <!-- Companion 2: Organic Bouclé Modular Sofa -->
                 <article class="group rounded-2xl bg-[#F6F3EE] border border-[#C9C0B3] p-5 hover:border-[#8A5A44] transition-all duration-300 shadow-sm hover:shadow-md flex flex-col justify-between">
                     <div>
                         <div class="relative aspect-[4/3] rounded-xl overflow-hidden bg-[#EDE8E0] border border-[#C9C0B3] mb-5">
-                            <img src="images/couches/couch1.jpg" alt="Bouclé Modular Sofa" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                            <img src="images/couches/couch1.jpg" alt="Organic Bouclé Modular Sofa" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                             <span class="absolute top-3 left-3 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-[#DFD8CD] text-[#362F2A] border border-[#C9C0B3]">
                                 Living Hearth
                             </span>
                         </div>
                         <span class="text-[10px] uppercase tracking-wider text-[#8A5A44] font-semibold block mb-1">Sofas &amp; Sectionals</span>
                         <h4 class="font-serif text-lg font-normal text-[#362F2A] group-hover:text-[#8A5A44] transition-colors">
-                            <a href="product_detail.php?id=3">Bouclé Modular Sofa</a>
+                            <a href="product_detail.php?id=7">Organic Bouclé Modular Sofa</a>
                         </h4>
                     </div>
                     <div class="pt-4 border-t border-[#C9C0B3] mt-4 flex items-center justify-between text-xs">
-                        <span class="font-serif font-medium text-[#362F2A]">1,250,000 MMK</span>
-                        <a href="product_detail.php?id=3" class="text-[#8A5A44] hover:text-[#704735] font-medium flex items-center gap-1">
+                        <span class="font-serif font-medium text-[#362F2A]">1,850,000 MMK</span>
+                        <a href="product_detail.php?id=7" class="text-[#8A5A44] hover:text-[#704735] font-medium flex items-center gap-1">
                             <span>Details</span>
                             <i class="ri-arrow-right-line"></i>
                         </a>
                     </div>
                 </article>
 
-                <!-- Companion 3: Solid Oak Table -->
+                <!-- Companion 3: Sculptural Teak Credenza -->
                 <article class="group rounded-2xl bg-[#F6F3EE] border border-[#C9C0B3] p-5 hover:border-[#8A5A44] transition-all duration-300 shadow-sm hover:shadow-md flex flex-col justify-between">
                     <div>
                         <div class="relative aspect-[4/3] rounded-xl overflow-hidden bg-[#EDE8E0] border border-[#C9C0B3] mb-5">
-                            <img src="images/tables/table1.jpg" alt="Solid Natural Oak Table" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                            <img src="images/tables/table1.jpg" alt="Sculptural Teak Credenza" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                             <span class="absolute top-3 left-3 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-[#DFD8CD] text-[#362F2A] border border-[#C9C0B3]">
                                 Dining Centerpiece
                             </span>
                         </div>
-                        <span class="text-[10px] uppercase tracking-wider text-[#8A5A44] font-semibold block mb-1">Dining Architecture</span>
+                        <span class="text-[10px] uppercase tracking-wider text-[#8A5A44] font-semibold block mb-1">Cabinetry &amp; Credenzas</span>
                         <h4 class="font-serif text-lg font-normal text-[#362F2A] group-hover:text-[#8A5A44] transition-colors">
-                            <a href="product_detail.php?id=4">Solid Natural Oak Table</a>
+                            <a href="product_detail.php?id=8">Sculptural Teak Credenza</a>
                         </h4>
                     </div>
                     <div class="pt-4 border-t border-[#C9C0B3] mt-4 flex items-center justify-between text-xs">
-                        <span class="font-serif font-medium text-[#362F2A]">890,000 MMK</span>
-                        <a href="product_detail.php?id=4" class="text-[#8A5A44] hover:text-[#704735] font-medium flex items-center gap-1">
+                        <span class="font-serif font-medium text-[#362F2A]">1,450,000 MMK</span>
+                        <a href="product_detail.php?id=8" class="text-[#8A5A44] hover:text-[#704735] font-medium flex items-center gap-1">
                             <span>Details</span>
                             <i class="ri-arrow-right-line"></i>
                         </a>
@@ -596,7 +534,7 @@ require_once __DIR__ . '/components/connection.php';
                         <article class="py-5 first:pt-0 group">
                             <span class="text-[10px] text-[#6E6359] uppercase tracking-wider block mb-1">Apr 28, 2026 • By Su Thinzar Htet</span>
                             <h4 class="font-serif text-base font-normal text-[#362F2A] group-hover:text-[#8A5A44] transition-colors">
-                                <a href="blog_detail.php?id=2">Joinery Without Nails: The Living Heritage of Wood Craft</a>
+                                <a href="blog_detail.php?id=2">Sustainable Forestry: Sourcing Reclaimed Teak &amp; Oak</a>
                             </h4>
                         </article>
 
@@ -604,15 +542,15 @@ require_once __DIR__ . '/components/connection.php';
                         <article class="py-5 group">
                             <span class="text-[10px] text-[#6E6359] uppercase tracking-wider block mb-1">Apr 14, 2026 • By Thae Nay Nwe Soe</span>
                             <h4 class="font-serif text-base font-normal text-[#362F2A] group-hover:text-[#8A5A44] transition-colors">
-                                <a href="blog_detail.php?id=3">Sculpting Ambient Light in Living Rooms with Paper &amp; Bronze</a>
+                                <a href="blog_detail.php?id=3">Lighting Architecture: Sculpting Shadow and Warmth</a>
                             </h4>
                         </article>
 
                         <!-- Dispatch 3 -->
                         <article class="py-5 group">
-                            <span class="text-[10px] text-[#6E6359] uppercase tracking-wider block mb-1">Mar 30, 2026 • By Myat Chal Oo</span>
+                            <span class="text-[10px] text-[#6E6359] uppercase tracking-wider block mb-1">Mar 30, 2026 • By Phone Myat Win</span>
                             <h4 class="font-serif text-base font-normal text-[#362F2A] group-hover:text-[#8A5A44] transition-colors">
-                                <a href="blog_detail.php?id=4">The Ritual of Morning Tea &amp; Minimalist Dining Furniture</a>
+                                <a href="blog_detail.php?id=6">The Palette of Quietude: Earth Pigments in Living Spaces</a>
                             </h4>
                         </article>
 
@@ -620,7 +558,7 @@ require_once __DIR__ . '/components/connection.php';
                         <article class="py-5 last:pb-0 group">
                             <span class="text-[10px] text-[#6E6359] uppercase tracking-wider block mb-1">Mar 18, 2026 • By Nyi Nyi Aung</span>
                             <h4 class="font-serif text-base font-normal text-[#362F2A] group-hover:text-[#8A5A44] transition-colors">
-                                <a href="blog_detail.php?id=5">Botanical Plant Waxes: Caring for Solid Walnut &amp; Oak</a>
+                                <a href="blog_detail.php?id=5">Botanical Plant Waxes: Caring for Solid Wood</a>
                             </h4>
                         </article>
                     </div>
@@ -628,7 +566,7 @@ require_once __DIR__ . '/components/connection.php';
 
                 <div class="pt-6 border-t border-[#C9C0B3] mt-6">
                     <a href="blog.php" class="text-xs uppercase tracking-wider text-[#8A5A44] hover:text-[#704735] font-semibold flex items-center justify-between transition-colors">
-                        <span>Explore All 6 Journal Volumes</span>
+                        <span>Explore All Journal Archives</span>
                         <i class="ri-arrow-right-line"></i>
                     </a>
                 </div>

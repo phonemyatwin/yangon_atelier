@@ -7,6 +7,7 @@ require_once __DIR__ . '/components/session_check.php';
 
 // Connect database
 require_once __DIR__ . '/../components/connection.php';
+require_once __DIR__ . '/../components/function.php';
 
 $id = $_GET['id'] ?? '';
 if (empty($id) || !filter_var($id, FILTER_VALIDATE_INT)) {
@@ -43,8 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'])) {
             ':id' => $blog['id'],
             ':author_id' => $_SESSION['admin']['id']
         ]);
-        if (!empty($blog['image']) && file_exists('../media/' . $blog['image'])) {
-            unlink('../media/' . $blog['image']);
+        if (!empty($blog['image']) && file_exists(__DIR__ . '/../media/' . $blog['image'])) {
+            unlink(__DIR__ . '/../media/' . $blog['image']);
         }
         $_SESSION['success'] = 'Your article is deleted successfully.';
         header('Location: blog.php');
@@ -107,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'])) {
                     <!-- Article Details Summary -->
                     <div class="border border-[#C9C0B3] bg-[#EDE8E0] rounded-2xl p-5 mb-8 flex items-center gap-5">
                         <div class="w-24 h-16 rounded-xl bg-[#F6F3EE] border border-[#C9C0B3] overflow-hidden flex-shrink-0">
-                            <img src="../media/<?= htmlspecialchars($blog['image']); ?>" alt="Article cover" class="w-full h-full object-cover">
+                            <img src="<?= htmlspecialchars(resolve_blog_image($blog['image'], '../')); ?>" alt="Article cover" class="w-full h-full object-cover">
                         </div>
                         <div class="space-y-1 text-xs">
                             <span class="text-[#6E6359] font-mono">Article #<?= htmlspecialchars($blog['id']) ?></span>

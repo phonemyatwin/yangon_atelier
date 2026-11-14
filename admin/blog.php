@@ -89,7 +89,7 @@ $blogs = $stmt->fetchAll();
                                             <td class="py-4 px-6 text-[#6E6359]">#<?= htmlspecialchars($blog['id']); ?></td>
                                             <td class="py-4 px-6">
                                                 <div class="w-16 h-11 rounded-lg bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden">
-                                                    <img src="../media/<?= htmlspecialchars($blog['image']); ?>" alt="Article image" class="w-full h-full object-cover">
+                                                    <img src="<?= htmlspecialchars(resolve_blog_image($blog['image'], '../')); ?>" alt="Article image" class="w-full h-full object-cover">
                                                 </div>
                                             </td>
                                             <td class="py-4 px-6">

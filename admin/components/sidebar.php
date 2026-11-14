@@ -22,9 +22,9 @@ $current_admin_page = basename($_SERVER['PHP_SELF'] ?? 'dashboard.php');
     <div>
         <!-- Brand Header -->
         <div class="h-20 flex items-center gap-3 px-6 border-b border-[#3A322B]">
-            <span class="w-9 h-9 rounded-xl bg-[#8A5A44] text-[#F6F3EE] font-bold flex items-center justify-center font-serif text-lg font-semibold shadow-xs">
-                Y
-            </span>
+            <div class="w-10 h-10 rounded-xl bg-[#EDE8E0] border border-[#704735] overflow-hidden flex items-center justify-center p-1 shadow-sm">
+                <img src="../images/logo/Yangon_Atelier.png" alt="Yangon Atelier Logo" class="w-full h-full object-contain">
+            </div>
             <div class="flex flex-col">
                 <span class="font-serif text-lg font-semibold tracking-tight text-[#F6F3EE] leading-none">Yangon Atelier</span>
                 <span class="text-[10px] tracking-[0.2em] uppercase text-[#DFD8CD] font-medium mt-1">Management Portal</span>

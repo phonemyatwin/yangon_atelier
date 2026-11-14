@@ -25,7 +25,9 @@ $current_page = basename($_SERVER['PHP_SELF'] ?? 'index.php');
         <!-- Drawer Header -->
         <div class="flex items-center justify-between pb-6 border-b border-[#C9C0B3]">
             <div class="flex items-center gap-2.5">
-                <span class="w-8 h-8 rounded-lg bg-[#8A5A44] text-[#F6F3EE] border border-[#704735] flex items-center justify-center font-serif text-sm font-bold">Y</span>
+                <div class="w-9 h-9 rounded-xl bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden flex items-center justify-center p-1 shadow-xs">
+                    <img src="images/logo/Yangon_Atelier.png" alt="Yangon Atelier Logo" class="w-full h-full object-contain">
+                </div>
                 <span class="font-serif text-lg font-semibold tracking-tight text-[#362F2A]">Yangon Atelier</span>
             </div>
             <!-- Accessible Close Button with legacy id "closer" -->

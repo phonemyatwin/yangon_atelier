@@ -7,6 +7,7 @@ require_once __DIR__ . '/components/session_check.php';
 
 // Connect database
 require_once __DIR__ . '/../components/connection.php';
+require_once __DIR__ . '/../components/function.php';
 
 $id = $_GET['id'] ?? '';
 $errors = [];
@@ -43,22 +44,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
 
     if (empty($title) || empty($author) || empty($content) || empty($category)) {
         $errors['blog_update_form'] = 'All fields are required. Please complete the form.';
-    } else {
-        if (mb_strlen($title) > 50) {
-            $errors['title'] = 'Title cannot exceed 50 characters.';
-        }
-        if (mb_strlen($author) > 50) {
-            $errors['author'] = 'Author name cannot exceed 50 characters.';
-        }
     }
 
     if (empty($errors)) {
         try {
             if (!empty($new_image)) {
                 $image = time() . '_' . $new_image;
-                move_uploaded_file($_FILES['image']['tmp_name'], '../media/' . $image);
-                if (!empty($old_image) && file_exists('../media/' . $old_image)) {
-                    unlink('../media/' . $old_image);
+                move_uploaded_file($_FILES['image']['tmp_name'], __DIR__ . '/../media/' . $image);
+                if (!empty($old_image) && file_exists(__DIR__ . '/../media/' . $old_image)) {
+                    unlink(__DIR__ . '/../media/' . $old_image);
                 }
             } else {
                 $image = $old_image;
@@ -175,7 +169,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
                             </label>
                             <div class="flex flex-col sm:flex-row items-center gap-6 p-4 rounded-2xl bg-[#EDE8E0] border border-[#C9C0B3]">
                                 <div class="w-32 h-20 rounded-xl bg-[#F6F3EE] border border-[#C9C0B3] overflow-hidden flex-shrink-0">
-                                    <img id="blog-preview" src="../media/<?= htmlspecialchars($blog['image'] ?? ''); ?>" alt="Cover visual" class="w-full h-full object-cover">
+                                    <img id="blog-preview" src="../media/<?= $blog['image']; ?>" alt="Cover visual" class="w-full h-full object-cover">
                                 </div>
                                 <div class="flex-1 space-y-1 text-center sm:text-left">
                                     <span class="text-xs font-semibold text-[#362F2A] block">Replace Cover (Optional)</span>

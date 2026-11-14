@@ -25,9 +25,9 @@
             <!-- Col 1: Brand & Atelier Ethos -->
             <div class="space-y-4">
                 <div class="flex items-center gap-3">
-                    <span class="w-8 h-8 rounded-xl bg-[#8A5A44] text-[#F6F3EE] flex items-center justify-center font-serif text-base font-bold shadow-xs">
-                        Y
-                    </span>
+                    <div class="w-10 h-10 rounded-xl bg-[#EDE8E0] border border-[#704735] overflow-hidden flex items-center justify-center p-1 shadow-sm">
+                        <img src="images/logo/Yangon_Atelier.png" alt="Yangon Atelier Logo" class="w-full h-full object-contain">
+                    </div>
                     <span class="font-serif text-xl tracking-tight text-[#F6F3EE] font-semibold">Yangon Atelier</span>
                 </div>
                 <p class="text-xs sm:text-sm text-[#DFD8CD] leading-relaxed">

@@ -48,9 +48,9 @@ $current_page = basename($_SERVER['PHP_SELF'] ?? 'index.php');
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         <!-- Atelier Brand Logo -->
         <a href="index.php" class="group flex items-center gap-3 focus:outline-none">
-            <span class="w-9 h-9 rounded-xl bg-[#8A5A44] text-[#F6F3EE] border border-[#704735] flex items-center justify-center font-serif text-lg font-bold tracking-wider group-hover:bg-[#704735] transition-all shadow-sm">
-                Y
-            </span>
+            <div class="w-10 h-10 rounded-xl bg-[#EDE8E0] border border-[#C9C0B3] group-hover:border-[#8A5A44] overflow-hidden flex items-center justify-center p-1 shadow-xs transition-all">
+                <img src="images/logo/Yangon_Atelier.png" alt="Yangon Atelier Logo" class="w-full h-full object-contain">
+            </div>
             <div class="flex flex-col">
                 <span class="font-serif text-xl tracking-tight text-[#362F2A] font-semibold leading-none">Yangon Atelier</span>
                 <span class="text-[9px] tracking-[0.25em] uppercase text-[#8A5A44] font-semibold mt-1">Furniture Studio</span>

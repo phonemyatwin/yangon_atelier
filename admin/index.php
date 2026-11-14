@@ -75,8 +75,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
     <div class="w-full max-w-md">
         <!-- Brand Header -->
         <div class="text-center mb-8">
-            <div class="inline-flex w-14 h-14 rounded-2xl bg-[#8A5A44] items-center justify-center font-serif text-2xl text-[#F6F3EE] mb-4 shadow-md font-semibold">
-                Y
+            <div class="inline-flex w-16 h-16 rounded-2xl bg-[#EDE8E0] border border-[#C9C0B3] items-center justify-center p-2 mb-4 shadow-md overflow-hidden">
+                <img src="../images/logo/Yangon_Atelier.png" alt="Yangon Atelier Logo" class="w-full h-full object-contain">
             </div>
             <h1 class="font-serif text-2xl sm:text-3xl font-medium tracking-tight text-[#362F2A]">Yangon Atelier</h1>
             <p class="text-xs text-[#8A5A44] uppercase tracking-[0.2em] mt-1.5 font-semibold">Administrative Gateway</p>
