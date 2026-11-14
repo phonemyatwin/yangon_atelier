@@ -639,6 +639,14 @@ require_once __DIR__ . '/components/connection.php';
 
     <?php include "components/footer.php"; ?>
     <script src="js/user.js"></script>
+
+    <?php if (isset($_SESSION['success'])): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                showToast(<?= json_encode($_SESSION['success']); ?>, 'success');
+            })
+        </script>
+    <?php endif; ?>
 </body>
 
 </html>

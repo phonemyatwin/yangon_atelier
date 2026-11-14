@@ -250,13 +250,15 @@ require_once __DIR__ . '/../components/connection.php';
     </div>
 
     <script src="js/admin.js"></script>
+    <script src="../js/user.js"></script>
 
-    <?php if (isset($_SESSION['admin_user'])): ?>
+    <?php if (isset($_SESSION['success'])): ?>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                showToast('Welcome back! '.<?= json_encode($_SESSION['admin_user']['name']); ?>, 'success');
+                showToast(<?= json_encode($_SESSION['success']); ?>, 'success');
             });
         </script>
+        <?php unset($_SESSION['success']); ?>
     <?php endif; ?>
 </body>
 

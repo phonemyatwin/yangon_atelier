@@ -3,7 +3,7 @@
 require_once __DIR__ . '/../components/session_start.php';
 
 // Redirect if already logged in as admin
-if (isset($_SESSION['admin_user'])) {
+if (isset($_SESSION['admin'])) {
     header("Location: dashboard.php");
     exit;
 }
@@ -43,13 +43,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
                 'samesite' => $params['samesite'],
             ]);
         }
-        $_SESSION['admin_user'] = [
+
+        $_SESSION['admin'] = [
             'id' => $admin['id'],
             'name' => $admin['name'],
             'email' => $admin['email'],
             'role' => $admin['role']
         ];
 
+        $_SESSION['success'] = 'Welcome back! ' . $_SESSION['admin']['name'];
         header('Location: dashboard.php');
         exit;
     } else {
@@ -95,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
                     </label>
                     <div class="relative">
                         <i class="ri-mail-line absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base"></i>
-                        <input type="email" id="email" name="email" required placeholder="admin@example.com" value="<?= htmlspecialchars($email ?? $_COOKIE['admin_email_cookie'] ?? '') ?>" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                        <input type="email" id="email" name="email" placeholder="admin@example.com" value="<?= htmlspecialchars($email ?? $_COOKIE['admin_email_cookie'] ?? '') ?>" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                     </div>
                 </div>
 
@@ -106,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
                     </label>
                     <div class="relative">
                         <i class="ri-lock-2-line absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base"></i>
-                        <input type="password" id="password" name="password" required placeholder="Enter your password" class="w-full pl-11 pr-11 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                        <input type="password" id="password" name="password" placeholder="Enter your password" class="w-full pl-11 pr-11 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                     </div>
                 </div>
 

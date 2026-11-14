@@ -261,7 +261,7 @@ require_once __DIR__ . '/components/connection.php';
                     <span class="text-xs uppercase tracking-wider text-[#8A5A44] font-semibold">Section 6</span>
                     <h2 class="font-serif text-2xl font-normal text-[#362F2A] tracking-tight">Retention &amp; Archival Lifecycles</h2>
                     <p>
-                        Personal data is retained only for the duration required to achieve the purpose for which it was assembled:
+                        Personal data is retained only for the duration to achieve the purpose for which it was assembled:
                     </p>
                     <ul class="list-disc pl-5 space-y-2 text-[#6E6359]">
                         <li><strong>Order Records:</strong> Retained for 5 years to guarantee warranty inspections, joinery replacements, and regulatory accounting.</li>

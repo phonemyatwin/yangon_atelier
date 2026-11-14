@@ -8,7 +8,52 @@ require_once __DIR__ . '/components/session_check.php';
 // Connect database
 require_once __DIR__ . '/../components/connection.php';
 
+$errors = [];
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['publish'])) {
+    $title = trim($_POST['title'] ?? '');
+    $author = trim($_POST['author'] ?? '');
+    $category = trim($_POST['category'] ?? 'Philosophy');
+    $image = $_FILES['image']['name'];
+    $content = trim($_POST['content'] ?? '');
+
+    if (empty($title) || empty($author) || empty($category) || empty($image) || empty($content)) {
+        $errors['blog_form'] = 'All fields are required. Please complete the form.';
+    } else {
+        if (mb_strlen($title) > 50) {
+            $errors['title'] = 'Title cannot exceed 50 characters.';
+        }
+        if (mb_strlen($author) > 50) {
+            $errors['author'] = 'Author name cannot exceed 50 characters.';
+        }
+    }
+
+    if (empty($errors)) {
+        try {
+            $image = time() . '_' . $image;
+            move_uploaded_file($_FILES['image']['tmp_name'], '../media/' . $image);
+            $sql = 'INSERT INTO blogs(title, author, author_id, image, content, category) VALUES(:title, :author, :author_id :image, :content, :category)';
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([
+                ':title' => $title,
+                ':author' => $author,
+                ':author_id' => $_SESSION['admin']['id'],
+                ':image' => $image,
+                ':content' => $content,
+                ':category' => $category,
+            ]);
+            $_SESSION['success'] = 'Journal article published successfully.';
+            header('Location: blog.php');
+            exit;
+        } catch (PDOException $e) {
+            if (!empty($image) && file_exists('../media/' . $image)) {
+                unlink('../media/' . $image);
+            }
+            error_log('Blog create error: ' . $e->getMessage() . "\n", 3, __DIR__ . '/error.log');
+            $errors['db'] = 'Unable to publish your article at this moment. Please try again later.';
+        }
+    }
+}
 
 ?>
 <!DOCTYPE html>
@@ -48,15 +93,7 @@ require_once __DIR__ . '/../components/connection.php';
                     </a>
                 </div>
 
-                <!-- Error Notification Banner -->
-                <?php if (!empty($error)): ?>
-                    <div class="p-4 rounded-2xl bg-[#EFE0E0] border border-[#DFC8C8] text-[#8C3B3B] text-xs flex items-center gap-2.5">
-                        <i class="ri-error-warning-line text-lg flex-shrink-0"></i>
-                        <span><?= htmlspecialchars($error) ?></span>
-                    </div>
-                <?php endif; ?>
-
-                <!-- Form Card in Raw Linen (#F6F3EE) -->
+                <!-- Form Card in Raw Linen -->
                 <div class="bg-[#F6F3EE] rounded-3xl border border-[#C9C0B3] p-6 sm:p-10 shadow-xs">
                     <form action="" method="POST" enctype="multipart/form-data" class="space-y-6">
 
@@ -65,17 +102,41 @@ require_once __DIR__ . '/../components/connection.php';
                             <label for="title" class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">
                                 Article Title <span class="text-[#8C3B3B]">*</span>
                             </label>
-                            <input type="text" id="title" name="title" required value="<?= htmlspecialchars($_POST['title'] ?? '') ?>" placeholder="e.g. The Philosophy of Wabi-Sabi in Modern Interiors" class="w-full px-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                            <input type="text" id="title" maxlength="50" name="title" value="<?= htmlspecialchars($title ?? '') ?>" placeholder="e.g. The Philosophy of Wabi-Sabi in Modern Interiors" class="w-full px-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                         </div>
 
-                        <!-- Author -->
-                        <div class="space-y-1.5">
-                            <label for="author" class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">
-                                Author Name or Byline <span class="text-[#8C3B3B]">*</span>
-                            </label>
-                            <div class="relative">
-                                <i class="ri-user-line absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base"></i>
-                                <input type="text" id="author" name="author" required placeholder="e.g. Atelier Editorial Staff" value="<?= htmlspecialchars($_POST['author'] ?? 'Atelier Editorial Staff') ?>" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                        <!-- Author & Category Grid -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <!-- Author -->
+                            <div class="space-y-1.5">
+                                <label for="author" class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">
+                                    Author Name or Byline <span class="text-[#8C3B3B]">*</span>
+                                </label>
+                                <div class="relative">
+                                    <i class="ri-user-line absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base"></i>
+                                    <input type="text" id="author" maxlength="50" name="author" placeholder="e.g. Atelier Editorial Staff" value="<?= htmlspecialchars($author ?? 'Atelier Editorial Staff') ?>" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                                </div>
+                            </div>
+
+                            <!-- Category -->
+                            <div class="space-y-1.5">
+                                <label for="category" class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">
+                                    Category <span class="text-[#8C3B3B]">*</span>
+                                </label>
+                                <div class="relative">
+                                    <select id="category" name="category" class="w-full appearance-none px-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] cursor-pointer transition-all">
+                                        <?php
+                                        $categories = ['Philosophy', 'Craftsmanship', 'Spatial Design', 'Interior Styling', 'Artisanship', 'Lighting', 'Living Rituals', 'Architecture', 'Editorial'];
+                                        $selected_category = $category ?? 'Philosophy';
+                                        foreach ($categories as $cat):
+                                        ?>
+                                            <option value="<?= htmlspecialchars($cat) ?>" <?= ($selected_category === $cat) ? 'selected' : '' ?>>
+                                                <?= htmlspecialchars($cat) ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <i class="ri-arrow-down-s-line absolute right-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base pointer-events-none"></i>
+                                </div>
                             </div>
                         </div>
 
@@ -89,7 +150,7 @@ require_once __DIR__ . '/../components/connection.php';
                                     <i class="ri-image-add-line text-3xl text-[#8A5A44] mb-2"></i>
                                     <span class="text-xs font-semibold text-[#362F2A]">Upload high-resolution article visual</span>
                                     <span class="text-[11px] text-[#6E6359] mt-0.5">Recommended landscape ratio 16:10</span>
-                                    <input type="file" id="image" name="image" accept="image/*" required data-preview-target="blog-preview" class="mt-4 text-xs text-[#6E6359] file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-[#DFD8CD] file:text-[#362F2A] hover:file:bg-[#C9C0B3] file:cursor-pointer cursor-pointer">
+                                    <input type="file" id="image" name="image" accept="image/*" data-preview-target="blog-preview" class="mt-4 text-xs text-[#6E6359] file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-[#DFD8CD] file:text-[#362F2A] hover:file:bg-[#C9C0B3] file:cursor-pointer cursor-pointer">
                                 </div>
                                 <div class="mt-4 flex justify-center">
                                     <img id="blog-preview" src="" alt="Cover preview" class="hidden w-40 h-24 object-cover rounded-xl border border-[#C9C0B3] bg-[#F6F3EE]">
@@ -102,7 +163,7 @@ require_once __DIR__ . '/../components/connection.php';
                             <label for="content" class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">
                                 Journal Essay Body <span class="text-[#8C3B3B]">*</span>
                             </label>
-                            <textarea id="content" name="content" rows="8" required placeholder="Write your long-form craft essay, reflections on natural materials, and spatial philosophies..." class="w-full p-4 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all"><?= htmlspecialchars($_POST['content'] ?? '') ?></textarea>
+                            <textarea id="content" name="content" rows="8" placeholder="Write your long-form craft essay, reflections on natural materials, and spatial philosophies..." class="w-full p-4 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all"><?= htmlspecialchars($content ?? '') ?></textarea>
                         </div>
 
                         <!-- Actions -->
@@ -110,7 +171,7 @@ require_once __DIR__ . '/../components/connection.php';
                             <a href="blog.php" class="px-5 py-3 rounded-xl border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-xs font-semibold text-[#362F2A] transition-colors">
                                 Cancel
                             </a>
-                            <button type="submit" name="submit" class="px-6 py-3 rounded-xl bg-[#8A5A44] hover:bg-[#704735] text-[#F6F3EE] text-xs font-semibold transition-colors shadow-xs flex items-center gap-2">
+                            <button type="submit" name="publish" class="px-6 py-3 rounded-xl bg-[#8A5A44] hover:bg-[#704735] text-[#F6F3EE] text-xs font-semibold transition-colors shadow-xs flex items-center gap-2">
                                 <i class="ri-check-line text-base"></i>
                                 <span>Publish Journal Post</span>
                             </button>
@@ -125,6 +186,17 @@ require_once __DIR__ . '/../components/connection.php';
     </div>
 
     <script src="js/admin.js"></script>
+    <script src="../js/user.js"></script>
+
+    <?php if (!empty($errors)): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                <?php foreach ($errors as $error): ?>
+                    showToast(<?= json_encode($error); ?>, 'error');
+                <?php endforeach; ?>
+            });
+        </script>
+    <?php endif; ?>
 </body>
 
 </html>

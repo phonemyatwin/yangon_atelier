@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
 
     // Check username
     if (empty($username)) {
-        $errors['username'] = 'Username is required.';
+        $errors['username'] = 'Username is .';
     } else if (strlen($username) < 3 || strlen($username) > 30) {
         $errors['username'] = 'Username must be at least 3 to 30 characters.';
     }
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
 
     // Check email
     if (empty($email)) {
-        $errors['email'] = 'Email is required.';
+        $errors['email'] = 'Email is .';
     } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors['email'] = 'Please enter a valid email address.';
     }
@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
 
     // Check password
     if (empty($password)) {
-        $errors['password'] = 'Password is required.';
+        $errors['password'] = 'Password is .';
     } else if (strlen($password) < 8) {
         $errors['password'] = 'Password must be at least 8 characters.';
     }
@@ -140,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
                         </label>
                         <div class="relative">
                             <i class="ri-user-line absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base"></i>
-                            <input type="text" id="username" name="username" required value="<?= htmlspecialchars($username ?? '') ?>" placeholder="Choose a username" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                            <input type="text" id="username" name="username" value="<?= htmlspecialchars($username ?? '') ?>" placeholder="Choose a username" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                         </div>
                     </div>
 
@@ -151,7 +151,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
                         </label>
                         <div class="relative">
                             <i class="ri-mail-line absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base"></i>
-                            <input type="email" id="email" name="email" required value="<?= htmlspecialchars($email ?? '') ?>" placeholder="client@example.com" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                            <input type="email" id="email" name="email" value="<?= htmlspecialchars($email ?? '') ?>" placeholder="client@example.com" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                         </div>
                     </div>
 
@@ -164,7 +164,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
                             </label>
                             <div class="relative">
                                 <i class="ri-lock-2-line absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base"></i>
-                                <input type="password" id="password" name="password" required placeholder="Min 8 characters" class="w-full pl-11 pr-10 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                                <input type="password" id="password" name="password" placeholder="Min 8 characters" class="w-full pl-11 pr-10 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                                 <button type="button" data-toggle-password="password" aria-label="Toggle password visibility" class="absolute right-3 top-1/2 -translate-y-1/2 text-[#6E6359] hover:text-[#362F2A] transition-colors">
                                     <i class="ri-eye-line text-sm"></i>
                                 </button>
@@ -178,7 +178,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
                             </label>
                             <div class="relative">
                                 <i class="ri-lock-password-line absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base"></i>
-                                <input type="password" id="confirm_password" name="confirm_password" required placeholder="Re-enter password" class="w-full pl-11 pr-10 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                                <input type="password" id="confirm_password" name="confirm_password" placeholder="Re-enter password" class="w-full pl-11 pr-10 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                                 <button type="button" data-toggle-password="confirm_password" aria-label="Toggle password visibility" class="absolute right-3 top-1/2 -translate-y-1/2 text-[#6E6359] hover:text-[#362F2A] transition-colors">
                                     <i class="ri-eye-line text-sm"></i>
                                 </button>

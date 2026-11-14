@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ============================================================================
  * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - GLOBAL STOREFRONT FOOTER
@@ -20,7 +21,7 @@
 <footer class="bg-[#4A4038] border-t border-[#3A322B] pt-16 pb-12 text-[#F6F3EE]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 pb-16 border-b border-[#3A322B]">
-            
+
             <!-- Col 1: Brand & Atelier Ethos -->
             <div class="space-y-4">
                 <div class="flex items-center gap-3">
@@ -88,7 +89,7 @@
                 </p>
                 <form action="" method="POST" data-toast-success="Thank you for subscribing to our journal." class="space-y-3">
                     <div class="relative">
-                        <input type="email" name="subscriber_email" placeholder="Enter your email address" required class="w-full px-4 py-3 bg-[#3A322B] border border-[#5C5046] rounded-xl text-[#F6F3EE] placeholder-[#C9C0B3] text-xs sm:text-sm focus:outline-none focus:border-[#8A5A44] focus:ring-1 focus:ring-[#8A5A44] transition-all">
+                        <input type="email" name="subscriber_email" placeholder="Enter your email address" class="w-full px-4 py-3 bg-[#3A322B] border border-[#5C5046] rounded-xl text-[#F6F3EE] placeholder-[#C9C0B3] text-xs sm:text-sm focus:outline-none focus:border-[#8A5A44] focus:ring-1 focus:ring-[#8A5A44] transition-all">
                     </div>
                     <button type="submit" name="subscribe_newsletter" class="w-full py-3 px-4 rounded-xl bg-[#8A5A44] hover:bg-[#704735] text-[#F6F3EE] font-semibold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 shadow-sm">
                         <span>Subscribe</span>

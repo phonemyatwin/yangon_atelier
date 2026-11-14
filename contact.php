@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['send'])) {
 
     // Form check
     if (empty($name) || empty($number) || empty($email) || empty($message)) {
-        $errors['form'] = 'All fields are required. Please complete the form.';
+        $errors['contact_form'] = 'All fields are required. Please complete the form.';
     } else {
         // Phone number check
         // if (!filter_var($number, FILTER_VALIDATE_INT)) {
@@ -179,7 +179,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['send'])) {
                             </label>
                             <div class="relative">
                                 <i class="ri-user-line absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base"></i>
-                                <input type="text" id="name" name="name" required value="<?= htmlspecialchars($name ?? '') ?>" placeholder="e.g. Phone Myat Win" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                                <input type="text" id="name" name="name" value="<?= htmlspecialchars($name ?? '') ?>" placeholder="e.g. Phone Myat Win" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                             </div>
                         </div>
 
@@ -192,7 +192,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['send'])) {
                                 </label>
                                 <div class="relative">
                                     <i class="ri-phone-line absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base"></i>
-                                    <input type="tel" id="number" name="number" required value="<?= htmlspecialchars($number ?? '') ?>" placeholder="09 973 383 719" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                                    <input type="tel" id="number" name="number" value="<?= htmlspecialchars($number ?? '') ?>" placeholder="09 973 383 719" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                                 </div>
                             </div>
 
@@ -203,7 +203,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['send'])) {
                                 </label>
                                 <div class="relative">
                                     <i class="ri-mail-line absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base"></i>
-                                    <input type="email" id="email" name="email" required value="<?= htmlspecialchars($email ?? '') ?>" placeholder="you@example.com" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                                    <input type="email" id="email" name="email" value="<?= htmlspecialchars($email ?? '') ?>" placeholder="you@example.com" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                                 </div>
                             </div>
                         </div>
@@ -214,7 +214,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['send'])) {
                                 Inquiry or Piece of Interest <span class="text-rose-600">*</span>
                             </label>
                             <div class="relative">
-                                <textarea id="message" name="message" rows="5" required placeholder="Tell us about your spatial project, requested piece specifications, or desired delivery timing..." class="w-full p-4 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all"><?= htmlspecialchars($message ?? '') ?></textarea>
+                                <textarea id="message" name="message" rows="5" placeholder="Tell us about your spatial project, requested piece specifications, or desired delivery timing..." class="w-full p-4 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all"><?= htmlspecialchars($message ?? '') ?></textarea>
                             </div>
                         </div>
 

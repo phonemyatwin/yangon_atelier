@@ -1,5 +1,5 @@
 <?php
-if (!isset($_SESSION['admin_user'])) {
+if (!isset($_SESSION['admin'])) {
     header('Location: index.php');
     exit;
 }

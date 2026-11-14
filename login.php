@@ -25,10 +25,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
 
     // I check all of the credentials in a single if statement and output only one error information as I've learnt that it is the industry standard to prevent the malicious attack called User Enumeration(Account Harvesting).
     if ($user && !empty($password) && password_verify($password, $user['password'])) {
-        
+
         // Regenerate new session id to prevent malicious attack called Session Fixation(session hijacking).
         session_regenerate_id(true);
-        
+
         // Remember me
         $thirty_days = time() + (60 * 60 * 24 * 30);
 
@@ -54,6 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
             'email' => $user['email']
         ];
 
+        $_SESSION['success'] = 'Welcome back! ' . $_SESSION['user']['username'];
         header('Location: index.php');
         exit;
     } else {
@@ -118,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
                         </label>
                         <div class="relative">
                             <i class="ri-mail-line absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base"></i>
-                            <input type="email" id="email" name="email" required value="<?= htmlspecialchars($email ?? $_COOKIE['user_email_cookie'] ?? '') ?>" placeholder="client@example.com" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                            <input type="email" id="email" name="email" value="<?= htmlspecialchars($email ?? $_COOKIE['user_email_cookie'] ?? '') ?>" placeholder="client@example.com" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                         </div>
                     </div>
 
@@ -132,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
                         </div>
                         <div class="relative">
                             <i class="ri-lock-2-line absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base"></i>
-                            <input type="password" id="password" name="password" required placeholder="Enter your password" class="w-full pl-11 pr-11 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                            <input type="password" id="password" name="password" placeholder="Enter your password" class="w-full pl-11 pr-11 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                             <button type="button" data-toggle-password="password" aria-label="Toggle password visibility" class="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#6E6359] hover:text-[#362F2A] transition-colors">
                                 <i class="ri-eye-line text-base"></i>
                             </button>

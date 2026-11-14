@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ============================================================================
  * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - ADMIN TOPBAR
@@ -9,12 +10,12 @@
  * 
  * BACKEND LOGIC REQUIREMENTS:
  * 1. Admin Session Details:
- *    - Check $_SESSION['admin_user'] to render current logged-in administrator name.
+ *    - Check $_SESSION['admin'] to render current logged-in administrator name.
  * ============================================================================
  */
 
-$admin_name = $_SESSION['admin_user']['name'] ?? 'Senior Curator';
-$admin_role = $_SESSION['admin_user']['role'] ?? 'Atelier Administrator';
+$admin_name = $_SESSION['admin']['name'] ?? 'Senior Curator';
+$admin_role = $_SESSION['admin']['role'] ?? 'Atelier Administrator';
 $admin_initials = strtoupper(substr($admin_name, 0, 2));
 ?>
 <header class="sticky top-0 z-30 h-20 bg-[#F6F3EE]/95 backdrop-blur-md border-b border-[#C9C0B3] px-4 sm:px-6 lg:px-8 flex items-center justify-between transition-all">

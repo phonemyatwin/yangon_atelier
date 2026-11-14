@@ -74,7 +74,7 @@ require_once __DIR__ . '/../components/connection.php';
                             <label for="title" class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">
                                 Article Title <span class="text-[#8C3B3B]">*</span>
                             </label>
-                            <input type="text" id="title" name="title" required value="The Philosophy of Wabi-Sabi in Modern Interiors" class="w-full px-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                            <input type="text" id="title" name="title" value="The Philosophy of Wabi-Sabi in Modern Interiors" class="w-full px-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                         </div>
 
                         <!-- Author -->
@@ -84,7 +84,7 @@ require_once __DIR__ . '/../components/connection.php';
                             </label>
                             <div class="relative">
                                 <i class="ri-user-line absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base"></i>
-                                <input type="text" id="author" name="author" required value="admin" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                                <input type="text" id="author" name="author" value="admin" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                             </div>
                         </div>
 
@@ -110,7 +110,7 @@ require_once __DIR__ . '/../components/connection.php';
                             <label for="content" class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">
                                 Article Content &amp; Essay Text <span class="text-[#8C3B3B]">*</span>
                             </label>
-                            <textarea id="content" name="content" rows="8" required class="w-full p-4 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">In an era saturated by industrial high-gloss surfaces, clinical lines, and the constant digital flicker of notifications, our domestic environments have frequently sacrificed soul for sterile uniformity. Japanese philosophy offers an enduring antidote through the worldview of wabi-sabi: the appreciation of beauty that is imperfect, impermanent, and incomplete.</textarea>
+                            <textarea id="content" name="content" rows="8" class="w-full p-4 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">In an era saturated by industrial high-gloss surfaces, clinical lines, and the constant digital flicker of notifications, our domestic environments have frequently sacrificed soul for sterile uniformity. Japanese philosophy offers an enduring antidote through the worldview of wabi-sabi: the appreciation of beauty that is imperfect, impermanent, and incomplete.</textarea>
                         </div>
 
                         <!-- Actions -->

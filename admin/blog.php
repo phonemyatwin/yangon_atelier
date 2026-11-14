@@ -1,15 +1,4 @@
 <?php
-
-/**
- * ============================================================================
- * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - ADMIN JOURNAL / BLOG LIST
- * ============================================================================
- * FILE: admin/blog.php
- * PURPOSE: Lists all editorial essays from the 'blogs' table and provides links
- *          to compose, edit, or delete articles.
- * ============================================================================
- */
-
 // Initialize session
 require_once __DIR__ . '/../components/session_start.php';
 
@@ -19,13 +8,14 @@ require_once __DIR__ . '/components/session_check.php';
 // Connect database
 require_once __DIR__ . '/../components/connection.php';
 
-$success = '';
-if (isset($_GET['msg'])) {
-    if ($_GET['msg'] === 'created') $success = "Journal article published successfully.";
-    if ($_GET['msg'] === 'updated') $success = "Journal article updated successfully.";
-    if ($_GET['msg'] === 'deleted') $success = "Journal article deleted successfully.";
-}
+// Function
+require_once __DIR__ . '/../components/function.php';
+
+$sql = 'SELECT * FROM blogs ORDER BY id DESC';
+$stmt = $pdo->query($sql);
+$blogs = $stmt->fetchAll();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -62,19 +52,11 @@ if (isset($_GET['msg'])) {
                     </a>
                 </div>
 
-                <!-- Success Notification Banner -->
-                <?php if (!empty($success)): ?>
-                    <div class="p-4 rounded-2xl bg-[#DCE5DF] border border-[#C6D6CB] text-[#3F624D] text-xs flex items-center gap-2.5">
-                        <i class="ri-checkbox-circle-line text-lg flex-shrink-0"></i>
-                        <span><?= htmlspecialchars($success) ?></span>
-                    </div>
-                <?php endif; ?>
-
                 <!-- Blog Table Card in Raw Linen (#F6F3EE) -->
                 <div class="bg-[#F6F3EE] rounded-3xl border border-[#C9C0B3] overflow-hidden shadow-xs">
                     <div class="p-5 border-b border-[#C9C0B3] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                         <div class="text-xs text-[#6E6359]">
-                            Showing <strong>6</strong> published editorial entries
+                            Showing <strong><?= count($blogs); ?></strong> published editorial entries
                         </div>
                         <div class="relative sm:w-64">
                             <i class="ri-search-line absolute left-3 top-1/2 -translate-y-1/2 text-[#6E6359] text-xs"></i>
@@ -96,161 +78,53 @@ if (isset($_GET['msg'])) {
                             </thead>
                             <tbody class="divide-y divide-[#C9C0B3] text-[#6E6359] font-medium">
 
-                                <!-- Post 1 -->
-                                <tr class="hover:bg-[#DFD8CD]/40 transition-colors">
-                                    <td class="py-4 px-6 text-[#6E6359]">#1</td>
-                                    <td class="py-4 px-6">
-                                        <div class="w-16 h-11 rounded-lg bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden">
-                                            <img src="../images/blogs/blog1.jpg" alt="Article image" class="w-full h-full object-cover">
-                                        </div>
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        <span class="font-semibold text-[#362F2A] block text-sm">The Philosophy of Wabi-Sabi in Modern Interiors</span>
-                                        <span class="text-[11px] text-[#8A5A44]">Philosophy • 4 min read</span>
-                                    </td>
-                                    <td class="py-4 px-6 text-[#362F2A]">Editorial Staff</td>
-                                    <td class="py-4 px-6 text-[#6E6359]">2026-05-21</td>
-                                    <td class="py-4 px-6 text-right">
-                                        <div class="inline-flex items-center gap-2">
-                                            <a href="blog_update.php?id=1" class="px-2.5 py-1 rounded-lg border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-[#8A5A44] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-pencil-line"></i> Edit
-                                            </a>
-                                            <a href="blog_delete.php?id=1" class="px-2.5 py-1 rounded-lg border border-[#DFC8C8] bg-[#EFE0E0] hover:bg-[#E5D0D0] text-[#8C3B3B] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-delete-bin-line"></i> Delete
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <!-- Post 2 -->
-                                <tr class="hover:bg-[#DFD8CD]/40 transition-colors">
-                                    <td class="py-4 px-6 text-[#6E6359]">#2</td>
-                                    <td class="py-4 px-6">
-                                        <div class="w-16 h-11 rounded-lg bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden">
-                                            <img src="../images/blogs/blog2.jpg" alt="Article image" class="w-full h-full object-cover">
-                                        </div>
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        <span class="font-semibold text-[#362F2A] block text-sm">Joinery Without Nails: The Heritage of Wood Craft</span>
-                                        <span class="text-[11px] text-[#8A5A44]">Artisanship • 6 min read</span>
-                                    </td>
-                                    <td class="py-4 px-6 text-[#362F2A]">Su Thinzar Htet</td>
-                                    <td class="py-4 px-6 text-[#6E6359]">2026-04-28</td>
-                                    <td class="py-4 px-6 text-right">
-                                        <div class="inline-flex items-center gap-2">
-                                            <a href="blog_update.php?id=2" class="px-2.5 py-1 rounded-lg border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-[#8A5A44] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-pencil-line"></i> Edit
-                                            </a>
-                                            <a href="blog_delete.php?id=2" class="px-2.5 py-1 rounded-lg border border-[#DFC8C8] bg-[#EFE0E0] hover:bg-[#E5D0D0] text-[#8C3B3B] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-delete-bin-line"></i> Delete
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <!-- Post 3 -->
-                                <tr class="hover:bg-[#DFD8CD]/40 transition-colors">
-                                    <td class="py-4 px-6 text-[#6E6359]">#3</td>
-                                    <td class="py-4 px-6">
-                                        <div class="w-16 h-11 rounded-lg bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden">
-                                            <img src="../images/blogs/blog3.jpg" alt="Article image" class="w-full h-full object-cover">
-                                        </div>
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        <span class="font-semibold text-[#362F2A] block text-sm">Sculpting Ambient Light in Living Rooms</span>
-                                        <span class="text-[11px] text-[#8A5A44]">Lighting • 5 min read</span>
-                                    </td>
-                                    <td class="py-4 px-6 text-[#362F2A]">Thae Nay Nwe Soe</td>
-                                    <td class="py-4 px-6 text-[#6E6359]">2026-04-14</td>
-                                    <td class="py-4 px-6 text-right">
-                                        <div class="inline-flex items-center gap-2">
-                                            <a href="blog_update.php?id=3" class="px-2.5 py-1 rounded-lg border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-[#8A5A44] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-pencil-line"></i> Edit
-                                            </a>
-                                            <a href="blog_delete.php?id=3" class="px-2.5 py-1 rounded-lg border border-[#DFC8C8] bg-[#EFE0E0] hover:bg-[#E5D0D0] text-[#8C3B3B] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-delete-bin-line"></i> Delete
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <!-- Post 4 -->
-                                <tr class="hover:bg-[#DFD8CD]/40 transition-colors">
-                                    <td class="py-4 px-6 text-[#6E6359]">#4</td>
-                                    <td class="py-4 px-6">
-                                        <div class="w-16 h-11 rounded-lg bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden">
-                                            <img src="../images/blogs/blog4.jpg" alt="Article image" class="w-full h-full object-cover">
-                                        </div>
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        <span class="font-semibold text-[#362F2A] block text-sm">The Ritual of Morning Tea &amp; Minimalist Dining</span>
-                                        <span class="text-[11px] text-[#8A5A44]">Lifestyle • 4 min read</span>
-                                    </td>
-                                    <td class="py-4 px-6 text-[#362F2A]">Myat Chal Oo</td>
-                                    <td class="py-4 px-6 text-[#6E6359]">2026-03-30</td>
-                                    <td class="py-4 px-6 text-right">
-                                        <div class="inline-flex items-center gap-2">
-                                            <a href="blog_update.php?id=4" class="px-2.5 py-1 rounded-lg border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-[#8A5A44] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-pencil-line"></i> Edit
-                                            </a>
-                                            <a href="blog_delete.php?id=4" class="px-2.5 py-1 rounded-lg border border-[#DFC8C8] bg-[#EFE0E0] hover:bg-[#E5D0D0] text-[#8C3B3B] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-delete-bin-line"></i> Delete
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <!-- Post 5 -->
-                                <tr class="hover:bg-[#DFD8CD]/40 transition-colors">
-                                    <td class="py-4 px-6 text-[#6E6359]">#5</td>
-                                    <td class="py-4 px-6">
-                                        <div class="w-16 h-11 rounded-lg bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden">
-                                            <img src="../images/blogs/blog5.jpg" alt="Article image" class="w-full h-full object-cover">
-                                        </div>
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        <span class="font-semibold text-[#362F2A] block text-sm">Botanical Plant Waxes: Caring for Solid Wood</span>
-                                        <span class="text-[11px] text-[#8A5A44]">Care • 7 min read</span>
-                                    </td>
-                                    <td class="py-4 px-6 text-[#362F2A]">Nyi Nyi Aung</td>
-                                    <td class="py-4 px-6 text-[#6E6359]">2026-03-18</td>
-                                    <td class="py-4 px-6 text-right">
-                                        <div class="inline-flex items-center gap-2">
-                                            <a href="blog_update.php?id=5" class="px-2.5 py-1 rounded-lg border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-[#8A5A44] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-pencil-line"></i> Edit
-                                            </a>
-                                            <a href="blog_delete.php?id=5" class="px-2.5 py-1 rounded-lg border border-[#DFC8C8] bg-[#EFE0E0] hover:bg-[#E5D0D0] text-[#8C3B3B] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-delete-bin-line"></i> Delete
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <!-- Post 6 -->
-                                <tr class="hover:bg-[#DFD8CD]/40 transition-colors">
-                                    <td class="py-4 px-6 text-[#6E6359]">#6</td>
-                                    <td class="py-4 px-6">
-                                        <div class="w-16 h-11 rounded-lg bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden">
-                                            <img src="../images/blogs/blog6.jpg" alt="Article image" class="w-full h-full object-cover">
-                                        </div>
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        <span class="font-semibold text-[#362F2A] block text-sm">Designing Quiet Havens in High-Density Cities</span>
-                                        <span class="text-[11px] text-[#8A5A44]">Interior • 5 min read</span>
-                                    </td>
-                                    <td class="py-4 px-6 text-[#362F2A]">Phone Myat Win</td>
-                                    <td class="py-4 px-6 text-[#6E6359]">2026-02-25</td>
-                                    <td class="py-4 px-6 text-right">
-                                        <div class="inline-flex items-center gap-2">
-                                            <a href="blog_update.php?id=6" class="px-2.5 py-1 rounded-lg border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-[#8A5A44] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-pencil-line"></i> Edit
-                                            </a>
-                                            <a href="blog_delete.php?id=6" class="px-2.5 py-1 rounded-lg border border-[#DFC8C8] bg-[#EFE0E0] hover:bg-[#E5D0D0] text-[#8C3B3B] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-delete-bin-line"></i> Delete
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <?php if (!empty($blogs)): ?>
+                                    <?php foreach ($blogs as $blog): ?>
+                                        <?php
+                                        // Format the date
+                                        $date = htmlspecialchars(date('F j, Y', strtotime($blog['created_at'])));
+                                        ?>
+                                        <!-- Posts -->
+                                        <tr class="hover:bg-[#DFD8CD]/40 transition-colors">
+                                            <td class="py-4 px-6 text-[#6E6359]">#<?= htmlspecialchars($blog['id']); ?></td>
+                                            <td class="py-4 px-6">
+                                                <div class="w-16 h-11 rounded-lg bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden">
+                                                    <img src="../media/<?= htmlspecialchars($blog['image']); ?>" alt="Article image" class="w-full h-full object-cover">
+                                                </div>
+                                            </td>
+                                            <td class="py-4 px-6">
+                                                <span class="font-semibold text-[#362F2A] block text-sm"><?= htmlspecialchars($blog['title']); ?></span>
+                                                <span class="text-[11px] text-[#8A5A44]"><?= htmlspecialchars($blog['category']); ?> • <?= get_reading_time($blog['content']); ?></span>
+                                            </td>
+                                            <td class="py-4 px-6 text-[#362F2A]"><?= htmlspecialchars($blog['author']); ?></td>
+                                            <td class="py-4 px-6 text-[#6E6359]"><?= $date; ?></td>
+                                            <td class="py-4 px-6 text-right">
+                                                <?php if ($_SESSION['admin']['id'] === $blog['author_id']): ?>
+                                                    <div class="inline-flex items-center gap-2">
+                                                        <a href="blog_update.php?id=<?= (int)$blog['id']; ?>" class="px-2.5 py-1 rounded-lg border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-[#8A5A44] font-semibold transition-colors flex items-center gap-1">
+                                                            <i class="ri-pencil-line"></i> Edit
+                                                        </a>
+                                                        <a href="blog_delete.php?id=<?= (int)$blog['id']; ?>" class="px-2.5 py-1 rounded-lg border border-[#DFC8C8] bg-[#EFE0E0] hover:bg-[#E5D0D0] text-[#8C3B3B] font-semibold transition-colors flex items-center gap-1">
+                                                            <i class="ri-delete-bin-line"></i> Delete
+                                                        </a>
+                                                    </div>
+                                                <?php else: ?>
+                                                    <span class="inline-flex items-center gap-1 text-xs text-[#6E6359] italic">
+                                                        <i class="ri-lock-line text-xs"></i> View only
+                                                    </span>
+                                                <?php endif; ?>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <tr>
+                                        <td colspan="6" class="py-12 text-center text-[#6E6359]">
+                                            <i class="ri-article-line text-3xl mb-2 block text-[#C9C0B3]"></i>
+                                            <p class="font-medium">No journal articles found.</p>
+                                            <a href="blog_create.php" class="inline-block mt-2 text-[#8A5A44] hover:underline font-semibold">Publish your first article &rarr;</a>
+                                        </td>
+                                    </tr>
+                                <?php endif; ?>
 
                             </tbody>
                         </table>
@@ -264,6 +138,25 @@ if (isset($_GET['msg'])) {
     </div>
 
     <script src="js/admin.js"></script>
+    <script src="../js/user.js"></script>
+
+    <?php if (isset($_SESSION['success'])): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                showToast(<?= json_encode($_SESSION['success']); ?>, 'success');
+            });
+        </script>
+        <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
+
+    <?php if (isset($_SESSION['error'])): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                showToast(<?= json_encode($_SESSION['error']); ?>, 'error');
+            });
+        </script>
+        <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
 </body>
 
 </html>

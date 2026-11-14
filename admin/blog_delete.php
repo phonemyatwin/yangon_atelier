@@ -1,15 +1,4 @@
 <?php
-
-/**
- * ============================================================================
- * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - DELETE JOURNAL ARTICLE
- * ============================================================================
- * FILE: admin/blog_delete.php
- * PURPOSE: Confirms deletion of an article, unlinks its cover image, and executes
- *          DELETE query against the 'blogs' table.
- * ============================================================================
- */
-
 // Initialize session
 require_once __DIR__ . '/../components/session_start.php';
 
@@ -18,6 +7,53 @@ require_once __DIR__ . '/components/session_check.php';
 
 // Connect database
 require_once __DIR__ . '/../components/connection.php';
+
+$id = $_GET['id'] ?? '';
+if (empty($id) || !filter_var($id, FILTER_VALIDATE_INT)) {
+    header('Location: blog.php');
+    exit;
+}
+
+$errors = [];
+
+try {
+    $sql = 'SELECT * FROM blogs WHERE id = :id';
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([':id' => $id]);
+    $blog = $stmt->fetch();
+} catch (PDOException $e) {
+    error_log('Blog fetch error' . $e->getMessage() . "\n", 3, __DIR__ . '/../error.log');
+    $_SESSION['error'] = 'Unable to retrieve article information.';
+    header('Location: blog.php');
+    exit;
+}
+
+// This is the tricky part. This page can be accessed only if your session id is equal with the author id of the blog. Which means only the author can have the access to his own blogs and no one else can. 
+if (!$blog || $_SESSION['admin']['id'] !== $blog['author_id']) {
+    $_SESSION['error'] = 'You do not have permission to delete this article.';
+    header('Location: blog.php');
+    exit;
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'])) {
+    try {
+        $sql = 'DELETE FROM blogs WHERE id = :id AND author_id = :author_id';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            ':id' => $blog['id'],
+            ':author_id' => $_SESSION['admin']['id']
+        ]);
+        if (!empty($blog['image']) && file_exists('../media/' . $blog['image'])) {
+            unlink('../media/' . $blog['image']);
+        }
+        $_SESSION['success'] = 'Your article is deleted successfully.';
+        header('Location: blog.php');
+        exit;
+    } catch (PDOException $e) {
+        error_log('Blog deletion error: ' . $e->getMessage() . "\n", 3, __DIR__ . '/../error.log');
+        $errors['delete'] = 'Your article cannot be deleted at this moment. Please try again later.';
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -71,21 +107,18 @@ require_once __DIR__ . '/../components/connection.php';
                     <!-- Article Details Summary -->
                     <div class="border border-[#C9C0B3] bg-[#EDE8E0] rounded-2xl p-5 mb-8 flex items-center gap-5">
                         <div class="w-24 h-16 rounded-xl bg-[#F6F3EE] border border-[#C9C0B3] overflow-hidden flex-shrink-0">
-                            <img src="../images/blogs/blog1.jpg" alt="Article cover" class="w-full h-full object-cover">
+                            <img src="../media/<?= htmlspecialchars($blog['image']); ?>" alt="Article cover" class="w-full h-full object-cover">
                         </div>
                         <div class="space-y-1 text-xs">
-                            <span class="text-[#6E6359] font-mono">Article #<?= htmlspecialchars($_GET['id'] ?? '1') ?></span>
-                            <h4 class="font-serif text-base font-semibold text-[#362F2A]">The Philosophy of Wabi-Sabi in Modern Interiors</h4>
-                            <p class="text-[#6E6359]">Author: <strong class="text-[#362F2A]">admin</strong> • Published: <strong>May 21, 2026</strong></p>
+                            <span class="text-[#6E6359] font-mono">Article #<?= htmlspecialchars($blog['id']) ?></span>
+                            <h4 class="font-serif text-base font-semibold text-[#362F2A]"><?= htmlspecialchars($blog['title']); ?></h4>
+                            <p class="text-[#6E6359]">Author: <strong class="text-[#362F2A]"><?= htmlspecialchars($blog['author']); ?></strong> • Published: <strong><?= htmlspecialchars(date('F j, Y', strtotime($blog['created_at']))); ?></strong></p>
                         </div>
                     </div>
 
                     <!-- Deletion Form -->
                     <form action="" method="POST" class="flex items-center justify-end gap-3 pt-4 border-t border-[#C9C0B3]">
-                        <input type="hidden" name="id" value="<?= htmlspecialchars($_GET['id'] ?? '1') ?>">
-                        <a href="blog.php" class="px-5 py-2.5 rounded-xl border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-xs font-semibold text-[#362F2A] transition-colors">
-                            Cancel
-                        </a>
+                        <a href="blog.php" class="px-5 py-2.5 rounded-xl border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-xs font-semibold text-[#362F2A] transition-colors">Cancel</a>
                         <button type="submit" name="delete" class="px-5 py-2.5 rounded-xl bg-[#8C3B3B] hover:bg-[#782F2F] text-[#F6F3EE] text-xs font-semibold transition-colors shadow-xs flex items-center gap-2">
                             <i class="ri-delete-bin-line text-sm"></i>
                             <span>Confirm &amp; Delete Article</span>
@@ -100,6 +133,16 @@ require_once __DIR__ . '/../components/connection.php';
     </div>
 
     <script src="js/admin.js"></script>
+    <script src="../js/user.js"></script>
+    <?php if (!empty($errors)): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                <?php foreach ($errors as $error): ?>
+                    showToast(<?= json_encode($error); ?>, 'error');
+                <?php endforeach; ?>
+            });
+        </script>
+    <?php endif; ?>
 </body>
 
 </html>

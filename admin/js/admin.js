@@ -1,8 +1,3 @@
-/**
- * Yangon Atelier Admin Panel — Vanilla JavaScript
- * Clean mobile sidebar toggle, overlay backdrop, and dropzone image previews
- */
-
 // Prevent mouse wheel from inadvertently changing number inputs
 document.addEventListener(
   "wheel",

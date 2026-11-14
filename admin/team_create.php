@@ -75,7 +75,7 @@ require_once __DIR__ . '/../components/connection.php';
                             </label>
                             <div class="relative">
                                 <i class="ri-user-line absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base"></i>
-                                <input type="text" id="name" name="name" required value="<?= htmlspecialchars($_POST['name'] ?? '') ?>" placeholder="e.g. Thae Nay Nwe Soe" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                                <input type="text" id="name" name="name" value="<?= htmlspecialchars($_POST['name'] ?? '') ?>" placeholder="e.g. Thae Nay Nwe Soe" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                             </div>
                         </div>
 
@@ -86,7 +86,7 @@ require_once __DIR__ . '/../components/connection.php';
                             </label>
                             <div class="relative">
                                 <i class="ri-briefcase-line absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base"></i>
-                                <input type="text" id="position" name="position" required value="<?= htmlspecialchars($_POST['position'] ?? '') ?>" placeholder="e.g. Master Wood Joiner" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                                <input type="text" id="position" name="position" value="<?= htmlspecialchars($_POST['position'] ?? '') ?>" placeholder="e.g. Master Wood Joiner" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                             </div>
                         </div>
 
@@ -100,7 +100,7 @@ require_once __DIR__ . '/../components/connection.php';
                                     <i class="ri-camera-lens-line text-3xl text-[#8A5A44] mb-2"></i>
                                     <span class="text-xs font-semibold text-[#362F2A]">Upload portrait photograph</span>
                                     <span class="text-[11px] text-[#6E6359] mt-0.5">JPG or PNG (aspect ratio 4:5 recommended)</span>
-                                    <input type="file" id="profile" name="profile" accept="image/*" required data-preview-target="team-preview" class="mt-4 text-xs text-[#6E6359] file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-[#DFD8CD] file:text-[#362F2A] hover:file:bg-[#C9C0B3] file:cursor-pointer cursor-pointer">
+                                    <input type="file" id="profile" name="profile" accept="image/*" data-preview-target="team-preview" class="mt-4 text-xs text-[#6E6359] file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-[#DFD8CD] file:text-[#362F2A] hover:file:bg-[#C9C0B3] file:cursor-pointer cursor-pointer">
                                 </div>
                                 <div class="mt-4 flex justify-center">
                                     <img id="team-preview" src="" alt="Portrait preview" class="hidden w-24 h-24 object-cover rounded-full border border-[#C9C0B3] bg-[#F6F3EE]">

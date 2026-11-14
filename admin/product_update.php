@@ -75,7 +75,7 @@ require_once __DIR__ . '/../components/connection.php';
                             <label for="name" class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">
                                 Product Title <span class="text-[#8C3B3B]">*</span>
                             </label>
-                            <input type="text" id="name" name="name" required value="Sculptural Lounge Armchair" class="w-full px-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                            <input type="text" id="name" name="name" value="Sculptural Lounge Armchair" class="w-full px-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                         </div>
 
                         <!-- Price and Stock Grid -->
@@ -86,7 +86,7 @@ require_once __DIR__ . '/../components/connection.php';
                                 </label>
                                 <div class="relative">
                                     <span class="absolute left-4 top-1/2 -translate-y-1/2 text-xs font-semibold text-[#6E6359]">MMK</span>
-                                    <input type="number" step="1" id="price" name="price" required value="400000" class="w-full pl-14 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                                    <input type="number" step="1" id="price" name="price" value="400000" class="w-full pl-14 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                                 </div>
                             </div>
 
@@ -94,7 +94,7 @@ require_once __DIR__ . '/../components/connection.php';
                                 <label for="stock" class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">
                                     Inventory Count <span class="text-[#8C3B3B]">*</span>
                                 </label>
-                                <input type="number" id="stock" name="stock" required value="25" class="w-full px-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                                <input type="number" id="stock" name="stock" value="25" class="w-full px-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                             </div>
                         </div>
 
