@@ -24,7 +24,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
 
     if ($admin && !empty($password) && password_verify($password, $admin['password'])) {
         session_regenerate_id(true);
-        require_once __DIR__ . '/components/remember_me.php';
+
+        $thirty_days = time() + (60 * 60 * 24 * 30);
+
+        setcookie('admin_email_cookie', $remember ? $email : '', [
+            'expires' => $remember ? $thirty_days : time() - 3600,
+            'path' => '/',
+            'httponly' => true,
+            'samesite' => 'Lax'
+        ]);
+
+        if ($remember) {
+            $params = session_get_cookie_params();
+            setcookie(session_name(), session_id(), [
+                'expires' => $thirty_days,
+                'path' => $params['path'],
+                'httponly' => $params['httponly'],
+                'samesite' => $params['samesite'],
+            ]);
+        }
         $_SESSION['admin_user'] = [
             'id' => $admin['id'],
             'name' => $admin['name'],
@@ -77,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
                     </label>
                     <div class="relative">
                         <i class="ri-mail-line absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base"></i>
-                        <input type="email" id="email" name="email" required placeholder="admin@yangonatelier.com" value="<?= htmlspecialchars($email ?? $_COOKIE['admin_email_cookie'] ?? '') ?>" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                        <input type="email" id="email" name="email" required placeholder="admin@example.com" value="<?= htmlspecialchars($email ?? $_COOKIE['admin_email_cookie'] ?? '') ?>" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                     </div>
                 </div>
 
@@ -88,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
                     </label>
                     <div class="relative">
                         <i class="ri-lock-2-line absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base"></i>
-                        <input type="password" id="password" name="password" required class="w-full pl-11 pr-11 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                        <input type="password" id="password" name="password" required placeholder="Enter your password" class="w-full pl-11 pr-11 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                     </div>
                 </div>
 
@@ -120,8 +138,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
         </p>
     </div>
 
-    <script src="js/admin.js"></script> 
-    <script src="../js/user.js"></script> 
+    <script src="js/admin.js"></script>
+    <script src="../js/user.js"></script>
 
     <?php if (!empty($errors)): ?>
         <script>

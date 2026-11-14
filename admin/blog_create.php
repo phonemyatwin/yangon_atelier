@@ -1,15 +1,4 @@
 <?php
-
-/**
- * ============================================================================
- * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - CREATE JOURNAL ARTICLE
- * ============================================================================
- * FILE: admin/blog_create.php
- * PURPOSE: Handles creation of editorial blog articles, processes header image
- *          uploads to ../images/, and inserts records into 'blogs' table.
- * ============================================================================
- */
-
 // Initialize session
 require_once __DIR__ . '/../components/session_start.php';
 

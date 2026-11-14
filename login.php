@@ -25,10 +25,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
 
     // I check all of the credentials in a single if statement and output only one error information as I've learnt that it is the industry standard to prevent the malicious attack called User Enumeration(Account Harvesting).
     if ($user && !empty($password) && password_verify($password, $user['password'])) {
+        
         // Regenerate new session id to prevent malicious attack called Session Fixation(session hijacking).
         session_regenerate_id(true);
+        
         // Remember me
-        require_once __DIR__ . '/components/remember_me.php';
+        $thirty_days = time() + (60 * 60 * 24 * 30);
+
+        setcookie('user_email_cookie', $remember ? $email : '', [
+            'expires' => $remember ? $thirty_days : time() - 3600,
+            'path' => '/',
+            'httponly' => true,
+            'samesite' => 'Lax'
+        ]);
+
+        if ($remember) {
+            $params = session_get_cookie_params();
+            setcookie(session_name(), session_id(), [
+                'expires' => $thirty_days,
+                'path' => $params['path'],
+                'httponly' => $params['httponly'],
+                'samesite' => $params['samesite']
+            ]);
+        }
         $_SESSION['user'] = [
             'id' => $user['id'],
             'username' => $user['username'],
