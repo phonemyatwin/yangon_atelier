@@ -17,7 +17,7 @@ if (empty($id) || !filter_var($id, FILTER_VALIDATE_INT)) {
 $errors = [];
 
 try {
-    $sql = 'SELECT * FROM blogs WHERE id = :id';
+    $sql = 'SELECT * FROM blogs WHERE id = :id LIMIT 1';
     $stmt = $pdo->prepare($sql);
     $stmt->execute([':id' => $id]);
     $blog = $stmt->fetch();
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'])) {
         header('Location: blog.php');
         exit;
     } catch (PDOException $e) {
-        error_log('Blog deletion error: ' . $e->getMessage() . "\n", 3, __DIR__ . '/../error.log');
+        error_log('Blog delete error: ' . $e->getMessage() . "\n", 3, __DIR__ . '/../error.log');
         $errors['delete'] = 'Your article cannot be deleted at this moment. Please try again later.';
     }
 }

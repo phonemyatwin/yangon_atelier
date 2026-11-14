@@ -1,15 +1,4 @@
 <?php
-
-/**
- * ============================================================================
- * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - UPDATE JOURNAL ARTICLE
- * ============================================================================
- * FILE: admin/blog_update.php
- * PURPOSE: Retrieves an existing blog article by ID, pre-fills form fields,
- *          processes content updates and optional image replacement.
- * ============================================================================
- */
-
 // Initialize session
 require_once __DIR__ . '/../components/session_start.php';
 
@@ -18,6 +7,83 @@ require_once __DIR__ . '/components/session_check.php';
 
 // Connect database
 require_once __DIR__ . '/../components/connection.php';
+
+$id = $_GET['id'] ?? '';
+$errors = [];
+if (empty($id) || !filter_var($id, FILTER_VALIDATE_INT)) {
+    header('Location: blog.php');
+    exit;
+}
+
+try {
+    $sql = 'SELECT * FROM blogs WHERE id = :id LIMIT 1';
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([':id' => $id]);
+    $blog = $stmt->fetch();
+} catch (PDOException $e) {
+    error_log('Blog fetch error: ' . $e->getMessage() . "\n", 3, __DIR__ . '/../error.log');
+    $_SESSION['error'] = 'Unable to retrieve article information.';
+    header('Location: blog.php');
+    exit;
+}
+
+if (!$blog || $_SESSION['admin']['id'] !== $blog['author_id']) {
+    $_SESSION['error'] = 'You do not have permission to update this article.';
+    header('Location: blog.php');
+    exit;
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
+    $title = trim($_POST['title'] ?? $blog['title']);
+    $author = trim($_POST['author'] ?? $blog['author']);
+    $old_image = trim($blog['image'] ?? '');
+    $new_image = trim($_FILES['image']['name'] ?? '');
+    $content = trim($_POST['content'] ?? $blog['content']);
+    $category = trim($_POST['category'] ?? $blog['category']);
+
+    if (empty($title) || empty($author) || empty($content) || empty($category)) {
+        $errors['blog_update_form'] = 'All fields are required. Please complete the form.';
+    } else {
+        if (mb_strlen($title) > 50) {
+            $errors['title'] = 'Title cannot exceed 50 characters.';
+        }
+        if (mb_strlen($author) > 50) {
+            $errors['author'] = 'Author name cannot exceed 50 characters.';
+        }
+    }
+
+    if (empty($errors)) {
+        try {
+            if (!empty($new_image)) {
+                $image = time() . '_' . $new_image;
+                move_uploaded_file($_FILES['image']['tmp_name'], '../media/' . $image);
+                if (!empty($old_image) && file_exists('../media/' . $old_image)) {
+                    unlink('../media/' . $old_image);
+                }
+            } else {
+                $image = $old_image;
+            }
+
+            $sql = 'UPDATE blogs SET title = :title, author = :author, image = :image, content = :content, category = :category WHERE id = :id AND author_id = :author_id';
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([
+                ':id' => $blog['id'],
+                ':title' => $title,
+                ':author' => $author,
+                ':author_id' => $_SESSION['admin']['id'],
+                ':image' => $image,
+                ':content' => $content,
+                ':category' => $category
+            ]);
+            $_SESSION['success'] = 'Your article is updated successfully.';
+            header('Location: blog.php');
+            exit;
+        } catch (PDOException $e) {
+            error_log('Blog update error: ' . $e->getMessage() . "\n", 3, __DIR__ . '/../error.log');
+            $errors['update'] = 'Your article cannot be updated at this moment. Please try again later.';
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,35 +122,49 @@ require_once __DIR__ . '/../components/connection.php';
                     </a>
                 </div>
 
-                <!-- Error Notification Banner -->
-                <?php if (!empty($error)): ?>
-                    <div class="p-4 rounded-2xl bg-[#EFE0E0] border border-[#DFC8C8] text-[#8C3B3B] text-xs flex items-center gap-2.5">
-                        <i class="ri-error-warning-line text-lg flex-shrink-0"></i>
-                        <span><?= htmlspecialchars($error) ?></span>
-                    </div>
-                <?php endif; ?>
-
                 <!-- Form Card in Raw Linen (#F6F3EE) -->
                 <div class="bg-[#F6F3EE] rounded-3xl border border-[#C9C0B3] p-6 sm:p-10 shadow-xs">
                     <form action="" method="POST" enctype="multipart/form-data" class="space-y-6">
-                        <input type="hidden" name="id" value="<?= htmlspecialchars($_GET['id'] ?? '1') ?>">
-
                         <!-- Title -->
                         <div class="space-y-1.5">
                             <label for="title" class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">
                                 Article Title <span class="text-[#8C3B3B]">*</span>
                             </label>
-                            <input type="text" id="title" name="title" value="The Philosophy of Wabi-Sabi in Modern Interiors" class="w-full px-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                            <input type="text" id="title" name="title" value="<?= htmlspecialchars($title ?? $blog['title'] ?? ''); ?>" class="w-full px-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                         </div>
 
-                        <!-- Author -->
-                        <div class="space-y-1.5">
-                            <label for="author" class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">
-                                Author Byline <span class="text-[#8C3B3B]">*</span>
-                            </label>
-                            <div class="relative">
-                                <i class="ri-user-line absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base"></i>
-                                <input type="text" id="author" name="author" value="admin" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                        <!-- Author & Category Grid -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <!-- Author -->
+                            <div class="space-y-1.5">
+                                <label for="author" class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">
+                                    Author Name or Byline <span class="text-[#8C3B3B]">*</span>
+                                </label>
+                                <div class="relative">
+                                    <i class="ri-user-line absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base"></i>
+                                    <input type="text" id="author" maxlength="50" name="author" placeholder="e.g. Atelier Editorial Staff" value="<?= htmlspecialchars($author ?? $blog['author'] ?? 'Atelier Editorial Staff') ?>" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                                </div>
+                            </div>
+
+                            <!-- Category -->
+                            <div class="space-y-1.5">
+                                <label for="category" class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">
+                                    Category <span class="text-[#8C3B3B]">*</span>
+                                </label>
+                                <div class="relative">
+                                    <select id="category" name="category" class="w-full appearance-none px-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] cursor-pointer transition-all">
+                                        <?php
+                                        $categories = ['Philosophy', 'Craftsmanship', 'Spatial Design', 'Interior Styling', 'Artisanship', 'Lighting', 'Living Rituals', 'Architecture', 'Editorial'];
+                                        $selected_category = $category ?? $blog['category'] ?? 'Philosophy';
+                                        foreach ($categories as $cat):
+                                        ?>
+                                            <option value="<?= htmlspecialchars($cat) ?>" <?= ($selected_category === $cat) ? 'selected' : '' ?>>
+                                                <?= htmlspecialchars($cat) ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <i class="ri-arrow-down-s-line absolute right-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base pointer-events-none"></i>
+                                </div>
                             </div>
                         </div>
 
@@ -95,7 +175,7 @@ require_once __DIR__ . '/../components/connection.php';
                             </label>
                             <div class="flex flex-col sm:flex-row items-center gap-6 p-4 rounded-2xl bg-[#EDE8E0] border border-[#C9C0B3]">
                                 <div class="w-32 h-20 rounded-xl bg-[#F6F3EE] border border-[#C9C0B3] overflow-hidden flex-shrink-0">
-                                    <img id="blog-preview" src="../images/blogs/blog1.jpg" alt="Cover visual" class="w-full h-full object-cover">
+                                    <img id="blog-preview" src="../media/<?= htmlspecialchars($blog['image'] ?? ''); ?>" alt="Cover visual" class="w-full h-full object-cover">
                                 </div>
                                 <div class="flex-1 space-y-1 text-center sm:text-left">
                                     <span class="text-xs font-semibold text-[#362F2A] block">Replace Cover (Optional)</span>
@@ -110,7 +190,7 @@ require_once __DIR__ . '/../components/connection.php';
                             <label for="content" class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">
                                 Article Content &amp; Essay Text <span class="text-[#8C3B3B]">*</span>
                             </label>
-                            <textarea id="content" name="content" rows="8" class="w-full p-4 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">In an era saturated by industrial high-gloss surfaces, clinical lines, and the constant digital flicker of notifications, our domestic environments have frequently sacrificed soul for sterile uniformity. Japanese philosophy offers an enduring antidote through the worldview of wabi-sabi: the appreciation of beauty that is imperfect, impermanent, and incomplete.</textarea>
+                            <textarea id="content" name="content" rows="8" class="w-full p-4 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all"><?= htmlspecialchars($content ?? $blog['content'] ?? ''); ?></textarea>
                         </div>
 
                         <!-- Actions -->
@@ -133,6 +213,16 @@ require_once __DIR__ . '/../components/connection.php';
     </div>
 
     <script src="js/admin.js"></script>
+    <script src="../js/user.js"></script>
+    <?php if (!empty($errors)): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                <?php foreach ($errors as $error): ?>
+                    showToast(<?= json_encode($error); ?>, 'error');
+                <?php endforeach; ?>
+            });
+        </script>
+    <?php endif; ?>
 </body>
 
 </html>

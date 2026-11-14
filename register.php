@@ -21,8 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
 
     // Check username
     if (empty($username)) {
-        $errors['username'] = 'Username is .';
-    } else if (strlen($username) < 3 || strlen($username) > 30) {
+        $errors['username'] = 'Username is required.';
+    } else if (mb_strlen($username) < 3 || mb_strlen($username) > 30) {
         $errors['username'] = 'Username must be at least 3 to 30 characters.';
     }
     if (!isset($errors['username'])) {
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
 
     // Check email
     if (empty($email)) {
-        $errors['email'] = 'Email is .';
+        $errors['email'] = 'Email is required.';
     } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors['email'] = 'Please enter a valid email address.';
     }
@@ -51,8 +51,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
 
     // Check password
     if (empty($password)) {
-        $errors['password'] = 'Password is .';
-    } else if (strlen($password) < 8) {
+        $errors['password'] = 'Password is required.';
+    } else if (mb_strlen($password) < 8) {
         $errors['password'] = 'Password must be at least 8 characters.';
     }
 

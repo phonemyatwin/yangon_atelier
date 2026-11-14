@@ -13,11 +13,11 @@ $errors = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['publish'])) {
     $title = trim($_POST['title'] ?? '');
     $author = trim($_POST['author'] ?? '');
-    $category = trim($_POST['category'] ?? 'Philosophy');
-    $image = $_FILES['image']['name'];
+    $image = $_FILES['image']['name'] ?? '';
     $content = trim($_POST['content'] ?? '');
+    $category = trim($_POST['category'] ?? 'Philosophy');
 
-    if (empty($title) || empty($author) || empty($category) || empty($image) || empty($content)) {
+    if (empty($title) || empty($author) || empty($image) || empty($content) || empty($category)) {
         $errors['blog_form'] = 'All fields are required. Please complete the form.';
     } else {
         if (mb_strlen($title) > 50) {
@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['publish'])) {
         try {
             $image = time() . '_' . $image;
             move_uploaded_file($_FILES['image']['tmp_name'], '../media/' . $image);
-            $sql = 'INSERT INTO blogs(title, author, author_id, image, content, category) VALUES(:title, :author, :author_id :image, :content, :category)';
+            $sql = 'INSERT INTO blogs(title, author, author_id, image, content, category) VALUES(:title, :author, :author_id, :image, :content, :category)';
             $stmt = $pdo->prepare($sql);
             $stmt->execute([
                 ':title' => $title,
@@ -49,8 +49,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['publish'])) {
             if (!empty($image) && file_exists('../media/' . $image)) {
                 unlink('../media/' . $image);
             }
-            error_log('Blog create error: ' . $e->getMessage() . "\n", 3, __DIR__ . '/error.log');
-            $errors['db'] = 'Unable to publish your article at this moment. Please try again later.';
+            error_log('Blog create error: ' . $e->getMessage() . "\n", 3, __DIR__ . '/../error.log');
+            $errors['create'] = 'Unable to publish your article at this moment. Please try again later.';
         }
     }
 }

@@ -44,8 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['send'])) {
                 ':email' => $email,
                 ':message' => $message
             ]);
-            $safe_name = htmlspecialchars($name);
-            $success = "Thank you {$safe_name}. Your inquiry has been received. Our concierge will reach out promptly.";
+            $name = htmlspecialchars($name);
+            $success = "Thank you {$name}. Your inquiry has been received. Our concierge will reach out promptly.";
             $name = $number = $email = $message = '';
         } catch (PDOException $e) {
             error_log('Contact form error: ' . $e->getMessage() . '\n', 3, __DIR__ . '/error.log');
