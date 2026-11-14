@@ -108,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'])) {
                     <!-- Article Details Summary -->
                     <div class="border border-[#C9C0B3] bg-[#EDE8E0] rounded-2xl p-5 mb-8 flex items-center gap-5">
                         <div class="w-24 h-16 rounded-xl bg-[#F6F3EE] border border-[#C9C0B3] overflow-hidden flex-shrink-0">
-                            <img src="<?= htmlspecialchars(resolve_blog_image($blog['image'], '../')); ?>" alt="Article cover" class="w-full h-full object-cover">
+                            <img src="../media/<?= htmlspecialchars($blog['image']); ?>" alt="Article cover" class="w-full h-full object-cover">
                         </div>
                         <div class="space-y-1 text-xs">
                             <span class="text-[#6E6359] font-mono">Article #<?= htmlspecialchars($blog['id']) ?></span>

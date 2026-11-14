@@ -65,8 +65,7 @@ $blogs = $stmt->fetchAll();
         <?php if (!empty($blogs)): ?>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
                 <?php foreach ($blogs as $blog):
-                    // Resilient image path resolver
-                    $img_src = resolve_blog_image($blog['image'] ?? '');
+                    $img_src = __DIR__ . '/media/' . $blog['image'];
 
                     // Reading time
                     $reading_time = get_reading_time($blog['content'] ?? '');
