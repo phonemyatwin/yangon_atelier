@@ -33,8 +33,8 @@ if (!$contact) {
 }
 
 $errors = [];
-if (isset($_GET['status'])) {
-    $new_status = $_GET['status'] ?? '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['status'])) {
+    $new_status = $_POST['status'] ?? '';
     $allowed_statuses = ['Pending Review', 'Followed Up', 'Archived'];
     try {
         if (in_array($new_status, $allowed_statuses)) {
@@ -52,7 +52,7 @@ if (isset($_GET['status'])) {
         }
     } catch (PDOException $e) {
         error_log('Status update error: ' . $e->getMessage() . "\n", 3, __DIR__ . '/../error.log');
-        $errors['status'] = 'The status cannot be updated at this moment. Please try again later.';
+        $errors['status'] = 'Status cannot be updated at this moment. Please try again later.';
     }
 }
 ?>
@@ -150,38 +150,43 @@ if (isset($_GET['status'])) {
                             Current Status: <strong class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold border <?= $badge_class; ?>"><?= htmlspecialchars($contact['status'] ?? 'Pending Review'); ?></strong>
                         </span>
 
-                        <div class="flex items-center gap-2">
-                            <?php if ($status === 'Followed Up'): ?>
-                                <!-- Restore to Pending Button -->
-                                <a href="contact_view.php?id=<?= (int)$contact['id']; ?>&status=Pending+Review"
-                                    class="px-4 py-2 rounded-xl bg-[#EFE2D5] text-[#8C5327] border border-[#E0CFBF] text-xs font-semibold hover:bg-[#E5D5C5] transition-colors flex items-center gap-1.5">
-                                    <i class="ri-restart-line text-sm"></i>
-                                    <span>Restore to Pending</span>
-                                </a>
-                            <?php else: ?>
-                                <!-- Mark Followed Up Button -->
-                                <a href="contact_view.php?id=<?= (int)$contact['id']; ?>&status=Followed+Up"
-                                    class="px-4 py-2 rounded-xl bg-[#DCE5DF] text-[#3F624D] border border-[#C6D6CB] text-xs font-semibold hover:bg-[#cfded3] transition-colors flex items-center gap-1.5">
-                                    <i class="ri-check-line text-sm"></i>
-                                    <span>Mark as Followed Up</span>
-                                </a>
-                            <?php endif; ?>
+                        <div class="flex flex-wrap items-center gap-2">
+                            <!-- Status Update Form -->
+                            <form method="POST" action="" class="flex flex-wrap items-center gap-2">
+                                <input type="hidden" name="id" value="">
 
-                            <?php if ($status === 'Archived'): ?>
-                                <!-- Restore to Pending Button -->
-                                <a href="contact_view.php?id=<?= (int)$contact['id']; ?>&status=Pending+Review"
-                                    class="px-4 py-2 rounded-xl bg-[#EFE2D5] text-[#8C5327] border border-[#E0CFBF] text-xs font-semibold hover:bg-[#E5D5C5] transition-colors flex items-center gap-1.5">
-                                    <i class="ri-restart-line text-sm"></i>
-                                    <span>Restore to Pending</span>
-                                </a>
-                            <?php else: ?>
-                                <!-- Archive Button -->
-                                <a href="contact_view.php?id=<?= (int)$contact['id']; ?>&status=Archived"
-                                    class="px-4 py-2 rounded-xl bg-[#EDE8E0] text-[#6E6359] border border-[#C9C0B3] text-xs font-semibold hover:bg-[#DFD8CD] transition-colors flex items-center gap-1.5">
-                                    <i class="ri-archive-line text-sm"></i>
-                                    <span>Archive</span>
-                                </a>
-                            <?php endif; ?>
+                                <?php if ($status === 'Followed Up'): ?>
+                                    <!-- Restore to Pending Button -->
+                                    <button type="submit" name="status" value="Pending Review"
+                                        class="px-4 py-2 rounded-xl bg-[#EFE2D5] text-[#8C5327] border border-[#E0CFBF] text-xs font-semibold hover:bg-[#E5D5C5] transition-colors flex items-center gap-1.5 cursor-pointer">
+                                        <i class="ri-restart-line text-sm"></i>
+                                        <span>Restore to Pending</span>
+                                    </button>
+                                <?php else: ?>
+                                    <!-- Mark Followed Up Button -->
+                                    <button type="submit" name="status" value="Followed Up"
+                                        class="px-4 py-2 rounded-xl bg-[#DCE5DF] text-[#3F624D] border border-[#C6D6CB] text-xs font-semibold hover:bg-[#cfded3] transition-colors flex items-center gap-1.5 cursor-pointer">
+                                        <i class="ri-check-line text-sm"></i>
+                                        <span>Mark as Followed Up</span>
+                                    </button>
+                                <?php endif; ?>
+
+                                <?php if ($status === 'Archived'): ?>
+                                    <!-- Restore to Pending Button -->
+                                    <button type="submit" name="status" value="Pending Review"
+                                        class="px-4 py-2 rounded-xl bg-[#EFE2D5] text-[#8C5327] border border-[#E0CFBF] text-xs font-semibold hover:bg-[#E5D5C5] transition-colors flex items-center gap-1.5 cursor-pointer">
+                                        <i class="ri-restart-line text-sm"></i>
+                                        <span>Restore to Pending</span>
+                                    </button>
+                                <?php else: ?>
+                                    <!-- Archive Button -->
+                                    <button type="submit" name="status" value="Archived"
+                                        class="px-4 py-2 rounded-xl bg-[#EDE8E0] text-[#6E6359] border border-[#C9C0B3] text-xs font-semibold hover:bg-[#DFD8CD] transition-colors flex items-center gap-1.5 cursor-pointer">
+                                        <i class="ri-archive-line text-sm"></i>
+                                        <span>Archive</span>
+                                    </button>
+                                <?php endif; ?>
+                            </form>
 
                             <!-- Reply via Email Button -->
                             <a href="mailto:<?= htmlspecialchars($contact['email']); ?>?subject=<?= rawurlencode('Re: Inquiry - Yangon Atelier'); ?>"
