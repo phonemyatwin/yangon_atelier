@@ -1,14 +1,4 @@
 <?php
-
-/**
- * ============================================================================
- * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - VIEW INQUIRY
- * ============================================================================
- * FILE: admin/contact_view.php
- * PURPOSE: Displays full message content and sender info for a specific inquiry.
- * ============================================================================
- */
-
 // Initialize session
 require_once __DIR__ . '/../components/session_start.php';
 
@@ -18,15 +8,62 @@ require_once __DIR__ . '/components/session_check.php';
 // Connect database
 require_once __DIR__ . '/../components/connection.php';
 
-$contact_id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
+$id = $_GET['id'] ?? '';
+if (empty($id) || !filter_var($id, FILTER_VALIDATE_INT)) {
+    header('Location: contacts.php');
+    exit;
+}
+
+try {
+    $sql = 'SELECT * FROM contacts WHERE id = :id';
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([':id' => $id]);
+    $contact = $stmt->fetch();
+} catch (PDOException $e) {
+    error_log('Contact fetch error: ' . $e->getMessage() . "\n", 3, __DIR__ . '/../error.log');
+    $_SESSION['error'] = 'Unable to retrieve inquiries. Please try again later.';
+    header('Location: contacts.php');
+    exit;
+}
+
+if (!$contact) {
+    $_SESSION['error'] = 'Inquiry not found.';
+    header('Location: contacts.php');
+    exit;
+}
+
+$errors = [];
+if (isset($_GET['status'])) {
+    $new_status = $_GET['status'] ?? '';
+    $allowed_statuses = ['Pending Review', 'Followed Up', 'Archived'];
+    try {
+        if (in_array($new_status, $allowed_statuses)) {
+            $sql = 'UPDATE contacts SET status = :status WHERE id = :id';
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([
+                ':id' => $id,
+                ':status' => $new_status
+            ]);
+            $_SESSION['success'] = "Status updated to {$new_status}.";
+            header("Location: contact_view.php?id={$contact['id']}");
+            exit;
+        } else {
+            $errors['status'] = 'Invalid status selected.';
+        }
+    } catch (PDOException $e) {
+        error_log('Status update error: ' . $e->getMessage() . "\n", 3, __DIR__ . '/../error.log');
+        $errors['status'] = 'The status cannot be updated at this moment. Please try again later.';
+    }
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Inquiry #<?= (int)$contact_id ?> | Yangon Atelier Admin</title>
+    <title>View Inquiry | Yangon Atelier Admin</title>
     <link rel="icon" type="image/x-icon" href="../images/favicon/favicon.ico">
     <?php include "components/css.php"; ?>
 </head>
@@ -48,7 +85,7 @@ $contact_id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
                             <span>/</span>
                             <a href="contacts.php" class="hover:text-[#362F2A] transition-colors">Inquiries</a>
                             <span>/</span>
-                            <span class="text-[#362F2A] font-medium">Message #<?= (int)$contact_id ?></span>
+                            <span class="text-[#362F2A] font-medium">Message #<?= (int)$contact['id'] ?></span>
                         </div>
                         <h2 class="font-serif text-2xl sm:text-3xl font-medium text-[#362F2A]">Showroom Inquiry Details</h2>
                     </div>
@@ -56,7 +93,7 @@ $contact_id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
                         <a href="contacts.php" class="px-4 py-2 rounded-xl border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-xs font-semibold text-[#362F2A] transition-colors">
                             Back
                         </a>
-                        <a href="contact_delete.php?id=<?= (int)$contact_id ?>" class="px-4 py-2 rounded-xl border border-[#DFC8C8] bg-[#EFE0E0] hover:bg-[#E5D0D0] text-[#8C3B3B] text-xs font-semibold transition-colors flex items-center gap-1">
+                        <a href="contact_delete.php?id=<?= (int)$contact['id'] ?>" class="px-4 py-2 rounded-xl border border-[#DFC8C8] bg-[#EFE0E0] hover:bg-[#E5D0D0] text-[#8C3B3B] text-xs font-semibold transition-colors flex items-center gap-1">
                             <i class="ri-delete-bin-line"></i> Delete
                         </a>
                     </div>
@@ -69,23 +106,23 @@ $contact_id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-5 rounded-2xl bg-[#EDE8E0] border border-[#C9C0B3] text-xs">
                         <div>
                             <span class="text-[#6E6359] block mb-0.5">Sender Name</span>
-                            <strong class="text-[#362F2A] text-sm block">Aung Min</strong>
+                            <strong class="text-[#362F2A] text-sm block"><?= htmlspecialchars($contact['name'] ?? ''); ?></strong>
                         </div>
                         <div>
                             <span class="text-[#6E6359] block mb-0.5">Phone / Viber</span>
-                            <a href="tel:09973383719" class="text-[#362F2A] hover:underline font-mono block">
-                                09973383719
+                            <a href="tel:<?= htmlspecialchars($contact['number'] ?? ''); ?>" class="text-[#362F2A] hover:underline font-mono block">
+                                <?= htmlspecialchars($contact['number'] ?? ''); ?>
                             </a>
                         </div>
                         <div>
                             <span class="text-[#6E6359] block mb-0.5">Email Address</span>
-                            <a href="mailto:aungmin@gmail.com" class="text-[#362F2A] hover:underline font-mono block">
-                                aungmin@gmail.com
+                            <a href="mailto:<?= htmlspecialchars($contact['email'] ?? ''); ?>" class="text-[#362F2A] hover:underline font-mono block">
+                                <?= htmlspecialchars($contact['email'] ?? ''); ?>
                             </a>
                         </div>
                         <div>
                             <span class="text-[#6E6359] block mb-0.5">Received Date</span>
-                            <span class="text-[#362F2A] block">2026-11-04 14:30</span>
+                            <span class="text-[#362F2A] block"><?= htmlspecialchars(date('F j, Y', strtotime($contact['created_at'] ?? ''))); ?></span>
                         </div>
                     </div>
 
@@ -93,17 +130,62 @@ $contact_id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
                     <div class="space-y-3">
                         <span class="text-xs uppercase tracking-widest text-[#8A5A44] font-semibold block">Message Body</span>
                         <div class="p-6 rounded-2xl bg-[#EDE8E0] border border-[#C9C0B3] text-[#362F2A] text-sm leading-relaxed">
-                            <p>
-                                Hello, I would like to know more about your modern sofa collection and delivery options in Yangon. We are currently finishing an architectural residence in Yankin and looking for 2 living room modular lounge chairs and an oak dining set. Please contact me with availability and wood finishes. Thank you.
-                            </p>
+                            <p><?= nl2br(htmlspecialchars($contact['message'] ?? '')); ?></p>
                         </div>
                     </div>
 
+                    <?php
+                    $status = $contact['status'] ?? 'Pending Review';
+                    $badge_class = match ($status) {
+                        'Followed Up' => 'text-[#3F624D] bg-[#DCE5DF] border-[#C6D6CB]',
+                        'Archived' => 'text-[#6E6359] bg-[#DFD8CD] border-[#C9C0B3]',
+                        'Pending Review' => 'text-[#8C5327] bg-[#EFE2D5] border-[#E0CFBF]',
+                        default => 'text-[#8C5327] bg-[#EFE2D5] border-[#E0CFBF]'
+                    };
+                    ?>
+
                     <!-- Response Actions -->
                     <div class="pt-6 border-t border-[#C9C0B3] flex flex-wrap items-center justify-between gap-4">
-                        <span class="text-xs text-[#6E6359]">Status: <strong class="text-[#8C5327]">Requires Follow-up</strong></span>
-                        <div class="flex items-center gap-3">
-                            <a href="mailto:aungmin@gmail.com?subject=Regarding%20Your%20Yangon Atelier%20Showroom%20Inquiry" class="px-6 py-2.5 rounded-xl bg-[#8A5A44] hover:bg-[#704735] text-[#F6F3EE] font-semibold text-xs transition-colors shadow-xs flex items-center gap-2">
+                        <span class="text-xs text-[#6E6359]">
+                            Current Status: <strong class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold border <?= $badge_class; ?>"><?= htmlspecialchars($contact['status'] ?? 'Pending Review'); ?></strong>
+                        </span>
+
+                        <div class="flex items-center gap-2">
+                            <?php if ($status === 'Followed Up'): ?>
+                                <!-- Restore to Pending Button -->
+                                <a href="contact_view.php?id=<?= (int)$contact['id']; ?>&status=Pending+Review"
+                                    class="px-4 py-2 rounded-xl bg-[#EFE2D5] text-[#8C5327] border border-[#E0CFBF] text-xs font-semibold hover:bg-[#E5D5C5] transition-colors flex items-center gap-1.5">
+                                    <i class="ri-restart-line text-sm"></i>
+                                    <span>Restore to Pending</span>
+                                </a>
+                            <?php else: ?>
+                                <!-- Mark Followed Up Button -->
+                                <a href="contact_view.php?id=<?= (int)$contact['id']; ?>&status=Followed+Up"
+                                    class="px-4 py-2 rounded-xl bg-[#DCE5DF] text-[#3F624D] border border-[#C6D6CB] text-xs font-semibold hover:bg-[#cfded3] transition-colors flex items-center gap-1.5">
+                                    <i class="ri-check-line text-sm"></i>
+                                    <span>Mark as Followed Up</span>
+                                </a>
+                            <?php endif; ?>
+
+                            <?php if ($status === 'Archived'): ?>
+                                <!-- Restore to Pending Button -->
+                                <a href="contact_view.php?id=<?= (int)$contact['id']; ?>&status=Pending+Review"
+                                    class="px-4 py-2 rounded-xl bg-[#EFE2D5] text-[#8C5327] border border-[#E0CFBF] text-xs font-semibold hover:bg-[#E5D5C5] transition-colors flex items-center gap-1.5">
+                                    <i class="ri-restart-line text-sm"></i>
+                                    <span>Restore to Pending</span>
+                                </a>
+                            <?php else: ?>
+                                <!-- Archive Button -->
+                                <a href="contact_view.php?id=<?= (int)$contact['id']; ?>&status=Archived"
+                                    class="px-4 py-2 rounded-xl bg-[#EDE8E0] text-[#6E6359] border border-[#C9C0B3] text-xs font-semibold hover:bg-[#DFD8CD] transition-colors flex items-center gap-1.5">
+                                    <i class="ri-archive-line text-sm"></i>
+                                    <span>Archive</span>
+                                </a>
+                            <?php endif; ?>
+
+                            <!-- Reply via Email Button -->
+                            <a href="mailto:<?= htmlspecialchars($contact['email']); ?>?subject=<?= rawurlencode('Re: Inquiry - Yangon Atelier'); ?>"
+                                class="px-4 py-2 rounded-xl bg-[#8A5A44] hover:bg-[#704735] text-[#F6F3EE] font-semibold text-xs transition-colors flex items-center gap-1.5">
                                 <i class="ri-reply-line text-sm"></i>
                                 <span>Reply via Email</span>
                             </a>
@@ -119,6 +201,26 @@ $contact_id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
     </div>
 
     <script src="js/admin.js"></script>
+    <script src="../js/user.js"></script>
+
+    <?php if (!empty($_SESSION['success'])): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                showToast(<?= json_encode($_SESSION['success']); ?>, 'success');
+            });
+        </script>
+        <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
+
+    <?php if (!empty($errors)): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                <?php foreach ($errors as $error): ?>
+                    showToast(<?= json_encode($error); ?>, 'error');
+                <?php endforeach; ?>
+            });
+        </script>
+    <?php endif; ?>
 </body>
 
 </html>

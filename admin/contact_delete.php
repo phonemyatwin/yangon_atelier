@@ -1,15 +1,4 @@
 <?php
-
-/**
- * ============================================================================
- * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - DELETE INQUIRY
- * ============================================================================
- * FILE: admin/contact_delete.php
- * PURPOSE: Confirms deletion of an inquiry and executes DELETE query against
- *          the 'contacts' database table.
- * ============================================================================
- */
-
 // Initialize session
 require_once __DIR__ . '/../components/session_start.php';
 
@@ -19,7 +8,29 @@ require_once __DIR__ . '/components/session_check.php';
 // Connect database
 require_once __DIR__ . '/../components/connection.php';
 
-$contact_id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
+$id = $_GET['id'] ?? '';
+if (empty($id) || !filter_var($id, FILTER_VALIDATE_INT)) {
+    header('Location: contacts.php');
+    exit;
+}
+
+try {
+    $sql = 'SELECT * FROM contacts WHERE id = :id';
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([':id' => $id]);
+    $contact = $stmt->fetch();
+} catch (PDOException $e) {
+    error_log('Contact fetch error: ' . $e->getMessage() . "\n", 3, __DIR__ . '/../error.log');
+    $_SESSION['error'] = 'Unable to retrieve inquiries. Please try again later.';
+    header('Location: contacts.php');
+    exit;
+}
+
+if (!$contact) {
+    $_SESSION['error'] = 'Inquiry not found.';
+    header('Location: contacts.php');
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -73,7 +84,7 @@ $contact_id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
                     <!-- Message Details Summary -->
                     <div class="border border-[#C9C0B3] bg-[#EDE8E0] rounded-2xl p-5 mb-8 space-y-2 text-xs">
                         <div class="flex items-center justify-between border-b border-[#C9C0B3] pb-2">
-                            <span class="text-[#6E6359] font-mono">Inquiry #<?= (int)$contact_id ?></span>
+                            <span class="text-[#6E6359] font-mono">Inquiry #<?= (int)$contact['id'] ?></span>
                             <span class="text-[#6E6359]">2026-11-04</span>
                         </div>
                         <h4 class="font-semibold text-[#362F2A] text-sm">From: Aung Min</h4>
@@ -82,7 +93,7 @@ $contact_id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
 
                     <!-- Deletion Form -->
                     <form method="POST" action="contacts.php?msg=deleted" class="flex items-center justify-end gap-3 pt-4 border-t border-[#C9C0B3]">
-                        <input type="hidden" name="id" value="<?= (int)$contact_id ?>">
+                        <input type="hidden" name="id" value="<?= (int)$contact['id'] ?>">
                         <a href="contacts.php" class="px-5 py-2.5 rounded-xl border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-xs font-semibold text-[#362F2A] transition-colors">
                             Cancel
                         </a>

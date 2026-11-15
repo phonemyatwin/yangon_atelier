@@ -24,7 +24,13 @@ try {
     $blog = $stmt->fetch();
 } catch (PDOException $e) {
     error_log('Blog fetch error' . $e->getMessage() . "\n", 3, __DIR__ . '/../error.log');
-    $_SESSION['error'] = 'Unable to retrieve article information.';
+    $_SESSION['error'] = 'Unable to retrieve article information. Please try again later.';
+    header('Location: blog.php');
+    exit;
+}
+
+if (!$blog) {
+    $_SESSION['error'] = 'Blog not found.';
     header('Location: blog.php');
     exit;
 }

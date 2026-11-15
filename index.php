@@ -207,7 +207,7 @@ require_once __DIR__ . '/components/connection.php';
                 </div>
             </div>
 
-            </div>
+        </div>
 
         </div>
 
@@ -584,6 +584,7 @@ require_once __DIR__ . '/components/connection.php';
                 showToast(<?= json_encode($_SESSION['success']); ?>, 'success');
             })
         </script>
+        <?php unset($_SESSION['success']); ?>
     <?php endif; ?>
 </body>
 
