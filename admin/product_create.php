@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create'])) {
     $description = trim($_POST['description'] ?? '');
     $category = trim($_POST['category'] ?? 'chairs');
 
-    if (empty($name) || empty($price) || empty($stock) || empty($image) || empty($description)) {
+    if (empty($name) || empty($price) || empty($stock) || empty($image) || empty($category)) {
         $errors['product'] = 'All fields are required. Please complete the form.';
     }
 
@@ -33,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create'])) {
             ':description' => $description,
             ':category' => $category
         ]);
+        move_uploaded_file($_FILES['image']['tmp_name'], __DIR__ . '/../media/' . $image);
     }
 }
 ?>
@@ -46,6 +47,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create'])) {
     <title>Create Atelier Product | Yangon Atelier Admin</title>
     <link rel="icon" type="image/x-icon" href="../images/favicon/favicon.ico">
     <?php include "components/css.php"; ?>
+    <style>
+        /* Remove number spinner arrows */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+            appearance: textfield;
+        }
+    </style>
 </head>
 
 <body class="bg-[#EDE8E0] text-[#362F2A] font-sans antialiased selection:bg-[#8A5A44] selection:text-[#F6F3EE]">
@@ -96,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create'])) {
                                 </label>
                                 <div class="relative">
                                     <span class="absolute left-4 top-1/2 -translate-y-1/2 text-xs font-semibold text-[#6E6359]">MMK</span>
-                                    <input type="number" step="1" id="price" name="price" value="<?= htmlspecialchars($price ?? '') ?>" placeholder="400000" class="w-full pl-14 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                                    <input type="number" step="1" id="price" name="price" value="<?= htmlspecialchars($price ?? '') ?>" placeholder="400000" class="w-full pl-14 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
                                 </div>
                             </div>
 
@@ -105,27 +119,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create'])) {
                                 <label for="stock" class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">
                                     Initial Inventory Count <span class="text-[#8C3B3B]">*</span>
                                 </label>
-                                <input type="number" id="stock" name="stock" value="<?= htmlspecialchars($stock ?? '25') ?>" placeholder="e.g. 25" class="w-full px-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                                <input type="number" id="stock" name="stock" value="<?= htmlspecialchars($stock ?? '25') ?>" placeholder="e.g. 25" class="w-full px-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
                             </div>
 
                             <!-- Category -->
-                            <div class="space-y-1.5">
-                                <label for="category" class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">
+                            <div class="space-y-1.5" id="category-dropdown-container">
+                                <label class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">
                                     Category <span class="text-[#8C3B3B]">*</span>
                                 </label>
                                 <div class="relative">
-                                    <select id="category" name="category" class="w-full appearance-none px-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] cursor-pointer transition-all">
-                                        <?php
-                                        $categories = ['chairs', 'sofas', 'tables', 'beds', 'objects', 'wardrobes'];
-                                        $selected_category = $category ?? 'chairs';
-                                        foreach ($categories as $cat):
+                                    <?php
+                                    $categories = ['chairs', 'sofas', 'tables', 'beds', 'objects', 'wardrobes'];
+                                    $selected_category = $category ?? 'chairs';
+                                    ?>
+                                    <!-- Hidden Input for Form Submission -->
+                                    <input type="hidden" name="category" id="category-input" value="<?= htmlspecialchars($selected_category) ?>">
+
+                                    <!-- Dropdown Trigger Button -->
+                                    <button type="button" id="category-button" class="w-full px-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] cursor-pointer transition-all flex items-center justify-between text-left">
+                                        <span id="category-selected-text"><?= htmlspecialchars(ucfirst($selected_category)) ?></span>
+                                        <i id="category-arrow" class="ri-arrow-down-s-line text-[#6E6359] text-base transition-transform duration-200"></i>
+                                    </button>
+
+                                    <!-- Custom Options Menu -->
+                                    <div id="category-menu" class="hidden absolute left-0 right-0 top-full mt-1.5 bg-[#F6F3EE] border border-[#C9C0B3] rounded-2xl shadow-xl overflow-hidden py-1.5 z-30">
+                                        <?php foreach ($categories as $cat):
+                                            $is_selected = ($selected_category === $cat);
                                         ?>
-                                            <option value="<?= htmlspecialchars($cat) ?>" <?= ($selected_category === $cat) ? 'selected' : '' ?>>
-                                                <?= htmlspecialchars($cat) ?>
-                                            </option>
+                                            <div data-value="<?= htmlspecialchars($cat) ?>"
+                                                data-label="<?= htmlspecialchars(ucfirst($cat)) ?>"
+                                                class="category-option px-4 py-2.5 text-sm cursor-pointer transition-colors flex items-center justify-between <?= $is_selected ? 'bg-[#8A5A44] text-[#F6F3EE] font-medium' : 'text-[#362F2A] hover:bg-[#DFD8CD]' ?>">
+                                                <span><?= htmlspecialchars(ucfirst($cat)) ?></span>
+                                                <i class="ri-check-line text-sm check-icon <?= $is_selected ? '' : 'hidden' ?>"></i>
+                                            </div>
                                         <?php endforeach; ?>
-                                    </select>
-                                    <i class="ri-arrow-down-s-line absolute right-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base pointer-events-none"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -179,6 +207,70 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create'])) {
 
     <script src="js/script.js"></script>
     <script src="../js/script.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const button = document.getElementById('category-button');
+            const menu = document.getElementById('category-menu');
+            const arrow = document.getElementById('category-arrow');
+            const input = document.getElementById('category-input');
+            const selectedText = document.getElementById('category-selected-text');
+            const options = document.querySelectorAll('.category-option');
+            const container = document.getElementById('category-dropdown-container');
+
+            if (button && menu) {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const isOpen = !menu.classList.contains('hidden');
+                    if (isOpen) {
+                        menu.classList.add('hidden');
+                        arrow.classList.remove('rotate-180');
+                    } else {
+                        menu.classList.remove('hidden');
+                        arrow.classList.add('rotate-180');
+                    }
+                });
+
+                options.forEach(function(opt) {
+                    opt.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const value = this.getAttribute('data-value');
+                        const label = this.getAttribute('data-label');
+
+                        input.value = value;
+                        selectedText.textContent = label;
+
+                        options.forEach(function(el) {
+                            el.className = 'category-option px-4 py-2.5 text-sm cursor-pointer transition-colors flex items-center justify-between text-[#362F2A] hover:bg-[#DFD8CD]';
+                            const check = el.querySelector('.check-icon');
+                            if (check) check.classList.add('hidden');
+                        });
+
+                        this.className = 'category-option px-4 py-2.5 text-sm cursor-pointer transition-colors flex items-center justify-between bg-[#8A5A44] text-[#F6F3EE] font-medium';
+                        const activeCheck = this.querySelector('.check-icon');
+                        if (activeCheck) activeCheck.classList.remove('hidden');
+
+                        menu.classList.add('hidden');
+                        arrow.classList.remove('rotate-180');
+                    });
+                });
+
+                document.addEventListener('click', function(e) {
+                    if (container && !container.contains(e.target)) {
+                        menu.classList.add('hidden');
+                        arrow.classList.remove('rotate-180');
+                    }
+                });
+
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && !menu.classList.contains('hidden')) {
+                        menu.classList.add('hidden');
+                        arrow.classList.remove('rotate-180');
+                    }
+                });
+            }
+        });
+    </script>
 
     <?php if (!empty($errors)): ?>
         <script>
