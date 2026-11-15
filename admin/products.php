@@ -349,7 +349,7 @@ if (isset($_GET['msg'])) {
         </div>
     </div>
 
-    <script src="js/admin.js"></script>
+    <script src="js/script.js"></script>
 </body>
 
 </html>

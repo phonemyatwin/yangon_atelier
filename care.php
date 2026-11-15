@@ -376,7 +376,7 @@ require_once __DIR__ . '/components/connection.php';
     </main>
 
     <?php include "components/footer.php"; ?>
-    <script src="js/user.js"></script>
+    <script src="js/script.js"></script>
 </body>
 
 </html>

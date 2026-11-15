@@ -209,7 +209,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
     </main>
 
     <?php include "components/footer.php"; ?>
-    <script src="js/user.js"></script>
+    <script src="js/script.js"></script>
     <!-- Errors pop-up like a toaster -->
     <?php if (!empty($errors)): ?>
         <script>

@@ -82,7 +82,7 @@ $blogs = $stmt->fetchAll();
                                     <?php foreach ($blogs as $blog): ?>
                                         <?php
                                         // Format the date
-                                        $date = htmlspecialchars(date('F j, Y', strtotime($blog['created_at'])));
+                                        $date = htmlspecialchars(date('F j, Y \a\t g:i a', strtotime($blog['created_at'])));
                                         ?>
                                         <!-- Posts -->
                                         <tr class="hover:bg-[#DFD8CD]/40 transition-colors">
@@ -137,8 +137,8 @@ $blogs = $stmt->fetchAll();
         </div>
     </div>
 
-    <script src="js/admin.js"></script>
-    <script src="../js/user.js"></script>
+    <script src="js/script.js"></script>
+    <script src="../js/script.js"></script>
 
     <?php if (isset($_SESSION['success'])): ?>
         <script>

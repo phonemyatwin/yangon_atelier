@@ -41,7 +41,7 @@ if (isset($_GET['status'])) {
             $sql = 'UPDATE contacts SET status = :status WHERE id = :id';
             $stmt = $pdo->prepare($sql);
             $stmt->execute([
-                ':id' => $id,
+                ':id' => $contact['id'],
                 ':status' => $new_status
             ]);
             $_SESSION['success'] = "Status updated to {$new_status}.";
@@ -122,7 +122,7 @@ if (isset($_GET['status'])) {
                         </div>
                         <div>
                             <span class="text-[#6E6359] block mb-0.5">Received Date</span>
-                            <span class="text-[#362F2A] block"><?= htmlspecialchars(date('F j, Y', strtotime($contact['created_at'] ?? ''))); ?></span>
+                            <span class="text-[#362F2A] block"><?= htmlspecialchars(date('F j, Y \a\t g:i a', strtotime($contact['created_at'] ?? ''))); ?></span>
                         </div>
                     </div>
 
@@ -200,8 +200,8 @@ if (isset($_GET['status'])) {
         </div>
     </div>
 
-    <script src="js/admin.js"></script>
-    <script src="../js/user.js"></script>
+    <script src="js/script.js"></script>
+    <script src="../js/script.js"></script>
 
     <?php if (!empty($_SESSION['success'])): ?>
         <script>

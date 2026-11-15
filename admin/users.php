@@ -135,7 +135,7 @@ if (isset($_GET['msg'])) {
         </div>
     </div>
 
-    <script src="js/user.js"></script>
+    <script src="js/script.js"></script>
 </body>
 
 </html>

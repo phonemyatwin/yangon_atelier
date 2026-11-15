@@ -21,7 +21,7 @@ try {
     $contact = $stmt->fetch();
 } catch (PDOException $e) {
     error_log('Contact fetch error: ' . $e->getMessage() . "\n", 3, __DIR__ . '/../error.log');
-    $_SESSION['error'] = 'Unable to retrieve inquiries. Please try again later.';
+    $_SESSION['error'] = 'Unable to retrieve the inquiry. Please try again later.';
     header('Location: contacts.php');
     exit;
 }
@@ -30,6 +30,21 @@ if (!$contact) {
     $_SESSION['error'] = 'Inquiry not found.';
     header('Location: contacts.php');
     exit;
+}
+
+$errors = [];
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'])) {
+    try {
+        $sql = 'DELETE FROM contacts WHERE id = :id';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([':id' => $contact['id']]);
+        $_SESSION['success'] = 'The inquiry is deleted successfully.';
+        header('Location: contact.php');
+        exit;
+    } catch (PDOException $e) {
+        error_log('Contact delete error: ' . $e->getMessage() . "\n", 3, __DIR__ . '/../error.log');
+        $errors['delete'] = 'This inquiry cannot be deleted at this moment. Please try again later.';
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -85,15 +100,14 @@ if (!$contact) {
                     <div class="border border-[#C9C0B3] bg-[#EDE8E0] rounded-2xl p-5 mb-8 space-y-2 text-xs">
                         <div class="flex items-center justify-between border-b border-[#C9C0B3] pb-2">
                             <span class="text-[#6E6359] font-mono">Inquiry #<?= (int)$contact['id'] ?></span>
-                            <span class="text-[#6E6359]">2026-11-04</span>
+                            <span class="text-[#6E6359]"><?= date('F j, Y \a\t g:i a', strtotime(htmlspecialchars($contact['created_at'] ?? ''))); ?></span>
                         </div>
-                        <h4 class="font-semibold text-[#362F2A] text-sm">From: Aung Min</h4>
-                        <p class="text-[#6E6359]">Email: <span class="font-mono text-[#362F2A]">aungmin@gmail.com</span> • Phone: <span class="text-[#362F2A]">09973383719</span></p>
+                        <h4 class="font-semibold text-[#362F2A] text-sm">From: <?= htmlspecialchars($contact['name'] ?? ''); ?></h4>
+                        <p class="text-[#6E6359]">Email: <span class="font-mono text-[#362F2A]"><?= htmlspecialchars($contact['email'] ?? ''); ?></span> • Phone: <span class="text-[#362F2A]"><?= htmlspecialchars($contact['number'] ?? ''); ?></span></p>
                     </div>
 
                     <!-- Deletion Form -->
-                    <form method="POST" action="contacts.php?msg=deleted" class="flex items-center justify-end gap-3 pt-4 border-t border-[#C9C0B3]">
-                        <input type="hidden" name="id" value="<?= (int)$contact['id'] ?>">
+                    <form method="POST" action="" class="flex items-center justify-end gap-3 pt-4 border-t border-[#C9C0B3]">
                         <a href="contacts.php" class="px-5 py-2.5 rounded-xl border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-xs font-semibold text-[#362F2A] transition-colors">
                             Cancel
                         </a>
@@ -110,7 +124,16 @@ if (!$contact) {
         </div>
     </div>
 
-    <script src="js/admin.js"></script>
+    <script src="js/script.js"></script>
+    <script src="../js/script.js"></script>
+
+    <?php if(!empty($errors)): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                showToast(<?= json_encode($errors); ?>, 'error');
+            });
+        </script>
+    <?php endif; ?>
 </body>
 
 </html>

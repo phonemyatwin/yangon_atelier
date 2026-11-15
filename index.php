@@ -576,7 +576,7 @@ require_once __DIR__ . '/components/connection.php';
     </section>
 
     <?php include "components/footer.php"; ?>
-    <script src="js/user.js"></script>
+    <script src="js/script.js"></script>
 
     <?php if (isset($_SESSION['success'])): ?>
         <script>

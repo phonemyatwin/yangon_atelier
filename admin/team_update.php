@@ -127,7 +127,7 @@ require_once __DIR__ . '/../components/connection.php';
         </div>
     </div>
 
-    <script src="js/admin.js"></script>
+    <script src="js/script.js"></script>
 </body>
 
 </html>

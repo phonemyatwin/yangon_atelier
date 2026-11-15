@@ -119,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'])) {
                         <div class="space-y-1 text-xs">
                             <span class="text-[#6E6359] font-mono">Article #<?= htmlspecialchars($blog['id']) ?></span>
                             <h4 class="font-serif text-base font-semibold text-[#362F2A]"><?= htmlspecialchars($blog['title']); ?></h4>
-                            <p class="text-[#6E6359]">Author: <strong class="text-[#362F2A]"><?= htmlspecialchars($blog['author']); ?></strong> • Published: <strong><?= htmlspecialchars(date('F j, Y', strtotime($blog['created_at']))); ?></strong></p>
+                            <p class="text-[#6E6359]">Author: <strong class="text-[#362F2A]"><?= htmlspecialchars($blog['author']); ?></strong> • Published: <strong><?= htmlspecialchars(date('F j, Y \a\t g:i a', strtotime($blog['created_at']))); ?></strong></p>
                         </div>
                     </div>
 
@@ -139,8 +139,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'])) {
         </div>
     </div>
 
-    <script src="js/admin.js"></script>
-    <script src="../js/user.js"></script>
+    <script src="js/script.js"></script>
+    <script src="../js/script.js"></script>
     <?php if (!empty($errors)): ?>
         <script>
             document.addEventListener('DOMContentLoaded', function() {

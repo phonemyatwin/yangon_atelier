@@ -97,7 +97,7 @@ $sub_id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
         </div>
     </div>
 
-    <script src="js/admin.js"></script>
+    <script src="js/script.js"></script>
 </body>
 
 </html>

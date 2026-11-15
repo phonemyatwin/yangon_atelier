@@ -185,8 +185,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['publish'])) {
         </div>
     </div>
 
-    <script src="js/admin.js"></script>
-    <script src="../js/user.js"></script>
+    <script src="js/script.js"></script>
+    <script src="../js/script.js"></script>
 
     <?php if (!empty($errors)): ?>
         <script>
