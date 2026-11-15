@@ -19,35 +19,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['publish'])) {
 
     if (empty($title) || empty($author) || empty($image) || empty($content) || empty($category)) {
         $errors['blog_form'] = 'All fields are required. Please complete the form.';
-    } else {
-        if (mb_strlen($title) > 50) {
-            $errors['title'] = 'Title cannot exceed 50 characters.';
-        }
-        if (mb_strlen($author) > 50) {
-            $errors['author'] = 'Author name cannot exceed 50 characters.';
-        }
     }
 
     if (empty($errors)) {
         try {
             $image = time() . '_' . $image;
-            move_uploaded_file($_FILES['image']['tmp_name'], '../media/' . $image);
-            $sql = 'INSERT INTO blogs(title, author, author_id, image, content, category) VALUES(:title, :author, :author_id, :image, :content, :category)';
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute([
-                ':title' => $title,
-                ':author' => $author,
-                ':author_id' => $_SESSION['admin']['id'],
-                ':image' => $image,
-                ':content' => $content,
-                ':category' => $category,
-            ]);
-            $_SESSION['success'] = 'Journal article published successfully.';
-            header('Location: blog.php');
-            exit;
+            if (!move_uploaded_file($_FILES['image']['tmp_name'], '../media/' . $image)) {
+                $errors['image'] = 'Failed to upload the image. Please check the folder permission.';
+            } else {
+                $sql = 'INSERT INTO blogs(title, author, author_id, image, content, category) VALUES(:title, :author, :author_id, :image, :content, :category)';
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute([
+                    ':title' => $title,
+                    ':author' => $author,
+                    ':author_id' => $_SESSION['admin']['id'],
+                    ':image' => $image,
+                    ':content' => $content,
+                    ':category' => $category,
+                ]);
+                $_SESSION['success'] = 'Journal article published successfully.';
+                header('Location: blog.php');
+                exit;
+            }
         } catch (PDOException $e) {
-            if (!empty($image) && file_exists('../media/' . $image)) {
-                unlink('../media/' . $image);
+            if (!empty($image) && file_exists(__DIR__ . '/../media/' . $image)) {
+                unlink(__DIR__ . '/../media/' . $image);
             }
             error_log('Blog create error: ' . $e->getMessage() . "\n", 3, __DIR__ . '/../error.log');
             $errors['create'] = 'Unable to publish your article at this moment. Please try again later.';
@@ -119,34 +115,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['publish'])) {
                             </div>
 
                             <!-- Category -->
+                            <?php
+                            $categories = ['Philosophy', 'Craftsmanship', 'Spatial Design', 'Interior Styling', 'Artisanship', 'Lighting', 'Living Rituals', 'Architecture', 'Editorial'];
+                            $category = $_POST['category'] ?? 'Philosophy';
+                            ?>
                             <div class="space-y-1.5" id="category-dropdown-container">
                                 <label class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">
                                     Category <span class="text-[#8C3B3B]">*</span>
                                 </label>
                                 <div class="relative">
-                                    <?php
-                                    $categories = ['Philosophy', 'Craftsmanship', 'Spatial Design', 'Interior Styling', 'Artisanship', 'Lighting', 'Living Rituals', 'Architecture', 'Editorial'];
-                                    $selected_category = $category ?? 'Philosophy';
-                                    ?>
+
                                     <!-- Hidden Input for Form Submission -->
-                                    <input type="hidden" name="category" id="category-input" value="<?= htmlspecialchars($selected_category) ?>">
+                                    <input type="hidden" name="category" id="category-input" value="<?= htmlspecialchars($category) ?>">
 
                                     <!-- Dropdown Trigger Button -->
                                     <button type="button" id="category-button" class="w-full px-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] cursor-pointer transition-all flex items-center justify-between text-left">
-                                        <span id="category-selected-text"><?= htmlspecialchars($selected_category) ?></span>
+                                        <span id="category-selected-text"><?= htmlspecialchars($category) ?></span>
                                         <i id="category-arrow" class="ri-arrow-down-s-line text-[#6E6359] text-base transition-transform duration-200"></i>
                                     </button>
 
                                     <!-- Custom Options Menu -->
                                     <div id="category-menu" class="hidden absolute left-0 right-0 top-full mt-1.5 bg-[#F6F3EE] border border-[#C9C0B3] rounded-2xl shadow-xl overflow-hidden py-1.5 z-30 max-h-60 overflow-y-auto">
                                         <?php foreach ($categories as $cat):
-                                            $is_selected = ($selected_category === $cat);
+                                            $selected_category = ($category === $cat);
                                         ?>
                                             <div data-value="<?= htmlspecialchars($cat) ?>"
                                                 data-label="<?= htmlspecialchars($cat) ?>"
-                                                class="category-option px-4 py-2.5 text-sm cursor-pointer transition-colors flex items-center justify-between <?= $is_selected ? 'bg-[#8A5A44] text-[#F6F3EE] font-medium' : 'text-[#362F2A] hover:bg-[#DFD8CD]' ?>">
+                                                class="category-option px-4 py-2.5 text-sm cursor-pointer transition-colors flex items-center justify-between <?= $selected_category ? 'bg-[#8A5A44] text-[#F6F3EE] font-medium' : 'text-[#362F2A] hover:bg-[#DFD8CD]' ?>">
                                                 <span><?= htmlspecialchars($cat) ?></span>
-                                                <i class="ri-check-line text-sm check-icon <?= $is_selected ? '' : 'hidden' ?>"></i>
+                                                <i class="ri-check-line text-sm check-icon <?= $selected_category ? '' : 'hidden' ?>"></i>
                                             </div>
                                         <?php endforeach; ?>
                                     </div>
@@ -201,70 +198,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['publish'])) {
 
     <script src="js/script.js"></script>
     <script src="../js/script.js"></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const button = document.getElementById('category-button');
-            const menu = document.getElementById('category-menu');
-            const arrow = document.getElementById('category-arrow');
-            const input = document.getElementById('category-input');
-            const selectedText = document.getElementById('category-selected-text');
-            const options = document.querySelectorAll('.category-option');
-            const container = document.getElementById('category-dropdown-container');
-
-            if (button && menu) {
-                button.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    const isOpen = !menu.classList.contains('hidden');
-                    if (isOpen) {
-                        menu.classList.add('hidden');
-                        arrow.classList.remove('rotate-180');
-                    } else {
-                        menu.classList.remove('hidden');
-                        arrow.classList.add('rotate-180');
-                    }
-                });
-
-                options.forEach(function(opt) {
-                    opt.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        const value = this.getAttribute('data-value');
-                        const label = this.getAttribute('data-label');
-
-                        input.value = value;
-                        selectedText.textContent = label;
-
-                        options.forEach(function(el) {
-                            el.className = 'category-option px-4 py-2.5 text-sm cursor-pointer transition-colors flex items-center justify-between text-[#362F2A] hover:bg-[#DFD8CD]';
-                            const check = el.querySelector('.check-icon');
-                            if (check) check.classList.add('hidden');
-                        });
-
-                        this.className = 'category-option px-4 py-2.5 text-sm cursor-pointer transition-colors flex items-center justify-between bg-[#8A5A44] text-[#F6F3EE] font-medium';
-                        const activeCheck = this.querySelector('.check-icon');
-                        if (activeCheck) activeCheck.classList.remove('hidden');
-
-                        menu.classList.add('hidden');
-                        arrow.classList.remove('rotate-180');
-                    });
-                });
-
-                document.addEventListener('click', function(e) {
-                    if (container && !container.contains(e.target)) {
-                        menu.classList.add('hidden');
-                        arrow.classList.remove('rotate-180');
-                    }
-                });
-
-                document.addEventListener('keydown', function(e) {
-                    if (e.key === 'Escape' && !menu.classList.contains('hidden')) {
-                        menu.classList.add('hidden');
-                        arrow.classList.remove('rotate-180');
-                    }
-                });
-            }
-        });
-    </script>
 
     <?php if (!empty($errors)): ?>
         <script>

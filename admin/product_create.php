@@ -15,25 +15,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create'])) {
     $stock = $_POST['stock'] ?? '';
     $image = $_FILES['image']['name'];
     $description = trim($_POST['description'] ?? '');
-    $category = trim($_POST['category'] ?? 'chairs');
+    $category = trim($_POST['category'] ?? 'Chairs & Seating');
 
     if (empty($name) || empty($price) || empty($stock) || empty($image) || empty($category)) {
         $errors['product'] = 'All fields are required. Please complete the form.';
+    } else {
+        if (!is_numeric($price) || $price < 0) {
+            $errors['price'] = 'Please enter a valid price.';
+        }
+
+        if (!filter_var($stock, FILTER_VALIDATE_INT) || $stock < 0) {
+            $errors['stock'] = 'Please enter a valid inventory count.';
+        }
     }
 
     if (empty($errors)) {
-        $image = time() . '_' . $image;
-        $sql = 'INSERT INTO products(name, price, stock, image, description) VALUES(:name, :price, :stock, :image, :description)';
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([
-            ':name' => $name,
-            ':price' => $price,
-            ':stock' => $stock,
-            ':image' => $image,
-            ':description' => $description,
-            ':category' => $category
-        ]);
-        move_uploaded_file($_FILES['image']['tmp_name'], __DIR__ . '/../media/' . $image);
+        try {
+            $image = time() . '_' . $image;
+            if (!move_uploaded_file($_FILES['image']['tmp_name'], __DIR__ . '/../media/' . $image)) {
+                $errors['image'] = 'Failed to upload the image. Please check folder permission.';
+            } else {
+                $sql = 'INSERT INTO products(name, price, stock, image, description, category) VALUES(:name, :price, :stock, :image, :description, :category)';
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute([
+                    ':name' => $name,
+                    ':price' => $price,
+                    ':stock' => $stock,
+                    ':image' => $image,
+                    ':description' => $description,
+                    ':category' => $category
+                ]);
+                $_SESSION['success'] = 'Furniture piece created successfully.';
+                header('Location: products.php');
+                exit;
+            }
+        } catch (PDOException $e) {
+            if (!empty($image) && file_exists(__DIR__ . '/../media/' . $image)) {
+                unlink(__DIR__ . '/../media/' . $image);
+            }
+            error_log('Product create error: ' . $e->getMessage() . "\n", 3, __DIR__ . '/../error.log');
+            $errors['create'] = 'Unable to create furniture piece at this moment. Please try again later.';
+        }
     }
 }
 ?>
@@ -131,7 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create'])) {
                                 'beds' => 'Beds & Tatami',
                                 'objects' => 'Lighting & Objects'
                             ];
-                            $category = $_POST['category'] ?? 'chairs';
+                            $category = $_POST['category'] ?? 'Chairs & Seating';
                             ?>
                             <div class="space-y-1.5" id="category-dropdown-container">
                                 <label class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">
@@ -139,7 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create'])) {
                                 </label>
                                 <div class="relative">
                                     <!-- Hidden Input for Form Submission -->
-                                    <input type="hidden" name="category" id="category-input" value="<?= htmlspecialchars($category ?? 'chair') ?>">
+                                    <input type="hidden" name="category" id="category-input" value="<?= htmlspecialchars($category ?? 'Chairs & Seating') ?>">
 
                                     <!-- Dropdown Trigger Button -->
                                     <button type="button" id="category-button" class="w-full px-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] cursor-pointer transition-all flex items-center justify-between text-left">
@@ -164,8 +186,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create'])) {
                             </div>
                         </div>
 
-
-
                         <!-- Image Dropzone / Upload -->
                         <div class="space-y-1.5">
                             <label class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">
@@ -186,17 +206,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create'])) {
 
                         <!-- Description -->
                         <div class="space-y-1.5">
-                            <label for="description" class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">
-                                Piece Narrative &amp; Specifications
-                            </label>
+                            <label for="description" class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">Piece Narrative &amp; Specifications</label>
                             <textarea id="description" name="description" rows="4" placeholder="Detail the timber source, joinery style, finish oils, and ergonomic proportions..." class="w-full p-4 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all"><?= htmlspecialchars($description ?? '') ?></textarea>
                         </div>
 
                         <!-- Form Actions -->
                         <div class="pt-4 border-t border-[#C9C0B3] flex items-center justify-end gap-3">
-                            <a href="products.php" class="px-5 py-3 rounded-xl border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-xs font-semibold text-[#362F2A] transition-colors">
-                                Cancel
-                            </a>
+                            <a href="products.php" class="px-5 py-3 rounded-xl border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-xs font-semibold text-[#362F2A] transition-colors">Cancel</a>
                             <button type="submit" name="create" class="px-6 py-3 rounded-xl bg-[#8A5A44] hover:bg-[#704735] text-[#F6F3EE] text-xs font-semibold transition-colors shadow-xs flex items-center gap-2">
                                 <i class="ri-check-line text-base"></i>
                                 <span>Save &amp; Publish Piece</span>
@@ -214,74 +230,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create'])) {
     <script src="js/script.js"></script>
     <script src="../js/script.js"></script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const button = document.getElementById('category-button');
-            const menu = document.getElementById('category-menu');
-            const arrow = document.getElementById('category-arrow');
-            const input = document.getElementById('category-input');
-            const selectedText = document.getElementById('category-selected-text');
-            const options = document.querySelectorAll('.category-option');
-            const container = document.getElementById('category-dropdown-container');
-
-            if (button && menu) {
-                button.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    const isOpen = !menu.classList.contains('hidden');
-                    if (isOpen) {
-                        menu.classList.add('hidden');
-                        arrow.classList.remove('rotate-180');
-                    } else {
-                        menu.classList.remove('hidden');
-                        arrow.classList.add('rotate-180');
-                    }
-                });
-
-                options.forEach(function(opt) {
-                    opt.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        const value = this.getAttribute('data-value');
-                        const label = this.getAttribute('data-label');
-
-                        input.value = value;
-                        selectedText.textContent = label;
-
-                        options.forEach(function(el) {
-                            el.className = 'category-option px-4 py-2.5 text-sm cursor-pointer transition-colors flex items-center justify-between text-[#362F2A] hover:bg-[#DFD8CD]';
-                            const check = el.querySelector('.check-icon');
-                            if (check) check.classList.add('hidden');
-                        });
-
-                        this.className = 'category-option px-4 py-2.5 text-sm cursor-pointer transition-colors flex items-center justify-between bg-[#8A5A44] text-[#F6F3EE] font-medium';
-                        const activeCheck = this.querySelector('.check-icon');
-                        if (activeCheck) activeCheck.classList.remove('hidden');
-
-                        menu.classList.add('hidden');
-                        arrow.classList.remove('rotate-180');
-                    });
-                });
-
-                document.addEventListener('click', function(e) {
-                    if (container && !container.contains(e.target)) {
-                        menu.classList.add('hidden');
-                        arrow.classList.remove('rotate-180');
-                    }
-                });
-
-                document.addEventListener('keydown', function(e) {
-                    if (e.key === 'Escape' && !menu.classList.contains('hidden')) {
-                        menu.classList.add('hidden');
-                        arrow.classList.remove('rotate-180');
-                    }
-                });
-            }
-        });
-    </script>
-
     <?php if (!empty($errors)): ?>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                showToast(<?= json_encode($errors); ?>, 'error');
+                <?php foreach ($errors as $error): ?>
+                    showToast(<?= json_encode($error); ?>, 'error');
+                <?php endforeach; ?>
             });
         </script>
     <?php endif; ?>

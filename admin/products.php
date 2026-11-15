@@ -1,15 +1,4 @@
 <?php
-
-/**
- * ============================================================================
- * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - ADMIN PRODUCTS LIST
- * ============================================================================
- * FILE: admin/products.php
- * PURPOSE: Lists all products from the 'products' table, provides search filtering,
- *          and links to create, update, and delete actions.
- * ============================================================================
- */
-
 // Initialize session
 require_once __DIR__ . '/../components/session_start.php';
 
@@ -19,14 +8,6 @@ require_once __DIR__ . '/components/session_check.php';
 // Connect database
 require_once __DIR__ . '/../components/connection.php';
 
-
-
-$success = '';
-if (isset($_GET['msg'])) {
-    if ($_GET['msg'] === 'created') $success = "Product piece created successfully.";
-    if ($_GET['msg'] === 'updated') $success = "Product piece updated successfully.";
-    if ($_GET['msg'] === 'deleted') $success = "Product piece deleted successfully.";
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,14 +44,6 @@ if (isset($_GET['msg'])) {
                         <span>Add New Piece</span>
                     </a>
                 </div>
-
-                <!-- Success Notification Banner -->
-                <?php if (!empty($success)): ?>
-                    <div class="p-4 rounded-2xl bg-[#DCE5DF] border border-[#C6D6CB] text-[#3F624D] text-xs flex items-center gap-2.5">
-                        <i class="ri-checkbox-circle-line text-lg flex-shrink-0"></i>
-                        <span><?= htmlspecialchars($success) ?></span>
-                    </div>
-                <?php endif; ?>
 
                 <!-- Products Table Card in Raw Linen (#F6F3EE) -->
                 <div class="bg-[#F6F3EE] rounded-3xl border border-[#C9C0B3] overflow-hidden shadow-xs">
@@ -350,6 +323,25 @@ if (isset($_GET['msg'])) {
     </div>
 
     <script src="js/script.js"></script>
+    <script src="../js/script.js"></script>
+
+    <?php if (isset($_SESSION['success'])): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                showToast(<?= json_encode($_SESSION['success']); ?>, 'success');
+            });
+        </script>
+        <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
+
+    <?php if (isset($_SESSION['error'])): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                showToast(<?= json_encode($_SESSION['error']); ?>, 'error');
+            });
+        </script>
+        <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
 </body>
 
 </html>

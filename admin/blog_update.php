@@ -229,69 +229,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
     <script src="js/script.js"></script>
     <script src="../js/script.js"></script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const button = document.getElementById('category-button');
-            const menu = document.getElementById('category-menu');
-            const arrow = document.getElementById('category-arrow');
-            const input = document.getElementById('category-input');
-            const selectedText = document.getElementById('category-selected-text');
-            const options = document.querySelectorAll('.category-option');
-            const container = document.getElementById('category-dropdown-container');
-
-            if (button && menu) {
-                button.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    const isOpen = !menu.classList.contains('hidden');
-                    if (isOpen) {
-                        menu.classList.add('hidden');
-                        arrow.classList.remove('rotate-180');
-                    } else {
-                        menu.classList.remove('hidden');
-                        arrow.classList.add('rotate-180');
-                    }
-                });
-
-                options.forEach(function(opt) {
-                    opt.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        const value = this.getAttribute('data-value');
-                        const label = this.getAttribute('data-label');
-
-                        input.value = value;
-                        selectedText.textContent = label;
-
-                        options.forEach(function(el) {
-                            el.className = 'category-option px-4 py-2.5 text-sm cursor-pointer transition-colors flex items-center justify-between text-[#362F2A] hover:bg-[#DFD8CD]';
-                            const check = el.querySelector('.check-icon');
-                            if (check) check.classList.add('hidden');
-                        });
-
-                        this.className = 'category-option px-4 py-2.5 text-sm cursor-pointer transition-colors flex items-center justify-between bg-[#8A5A44] text-[#F6F3EE] font-medium';
-                        const activeCheck = this.querySelector('.check-icon');
-                        if (activeCheck) activeCheck.classList.remove('hidden');
-
-                        menu.classList.add('hidden');
-                        arrow.classList.remove('rotate-180');
-                    });
-                });
-
-                document.addEventListener('click', function(e) {
-                    if (container && !container.contains(e.target)) {
-                        menu.classList.add('hidden');
-                        arrow.classList.remove('rotate-180');
-                    }
-                });
-
-                document.addEventListener('keydown', function(e) {
-                    if (e.key === 'Escape' && !menu.classList.contains('hidden')) {
-                        menu.classList.add('hidden');
-                        arrow.classList.remove('rotate-180');
-                    }
-                });
-            }
-        });
-    </script>
     <?php if (!empty($errors)): ?>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
