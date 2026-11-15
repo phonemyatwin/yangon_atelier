@@ -1,15 +1,4 @@
 <?php
-
-/**
- * ============================================================================
- * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - CREATE PRODUCT
- * ============================================================================
- * FILE: admin/product_create.php
- * PURPOSE: Handles creation of new furniture catalog items, processes image
- *          uploads to the ../images/ directory, and inserts records into 'products'.
- * ============================================================================
- */
-
 // Initialize session
 require_once __DIR__ . '/../components/session_start.php';
 
@@ -18,7 +7,36 @@ require_once __DIR__ . '/components/session_check.php';
 
 // Connect database
 require_once __DIR__ . '/../components/connection.php';
+
+$errors = [];
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create'])) {
+    $name = trim($_POST['name'] ?? '');
+    $price = $_POST['price'] ?? '';
+    $stock = $_POST['stock'] ?? '';
+    $image = $_FILES['image']['name'];
+    $description = trim($_POST['description'] ?? '');
+    $category = trim($_POST['category'] ?? 'chairs');
+
+    if (empty($name) || empty($price) || empty($stock) || empty($image) || empty($description)) {
+        $errors['product'] = 'All fields are required. Please complete the form.';
+    }
+
+    if (empty($errors)) {
+        $image = time() . '_' . $image;
+        $sql = 'INSERT INTO products(name, price, stock, image, description) VALUES(:name, :price, :stock, :image, :description)';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            ':name' => $name,
+            ':price' => $price,
+            ':stock' => $stock,
+            ':image' => $image,
+            ':description' => $description,
+            ':category' => $category
+        ]);
+    }
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -56,14 +74,6 @@ require_once __DIR__ . '/../components/connection.php';
                     </a>
                 </div>
 
-                <!-- Error Notification Banner -->
-                <?php if (!empty($error)): ?>
-                    <div class="p-4 rounded-2xl bg-[#EFE0E0] border border-[#DFC8C8] text-[#8C3B3B] text-xs flex items-center gap-2.5">
-                        <i class="ri-error-warning-line text-lg flex-shrink-0"></i>
-                        <span><?= htmlspecialchars($error) ?></span>
-                    </div>
-                <?php endif; ?>
-
                 <!-- Form Card in Raw Linen (#F6F3EE) -->
                 <div class="bg-[#F6F3EE] rounded-3xl border border-[#C9C0B3] p-6 sm:p-10 shadow-xs">
                     <form action="" method="POST" enctype="multipart/form-data" class="space-y-6">
@@ -73,28 +83,54 @@ require_once __DIR__ . '/../components/connection.php';
                             <label for="name" class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">
                                 Product Title <span class="text-[#8C3B3B]">*</span>
                             </label>
-                            <input type="text" id="name" name="name" value="<?= htmlspecialchars($_POST['name'] ?? '') ?>" placeholder="e.g. Sculptural Lounge Armchair" class="w-full px-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                            <input type="text" id="name" name="name" value="<?= htmlspecialchars($name ?? '') ?>" placeholder="e.g. Sculptural Lounge Armchair" class="w-full px-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                         </div>
 
-                        <!-- Price and Stock Grid -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <!-- Price, Stock, and Category Grid -->
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+
+                            <!-- Price -->
                             <div class="space-y-1.5">
                                 <label for="price" class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">
                                     Price in MMK <span class="text-[#8C3B3B]">*</span>
                                 </label>
                                 <div class="relative">
                                     <span class="absolute left-4 top-1/2 -translate-y-1/2 text-xs font-semibold text-[#6E6359]">MMK</span>
-                                    <input type="number" step="1" id="price" name="price" value="<?= htmlspecialchars($_POST['price'] ?? '') ?>" placeholder="400000" class="w-full pl-14 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                                    <input type="number" step="1" id="price" name="price" value="<?= htmlspecialchars($price ?? '') ?>" placeholder="400000" class="w-full pl-14 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                                 </div>
                             </div>
 
+                            <!-- Stock -->
                             <div class="space-y-1.5">
                                 <label for="stock" class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">
                                     Initial Inventory Count <span class="text-[#8C3B3B]">*</span>
                                 </label>
-                                <input type="number" id="stock" name="stock" value="<?= htmlspecialchars($_POST['stock'] ?? '25') ?>" placeholder="e.g. 25" class="w-full px-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                                <input type="number" id="stock" name="stock" value="<?= htmlspecialchars($stock ?? '25') ?>" placeholder="e.g. 25" class="w-full px-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                            </div>
+
+                            <!-- Category -->
+                            <div class="space-y-1.5">
+                                <label for="category" class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">
+                                    Category <span class="text-[#8C3B3B]">*</span>
+                                </label>
+                                <div class="relative">
+                                    <select id="category" name="category" class="w-full appearance-none px-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] cursor-pointer transition-all">
+                                        <?php
+                                        $categories = ['chairs', 'sofas', 'tables', 'beds', 'objects', 'wardrobes'];
+                                        $selected_category = $category ?? 'chairs';
+                                        foreach ($categories as $cat):
+                                        ?>
+                                            <option value="<?= htmlspecialchars($cat) ?>" <?= ($selected_category === $cat) ? 'selected' : '' ?>>
+                                                <?= htmlspecialchars($cat) ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <i class="ri-arrow-down-s-line absolute right-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base pointer-events-none"></i>
+                                </div>
                             </div>
                         </div>
+
+
 
                         <!-- Image Dropzone / Upload -->
                         <div class="space-y-1.5">
@@ -119,7 +155,7 @@ require_once __DIR__ . '/../components/connection.php';
                             <label for="description" class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">
                                 Piece Narrative &amp; Specifications
                             </label>
-                            <textarea id="description" name="description" rows="4" placeholder="Detail the timber source, joinery style, finish oils, and ergonomic proportions..." class="w-full p-4 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all"><?= htmlspecialchars($_POST['description'] ?? '') ?></textarea>
+                            <textarea id="description" name="description" rows="4" placeholder="Detail the timber source, joinery style, finish oils, and ergonomic proportions..." class="w-full p-4 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all"><?= htmlspecialchars($description ?? '') ?></textarea>
                         </div>
 
                         <!-- Form Actions -->
@@ -127,7 +163,7 @@ require_once __DIR__ . '/../components/connection.php';
                             <a href="products.php" class="px-5 py-3 rounded-xl border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-xs font-semibold text-[#362F2A] transition-colors">
                                 Cancel
                             </a>
-                            <button type="submit" name="submit" class="px-6 py-3 rounded-xl bg-[#8A5A44] hover:bg-[#704735] text-[#F6F3EE] text-xs font-semibold transition-colors shadow-xs flex items-center gap-2">
+                            <button type="submit" name="create" class="px-6 py-3 rounded-xl bg-[#8A5A44] hover:bg-[#704735] text-[#F6F3EE] text-xs font-semibold transition-colors shadow-xs flex items-center gap-2">
                                 <i class="ri-check-line text-base"></i>
                                 <span>Save &amp; Publish Piece</span>
                             </button>
@@ -142,6 +178,15 @@ require_once __DIR__ . '/../components/connection.php';
     </div>
 
     <script src="js/script.js"></script>
+    <script src="../js/script.js"></script>
+
+    <?php if (!empty($errors)): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                showToast(<?= json_encode($errors); ?>, 'error');
+            });
+        </script>
+    <?php endif; ?>
 </body>
 
 </html>
