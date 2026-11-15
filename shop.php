@@ -153,14 +153,37 @@ $category = $_GET['category'] ?? 'all';
                     <input type="text" id="catalog-search" placeholder="Filter in catalog..." class="w-full pl-9 pr-3 py-2 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-xs text-[#362F2A] placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44]">
                 </div>
 
-                <div class="relative">
-                    <select id="catalog-sort" aria-label="Sort products" class="appearance-none pl-4 pr-9 py-2 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-xs font-medium text-[#362F2A] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] cursor-pointer">
+                <div class="relative" id="sort-dropdown-container">
+                    <select id="catalog-sort" name="sort" aria-label="Sort products" class="hidden">
                         <option value="featured">Sort: Featured</option>
                         <option value="price_asc">Price: Low to High</option>
                         <option value="price_desc">Price: High to Low</option>
                         <option value="name_asc">Name: A to Z</option>
                     </select>
-                    <i class="ri-arrow-down-s-line absolute right-3 top-1/2 -translate-y-1/2 text-[#6E6359] text-sm pointer-events-none"></i>
+
+                    <button type="button" id="sort-dropdown-btn" class="pl-4 pr-8 py-2 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-xs font-medium text-[#362F2A] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] cursor-pointer flex items-center justify-between gap-2 whitespace-nowrap transition-all">
+                        <span id="sort-dropdown-label">Sort: Featured</span>
+                        <i id="sort-dropdown-arrow" class="ri-arrow-down-s-line text-[#6E6359] text-sm transition-transform duration-200"></i>
+                    </button>
+
+                    <div id="sort-dropdown-menu" class="hidden absolute right-0 top-full mt-1.5 w-44 bg-[#F6F3EE] border border-[#C9C0B3] rounded-2xl shadow-xl overflow-hidden py-1.5 z-30">
+                        <div data-value="featured" class="sort-option px-4 py-2 text-xs cursor-pointer transition-colors flex items-center justify-between bg-[#8A5A44] text-[#F6F3EE] font-medium">
+                            <span>Sort: Featured</span>
+                            <i class="ri-check-line text-xs check-icon"></i>
+                        </div>
+                        <div data-value="price_asc" class="sort-option px-4 py-2 text-xs cursor-pointer transition-colors flex items-center justify-between text-[#362F2A] hover:bg-[#DFD8CD]">
+                            <span>Price: Low to High</span>
+                            <i class="ri-check-line text-xs check-icon hidden"></i>
+                        </div>
+                        <div data-value="price_desc" class="sort-option px-4 py-2 text-xs cursor-pointer transition-colors flex items-center justify-between text-[#362F2A] hover:bg-[#DFD8CD]">
+                            <span>Price: High to Low</span>
+                            <i class="ri-check-line text-xs check-icon hidden"></i>
+                        </div>
+                        <div data-value="name_asc" class="sort-option px-4 py-2 text-xs cursor-pointer transition-colors flex items-center justify-between text-[#362F2A] hover:bg-[#DFD8CD]">
+                            <span>Name: A to Z</span>
+                            <i class="ri-check-line text-xs check-icon hidden"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -1249,6 +1272,65 @@ $category = $_GET['category'] ?? 'all';
                     });
                     cards.forEach(c => productGrid.appendChild(c));
                     applyFilters();
+                });
+            }
+
+            // Custom Sort Dropdown Handler
+            const sortBtn = document.getElementById("sort-dropdown-btn");
+            const sortMenu = document.getElementById("sort-dropdown-menu");
+            const sortArrow = document.getElementById("sort-dropdown-arrow");
+            const sortLabel = document.getElementById("sort-dropdown-label");
+            const sortOptions = document.querySelectorAll(".sort-option");
+            const sortContainer = document.getElementById("sort-dropdown-container");
+
+            if (sortBtn && sortMenu) {
+                sortBtn.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    const isOpen = !sortMenu.classList.contains("hidden");
+                    sortMenu.classList.toggle("hidden", isOpen);
+                    if (sortArrow) sortArrow.classList.toggle("rotate-180", !isOpen);
+                });
+
+                sortOptions.forEach(opt => {
+                    opt.addEventListener("click", (e) => {
+                        e.stopPropagation();
+                        const val = opt.getAttribute("data-value");
+                        const txt = opt.querySelector("span") ? opt.querySelector("span").textContent : opt.textContent;
+
+                        if (sortLabel) sortLabel.textContent = txt;
+
+                        sortOptions.forEach(el => {
+                            el.className = "sort-option px-4 py-2 text-xs cursor-pointer transition-colors flex items-center justify-between text-[#362F2A] hover:bg-[#DFD8CD]";
+                            const chk = el.querySelector(".check-icon");
+                            if (chk) chk.classList.add("hidden");
+                        });
+
+                        opt.className = "sort-option px-4 py-2 text-xs cursor-pointer transition-colors flex items-center justify-between bg-[#8A5A44] text-[#F6F3EE] font-medium";
+                        const activeChk = opt.querySelector(".check-icon");
+                        if (activeChk) activeChk.classList.remove("hidden");
+
+                        sortMenu.classList.add("hidden");
+                        if (sortArrow) sortArrow.classList.remove("rotate-180");
+
+                        if (sortSelect) {
+                            sortSelect.value = val;
+                            sortSelect.dispatchEvent(new Event("change"));
+                        }
+                    });
+                });
+
+                document.addEventListener("click", (e) => {
+                    if (sortContainer && !sortContainer.contains(e.target)) {
+                        sortMenu.classList.add("hidden");
+                        if (sortArrow) sortArrow.classList.remove("rotate-180");
+                    }
+                });
+
+                document.addEventListener("keydown", (e) => {
+                    if (e.key === "Escape" && !sortMenu.classList.contains("hidden")) {
+                        sortMenu.classList.add("hidden");
+                        if (sortArrow) sortArrow.classList.remove("rotate-180");
+                    }
                 });
             }
 

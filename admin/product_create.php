@@ -123,34 +123,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create'])) {
                             </div>
 
                             <!-- Category -->
+                            <?php
+                            $categories = [
+                                'chairs' => 'Chairs & Seating',
+                                'sofas' => 'Sofas & Lounge',
+                                'tables' => 'Tables & Desks',
+                                'beds' => 'Beds & Tatami',
+                                'objects' => 'Lighting & Objects'
+                            ];
+                            $category = $_POST['category'] ?? 'chairs';
+                            ?>
                             <div class="space-y-1.5" id="category-dropdown-container">
                                 <label class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">
                                     Category <span class="text-[#8C3B3B]">*</span>
                                 </label>
                                 <div class="relative">
-                                    <?php
-                                    $categories = ['chairs', 'sofas', 'tables', 'beds', 'objects', 'wardrobes'];
-                                    $selected_category = $category ?? 'chairs';
-                                    ?>
                                     <!-- Hidden Input for Form Submission -->
-                                    <input type="hidden" name="category" id="category-input" value="<?= htmlspecialchars($selected_category) ?>">
+                                    <input type="hidden" name="category" id="category-input" value="<?= htmlspecialchars($category ?? 'chair') ?>">
 
                                     <!-- Dropdown Trigger Button -->
                                     <button type="button" id="category-button" class="w-full px-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] cursor-pointer transition-all flex items-center justify-between text-left">
-                                        <span id="category-selected-text"><?= htmlspecialchars(ucfirst($selected_category)) ?></span>
+                                        <span id="category-selected-text"><?= htmlspecialchars(ucfirst($category)) ?></span>
                                         <i id="category-arrow" class="ri-arrow-down-s-line text-[#6E6359] text-base transition-transform duration-200"></i>
                                     </button>
 
                                     <!-- Custom Options Menu -->
                                     <div id="category-menu" class="hidden absolute left-0 right-0 top-full mt-1.5 bg-[#F6F3EE] border border-[#C9C0B3] rounded-2xl shadow-xl overflow-hidden py-1.5 z-30">
                                         <?php foreach ($categories as $cat):
-                                            $is_selected = ($selected_category === $cat);
+                                            $selected_category = ($category === $cat);
                                         ?>
                                             <div data-value="<?= htmlspecialchars($cat) ?>"
                                                 data-label="<?= htmlspecialchars(ucfirst($cat)) ?>"
-                                                class="category-option px-4 py-2.5 text-sm cursor-pointer transition-colors flex items-center justify-between <?= $is_selected ? 'bg-[#8A5A44] text-[#F6F3EE] font-medium' : 'text-[#362F2A] hover:bg-[#DFD8CD]' ?>">
+                                                class="category-option px-4 py-2.5 text-sm cursor-pointer transition-colors flex items-center justify-between <?= $selected_category ? 'bg-[#8A5A44] text-[#F6F3EE] font-medium' : 'text-[#362F2A] hover:bg-[#DFD8CD]' ?>">
                                                 <span><?= htmlspecialchars(ucfirst($cat)) ?></span>
-                                                <i class="ri-check-line text-sm check-icon <?= $is_selected ? '' : 'hidden' ?>"></i>
+                                                <i class="ri-check-line text-sm check-icon <?= $selected_category ? '' : 'hidden' ?>"></i>
                                             </div>
                                         <?php endforeach; ?>
                                     </div>

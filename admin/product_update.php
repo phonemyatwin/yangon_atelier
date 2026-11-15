@@ -29,6 +29,20 @@ require_once __DIR__ . '/../components/connection.php';
     <title>Edit Atelier Product | Yangon Atelier Admin</title>
     <link rel="icon" type="image/x-icon" href="../images/favicon/favicon.ico">
     <?php include "components/css.php"; ?>
+
+    <style>
+        /* Remove number spinner arrows */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+            appearance: textfield;
+        }
+    </style>
 </head>
 
 <body class="bg-[#EDE8E0] text-[#362F2A] font-sans antialiased selection:bg-[#8A5A44] selection:text-[#F6F3EE]">
@@ -78,23 +92,61 @@ require_once __DIR__ . '/../components/connection.php';
                             <input type="text" id="name" name="name" value="Sculptural Lounge Armchair" class="w-full px-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                         </div>
 
-                        <!-- Price and Stock Grid -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <!-- Price, Stock, and Category Grid -->
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+
+                            <!-- Price -->
                             <div class="space-y-1.5">
                                 <label for="price" class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">
                                     Price in MMK <span class="text-[#8C3B3B]">*</span>
                                 </label>
                                 <div class="relative">
                                     <span class="absolute left-4 top-1/2 -translate-y-1/2 text-xs font-semibold text-[#6E6359]">MMK</span>
-                                    <input type="number" step="1" id="price" name="price" value="400000" class="w-full pl-14 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                                    <input type="number" step="1" id="price" name="price" value="<?= htmlspecialchars($price ?? '') ?>" placeholder="400000" class="w-full pl-14 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
                                 </div>
                             </div>
 
+                            <!-- Stock -->
                             <div class="space-y-1.5">
                                 <label for="stock" class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">
-                                    Inventory Count <span class="text-[#8C3B3B]">*</span>
+                                    Initial Inventory Count <span class="text-[#8C3B3B]">*</span>
                                 </label>
-                                <input type="number" id="stock" name="stock" value="25" class="w-full px-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                                <input type="number" id="stock" name="stock" value="<?= htmlspecialchars($stock ?? '25') ?>" placeholder="e.g. 25" class="w-full px-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
+                            </div>
+
+                            <!-- Category -->
+                            <div class="space-y-1.5" id="category-dropdown-container">
+                                <label class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">
+                                    Category <span class="text-[#8C3B3B]">*</span>
+                                </label>
+                                <div class="relative">
+                                    <?php
+                                    $categories = ['chairs', 'sofas', 'tables', 'beds', 'objects', 'wardrobes'];
+                                    $category = $_POST['category'] ?? 'chairs';
+                                    ?>
+                                    <!-- Hidden Input for Form Submission -->
+                                    <input type="hidden" name="category" id="category-input" value="<?= htmlspecialchars($category) ?>">
+
+                                    <!-- Dropdown Trigger Button -->
+                                    <button type="button" id="category-button" class="w-full px-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] cursor-pointer transition-all flex items-center justify-between text-left">
+                                        <span id="category-selected-text"><?= htmlspecialchars(ucfirst($category)) ?></span>
+                                        <i id="category-arrow" class="ri-arrow-down-s-line text-[#6E6359] text-base transition-transform duration-200"></i>
+                                    </button>
+
+                                    <!-- Custom Options Menu -->
+                                    <div id="category-menu" class="hidden absolute left-0 right-0 top-full mt-1.5 bg-[#F6F3EE] border border-[#C9C0B3] rounded-2xl shadow-xl overflow-hidden py-1.5 z-30">
+                                        <?php foreach ($categories as $cat):
+                                            $selected_category = ($category === $cat);
+                                        ?>
+                                            <div data-value="<?= htmlspecialchars($cat) ?>"
+                                                data-label="<?= htmlspecialchars(ucfirst($cat)) ?>"
+                                                class="category-option px-4 py-2.5 text-sm cursor-pointer transition-colors flex items-center justify-between <?= $selected_category ? 'bg-[#8A5A44] text-[#F6F3EE] font-medium' : 'text-[#362F2A] hover:bg-[#DFD8CD]' ?>">
+                                                <span><?= htmlspecialchars(ucfirst($cat)) ?></span>
+                                                <i class="ri-check-line text-sm check-icon <?= $selected_category ? '' : 'hidden' ?>"></i>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -141,6 +193,70 @@ require_once __DIR__ . '/../components/connection.php';
             <?php include "components/footer.php"; ?>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const button = document.getElementById('category-button');
+            const menu = document.getElementById('category-menu');
+            const arrow = document.getElementById('category-arrow');
+            const input = document.getElementById('category-input');
+            const selectedText = document.getElementById('category-selected-text');
+            const options = document.querySelectorAll('.category-option');
+            const container = document.getElementById('category-dropdown-container');
+
+            if (button && menu) {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const isOpen = !menu.classList.contains('hidden');
+                    if (isOpen) {
+                        menu.classList.add('hidden');
+                        arrow.classList.remove('rotate-180');
+                    } else {
+                        menu.classList.remove('hidden');
+                        arrow.classList.add('rotate-180');
+                    }
+                });
+
+                options.forEach(function(opt) {
+                    opt.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const value = this.getAttribute('data-value');
+                        const label = this.getAttribute('data-label');
+
+                        input.value = value;
+                        selectedText.textContent = label;
+
+                        options.forEach(function(el) {
+                            el.className = 'category-option px-4 py-2.5 text-sm cursor-pointer transition-colors flex items-center justify-between text-[#362F2A] hover:bg-[#DFD8CD]';
+                            const check = el.querySelector('.check-icon');
+                            if (check) check.classList.add('hidden');
+                        });
+
+                        this.className = 'category-option px-4 py-2.5 text-sm cursor-pointer transition-colors flex items-center justify-between bg-[#8A5A44] text-[#F6F3EE] font-medium';
+                        const activeCheck = this.querySelector('.check-icon');
+                        if (activeCheck) activeCheck.classList.remove('hidden');
+
+                        menu.classList.add('hidden');
+                        arrow.classList.remove('rotate-180');
+                    });
+                });
+
+                document.addEventListener('click', function(e) {
+                    if (container && !container.contains(e.target)) {
+                        menu.classList.add('hidden');
+                        arrow.classList.remove('rotate-180');
+                    }
+                });
+
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && !menu.classList.contains('hidden')) {
+                        menu.classList.add('hidden');
+                        arrow.classList.remove('rotate-180');
+                    }
+                });
+            }
+        });
+    </script>
 
     <script src="js/script.js"></script>
 </body>

@@ -147,23 +147,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
                             </div>
 
                             <!-- Category -->
-                            <div class="space-y-1.5">
-                                <label for="category" class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">
+                            <div class="space-y-1.5" id="category-dropdown-container">
+                                <label class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">
                                     Category <span class="text-[#8C3B3B]">*</span>
                                 </label>
                                 <div class="relative">
-                                    <select id="category" name="category" class="w-full appearance-none px-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] cursor-pointer transition-all">
-                                        <?php
-                                        $categories = ['Philosophy', 'Craftsmanship', 'Spatial Design', 'Interior Styling', 'Artisanship', 'Lighting', 'Living Rituals', 'Architecture', 'Editorial'];
-                                        $selected_category = $category ?? $blog['category'] ?? 'Philosophy';
-                                        foreach ($categories as $cat):
+                                    <?php
+                                    $categories = ['Philosophy', 'Craftsmanship', 'Spatial Design', 'Interior Styling', 'Artisanship', 'Lighting', 'Living Rituals', 'Architecture', 'Editorial'];
+                                    $selected_category = $category ?? $blog['category'] ?? 'Philosophy';
+                                    ?>
+                                    <!-- Hidden Input for Form Submission -->
+                                    <input type="hidden" name="category" id="category-input" value="<?= htmlspecialchars($selected_category) ?>">
+
+                                    <!-- Dropdown Trigger Button -->
+                                    <button type="button" id="category-button" class="w-full px-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] cursor-pointer transition-all flex items-center justify-between text-left">
+                                        <span id="category-selected-text"><?= htmlspecialchars($selected_category) ?></span>
+                                        <i id="category-arrow" class="ri-arrow-down-s-line text-[#6E6359] text-base transition-transform duration-200"></i>
+                                    </button>
+
+                                    <!-- Custom Options Menu -->
+                                    <div id="category-menu" class="hidden absolute left-0 right-0 top-full mt-1.5 bg-[#F6F3EE] border border-[#C9C0B3] rounded-2xl shadow-xl overflow-hidden py-1.5 z-30 max-h-60 overflow-y-auto">
+                                        <?php foreach ($categories as $cat): 
+                                            $is_selected = ($selected_category === $cat);
                                         ?>
-                                            <option value="<?= htmlspecialchars($cat) ?>" <?= ($selected_category === $cat) ? 'selected' : '' ?>>
-                                                <?= htmlspecialchars($cat) ?>
-                                            </option>
+                                            <div data-value="<?= htmlspecialchars($cat) ?>"
+                                                 data-label="<?= htmlspecialchars($cat) ?>"
+                                                 class="category-option px-4 py-2.5 text-sm cursor-pointer transition-colors flex items-center justify-between <?= $is_selected ? 'bg-[#8A5A44] text-[#F6F3EE] font-medium' : 'text-[#362F2A] hover:bg-[#DFD8CD]' ?>">
+                                                <span><?= htmlspecialchars($cat) ?></span>
+                                                <i class="ri-check-line text-sm check-icon <?= $is_selected ? '' : 'hidden' ?>"></i>
+                                            </div>
                                         <?php endforeach; ?>
-                                    </select>
-                                    <i class="ri-arrow-down-s-line absolute right-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base pointer-events-none"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -214,6 +228,70 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
 
     <script src="js/script.js"></script>
     <script src="../js/script.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const button = document.getElementById('category-button');
+            const menu = document.getElementById('category-menu');
+            const arrow = document.getElementById('category-arrow');
+            const input = document.getElementById('category-input');
+            const selectedText = document.getElementById('category-selected-text');
+            const options = document.querySelectorAll('.category-option');
+            const container = document.getElementById('category-dropdown-container');
+
+            if (button && menu) {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const isOpen = !menu.classList.contains('hidden');
+                    if (isOpen) {
+                        menu.classList.add('hidden');
+                        arrow.classList.remove('rotate-180');
+                    } else {
+                        menu.classList.remove('hidden');
+                        arrow.classList.add('rotate-180');
+                    }
+                });
+
+                options.forEach(function(opt) {
+                    opt.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const value = this.getAttribute('data-value');
+                        const label = this.getAttribute('data-label');
+
+                        input.value = value;
+                        selectedText.textContent = label;
+
+                        options.forEach(function(el) {
+                            el.className = 'category-option px-4 py-2.5 text-sm cursor-pointer transition-colors flex items-center justify-between text-[#362F2A] hover:bg-[#DFD8CD]';
+                            const check = el.querySelector('.check-icon');
+                            if (check) check.classList.add('hidden');
+                        });
+
+                        this.className = 'category-option px-4 py-2.5 text-sm cursor-pointer transition-colors flex items-center justify-between bg-[#8A5A44] text-[#F6F3EE] font-medium';
+                        const activeCheck = this.querySelector('.check-icon');
+                        if (activeCheck) activeCheck.classList.remove('hidden');
+
+                        menu.classList.add('hidden');
+                        arrow.classList.remove('rotate-180');
+                    });
+                });
+
+                document.addEventListener('click', function(e) {
+                    if (container && !container.contains(e.target)) {
+                        menu.classList.add('hidden');
+                        arrow.classList.remove('rotate-180');
+                    }
+                });
+
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && !menu.classList.contains('hidden')) {
+                        menu.classList.add('hidden');
+                        arrow.classList.remove('rotate-180');
+                    }
+                });
+            }
+        });
+    </script>
     <?php if (!empty($errors)): ?>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
