@@ -8,24 +8,45 @@ require_once __DIR__ . '/components/session_check.php';
 // Connect database
 require_once __DIR__ . '/../components/connection.php';
 
+$categories = [
+    'chairs'  => 'Chairs & Seating',
+    'sofas'   => 'Sofas & Lounge',
+    'tables'  => 'Tables & Desks',
+    'beds'    => 'Beds & Tatami',
+    'objects' => 'Lighting & Objects'
+];
+
 $errors = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create'])) {
     $name = trim($_POST['name'] ?? '');
     $price = $_POST['price'] ?? '';
     $stock = $_POST['stock'] ?? '';
-    $image = $_FILES['image']['name'];
+    $image = $_FILES['image']['name'] ?? '';
     $description = trim($_POST['description'] ?? '');
-    $category = trim($_POST['category'] ?? 'Chairs & Seating');
+    $category = trim($_POST['category'] ?? 'chairs');
 
-    if (empty($name) || empty($price) || empty($stock) || empty($image) || empty($category)) {
+    if (empty($name) || $price === '' || $stock === '' || empty($image) || empty($category)) {
         $errors['product'] = 'All fields are required. Please complete the form.';
     } else {
         if (!is_numeric($price) || $price < 0) {
             $errors['price'] = 'Please enter a valid price.';
         }
 
-        if (!filter_var($stock, FILTER_VALIDATE_INT) || $stock < 0) {
+        if (filter_var($stock, FILTER_VALIDATE_INT) === FALSE || (int)$stock < 0) {
             $errors['stock'] = 'Please enter a valid inventory count.';
+        }
+
+        if (!array_key_exists($category, $categories)) {
+            $errors['category'] = 'Please select a valid category.';
+        }
+
+        $allowed_extensions = ['jpg', 'jpeg', 'png', 'webp'];
+        $extension = strtolower(pathinfo($image, PATHINFO_EXTENSION));
+
+        if (!in_array($extension, $allowed_extensions)) {
+            $errors['extension'] = 'Only JPG, JPEG, PNG, and WEBP image files are allowed.';
+        } elseif (!isset($_FILES['image']) || $_FILES['image']['error'] !== UPLOAD_ERR_OK) {
+            $errors['image'] = 'An error occurred while uploading the image.';
         }
     }
 
@@ -146,39 +167,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create'])) {
 
                             <!-- Category -->
                             <?php
-                            $categories = [
-                                'chairs' => 'Chairs & Seating',
-                                'sofas' => 'Sofas & Lounge',
-                                'tables' => 'Tables & Desks',
-                                'beds' => 'Beds & Tatami',
-                                'objects' => 'Lighting & Objects'
-                            ];
-                            $category = $_POST['category'] ?? 'Chairs & Seating';
+                            $selected_value = $_POST['category'] ?? 'chairs';
+                            $selected_label = $categories[$selected_value] ?? 'Chairs & Seating';
                             ?>
                             <div class="space-y-1.5" id="category-dropdown-container">
                                 <label class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">
                                     Category <span class="text-[#8C3B3B]">*</span>
                                 </label>
                                 <div class="relative">
-                                    <!-- Hidden Input for Form Submission -->
-                                    <input type="hidden" name="category" id="category-input" value="<?= htmlspecialchars($category ?? 'Chairs & Seating') ?>">
+                                    <!-- Hidden Input for Form Submission (stores the value e.g. 'chairs') -->
+                                    <input type="hidden" name="category" id="category-input" value="<?= htmlspecialchars($selected_value) ?>">
 
-                                    <!-- Dropdown Trigger Button -->
+                                    <!-- Dropdown Trigger Button -->Sculptural Lounge Armchair
                                     <button type="button" id="category-button" class="w-full px-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] cursor-pointer transition-all flex items-center justify-between text-left">
-                                        <span id="category-selected-text"><?= htmlspecialchars(ucfirst($category)) ?></span>
+                                        <span id="category-selected-text"><?= htmlspecialchars($selected_label) ?></span>
                                         <i id="category-arrow" class="ri-arrow-down-s-line text-[#6E6359] text-base transition-transform duration-200"></i>
                                     </button>
 
                                     <!-- Custom Options Menu -->
                                     <div id="category-menu" class="hidden absolute left-0 right-0 top-full mt-1.5 bg-[#F6F3EE] border border-[#C9C0B3] rounded-2xl shadow-xl overflow-hidden py-1.5 z-30">
-                                        <?php foreach ($categories as $cat):
-                                            $selected_category = ($category === $cat);
+                                        <?php foreach ($categories as $value => $label):
+                                            $is_selected = ($selected_value === $value);
                                         ?>
-                                            <div data-value="<?= htmlspecialchars($cat) ?>"
-                                                data-label="<?= htmlspecialchars(ucfirst($cat)) ?>"
-                                                class="category-option px-4 py-2.5 text-sm cursor-pointer transition-colors flex items-center justify-between <?= $selected_category ? 'bg-[#8A5A44] text-[#F6F3EE] font-medium' : 'text-[#362F2A] hover:bg-[#DFD8CD]' ?>">
-                                                <span><?= htmlspecialchars(ucfirst($cat)) ?></span>
-                                                <i class="ri-check-line text-sm check-icon <?= $selected_category ? '' : 'hidden' ?>"></i>
+                                            <div data-value="<?= htmlspecialchars($value) ?>"
+                                                data-label="<?= htmlspecialchars($label) ?>"
+                                                class="category-option px-4 py-2.5 text-sm cursor-pointer transition-colors flex items-center justify-between <?= $is_selected ? 'bg-[#8A5A44] text-[#F6F3EE] font-medium' : 'text-[#362F2A] hover:bg-[#DFD8CD]' ?>">
+                                                <span><?= htmlspecialchars($label) ?></span>
+                                                <i class="ri-check-line text-sm check-icon <?= $is_selected ? '' : 'hidden' ?>"></i>
                                             </div>
                                         <?php endforeach; ?>
                                     </div>

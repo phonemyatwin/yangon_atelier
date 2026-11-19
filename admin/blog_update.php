@@ -10,7 +10,7 @@ require_once __DIR__ . '/../components/connection.php';
 require_once __DIR__ . '/../components/function.php';
 
 $id = $_GET['id'] ?? '';
-$errors = [];
+
 if (empty($id) || !filter_var($id, FILTER_VALIDATE_INT)) {
     header('Location: blog.php');
     exit;
@@ -34,12 +34,14 @@ if (!$blog) {
     exit;
 }
 
-if (!$blog || $_SESSION['admin']['id'] !== $blog['author_id']) {
+if ($_SESSION['admin']['id'] !== $blog['author_id']) {
     $_SESSION['error'] = 'You do not have permission to update this article.';
     header('Location: blog.php');
     exit;
 }
 
+$errors = [];
+$categories = ['Philosophy', 'Craftsmanship', 'Spatial Design', 'Interior Styling', 'Artisanship', 'Lighting', 'Living Rituals', 'Architecture', 'Editorial'];
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
     $title = trim($_POST['title'] ?? $blog['title']);
     $author = trim($_POST['author'] ?? $blog['author']);
@@ -50,15 +52,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
 
     if (empty($title) || empty($author) || empty($content) || empty($category)) {
         $errors['blog_update_form'] = 'All fields are required. Please complete the form.';
+    } else {
+        $allowed_extensions = ['jpg', 'jpeg', 'png', 'webp'];
+        $extension = strtolower(pathinfo($new_image, PATHINFO_EXTENSION));
+        if (in_array($extension, $allowed_extensions)) {
+            $errors['extension'] = 'Only JPG, JPEG, PNG, and WEBP image files are allowed.';
+        } elseif (!isset($_FILES['image']) || $_FILES['image']['error'] !== UPLOAD_ERR_OK) {
+            $errors['image'] = 'An error occurred while uploading the image.';
+        }
+
+        if (in_array($category, $categories)) {
+            $errors['category'] = 'Please select a valid category.';
+        }
     }
 
     if (empty($errors)) {
         try {
             if (!empty($new_image)) {
                 $image = time() . '_' . $new_image;
-                move_uploaded_file($_FILES['image']['tmp_name'], __DIR__ . '/../media/' . $image);
-                if (!empty($old_image) && file_exists(__DIR__ . '/../media/' . $old_image)) {
-                    unlink(__DIR__ . '/../media/' . $old_image);
+                if (!move_uploaded_file($_FILES['image']['tmp_name'], __DIR__ . '/../media/' . $image)) {
+                    $errors['image'] = 'Failed to upload the image. Please check directory permission.';
+                } else {
+                    if (!empty($old_image) && file_exists(__DIR__ . '/../media/' . $old_image)) {
+                        unlink(__DIR__ . '/../media/' . $old_image);
+                    }
                 }
             } else {
                 $image = $old_image;
@@ -153,7 +170,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
                                 </label>
                                 <div class="relative">
                                     <?php
-                                    $categories = ['Philosophy', 'Craftsmanship', 'Spatial Design', 'Interior Styling', 'Artisanship', 'Lighting', 'Living Rituals', 'Architecture', 'Editorial'];
                                     $selected_category = $category ?? $blog['category'] ?? 'Philosophy';
                                     ?>
                                     <!-- Hidden Input for Form Submission -->
@@ -167,12 +183,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
 
                                     <!-- Custom Options Menu -->
                                     <div id="category-menu" class="hidden absolute left-0 right-0 top-full mt-1.5 bg-[#F6F3EE] border border-[#C9C0B3] rounded-2xl shadow-xl overflow-hidden py-1.5 z-30 max-h-60 overflow-y-auto">
-                                        <?php foreach ($categories as $cat): 
+                                        <?php foreach ($categories as $cat):
                                             $is_selected = ($selected_category === $cat);
                                         ?>
                                             <div data-value="<?= htmlspecialchars($cat) ?>"
-                                                 data-label="<?= htmlspecialchars($cat) ?>"
-                                                 class="category-option px-4 py-2.5 text-sm cursor-pointer transition-colors flex items-center justify-between <?= $is_selected ? 'bg-[#8A5A44] text-[#F6F3EE] font-medium' : 'text-[#362F2A] hover:bg-[#DFD8CD]' ?>">
+                                                data-label="<?= htmlspecialchars($cat) ?>"
+                                                class="category-option px-4 py-2.5 text-sm cursor-pointer transition-colors flex items-center justify-between <?= $is_selected ? 'bg-[#8A5A44] text-[#F6F3EE] font-medium' : 'text-[#362F2A] hover:bg-[#DFD8CD]' ?>">
                                                 <span><?= htmlspecialchars($cat) ?></span>
                                                 <i class="ri-check-line text-sm check-icon <?= $is_selected ? '' : 'hidden' ?>"></i>
                                             </div>

@@ -8,7 +8,21 @@ require_once __DIR__ . '/components/session_check.php';
 // Connect database
 require_once __DIR__ . '/../components/connection.php';
 
+$categories = [
+    'chairs' => 'Chairs & Seating',
+    'sofas' => 'Sofas & Lounge',
+    'tables' => 'Tables & Desks',
+    'beds' => 'Beds & Tatami',
+    'objects' => 'Lighting & Objects',
+];
+
+$sql = 'SELECT * FROM products ORDER BY id DESC';
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+$products = $stmt->fetchAll();
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,7 +63,7 @@ require_once __DIR__ . '/../components/connection.php';
                 <div class="bg-[#F6F3EE] rounded-3xl border border-[#C9C0B3] overflow-hidden shadow-xs">
                     <div class="p-5 border-b border-[#C9C0B3] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                         <div class="text-xs text-[#6E6359]">
-                            Showing <strong>8</strong> catalog pieces
+                            Showing <strong><?= count($products); ?></strong> catalog pieces
                         </div>
                         <div class="relative sm:w-64">
                             <i class="ri-search-line absolute left-3 top-1/2 -translate-y-1/2 text-[#6E6359] text-xs"></i>
@@ -71,245 +85,53 @@ require_once __DIR__ . '/../components/connection.php';
                             </thead>
                             <tbody class="divide-y divide-[#C9C0B3] text-[#6E6359] font-medium">
 
-                                <!-- Item 1 -->
-                                <tr class="hover:bg-[#DFD8CD]/40 transition-colors">
-                                    <td class="py-4 px-6 text-[#6E6359]">#1</td>
-                                    <td class="py-4 px-6">
-                                        <div class="w-14 h-11 rounded-xl bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden flex items-center justify-center">
-                                            <img src="../images/chairs/chair1.jpg" alt="Nordic Solid Wood Armchair" class="w-full h-full object-cover">
-                                        </div>
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        <span class="font-semibold text-[#362F2A] block text-sm">Nordic Solid Wood Armchair</span>
-                                        <span class="text-[11px] text-[#8A5A44]">Chairs &amp; Seating</span>
-                                    </td>
-                                    <td class="py-4 px-6 font-semibold text-[#362F2A]">420,000 MMK</td>
-                                    <td class="py-4 px-6">
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold text-[#3F624D] bg-[#DCE5DF] border border-[#C6D6CB]">
-                                            25 In Stock
-                                        </span>
-                                    </td>
-                                    <td class="py-4 px-6 text-right">
-                                        <div class="inline-flex items-center gap-2">
-                                            <a href="product_update.php?id=1" class="px-2.5 py-1 rounded-lg border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-[#8A5A44] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-pencil-line"></i> Edit
-                                            </a>
-                                            <a href="product_delete.php?id=1" class="px-2.5 py-1 rounded-lg border border-[#DFC8C8] bg-[#EFE0E0] hover:bg-[#E5D0D0] text-[#8C3B3B] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-delete-bin-line"></i> Delete
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <!-- Item 2 -->
-                                <tr class="hover:bg-[#DFD8CD]/40 transition-colors">
-                                    <td class="py-4 px-6 text-[#6E6359]">#2</td>
-                                    <td class="py-4 px-6">
-                                        <div class="w-14 h-11 rounded-xl bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden flex items-center justify-center">
-                                            <img src="../images/chairs/chair2.jpg" alt="Curved Lounge Armchair" class="w-full h-full object-cover">
-                                        </div>
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        <span class="font-semibold text-[#362F2A] block text-sm">Curved Lounge Armchair</span>
-                                        <span class="text-[11px] text-[#8A5A44]">Lounge &amp; Seating</span>
-                                    </td>
-                                    <td class="py-4 px-6 font-semibold text-[#362F2A]">580,000 MMK</td>
-                                    <td class="py-4 px-6">
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold text-[#3F624D] bg-[#DCE5DF] border border-[#C6D6CB]">
-                                            50 In Stock
-                                        </span>
-                                    </td>
-                                    <td class="py-4 px-6 text-right">
-                                        <div class="inline-flex items-center gap-2">
-                                            <a href="product_update.php?id=2" class="px-2.5 py-1 rounded-lg border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-[#8A5A44] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-pencil-line"></i> Edit
-                                            </a>
-                                            <a href="product_delete.php?id=2" class="px-2.5 py-1 rounded-lg border border-[#DFC8C8] bg-[#EFE0E0] hover:bg-[#E5D0D0] text-[#8C3B3B] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-delete-bin-line"></i> Delete
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <!-- Item 3 -->
-                                <tr class="hover:bg-[#DFD8CD]/40 transition-colors">
-                                    <td class="py-4 px-6 text-[#6E6359]">#3</td>
-                                    <td class="py-4 px-6">
-                                        <div class="w-14 h-11 rounded-xl bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden flex items-center justify-center">
-                                            <img src="../images/couches/couch1.jpg" alt="Bouclé Modular Sofa" class="w-full h-full object-cover">
-                                        </div>
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        <span class="font-semibold text-[#362F2A] block text-sm">Bouclé Modular Sofa</span>
-                                        <span class="text-[11px] text-[#8A5A44]">Sofas &amp; Sectionals</span>
-                                    </td>
-                                    <td class="py-4 px-6 font-semibold text-[#362F2A]">1,250,000 MMK</td>
-                                    <td class="py-4 px-6">
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold text-[#8C5327] bg-[#EFE2D5] border border-[#E0CFBF]">
-                                            8 Low Stock
-                                        </span>
-                                    </td>
-                                    <td class="py-4 px-6 text-right">
-                                        <div class="inline-flex items-center gap-2">
-                                            <a href="product_update.php?id=3" class="px-2.5 py-1 rounded-lg border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-[#8A5A44] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-pencil-line"></i> Edit
-                                            </a>
-                                            <a href="product_delete.php?id=3" class="px-2.5 py-1 rounded-lg border border-[#DFC8C8] bg-[#EFE0E0] hover:bg-[#E5D0D0] text-[#8C3B3B] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-delete-bin-line"></i> Delete
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <!-- Item 4 -->
-                                <tr class="hover:bg-[#DFD8CD]/40 transition-colors">
-                                    <td class="py-4 px-6 text-[#6E6359]">#4</td>
-                                    <td class="py-4 px-6">
-                                        <div class="w-14 h-11 rounded-xl bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden flex items-center justify-center">
-                                            <img src="../images/tables/table1.jpg" alt="Solid Natural Oak Dining Table" class="w-full h-full object-cover">
-                                        </div>
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        <span class="font-semibold text-[#362F2A] block text-sm">Solid Natural Oak Dining Table</span>
-                                        <span class="text-[11px] text-[#8A5A44]">Dining Tables</span>
-                                    </td>
-                                    <td class="py-4 px-6 font-semibold text-[#362F2A]">890,000 MMK</td>
-                                    <td class="py-4 px-6">
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold text-[#3F624D] bg-[#DCE5DF] border border-[#C6D6CB]">
-                                            14 In Stock
-                                        </span>
-                                    </td>
-                                    <td class="py-4 px-6 text-right">
-                                        <div class="inline-flex items-center gap-2">
-                                            <a href="product_update.php?id=4" class="px-2.5 py-1 rounded-lg border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-[#8A5A44] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-pencil-line"></i> Edit
-                                            </a>
-                                            <a href="product_delete.php?id=4" class="px-2.5 py-1 rounded-lg border border-[#DFC8C8] bg-[#EFE0E0] hover:bg-[#E5D0D0] text-[#8C3B3B] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-delete-bin-line"></i> Delete
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <!-- Item 5 -->
-                                <tr class="hover:bg-[#DFD8CD]/40 transition-colors">
-                                    <td class="py-4 px-6 text-[#6E6359]">#5</td>
-                                    <td class="py-4 px-6">
-                                        <div class="w-14 h-11 rounded-xl bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden flex items-center justify-center">
-                                            <img src="../images/beds/bed1.jpg" alt="Upholstered Platform Bed" class="w-full h-full object-cover">
-                                        </div>
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        <span class="font-semibold text-[#362F2A] block text-sm">Upholstered Platform Bed</span>
-                                        <span class="text-[11px] text-[#8A5A44]">Bedroom Architecture</span>
-                                    </td>
-                                    <td class="py-4 px-6 font-semibold text-[#362F2A]">1,480,000 MMK</td>
-                                    <td class="py-4 px-6">
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold text-[#3F624D] bg-[#DCE5DF] border border-[#C6D6CB]">
-                                            10 In Stock
-                                        </span>
-                                    </td>
-                                    <td class="py-4 px-6 text-right">
-                                        <div class="inline-flex items-center gap-2">
-                                            <a href="product_update.php?id=5" class="px-2.5 py-1 rounded-lg border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-[#8A5A44] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-pencil-line"></i> Edit
-                                            </a>
-                                            <a href="product_delete.php?id=5" class="px-2.5 py-1 rounded-lg border border-[#DFC8C8] bg-[#EFE0E0] hover:bg-[#E5D0D0] text-[#8C3B3B] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-delete-bin-line"></i> Delete
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <!-- Item 6 -->
-                                <tr class="hover:bg-[#DFD8CD]/40 transition-colors">
-                                    <td class="py-4 px-6 text-[#6E6359]">#6</td>
-                                    <td class="py-4 px-6">
-                                        <div class="w-14 h-11 rounded-xl bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden flex items-center justify-center">
-                                            <img src="../images/tables/table3.jpg" alt="Marble Low Coffee Table" class="w-full h-full object-cover">
-                                        </div>
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        <span class="font-semibold text-[#362F2A] block text-sm">Marble Low Coffee Table</span>
-                                        <span class="text-[11px] text-[#8A5A44]">Coffee Tables</span>
-                                    </td>
-                                    <td class="py-4 px-6 font-semibold text-[#362F2A]">520,000 MMK</td>
-                                    <td class="py-4 px-6">
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold text-[#3F624D] bg-[#DCE5DF] border border-[#C6D6CB]">
-                                            18 In Stock
-                                        </span>
-                                    </td>
-                                    <td class="py-4 px-6 text-right">
-                                        <div class="inline-flex items-center gap-2">
-                                            <a href="product_update.php?id=6" class="px-2.5 py-1 rounded-lg border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-[#8A5A44] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-pencil-line"></i> Edit
-                                            </a>
-                                            <a href="product_delete.php?id=6" class="px-2.5 py-1 rounded-lg border border-[#DFC8C8] bg-[#EFE0E0] hover:bg-[#E5D0D0] text-[#8C3B3B] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-delete-bin-line"></i> Delete
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <!-- Item 7 -->
-                                <tr class="hover:bg-[#DFD8CD]/40 transition-colors">
-                                    <td class="py-4 px-6 text-[#6E6359]">#7</td>
-                                    <td class="py-4 px-6">
-                                        <div class="w-14 h-11 rounded-xl bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden flex items-center justify-center">
-                                            <img src="../images/beds/bed2.jpg" alt="Japandi Low Tatami Bed" class="w-full h-full object-cover">
-                                        </div>
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        <span class="font-semibold text-[#362F2A] block text-sm">Japandi Low Tatami Bed</span>
-                                        <span class="text-[11px] text-[#8A5A44]">Low Platform Beds</span>
-                                    </td>
-                                    <td class="py-4 px-6 font-semibold text-[#362F2A]">1,850,000 MMK</td>
-                                    <td class="py-4 px-6">
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold text-[#8C5327] bg-[#EFE2D5] border border-[#E0CFBF]">
-                                            5 Low Stock
-                                        </span>
-                                    </td>
-                                    <td class="py-4 px-6 text-right">
-                                        <div class="inline-flex items-center gap-2">
-                                            <a href="product_update.php?id=7" class="px-2.5 py-1 rounded-lg border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-[#8A5A44] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-pencil-line"></i> Edit
-                                            </a>
-                                            <a href="product_delete.php?id=7" class="px-2.5 py-1 rounded-lg border border-[#DFC8C8] bg-[#EFE0E0] hover:bg-[#E5D0D0] text-[#8C3B3B] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-delete-bin-line"></i> Delete
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <!-- Item 8 -->
-                                <tr class="hover:bg-[#DFD8CD]/40 transition-colors">
-                                    <td class="py-4 px-6 text-[#6E6359]">#8</td>
-                                    <td class="py-4 px-6">
-                                        <div class="w-14 h-11 rounded-xl bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden flex items-center justify-center">
-                                            <img src="../images/tables/table8.jpg" alt="Sculptural Ceramic Table Lamp" class="w-full h-full object-cover">
-                                        </div>
-                                    </td>
-                                    <td class="py-4 px-6">
-                                        <span class="font-semibold text-[#362F2A] block text-sm">Sculptural Ceramic Table Lamp</span>
-                                        <span class="text-[11px] text-[#8A5A44]">Lighting &amp; Objects</span>
-                                    </td>
-                                    <td class="py-4 px-6 font-semibold text-[#362F2A]">195,000 MMK</td>
-                                    <td class="py-4 px-6">
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold text-[#3F624D] bg-[#DCE5DF] border border-[#C6D6CB]">
-                                            32 In Stock
-                                        </span>
-                                    </td>
-                                    <td class="py-4 px-6 text-right">
-                                        <div class="inline-flex items-center gap-2">
-                                            <a href="product_update.php?id=8" class="px-2.5 py-1 rounded-lg border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-[#8A5A44] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-pencil-line"></i> Edit
-                                            </a>
-                                            <a href="product_delete.php?id=8" class="px-2.5 py-1 rounded-lg border border-[#DFC8C8] bg-[#EFE0E0] hover:bg-[#E5D0D0] text-[#8C3B3B] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-delete-bin-line"></i> Delete
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <?php if (!empty($products)): ?>
+                                    <?php foreach ($products as $product): ?>
+                                        <!-- Item 1 -->
+                                        <tr class="hover:bg-[#DFD8CD]/40 transition-colors">
+                                            <td class="py-4 px-6 text-[#6E6359]">#<?= htmlspecialchars($product['id']); ?></td>
+                                            <td class="py-4 px-6">
+                                                <div class="w-14 h-11 rounded-xl bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden flex items-center justify-center">
+                                                    <img src="../media/<?= htmlspecialchars($product['image']); ?>" alt="<?= htmlspecialchars($product['name']); ?>" class="w-full h-full object-cover">
+                                                </div>
+                                            </td>
+                                            <td class="py-4 px-6">
+                                                <span class="font-semibold text-[#362F2A] block text-sm"><?= htmlspecialchars($product['name']); ?></span>
+                                                <span class="text-[11px] text-[#8A5A44]"><?= htmlspecialchars($categories[$product['category']] ?? ucfirst(htmlspecialchars($product['category']) ?? 'Uncategorized')); ?></span>
+                                            </td>
+                                            <td class="py-4 px-6 font-semibold text-[#362F2A]"><?= number_format((int)$product['price']); ?> MMK</td>
+                                            <td class="py-4 px-6">
+                                                <?php if ((int)$product['stock'] > 0): ?>
+                                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold text-[#3F624D] bg-[#DCE5DF] border border-[#C6D6CB]">
+                                                        <?= (int)$product['stock']; ?> In Stock
+                                                    </span>
+                                                <?php else: ?>
+                                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold text-[#8C3B3B] bg-[#EFE0E0] border border-[#DFC8C8]">
+                                                        Out of Stock
+                                                    </span>
+                                                <?php endif; ?>
+                                            </td>
+                                            <td class="py-4 px-6 text-right">
+                                                <div class="inline-flex items-center gap-2">
+                                                    <a href="product_update.php?id=<?= (int)$product['id']; ?>" class="px-2.5 py-1 rounded-lg border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-[#8A5A44] font-semibold transition-colors flex items-center gap-1">
+                                                        <i class="ri-pencil-line"></i> Edit
+                                                    </a>
+                                                    <a href="product_delete.php?id=<?= (int)$product['id']; ?>" class="px-2.5 py-1 rounded-lg border border-[#DFC8C8] bg-[#EFE0E0] hover:bg-[#E5D0D0] text-[#8C3B3B] font-semibold transition-colors flex items-center gap-1">
+                                                        <i class="ri-delete-bin-line"></i> Delete
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <tr>
+                                        <td colspan="6" class="py-12 text-center text-[#6E6359]">
+                                            <i class="ri-article-line text-3xl mb-2 block text-[#C9C0B3]"></i>
+                                            <p class="font-medium">No furniture pieces found in the catalog.</p>
+                                            <a href="blog_create.php" class="inline-block mt-2 text-[#8A5A44] hover:underline font-semibold">Add your first piece &rarr;</a>
+                                        </td>
+                                    </tr>
+                                <?php endif; ?>
 
                             </tbody>
                         </table>

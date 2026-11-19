@@ -1,16 +1,4 @@
 <?php
-
-/**
- * ============================================================================
- * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - UPDATE PRODUCT
- * ============================================================================
- * FILE: admin/product_update.php
- * PURPOSE: Retrieves an existing product by ID, displays current values in the form,
- *          processes modifications (including optional new image replacement), and
- *          updates the 'products' database table.
- * ============================================================================
- */
-
 // Initialize session
 require_once __DIR__ . '/../components/session_start.php';
 
@@ -19,6 +7,112 @@ require_once __DIR__ . '/components/session_check.php';
 
 // Connect database
 require_once __DIR__ . '/../components/connection.php';
+
+$id = $_GET['id'] ?? '';
+if (empty($id) || !filter_var($id, FILTER_VALIDATE_INT)) {
+    header('Location: products.php');
+    exit;
+}
+
+
+$errors = [];
+
+try {
+    $sql = "SELECT * FROM products WHERE id = :id LIMIT 1";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([':id' => $id]);
+    $product = $stmt->fetch();
+} catch (PDOException $e) {
+    error_log('Product fetch error: ' . $e->getMessage() . "\n", 3, __DIR__ . '/../error.log');
+    $_SESSION['error'] = 'Unable to retrieve product information. Please try again later.';
+    header('Location: products.php');
+    exit;
+}
+
+if (!$product) {
+    $_SESSION['error'] = 'Product not found.';
+    header('Location: products.php');
+    exit;
+}
+
+$categories = [
+    'chairs' => 'Chairs & Seating',
+    'sofas' => 'Sofas & Lounge',
+    'tables' => 'Tables & Desks',
+    'beds' => 'Beds & Tatami',
+    'objects' => 'Lighting & Objects'
+];
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
+    $name = trim($_POST['name']) ?? $product['name'];
+    $price = trim($_POST['price']) ?? $product['price'];
+    $stock = trim($_POST['stock']) ?? $product['stock'];
+    $category = trim($_POST['category']) ?? $product['category'];
+    $old_image = $product['image'];
+    $new_image =  $_FILES['image']['name'] ?? '';
+    $description = trim($_POST['description']) ?? $product['description'];
+
+    if (empty($name) || empty($price) || $stock === '' || empty($category) || empty($description)) {
+        $errors['product'] = 'All fields are required. Please complete the form.';
+    } else {
+        if (!is_numeric($price) || $price < 0) {
+            $errors['price'] = 'Please enter a valid price.';
+        }
+
+        if (filter_var($stock, FILTER_VALIDATE_INT) === false || $stock < 0) {
+            $errors['stock'] = 'Please enter a valid inventory count.';
+        }
+
+        if (!array_key_exists($category, $categories)) {
+            $errors['category'] = 'Please select a valid category.';
+        }
+
+        if (!empty($new_image)) {
+            $allowed_extensions = ['jpg', 'jpeg', 'png', 'webp'];
+            $extension = strtolower(pathinfo($new_image, PATHINFO_EXTENSION));
+            if (!in_array($extension, $allowed_extensions)) {
+                $errors['extension'] = 'Only JPG, JPEG, PNG, and WEBP image files are allowed.';
+            } elseif(!isset($_FILES['image']) || $_FILES['image']['error'] !== UPLOAD_ERR_OK){
+                $errors['image'] = 'An error occurred while uploading the image.';
+            }
+        }
+    }
+
+    if (empty($errors)) {
+        try {
+            if (!empty($new_image)) {
+                $image = time() . '_' . $new_image;
+                if (!move_uploaded_file($_FILES['image']['tmp_name'], __DIR__ . '/../media/' . $image)) {
+                    $errors['image'] = 'Failed to upload the image. Please check directory permission.';
+                } else {
+                    if (!empty($old_image) && file_exists(__DIR__ . '/../media/' . $old_image)) {
+                        unlink(__DIR__ . '/../media/' . $old_image);
+                    }
+                }
+            } else {
+                $image = $old_image;
+            }
+
+            $sql = 'UPDATE products SET name = :name, price = :price, stock = :stock, category = :category, image = :image, description = :description WHERE id = :id';
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([
+                ':id' => $product['id'],
+                ':name' => $name,
+                ':price' => $price,
+                ':stock' => $stock,
+                ':category' => $category,
+                ':image' => $image,
+                ':description' => $description
+            ]);
+            $_SESSION['success'] = 'Product id: ' . $product['id'] . ' is updated successfully.';
+            header('Location: products.php');
+            exit;
+        } catch (PDOException $e) {
+            error_log('Product update error: ' . $e->getMessage() . "\n", 3, __DIR__ . '/../error.log');
+            $errors['update'] = 'This product cannot be updated at this moment. Please try again later.';
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -71,25 +165,15 @@ require_once __DIR__ . '/../components/connection.php';
                     </a>
                 </div>
 
-                <!-- Error Notification Banner -->
-                <?php if (!empty($error)): ?>
-                    <div class="p-4 rounded-2xl bg-[#EFE0E0] border border-[#DFC8C8] text-[#8C3B3B] text-xs flex items-center gap-2.5">
-                        <i class="ri-error-warning-line text-lg flex-shrink-0"></i>
-                        <span><?= htmlspecialchars($error) ?></span>
-                    </div>
-                <?php endif; ?>
-
                 <!-- Form Card in Raw Linen (#F6F3EE) -->
                 <div class="bg-[#F6F3EE] rounded-3xl border border-[#C9C0B3] p-6 sm:p-10 shadow-xs">
                     <form action="" method="POST" enctype="multipart/form-data" class="space-y-6">
-                        <input type="hidden" name="id" value="1">
-
                         <!-- Name -->
                         <div class="space-y-1.5">
                             <label for="name" class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">
                                 Product Title <span class="text-[#8C3B3B]">*</span>
                             </label>
-                            <input type="text" id="name" name="name" value="Sculptural Lounge Armchair" class="w-full px-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                            <input type="text" id="name" name="name" value="<?= htmlspecialchars($name ?? $product['name']); ?>" class="w-full px-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                         </div>
 
                         <!-- Price, Stock, and Category Grid -->
@@ -102,7 +186,7 @@ require_once __DIR__ . '/../components/connection.php';
                                 </label>
                                 <div class="relative">
                                     <span class="absolute left-4 top-1/2 -translate-y-1/2 text-xs font-semibold text-[#6E6359]">MMK</span>
-                                    <input type="number" step="1" id="price" name="price" value="<?= htmlspecialchars($price ?? '') ?>" placeholder="400000" class="w-full pl-14 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
+                                    <input type="number" step="1" id="price" name="price" value="<?= $price ?? (int)$product['price']; ?>" class="w-full pl-14 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
                                 </div>
                             </div>
 
@@ -111,44 +195,38 @@ require_once __DIR__ . '/../components/connection.php';
                                 <label for="stock" class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">
                                     Initial Inventory Count <span class="text-[#8C3B3B]">*</span>
                                 </label>
-                                <input type="number" id="stock" name="stock" value="<?= htmlspecialchars($stock ?? '25') ?>" placeholder="e.g. 25" class="w-full px-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
+                                <input type="number" id="stock" name="stock" value="<?= $stock ?? (int)$product['stock']; ?>" placeholder="e.g. 25" class="w-full px-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
                             </div>
 
                             <!-- Category -->
                             <?php
-                            $categories = [
-                                'chairs' => 'Chairs & Seating',
-                                'sofas' => 'Sofas & Lounge',
-                                'tables' => 'Tables & Desks',
-                                'beds' => 'Beds & Tatami',
-                                'objects' => 'Lighting & Objects'
-                            ];
-                            $category = $_POST['category'] ?? 'Chairs & Seating';
+                            $selected_value = $category ?? $product['category'] ?? 'chairs';
+                            $selected_label = $categories[$selected_value] ?? 'Chairs & Seating';
                             ?>
                             <div class="space-y-1.5" id="category-dropdown-container">
                                 <label class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">
                                     Category <span class="text-[#8C3B3B]">*</span>
                                 </label>
                                 <div class="relative">
-                                    <!-- Hidden Input for Form Submission -->
-                                    <input type="hidden" name="category" id="category-input" value="<?= htmlspecialchars($category ?? 'Chairs & Seating') ?>">
+                                    <!-- Hidden Input for Form Submission (stores the value e.g. 'chairs') -->
+                                    <input type="hidden" name="category" id="category-input" value="<?= htmlspecialchars($selected_value) ?>">
 
                                     <!-- Dropdown Trigger Button -->
                                     <button type="button" id="category-button" class="w-full px-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] cursor-pointer transition-all flex items-center justify-between text-left">
-                                        <span id="category-selected-text"><?= htmlspecialchars(ucfirst($category)) ?></span>
+                                        <span id="category-selected-text"><?= htmlspecialchars($selected_label) ?></span>
                                         <i id="category-arrow" class="ri-arrow-down-s-line text-[#6E6359] text-base transition-transform duration-200"></i>
                                     </button>
 
                                     <!-- Custom Options Menu -->
                                     <div id="category-menu" class="hidden absolute left-0 right-0 top-full mt-1.5 bg-[#F6F3EE] border border-[#C9C0B3] rounded-2xl shadow-xl overflow-hidden py-1.5 z-30">
-                                        <?php foreach ($categories as $cat):
-                                            $selected_category = ($category === $cat);
+                                        <?php foreach ($categories as $value => $label):
+                                            $is_selected = ($selected_value === $value);
                                         ?>
-                                            <div data-value="<?= htmlspecialchars($cat) ?>"
-                                                data-label="<?= htmlspecialchars(ucfirst($cat)) ?>"
-                                                class="category-option px-4 py-2.5 text-sm cursor-pointer transition-colors flex items-center justify-between <?= $selected_category ? 'bg-[#8A5A44] text-[#F6F3EE] font-medium' : 'text-[#362F2A] hover:bg-[#DFD8CD]' ?>">
-                                                <span><?= htmlspecialchars(ucfirst($cat)) ?></span>
-                                                <i class="ri-check-line text-sm check-icon <?= $selected_category ? '' : 'hidden' ?>"></i>
+                                            <div data-value="<?= htmlspecialchars($value) ?>"
+                                                data-label="<?= htmlspecialchars($label) ?>"
+                                                class="category-option px-4 py-2.5 text-sm cursor-pointer transition-colors flex items-center justify-between <?= $is_selected ? 'bg-[#8A5A44] text-[#F6F3EE] font-medium' : 'text-[#362F2A] hover:bg-[#DFD8CD]' ?>">
+                                                <span><?= htmlspecialchars($label) ?></span>
+                                                <i class="ri-check-line text-sm check-icon <?= $is_selected ? '' : 'hidden' ?>"></i>
                                             </div>
                                         <?php endforeach; ?>
                                     </div>
@@ -163,7 +241,7 @@ require_once __DIR__ . '/../components/connection.php';
                             </label>
                             <div class="flex flex-col sm:flex-row items-center gap-6 p-4 rounded-2xl bg-[#EDE8E0] border border-[#C9C0B3]">
                                 <div class="w-24 h-24 rounded-xl bg-[#F6F3EE] border border-[#C9C0B3] p-2 flex items-center justify-center flex-shrink-0">
-                                    <img id="product-preview" src="../images/chairs/chair1.jpg" alt="Current Piece" class="max-h-full max-w-full object-contain">
+                                    <img id="product-preview" src="../media/<?= htmlspecialchars($product['image']); ?>" alt="<?= htmlspecialchars($product['name']); ?>" class="max-h-full max-w-full object-contain">
                                 </div>
                                 <div class="flex-1 space-y-1 text-center sm:text-left">
                                     <span class="text-xs font-semibold text-[#362F2A] block">Replace Image (Optional)</span>
@@ -178,7 +256,7 @@ require_once __DIR__ . '/../components/connection.php';
                             <label for="description" class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">
                                 Piece Narrative &amp; Specifications
                             </label>
-                            <textarea id="description" name="description" rows="4" class="w-full p-4 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">Sculptural lounge armchair shaped from certified American walnut with hand-rubbed organic oil finish.</textarea>
+                            <textarea id="description" name="description" rows="4" class="w-full p-4 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all"><?= htmlspecialchars($product['description']); ?></textarea>
                         </div>
 
                         <!-- Form Actions -->
@@ -201,6 +279,17 @@ require_once __DIR__ . '/../components/connection.php';
     </div>
 
     <script src="js/script.js"></script>
+    <script src="../js/script.js"></script>
+
+    <?php if (!empty($errors)): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                <?php foreach ($errors as $error): ?>
+                    showToast(<?= json_encode($error); ?>, 'error');
+                <?php endforeach; ?>
+            });
+        </script>
+    <?php endif; ?>
 </body>
 
 </html>

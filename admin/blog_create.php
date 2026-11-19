@@ -9,6 +9,7 @@ require_once __DIR__ . '/components/session_check.php';
 require_once __DIR__ . '/../components/connection.php';
 
 $errors = [];
+$categories = ['Philosophy', 'Craftsmanship', 'Spatial Design', 'Interior Styling', 'Artisanship', 'Lighting', 'Living Rituals', 'Architecture', 'Editorial'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['publish'])) {
     $title = trim($_POST['title'] ?? '');
@@ -19,6 +20,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['publish'])) {
 
     if (empty($title) || empty($author) || empty($image) || empty($content) || empty($category)) {
         $errors['blog_form'] = 'All fields are required. Please complete the form.';
+    } else {
+        $allowed_extensions = ['jpg', 'jpeg', 'png', 'webp'];
+        $extension = strtolower(pathinfo($image, PATHINFO_EXTENSION));
+        if (!in_array($extension, $allowed_extensions)) {
+            $errors['extension'] = 'Only JPG, JPEG, PNG, and WEBP image files are allowed.';
+        }
+
+        if (!in_array($category, $categories)) {
+            $errors['category'] = 'Please enter a valid category.';
+        }
     }
 
     if (empty($errors)) {
@@ -98,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['publish'])) {
                             <label for="title" class="block text-xs font-semibold uppercase tracking-wider text-[#6E6359]">
                                 Article Title <span class="text-[#8C3B3B]">*</span>
                             </label>
-                            <input type="text" id="title" maxlength="50" name="title" value="<?= htmlspecialchars($title ?? '') ?>" placeholder="e.g. The Philosophy of Wabi-Sabi in Modern Interiors" class="w-full px-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                            <input type="text" id="title" name="title" value="<?= htmlspecialchars($title ?? '') ?>" placeholder="e.g. The Philosophy of Wabi-Sabi in Modern Interiors" class="w-full px-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                         </div>
 
                         <!-- Author & Category Grid -->
@@ -110,13 +121,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['publish'])) {
                                 </label>
                                 <div class="relative">
                                     <i class="ri-user-line absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base"></i>
-                                    <input type="text" id="author" maxlength="50" name="author" placeholder="e.g. Atelier Editorial Staff" value="<?= htmlspecialchars($author ?? 'Atelier Editorial Staff') ?>" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                                    <input type="text" id="author" name="author" placeholder="e.g. Atelier Editorial Staff" value="<?= htmlspecialchars($author ?? 'Atelier Editorial Staff') ?>" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#6E6359] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                                 </div>
                             </div>
 
                             <!-- Category -->
                             <?php
-                            $categories = ['Philosophy', 'Craftsmanship', 'Spatial Design', 'Interior Styling', 'Artisanship', 'Lighting', 'Living Rituals', 'Architecture', 'Editorial'];
                             $category = $_POST['category'] ?? 'Philosophy';
                             ?>
                             <div class="space-y-1.5" id="category-dropdown-container">
