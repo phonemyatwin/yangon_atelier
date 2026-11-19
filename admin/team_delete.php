@@ -1,15 +1,4 @@
 <?php
-
-/**
- * ============================================================================
- * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - DELETE TEAM MEMBER
- * ============================================================================
- * FILE: admin/team_delete.php
- * PURPOSE: Confirms deletion of an artisan profile, removes photo from ../images/,
- *          and executes DELETE query against the 'team' table.
- * ============================================================================
- */
-
 // Initialize session
 require_once __DIR__ . '/../components/session_start.php';
 
@@ -18,6 +7,48 @@ require_once __DIR__ . '/components/session_check.php';
 
 // Connect database
 require_once __DIR__ . '/../components/connection.php';
+
+$id = $_GET['id'] ?? '';
+if (empty($id) || !filter_var($id, FILTER_VALIDATE_INT)) {
+    header('Location: team.php');
+    exit;
+}
+
+try {
+    $sql = 'SELECT * FROM team WHERE id = :id LIMIT 1';
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([':id' => $id]);
+    $member = $stmt->fetch();
+} catch (PDOException $e) {
+    error_log('Team member fetch error: ' . $e->getMessage() . "\n", 3, __DIR__ . '/../error.log');
+    $_SESSION['error'] = 'Unable to retrieve team member details. Please try again later.';
+    header('Location: team.php');
+    exit;
+}
+
+if (!$member) {
+    $_SESSION['error'] = 'Team member not found.';
+    header('Location: team.php');
+    exit;
+}
+
+$error = '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'])) {
+    try {
+        $sql = 'DELETE FROM team WHERE id = :id';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([':id' => $member['id']]);
+        if (!empty($member['image']) && file_exists(__DIR__ . '/../media/' . $member['image'])) {
+            unlink(__DIR__ . '/../media/' . $member['image']);
+        }
+        $_SESSION['success'] = 'Team member removed successfully.';
+        header('Location: team.php');
+        exit;
+    } catch (PDOException $e) {
+        error_log('Team member delete error: ' . $e->getMessage() . "\n", 3, __DIR__ . '/../error.log');
+        $error = 'Unable to remove team member at this moment. Please try again later.';
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -71,18 +102,17 @@ require_once __DIR__ . '/../components/connection.php';
                     <!-- Member Details Summary -->
                     <div class="border border-[#C9C0B3] bg-[#EDE8E0] rounded-2xl p-5 mb-8 flex items-center gap-5">
                         <div class="w-16 h-20 rounded-xl bg-[#F6F3EE] border border-[#C9C0B3] overflow-hidden flex-shrink-0">
-                            <img src="../images/team/phonemyatwin.jpg" alt="Artisan portrait" class="w-full h-full object-cover">
+                            <img src="../media/<?= htmlspecialchars($member['image']); ?>" alt="<?= htmlspecialchars($member['name']); ?>" class="w-full h-full object-cover">
                         </div>
                         <div class="space-y-1 text-xs">
-                            <span class="text-[#6E6359] font-mono">Member #<?= htmlspecialchars($_GET['id'] ?? '1') ?></span>
-                            <h4 class="font-serif text-base font-semibold text-[#362F2A]">Phone Myat Win</h4>
-                            <p class="text-[#6E6359]">Role: <strong class="text-[#362F2A]">Principal Architect &amp; Founder</strong></p>
+                            <span class="text-[#6E6359] font-mono">Member #<?= htmlspecialchars($member['id'] ?? '1') ?></span>
+                            <h4 class="font-serif text-base font-semibold text-[#362F2A]"><?= htmlspecialchars($member['name']); ?></h4>
+                            <p class="text-[#6E6359]">Role: <strong class="text-[#362F2A]"><?= htmlspecialchars($member['position']); ?></strong></p>
                         </div>
                     </div>
 
                     <!-- Deletion Form -->
                     <form action="" method="POST" class="flex items-center justify-end gap-3 pt-4 border-t border-[#C9C0B3]">
-                        <input type="hidden" name="id" value="<?= htmlspecialchars($_GET['id'] ?? '1') ?>">
                         <a href="team.php" class="px-5 py-2.5 rounded-xl border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-xs font-semibold text-[#362F2A] transition-colors">
                             Cancel
                         </a>
@@ -100,6 +130,14 @@ require_once __DIR__ . '/../components/connection.php';
     </div>
 
     <script src="js/script.js"></script>
+    <script src="../js/script.js"></script>
+    <?php if (!empty($error)): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                showToast(<?= json_encode($error); ?>, 'error');
+            });
+        </script>
+    <?php endif; ?>
 </body>
 
 </html>

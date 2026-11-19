@@ -14,9 +14,6 @@ if (empty($id) || !filter_var($id, FILTER_VALIDATE_INT)) {
     exit;
 }
 
-
-$errors = [];
-
 try {
     $sql = "SELECT * FROM products WHERE id = :id LIMIT 1";
     $stmt = $pdo->prepare($sql);
@@ -42,7 +39,7 @@ $categories = [
     'beds' => 'Beds & Tatami',
     'objects' => 'Lighting & Objects'
 ];
-
+$errors = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
     $name = trim($_POST['name']) ?? $product['name'];
     $price = trim($_POST['price']) ?? $product['price'];
@@ -52,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
     $new_image =  $_FILES['image']['name'] ?? '';
     $description = trim($_POST['description']) ?? $product['description'];
 
-    if (empty($name) || empty($price) || $stock === '' || empty($category) || empty($description)) {
+    if (empty($name) || empty($price) || $stock === '' || empty($category)) {
         $errors['product'] = 'All fields are required. Please complete the form.';
     } else {
         if (!is_numeric($price) || $price < 0) {
@@ -72,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
             $extension = strtolower(pathinfo($new_image, PATHINFO_EXTENSION));
             if (!in_array($extension, $allowed_extensions)) {
                 $errors['extension'] = 'Only JPG, JPEG, PNG, and WEBP image files are allowed.';
-            } elseif(!isset($_FILES['image']) || $_FILES['image']['error'] !== UPLOAD_ERR_OK){
+            } elseif (!isset($_FILES['image']) || $_FILES['image']['error'] !== UPLOAD_ERR_OK) {
                 $errors['image'] = 'An error occurred while uploading the image.';
             }
         }
@@ -93,20 +90,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
                 $image = $old_image;
             }
 
-            $sql = 'UPDATE products SET name = :name, price = :price, stock = :stock, category = :category, image = :image, description = :description WHERE id = :id';
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute([
-                ':id' => $product['id'],
-                ':name' => $name,
-                ':price' => $price,
-                ':stock' => $stock,
-                ':category' => $category,
-                ':image' => $image,
-                ':description' => $description
-            ]);
-            $_SESSION['success'] = 'Product id: ' . $product['id'] . ' is updated successfully.';
-            header('Location: products.php');
-            exit;
+            if (empty($errors)) {
+                $sql = 'UPDATE products SET name = :name, price = :price, stock = :stock, category = :category, image = :image, description = :description WHERE id = :id';
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute([
+                    ':id' => $product['id'],
+                    ':name' => $name,
+                    ':price' => $price,
+                    ':stock' => $stock,
+                    ':category' => $category,
+                    ':image' => $image,
+                    ':description' => $description
+                ]);
+                $_SESSION['success'] = 'Product id: ' . $product['id'] . ' is updated successfully.';
+                header('Location: products.php');
+                exit;
+            }
         } catch (PDOException $e) {
             error_log('Product update error: ' . $e->getMessage() . "\n", 3, __DIR__ . '/../error.log');
             $errors['update'] = 'This product cannot be updated at this moment. Please try again later.';

@@ -1,15 +1,4 @@
 <?php
-
-/**
- * ============================================================================
- * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - ADMIN TEAM LIST
- * ============================================================================
- * FILE: admin/team.php
- * PURPOSE: Lists all collective artisans and team members from the 'team' table
- *          and provides links to add, edit, or remove profiles.
- * ============================================================================
- */
-
 // Initialize session
 require_once __DIR__ . '/../components/session_start.php';
 
@@ -19,12 +8,18 @@ require_once __DIR__ . '/components/session_check.php';
 // Connect database
 require_once __DIR__ . '/../components/connection.php';
 
-$success = '';
-if (isset($_GET['msg'])) {
-    if ($_GET['msg'] === 'created') $success = "Team member profile added successfully.";
-    if ($_GET['msg'] === 'updated') $success = "Team member profile updated successfully.";
-    if ($_GET['msg'] === 'deleted') $success = "Team member profile deleted successfully.";
+$error = '';
+$members = [];
+
+try {
+    $sql = 'SELECT * FROM team ORDER BY id DESC';
+    $stmt = $pdo->query($sql);
+    $members = $stmt->fetchAll();
+} catch (PDOException $e) {
+    error_log('Team fetch error: ' . $e->getMessage() . "\n", 3, __DIR__ . '/../error.log');
+    $error = 'Unable to retrieve team members. Please try again later.';
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,19 +57,11 @@ if (isset($_GET['msg'])) {
                     </a>
                 </div>
 
-                <!-- Success Notification Banner -->
-                <?php if (!empty($success)): ?>
-                    <div class="p-4 rounded-2xl bg-[#DCE5DF] border border-[#C6D6CB] text-[#3F624D] text-xs flex items-center gap-2.5">
-                        <i class="ri-checkbox-circle-line text-lg flex-shrink-0"></i>
-                        <span><?= htmlspecialchars($success) ?></span>
-                    </div>
-                <?php endif; ?>
-
                 <!-- Table Card in Raw Linen (#F6F3EE) -->
                 <div class="bg-[#F6F3EE] rounded-3xl border border-[#C9C0B3] overflow-hidden shadow-xs">
                     <div class="p-5 border-b border-[#C9C0B3] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                         <div class="text-xs text-[#6E6359]">
-                            Showing <strong>6</strong> active collective artisans &amp; curators
+                            Showing <strong><?= count($members); ?></strong> active collective artisans &amp; curators
                         </div>
                         <div class="relative sm:w-64">
                             <i class="ri-search-line absolute left-3 top-1/2 -translate-y-1/2 text-[#6E6359] text-xs"></i>
@@ -95,137 +82,40 @@ if (isset($_GET['msg'])) {
                             </thead>
                             <tbody class="divide-y divide-[#C9C0B3] text-[#6E6359] font-medium">
 
-                                <!-- Member 1 -->
-                                <tr class="hover:bg-[#DFD8CD]/40 transition-colors">
-                                    <td class="py-4 px-6 text-[#6E6359]">#1</td>
-                                    <td class="py-4 px-6">
-                                        <div class="w-10 h-10 rounded-full bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden">
-                                            <img src="../images/team/phonemyatwin.jpg" alt="Phone Myat Win" class="w-full h-full object-cover">
-                                        </div>
-                                    </td>
-                                    <td class="py-4 px-6 font-semibold text-[#362F2A] text-sm">Phone Myat Win</td>
-                                    <td class="py-4 px-6 text-[#6E6359]">Principal Architect &amp; Founder</td>
-                                    <td class="py-4 px-6 text-right">
-                                        <div class="inline-flex items-center gap-2">
-                                            <a href="team_update.php?id=1" class="px-2.5 py-1 rounded-lg border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-[#8A5A44] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-pencil-line"></i> Edit
-                                            </a>
-                                            <a href="team_delete.php?id=1" class="px-2.5 py-1 rounded-lg border border-[#DFC8C8] bg-[#EFE0E0] hover:bg-[#E5D0D0] text-[#8C3B3B] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-delete-bin-line"></i> Delete
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <?php if (!empty($members)): ?>
+                                    <?php foreach ($members as $member): ?>
+                                        <!-- Member 1 -->
+                                        <tr class="hover:bg-[#DFD8CD]/40 transition-colors">
+                                            <td class="py-4 px-6 text-[#6E6359]">#<?= htmlspecialchars($member['id']); ?></td>
+                                            <td class="py-4 px-6">
+                                                <div class="w-10 h-10 rounded-full bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden">
+                                                    <img src="../media/<?= htmlspecialchars($member['image']); ?>" alt="<?= htmlspecialchars($member['name']); ?>" class="w-full h-full object-cover">
+                                                </div>
+                                            </td>
+                                            <td class="py-4 px-6 font-semibold text-[#362F2A] text-sm"><?= htmlspecialchars($member['name']); ?></td>
+                                            <td class="py-4 px-6 text-[#6E6359]"><?= htmlspecialchars($member['position']); ?></td>
+                                            <td class="py-4 px-6 text-right">
+                                                <div class="inline-flex items-center gap-2">
+                                                    <a href="team_update.php?id=<?= (int)$member['id']; ?>" class="px-2.5 py-1 rounded-lg border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-[#8A5A44] font-semibold transition-colors flex items-center gap-1">
+                                                        <i class="ri-pencil-line"></i> Edit
+                                                    </a>
+                                                    <a href="team_delete.php?id=<?= (int)$member['id']; ?>" class="px-2.5 py-1 rounded-lg border border-[#DFC8C8] bg-[#EFE0E0] hover:bg-[#E5D0D0] text-[#8C3B3B] font-semibold transition-colors flex items-center gap-1">
+                                                        <i class="ri-delete-bin-line"></i> Delete
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <tr>
+                                        <td colspan="5" class="py-12 text-center text-[#6E6359]">
+                                            <i class="ri-team-line text-3xl mb-2 block text-[#C9C0B3]"></i>
+                                            <p class="font-medium text-sm text-[#362F2A]">No team members found</p>
+                                            <a href="team_create.php" class="inline-block mt-2 text-[#8A5A44] hover:underline font-semibold">Add your first artisan or curator &rarr;</a>
+                                        </td>
+                                    </tr>
+                                <?php endif; ?>
 
-                                <!-- Member 2 -->
-                                <tr class="hover:bg-[#DFD8CD]/40 transition-colors">
-                                    <td class="py-4 px-6 text-[#6E6359]">#2</td>
-                                    <td class="py-4 px-6">
-                                        <div class="w-10 h-10 rounded-full bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden">
-                                            <img src="../images/team/thaenaynwesoe.jpg" alt="Thae Nay Nwe Soe" class="w-full h-full object-cover">
-                                        </div>
-                                    </td>
-                                    <td class="py-4 px-6 font-semibold text-[#362F2A] text-sm">Thae Nay Nwe Soe</td>
-                                    <td class="py-4 px-6 text-[#6E6359]">Head of Interior Ergonomics</td>
-                                    <td class="py-4 px-6 text-right">
-                                        <div class="inline-flex items-center gap-2">
-                                            <a href="team_update.php?id=2" class="px-2.5 py-1 rounded-lg border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-[#8A5A44] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-pencil-line"></i> Edit
-                                            </a>
-                                            <a href="team_delete.php?id=2" class="px-2.5 py-1 rounded-lg border border-[#DFC8C8] bg-[#EFE0E0] hover:bg-[#E5D0D0] text-[#8C3B3B] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-delete-bin-line"></i> Delete
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <!-- Member 3 -->
-                                <tr class="hover:bg-[#DFD8CD]/40 transition-colors">
-                                    <td class="py-4 px-6 text-[#6E6359]">#3</td>
-                                    <td class="py-4 px-6">
-                                        <div class="w-10 h-10 rounded-full bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden">
-                                            <img src="../images/team/suthinzarhtet.jpg" alt="Su Thinzar Htet" class="w-full h-full object-cover">
-                                        </div>
-                                    </td>
-                                    <td class="py-4 px-6 font-semibold text-[#362F2A] text-sm">Su Thinzar Htet</td>
-                                    <td class="py-4 px-6 text-[#6E6359]">Master Wood Craftsman</td>
-                                    <td class="py-4 px-6 text-right">
-                                        <div class="inline-flex items-center gap-2">
-                                            <a href="team_update.php?id=3" class="px-2.5 py-1 rounded-lg border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-[#8A5A44] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-pencil-line"></i> Edit
-                                            </a>
-                                            <a href="team_delete.php?id=3" class="px-2.5 py-1 rounded-lg border border-[#DFC8C8] bg-[#EFE0E0] hover:bg-[#E5D0D0] text-[#8C3B3B] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-delete-bin-line"></i> Delete
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <!-- Member 4 -->
-                                <tr class="hover:bg-[#DFD8CD]/40 transition-colors">
-                                    <td class="py-4 px-6 text-[#6E6359]">#4</td>
-                                    <td class="py-4 px-6">
-                                        <div class="w-10 h-10 rounded-full bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden">
-                                            <img src="../images/team/myatchaloo.jpg" alt="Myat Chal Oo" class="w-full h-full object-cover">
-                                        </div>
-                                    </td>
-                                    <td class="py-4 px-6 font-semibold text-[#362F2A] text-sm">Myat Chal Oo</td>
-                                    <td class="py-4 px-6 text-[#6E6359]">Material &amp; Textile Curator</td>
-                                    <td class="py-4 px-6 text-right">
-                                        <div class="inline-flex items-center gap-2">
-                                            <a href="team_update.php?id=4" class="px-2.5 py-1 rounded-lg border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-[#8A5A44] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-pencil-line"></i> Edit
-                                            </a>
-                                            <a href="team_delete.php?id=4" class="px-2.5 py-1 rounded-lg border border-[#DFC8C8] bg-[#EFE0E0] hover:bg-[#E5D0D0] text-[#8C3B3B] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-delete-bin-line"></i> Delete
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <!-- Member 5 -->
-                                <tr class="hover:bg-[#DFD8CD]/40 transition-colors">
-                                    <td class="py-4 px-6 text-[#6E6359]">#5</td>
-                                    <td class="py-4 px-6">
-                                        <div class="w-10 h-10 rounded-full bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden">
-                                            <img src="../images/team/nyinyiaung.jpg" alt="Nyi Nyi Aung" class="w-full h-full object-cover">
-                                        </div>
-                                    </td>
-                                    <td class="py-4 px-6 font-semibold text-[#362F2A] text-sm">Nyi Nyi Aung</td>
-                                    <td class="py-4 px-6 text-[#6E6359]">Finishing Specialist</td>
-                                    <td class="py-4 px-6 text-right">
-                                        <div class="inline-flex items-center gap-2">
-                                            <a href="team_update.php?id=5" class="px-2.5 py-1 rounded-lg border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-[#8A5A44] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-pencil-line"></i> Edit
-                                            </a>
-                                            <a href="team_delete.php?id=5" class="px-2.5 py-1 rounded-lg border border-[#DFC8C8] bg-[#EFE0E0] hover:bg-[#E5D0D0] text-[#8C3B3B] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-delete-bin-line"></i> Delete
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <!-- Member 6 -->
-                                <tr class="hover:bg-[#DFD8CD]/40 transition-colors">
-                                    <td class="py-4 px-6 text-[#6E6359]">#6</td>
-                                    <td class="py-4 px-6">
-                                        <div class="w-10 h-10 rounded-full bg-[#EDE8E0] border border-[#C9C0B3] overflow-hidden">
-                                            <img src="../images/team/minkhantnaung.jpg" alt="Min Khant Naung" class="w-full h-full object-cover">
-                                        </div>
-                                    </td>
-                                    <td class="py-4 px-6 font-semibold text-[#362F2A] text-sm">Min Khant Naung</td>
-                                    <td class="py-4 px-6 text-[#6E6359]">Showroom Concierge Director</td>
-                                    <td class="py-4 px-6 text-right">
-                                        <div class="inline-flex items-center gap-2">
-                                            <a href="team_update.php?id=6" class="px-2.5 py-1 rounded-lg border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-[#8A5A44] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-pencil-line"></i> Edit
-                                            </a>
-                                            <a href="team_delete.php?id=6" class="px-2.5 py-1 rounded-lg border border-[#DFC8C8] bg-[#EFE0E0] hover:bg-[#E5D0D0] text-[#8C3B3B] font-semibold transition-colors flex items-center gap-1">
-                                                <i class="ri-delete-bin-line"></i> Delete
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
 
                             </tbody>
                         </table>
@@ -239,6 +129,30 @@ if (isset($_GET['msg'])) {
     </div>
 
     <script src="js/script.js"></script>
+    <script src="../js/script.js"></script>
+    <?php if (isset($_SESSION['success'])): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                showToast(<?= json_encode($_SESSION['success']); ?>, 'success');
+            });
+        </script>
+        <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
+    <?php if (isset($_SESSION['error'])): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                showToast(<?= json_encode($_SESSION['error']); ?>, 'error');
+            });
+        </script>
+        <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
+    <?php if (!empty($error)): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                showToast(<?= json_encode($error); ?>, 'error');
+            });
+        </script>
+    <?php endif; ?>
 </body>
 
 </html>

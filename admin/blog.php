@@ -11,9 +11,17 @@ require_once __DIR__ . '/../components/connection.php';
 // Function
 require_once __DIR__ . '/../components/function.php';
 
-$sql = 'SELECT * FROM blogs ORDER BY id DESC';
-$stmt = $pdo->query($sql);
-$blogs = $stmt->fetchAll();
+$blogs = [];
+$error = '';
+
+try {
+    $sql = 'SELECT * FROM blogs ORDER BY id DESC';
+    $stmt = $pdo->query($sql);
+    $blogs = $stmt->fetchAll();
+} catch (PDOException $e) {
+    error_log('Blog fetch error: ' . $e->getMessage() . "\n", 3, __DIR__ . '/../error.log');
+    $error = 'Unable to retrieve journal articles. Please try again later.';
+}
 ?>
 
 <!DOCTYPE html>
@@ -156,6 +164,13 @@ $blogs = $stmt->fetchAll();
             });
         </script>
         <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
+    <?php if (!empty($error)): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                showToast(<?= json_encode($error); ?>, 'error');
+            });
+        </script>
     <?php endif; ?>
 </body>
 

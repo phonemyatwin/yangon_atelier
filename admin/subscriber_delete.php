@@ -1,14 +1,4 @@
 <?php
-
-/**
- * ============================================================================
- * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - DELETE SUBSCRIBER
- * ============================================================================
- * FILE: admin/subscriber_delete.php
- * PURPOSE: Confirms deletion of a subscriber and removes email from 'subscribers'.
- * ============================================================================
- */
-
 // Initialize session
 require_once __DIR__ . '/../components/session_start.php';
 
@@ -18,7 +8,44 @@ require_once __DIR__ . '/components/session_check.php';
 // Connect database
 require_once __DIR__ . '/../components/connection.php';
 
-$sub_id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
+$id = $_GET['id'] ?? '';
+if (empty($id) || !filter_var($id, FILTER_VALIDATE_INT)) {
+    header('Location: subscribers.php');
+    exit;
+}
+
+try {
+    $sql = 'SELECT * FROM subscribers WHERE id = :id LIMIT 1';
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([':id' => $id]);
+    $subscriber = $stmt->fetch();
+} catch (PDOException $e) {
+    error_log('Subscriber fetch error: ' . $e->getMessage() . "\n", 3, __DIR__ . '/../error.log');
+    $_SESSION['error'] = 'Unable to retrieve subscriber details. Please try again later.';
+    header('Location: subscribers.php');
+    exit;
+}
+
+if (!$subscriber) {
+    $_SESSION['error'] = 'Subscriber not found.';
+    header('Location: subscribers.php');
+    exit;
+}
+
+$error = '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'])) {
+    try {
+        $sql = 'DELETE FROM subscribers WHERE id = :id';
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([':id' => $subscriber['id']]);
+        $_SESSION['success'] = 'Subscriber #' . $subscriber['id'] . ' removed successfully.';
+        header('Location: subscribers.php');
+        exit;
+    } catch (PDOException $e) {
+        error_log('Subscriber delete error: ' . $e->getMessage() . "\n", 3, __DIR__ . '/../error.log');
+        $error = 'Unable to remove subscriber at this moment. Please try again later.';
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,15 +99,14 @@ $sub_id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
                     <!-- Subscriber Details Summary -->
                     <div class="border border-[#C9C0B3] bg-[#EDE8E0] rounded-2xl p-5 mb-8 space-y-2 text-xs">
                         <div class="flex items-center justify-between border-b border-[#C9C0B3] pb-2">
-                            <span class="text-[#6E6359] font-mono">Subscriber #<?= (int)$sub_id ?></span>
-                            <span class="text-[#6E6359]">Subscribed on 2026-11-01</span>
+                            <span class="text-[#6E6359] font-mono">Subscriber #<?= htmlspecialchars($subscriber['id']); ?></span>
+                            <span class="text-[#6E6359]">Subscribed on <?= htmlspecialchars(date('F j, Y \a\t g:i a', strtotime($subscriber['created_at']))); ?></span>
                         </div>
-                        <h4 class="font-mono font-semibold text-[#362F2A] text-sm">aungmin@gmail.com</h4>
+                        <h4 class="font-mono font-semibold text-[#362F2A] text-sm"><?= htmlspecialchars($subscriber['email']); ?></h4>
                     </div>
 
                     <!-- Deletion Form -->
-                    <form method="POST" action="subscribers.php?msg=deleted" class="flex items-center justify-end gap-3 pt-4 border-t border-[#C9C0B3]">
-                        <input type="hidden" name="id" value="<?= (int)$sub_id ?>">
+                    <form method="POST" action="" class="flex items-center justify-end gap-3 pt-4 border-t border-[#C9C0B3]">
                         <a href="subscribers.php" class="px-5 py-2.5 rounded-xl border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-xs font-semibold text-[#362F2A] transition-colors">
                             Cancel
                         </a>
@@ -98,6 +124,14 @@ $sub_id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
     </div>
 
     <script src="js/script.js"></script>
+    <script src="../js/script.js"></script>
+    <?php if (!empty($error)): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                showToast(<?= json_encode($error); ?>, 'error');
+            });
+        </script>
+    <?php endif; ?>
 </body>
 
 </html>

@@ -81,20 +81,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
                 $image = $old_image;
             }
 
-            $sql = 'UPDATE blogs SET title = :title, author = :author, image = :image, content = :content, category = :category WHERE id = :id AND author_id = :author_id';
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute([
-                ':id' => $blog['id'],
-                ':title' => $title,
-                ':author' => $author,
-                ':author_id' => $_SESSION['admin']['id'],
-                ':image' => $image,
-                ':content' => $content,
-                ':category' => $category
-            ]);
-            $_SESSION['success'] = 'Your article is updated successfully.';
-            header('Location: blog.php');
-            exit;
+            if (empty($errors)) {
+                $sql = 'UPDATE blogs SET title = :title, author = :author, image = :image, content = :content, category = :category WHERE id = :id AND author_id = :author_id';
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute([
+                    ':id' => $blog['id'],
+                    ':title' => $title,
+                    ':author' => $author,
+                    ':author_id' => $_SESSION['admin']['id'],
+                    ':image' => $image,
+                    ':content' => $content,
+                    ':category' => $category
+                ]);
+                $_SESSION['success'] = 'Your article is updated successfully.';
+                header('Location: blog.php');
+                exit;
+            }
         } catch (PDOException $e) {
             error_log('Blog update error: ' . $e->getMessage() . "\n", 3, __DIR__ . '/../error.log');
             $errors['update'] = 'Your article cannot be updated at this moment. Please try again later.';

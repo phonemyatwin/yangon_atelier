@@ -1,15 +1,4 @@
 <?php
-
-/**
- * ============================================================================
- * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - ADMIN SUBSCRIBERS LIST
- * ============================================================================
- * FILE: admin/subscribers.php
- * PURPOSE: Lists newsletter subscribers from 'subscribers' table with options
- *          to filter and unsubscribe.
- * ============================================================================
- */
-
 // Initialize session
 require_once __DIR__ . '/../components/session_start.php';
 
@@ -19,9 +8,15 @@ require_once __DIR__ . '/components/session_check.php';
 // Connect database
 require_once __DIR__ . '/../components/connection.php';
 
-$success = '';
-if (isset($_GET['msg']) && $_GET['msg'] === 'deleted') {
-    $success = "Subscriber email removed successfully.";
+$subscribers = [];
+$error = '';
+try {
+    $sql = "SELECT * FROM subscribers ORDER BY id DESC";
+    $stmt = $pdo->query($sql);
+    $subscribers = $stmt->fetchAll();
+} catch (PDOException $e) {
+    error_log('Subscribers fetch error: ' . $e->getMessage() . "\n", 3, __DIR__ . '/../error.log');
+    $error = 'Unable to load subscribers list. Please try again later.';
 }
 ?>
 <!DOCTYPE html>
@@ -56,19 +51,11 @@ if (isset($_GET['msg']) && $_GET['msg'] === 'deleted') {
                     </div>
                 </div>
 
-                <!-- Success Notification Banner -->
-                <?php if (!empty($success)): ?>
-                    <div class="p-4 rounded-2xl bg-[#DCE5DF] border border-[#C6D6CB] text-[#3F624D] text-xs flex items-center gap-2.5">
-                        <i class="ri-checkbox-circle-line text-lg flex-shrink-0"></i>
-                        <span><?= htmlspecialchars($success) ?></span>
-                    </div>
-                <?php endif; ?>
-
                 <!-- Table Card in Raw Linen (#F6F3EE) -->
                 <div class="bg-[#F6F3EE] rounded-3xl border border-[#C9C0B3] overflow-hidden shadow-xs">
                     <div class="p-5 border-b border-[#C9C0B3] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                         <div class="text-xs text-[#6E6359]">
-                            Showing <strong>2</strong> verified email subscribers
+                            Showing <strong><?= count($subscribers); ?></strong> verified email subscribers
                         </div>
                         <div class="relative sm:w-64">
                             <i class="ri-search-line absolute left-3 top-1/2 -translate-y-1/2 text-[#6E6359] text-xs"></i>
@@ -88,40 +75,34 @@ if (isset($_GET['msg']) && $_GET['msg'] === 'deleted') {
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-[#C9C0B3] text-[#6E6359] font-medium">
-
-                                <!-- Sub 1 -->
-                                <tr class="hover:bg-[#DFD8CD]/40 transition-colors">
-                                    <td class="py-4 px-6 text-[#6E6359]">#1</td>
-                                    <td class="py-4 px-6 font-mono text-[#362F2A] text-xs font-semibold">aungmin@gmail.com</td>
-                                    <td class="py-4 px-6 text-[#6E6359]">2026-11-01</td>
-                                    <td class="py-4 px-6">
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold text-[#3F624D] bg-[#DCE5DF] border border-[#C6D6CB]">
-                                            Subscribed
-                                        </span>
-                                    </td>
-                                    <td class="py-4 px-6 text-right">
-                                        <a href="subscriber_delete.php?id=1" class="px-2.5 py-1 rounded-lg border border-[#DFC8C8] bg-[#EFE0E0] hover:bg-[#E5D0D0] text-[#8C3B3B] font-semibold text-xs transition-colors inline-flex items-center gap-1">
-                                            <i class="ri-delete-bin-line"></i> Remove
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <!-- Sub 2 -->
-                                <tr class="hover:bg-[#DFD8CD]/40 transition-colors">
-                                    <td class="py-4 px-6 text-[#6E6359]">#2</td>
-                                    <td class="py-4 px-6 font-mono text-[#362F2A] text-xs font-semibold">susu@gmail.com</td>
-                                    <td class="py-4 px-6 text-[#6E6359]">2026-11-02</td>
-                                    <td class="py-4 px-6">
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold text-[#3F624D] bg-[#DCE5DF] border border-[#C6D6CB]">
-                                            Subscribed
-                                        </span>
-                                    </td>
-                                    <td class="py-4 px-6 text-right">
-                                        <a href="subscriber_delete.php?id=2" class="px-2.5 py-1 rounded-lg border border-[#DFC8C8] bg-[#EFE0E0] hover:bg-[#E5D0D0] text-[#8C3B3B] font-semibold text-xs transition-colors inline-flex items-center gap-1">
-                                            <i class="ri-delete-bin-line"></i> Remove
-                                        </a>
-                                    </td>
-                                </tr>
+                                <?php if (!empty($subscribers)): ?>
+                                    <?php foreach ($subscribers as $subscriber): ?>
+                                        <!-- Sub 1 -->
+                                        <tr class="hover:bg-[#DFD8CD]/40 transition-colors">
+                                            <td class="py-4 px-6 text-[#6E6359]">#<?= htmlspecialchars($subscriber['id']); ?></td>
+                                            <td class="py-4 px-6 font-mono text-[#362F2A] text-xs font-semibold"><?= htmlspecialchars($subscriber['email']); ?></td>
+                                            <td class="py-4 px-6 text-[#6E6359]"><?= htmlspecialchars(date('F j, Y \a\t g:i a', strtotime($subscriber['created_at']))) ?></td>
+                                            <td class="py-4 px-6">
+                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold text-[#3F624D] bg-[#DCE5DF] border border-[#C6D6CB]">
+                                                    Subscribed
+                                                </span>
+                                            </td>
+                                            <td class="py-4 px-6 text-right">
+                                                <a href="subscriber_delete.php?id=<?= (int)$subscriber['id']; ?>" class="px-2.5 py-1 rounded-lg border border-[#DFC8C8] bg-[#EFE0E0] hover:bg-[#E5D0D0] text-[#8C3B3B] font-semibold text-xs transition-colors inline-flex items-center gap-1">
+                                                    <i class="ri-delete-bin-line"></i> Remove
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <tr>
+                                        <td colspan="5" class="py-12 text-center text-[#6E6359]">
+                                            <i class="ri-mail-line text-3xl mb-2 block text-[#C9C0B3]"></i>
+                                            <p class="font-medium text-sm text-[#362F2A]">No newsletter subscribers found</p>
+                                            <span class="text-xs text-[#6E6359] mt-1 block">Subscribers who sign up via the storefront newsletter form will appear here.</span>
+                                        </td>
+                                    </tr>
+                                <?php endif; ?>
 
                             </tbody>
                         </table>
@@ -135,6 +116,30 @@ if (isset($_GET['msg']) && $_GET['msg'] === 'deleted') {
     </div>
 
     <script src="js/script.js"></script>
+    <script src="../js/script.js"></script>
+    <?php if (isset($_SESSION['success'])): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                showToast(<?= json_encode($_SESSION['success']); ?>, 'success');
+            });
+        </script>
+        <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
+    <?php if (isset($_SESSION['error'])): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                showToast(<?= json_encode($_SESSION['error']); ?>, 'error');
+            });
+        </script>
+        <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
+    <?php if (!empty($error)): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                    showToast(<?= json_encode($error); ?>, 'error');
+            });
+        </script>
+    <?php endif; ?>
 </body>
 
 </html>

@@ -8,9 +8,17 @@ require_once __DIR__ . '/components/session_check.php';
 // Connect database
 require_once __DIR__ . '/../components/connection.php';
 
-$sql = 'SELECT * FROM contacts ORDER BY id DESC';
-$stmt = $pdo->query($sql);
-$contacts = $stmt->fetchAll();
+$contacts = [];
+$error = '';
+
+try {
+    $sql = 'SELECT * FROM contacts ORDER BY id DESC';
+    $stmt = $pdo->query($sql);
+    $contacts = $stmt->fetchAll();
+} catch (PDOException $e) {
+    error_log('Contacts fetch error: ' . $e->getMessage() . "\n", 3, __DIR__ . '/../error.log');
+    $error = 'Unable to retrieve client inquiries. Please try again later.';
+}
 
 ?>
 
@@ -144,6 +152,13 @@ $contacts = $stmt->fetchAll();
             });
         </script>
         <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
+    <?php if (!empty($error)): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                showToast(<?= json_encode($error); ?>, 'error');
+            });
+        </script>
     <?php endif; ?>
 </body>
 

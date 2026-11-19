@@ -16,10 +16,16 @@ $categories = [
     'objects' => 'Lighting & Objects',
 ];
 
-$sql = 'SELECT * FROM products ORDER BY id DESC';
-$stmt = $pdo->prepare($sql);
-$stmt->execute();
-$products = $stmt->fetchAll();
+$products = [];
+$error = '';
+try {
+    $sql = 'SELECT * FROM products ORDER BY id DESC';
+    $stmt = $pdo->query($sql);
+    $products = $stmt->fetchAll();
+} catch (PDOException $e) {
+    error_log('Product fetch error: ' . $e->getMessage() . "\n", 3, __DIR__ . '/../error.log');
+    $error = 'Unable to retrieve furniture catalog. Please try again later.';
+}
 
 ?>
 
@@ -125,7 +131,7 @@ $products = $stmt->fetchAll();
                                     <?php endforeach; ?>
                                 <?php else: ?>
                                     <tr>
-                                        <td colspan="6" class="py-12 text-center text-[#6E6359]">
+                                        <td colspan="5" class="py-12 text-center text-[#6E6359]">
                                             <i class="ri-article-line text-3xl mb-2 block text-[#C9C0B3]"></i>
                                             <p class="font-medium">No furniture pieces found in the catalog.</p>
                                             <a href="blog_create.php" class="inline-block mt-2 text-[#8A5A44] hover:underline font-semibold">Add your first piece &rarr;</a>
@@ -163,6 +169,13 @@ $products = $stmt->fetchAll();
             });
         </script>
         <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
+    <?php if (!empty($error)): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                showToast(<?= json_encode($error); ?>, 'error');
+            });
+        </script>
     <?php endif; ?>
 </body>
 
