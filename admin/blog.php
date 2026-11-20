@@ -107,7 +107,7 @@ try {
                                             <td class="py-4 px-6 text-[#362F2A]"><?= htmlspecialchars($blog['author']); ?></td>
                                             <td class="py-4 px-6 text-[#6E6359]"><?= $date; ?></td>
                                             <td class="py-4 px-6 text-right">
-                                                <?php if ($_SESSION['admin']['id'] === $blog['author_id']): ?>
+                                                <?php if ((int)$_SESSION['admin']['id'] === (int)$blog['author_id']): ?>
                                                     <div class="inline-flex items-center gap-2">
                                                         <a href="blog_update.php?id=<?= (int)$blog['id']; ?>" class="px-2.5 py-1 rounded-lg border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-[#8A5A44] font-semibold transition-colors flex items-center gap-1">
                                                             <i class="ri-pencil-line"></i> Edit

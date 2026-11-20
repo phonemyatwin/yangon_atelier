@@ -12,7 +12,7 @@ $error = '';
 $members = [];
 
 try {
-    $sql = 'SELECT * FROM team ORDER BY id DESC';
+    $sql = 'SELECT * FROM team';
     $stmt = $pdo->query($sql);
     $members = $stmt->fetchAll();
 } catch (PDOException $e) {

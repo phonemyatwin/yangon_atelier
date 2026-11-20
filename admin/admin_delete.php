@@ -4,7 +4,7 @@
  * ============================================================================
  * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - DELETE USER
  * ============================================================================
- * FILE: admin/user_delete.php
+ * FILE: admin/admin_delete.php
  * PURPOSE: Confirms user account removal and executes DELETE query against
  *          the 'users' table.
  * ============================================================================
@@ -45,13 +45,13 @@ require_once __DIR__ . '/../components/connection.php';
                         <div class="flex items-center gap-2 text-xs text-[#6E6359] mb-1">
                             <a href="dashboard.php" class="hover:text-[#362F2A] transition-colors">Dashboard</a>
                             <span>/</span>
-                            <a href="users.php" class="hover:text-[#362F2A] transition-colors">Users</a>
+                            <a href="admins.php" class="hover:text-[#362F2A] transition-colors">Users</a>
                             <span>/</span>
                             <span class="text-[#8C3B3B] font-medium">Delete</span>
                         </div>
                         <h2 class="font-serif text-2xl sm:text-3xl font-medium text-[#362F2A]">Confirm Account Removal</h2>
                     </div>
-                    <a href="users.php" class="px-4 py-2 rounded-xl border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-xs font-semibold text-[#362F2A] transition-colors">
+                    <a href="admins.php" class="px-4 py-2 rounded-xl border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-xs font-semibold text-[#362F2A] transition-colors">
                         Cancel
                     </a>
                 </div>
@@ -83,7 +83,7 @@ require_once __DIR__ . '/../components/connection.php';
                     <!-- Deletion Form -->
                     <form action="" method="POST" class="flex items-center justify-end gap-3 pt-4 border-t border-[#C9C0B3]">
                         <input type="hidden" name="id" value="<?= htmlspecialchars($_GET['id'] ?? '1') ?>">
-                        <a href="users.php" class="px-5 py-2.5 rounded-xl border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-xs font-semibold text-[#362F2A] transition-colors">
+                        <a href="admins.php" class="px-5 py-2.5 rounded-xl border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-xs font-semibold text-[#362F2A] transition-colors">
                             Cancel
                         </a>
                         <button type="submit" name="delete" class="px-5 py-2.5 rounded-xl bg-[#8C3B3B] hover:bg-[#782F2F] text-[#F6F3EE] text-xs font-semibold transition-colors shadow-xs flex items-center gap-2">

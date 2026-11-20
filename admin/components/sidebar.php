@@ -45,9 +45,9 @@ $current_admin_page = basename($_SERVER['PHP_SELF'] ?? 'dashboard.php');
                         <i class="ri-shopping-bag-3-line text-base <?= (strpos($current_admin_page, 'product') !== false) ? 'text-[#8A5A44]' : 'text-[#C9C0B3]' ?>"></i>
                         <span>Products</span>
                     </a>
-                    <a href="users.php" class="flex items-center gap-3 px-3 py-2.5 rounded-xl <?= (strpos($current_admin_page, 'user') !== false) ? 'bg-[#3A322B] text-[#F6F3EE] font-semibold shadow-xs' : 'text-[#DFD8CD] hover:bg-[#3A322B]/70 hover:text-[#F6F3EE]' ?> transition-colors">
+                    <a href="admins.php" class="flex items-center gap-3 px-3 py-2.5 rounded-xl <?= (strpos($current_admin_page, 'user') !== false) ? 'bg-[#3A322B] text-[#F6F3EE] font-semibold shadow-xs' : 'text-[#DFD8CD] hover:bg-[#3A322B]/70 hover:text-[#F6F3EE]' ?> transition-colors">
                         <i class="ri-user-3-line text-base <?= (strpos($current_admin_page, 'user') !== false) ? 'text-[#8A5A44]' : 'text-[#C9C0B3]' ?>"></i>
-                        <span>Users</span>
+                        <span>Admins</span>
                     </a>
                 </div>
             </div>
