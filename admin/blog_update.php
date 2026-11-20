@@ -55,13 +55,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
     } else {
         $allowed_extensions = ['jpg', 'jpeg', 'png', 'webp'];
         $extension = strtolower(pathinfo($new_image, PATHINFO_EXTENSION));
-        if (in_array($extension, $allowed_extensions)) {
+        if (!in_array($extension, $allowed_extensions)) {
             $errors['extension'] = 'Only JPG, JPEG, PNG, and WEBP image files are allowed.';
         } elseif (!isset($_FILES['image']) || $_FILES['image']['error'] !== UPLOAD_ERR_OK) {
             $errors['image'] = 'An error occurred while uploading the image.';
         }
 
-        if (in_array($category, $categories)) {
+        if (!in_array($category, $categories)) {
             $errors['category'] = 'Please select a valid category.';
         }
     }
