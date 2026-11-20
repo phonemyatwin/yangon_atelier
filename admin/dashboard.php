@@ -1,16 +1,4 @@
 <?php
-
-/**
- * ============================================================================
- * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - ADMIN DASHBOARD
- * ============================================================================
- * FILE: admin/dashboard.php
- * PURPOSE: Central executive summary for the atelier. Displays real-time counts
- *          from products, users, blogs, team, contacts, and subscribers tables,
- *          along with the 5 most recent customer inquiries.
- * ============================================================================
- */
-
 // Initialize session
 require_once __DIR__ . '/../components/session_start.php';
 
@@ -19,6 +7,10 @@ require_once __DIR__ . '/components/session_check.php';
 
 // Connect database
 require_once __DIR__ . '/../components/connection.php';
+
+$sql = 'SELECT * FROM contacts ORDER BY id DESC';
+$stmt = $pdo->query($sql);
+$contacts = $stmt->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -73,7 +65,7 @@ require_once __DIR__ . '/../components/connection.php';
                             </div>
                         </div>
                         <div class="mt-4">
-                            <strong class="font-serif text-2xl font-semibold text-[#362F2A] block leading-tight">29</strong>
+                            <strong class="font-serif text-2xl font-semibold text-[#362F2A] block leading-tight">27</strong>
                             <span class="text-[11px] text-[#3F624D] font-medium inline-flex items-center gap-0.5 mt-1">
                                 <i class="ri-arrow-up-line"></i> +4 this month
                             </span>
@@ -105,7 +97,7 @@ require_once __DIR__ . '/../components/connection.php';
                             </div>
                         </div>
                         <div class="mt-4">
-                            <strong class="font-serif text-2xl font-semibold text-[#362F2A] block leading-tight">6</strong>
+                            <strong class="font-serif text-2xl font-semibold text-[#362F2A] block leading-tight">8</strong>
                             <span class="text-[11px] text-[#6E6359] font-medium inline-flex items-center gap-0.5 mt-1">
                                 Editorial active
                             </span>
@@ -121,7 +113,7 @@ require_once __DIR__ . '/../components/connection.php';
                             </div>
                         </div>
                         <div class="mt-4">
-                            <strong class="font-serif text-2xl font-semibold text-[#362F2A] block leading-tight">6</strong>
+                            <strong class="font-serif text-2xl font-semibold text-[#362F2A] block leading-tight">8</strong>
                             <span class="text-[11px] text-[#6E6359] font-medium inline-flex items-center gap-0.5 mt-1">
                                 Staff members
                             </span>
@@ -187,57 +179,44 @@ require_once __DIR__ . '/../components/connection.php';
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-[#C9C0B3] text-[#6E6359] font-medium">
-                                <tr class="hover:bg-[#DFD8CD]/40 transition-colors">
-                                    <td class="py-4 px-6 text-[#6E6359]">#1</td>
-                                    <td class="py-4 px-6 font-semibold text-[#362F2A]">Aung Min</td>
-                                    <td class="py-4 px-6 text-[#6E6359]">aungmin@gmail.com</td>
-                                    <td class="py-4 px-6 text-[#6E6359]">09973383719</td>
-                                    <td class="py-4 px-6">
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold text-[#8C5327] bg-[#EFE2D5] border border-[#E0CFBF]">
-                                            Pending Review
-                                        </span>
-                                    </td>
-                                    <td class="py-4 px-6 text-right">
-                                        <div class="inline-flex items-center gap-2">
-                                            <a href="contact_view.php?id=1" class="px-2.5 py-1 rounded-lg border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-[#362F2A] font-semibold transition-colors">View</a>
-                                            <a href="contact_delete.php?id=1" class="px-2.5 py-1 rounded-lg border border-[#DFC8C8] bg-[#EFE0E0] hover:bg-[#E5D0D0] text-[#8C3B3B] font-semibold transition-colors">Delete</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-[#DFD8CD]/40 transition-colors">
-                                    <td class="py-4 px-6 text-[#6E6359]">#2</td>
-                                    <td class="py-4 px-6 font-semibold text-[#362F2A]">Su Su</td>
-                                    <td class="py-4 px-6 text-[#6E6359]">susu@gmail.com</td>
-                                    <td class="py-4 px-6 text-[#6E6359]">09421122846</td>
-                                    <td class="py-4 px-6">
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold text-[#3F624D] bg-[#DCE5DF] border border-[#C6D6CB]">
-                                            Followed Up
-                                        </span>
-                                    </td>
-                                    <td class="py-4 px-6 text-right">
-                                        <div class="inline-flex items-center gap-2">
-                                            <a href="contact_view.php?id=2" class="px-2.5 py-1 rounded-lg border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-[#362F2A] font-semibold transition-colors">View</a>
-                                            <a href="contact_delete.php?id=2" class="px-2.5 py-1 rounded-lg border border-[#DFC8C8] bg-[#EFE0E0] hover:bg-[#E5D0D0] text-[#8C3B3B] font-semibold transition-colors">Delete</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-[#DFD8CD]/40 transition-colors">
-                                    <td class="py-4 px-6 text-[#6E6359]">#3</td>
-                                    <td class="py-4 px-6 font-semibold text-[#362F2A]">Ko Ko</td>
-                                    <td class="py-4 px-6 text-[#6E6359]">koko@gmail.com</td>
-                                    <td class="py-4 px-6 text-[#6E6359]">09456123789</td>
-                                    <td class="py-4 px-6">
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold text-[#6E6359] bg-[#DFD8CD] border border-[#C9C0B3]">
-                                            Archived
-                                        </span>
-                                    </td>
-                                    <td class="py-4 px-6 text-right">
-                                        <div class="inline-flex items-center gap-2">
-                                            <a href="contact_view.php?id=3" class="px-2.5 py-1 rounded-lg border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-[#362F2A] font-semibold transition-colors">View</a>
-                                            <a href="contact_delete.php?id=3" class="px-2.5 py-1 rounded-lg border border-[#DFC8C8] bg-[#EFE0E0] hover:bg-[#E5D0D0] text-[#8C3B3B] font-semibold transition-colors">Delete</a>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <?php if (!empty($contacts)): ?>
+                                    <?php foreach ($contacts as $contact): ?>
+                                        <tr class="hover:bg-[#DFD8CD]/40 transition-colors">
+                                            <td class="py-4 px-6 text-[#6E6359]">#<?= (int)$contact['id'] ?></td>
+                                            <td class="py-4 px-6 font-semibold text-[#362F2A]"><?= htmlspecialchars($contact['name']); ?></td>
+                                            <td class="py-4 px-6 text-[#6E6359]"><?= htmlspecialchars($contact['email']); ?></td>
+                                            <td class="py-4 px-6 text-[#6E6359]"><?= htmlspecialchars($contact['number']); ?></td>
+
+                                            <?php
+                                            $status = $contact['status'] ?? 'Pending Review';
+                                            $badge_class = match ($status) {
+                                                'Followed Up' => 'text-[#3F624D] bg-[#DCE5DF] border-[#C6D6CB]',
+                                                'Archived' => 'text-[#6E6359] bg-[#DFD8CD] border-[#C9C0B3]',
+                                                'Pending Review' => 'text-[#8C5327] bg-[#EFE2D5] border-[#E0CFBF]',
+                                                default => 'text-[#8C5327] bg-[#EFE2D5] border-[#E0CFBF]'
+                                            };
+                                            ?>
+
+                                            <td class="py-4 px-6">
+                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold border <?= $badge_class; ?>">
+                                                    <?= htmlspecialchars($status); ?>
+                                                </span>
+                                            </td>
+                                            <td class="py-4 px-6 text-right">
+                                                <div class="inline-flex items-center gap-2">
+                                                    <a href="contact_view.php?id=<?= (int)$contact['id']; ?>" class="px-2.5 py-1 rounded-lg border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-[#362F2A] font-semibold transition-colors">View</a>
+                                                    <a href="contact_delete.php?id=<?= (int)$contact['id']; ?>" class="px-2.5 py-1 rounded-lg border border-[#DFC8C8] bg-[#EFE0E0] hover:bg-[#E5D0D0] text-[#8C3B3B] font-semibold transition-colors">Delete</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach ?>
+                                <?php else: ?>
+                                    <tr>
+                                        <td colspan="6" class="py-12 text-center text-[#6E6359]">
+                                            No customer inquiries or messages found.
+                                        </td>
+                                    </tr>
+                                <?php endif; ?>
                             </tbody>
                         </table>
                     </div>

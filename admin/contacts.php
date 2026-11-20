@@ -84,7 +84,7 @@ try {
                                     <?php foreach ($contacts as $contact): ?>
                                         <!-- Contact 1 -->
                                         <tr class="hover:bg-[#DFD8CD]/40 transition-colors">
-                                            <td class="py-4 px-6 text-[#6E6359]">#<?= htmlspecialchars($contact['id'] ?? ''); ?></td>
+                                            <td class="py-4 px-6 text-[#6E6359]">#<?= (int)$contact['id']; ?></td>
                                             <td class="py-4 px-6 font-semibold text-[#362F2A] text-sm"><?= htmlspecialchars($contact['name'] ?? ''); ?></td>
                                             <td class="py-4 px-6 text-[#6E6359] font-mono text-xs"><?= htmlspecialchars($contact['email'] ?? ''); ?></td>
                                             <td class="py-4 px-6 text-[#6E6359]"><?= htmlspecialchars($contact['number'] ?? ''); ?></td>
@@ -100,7 +100,9 @@ try {
                                             ?>
 
                                             <td class="py-4 px-6">
-                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold border <?= $badge_class; ?>"><?= htmlspecialchars($status); ?></span>
+                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-semibold border <?= $badge_class; ?>">
+                                                    <?= htmlspecialchars($status); ?>
+                                                </span>
                                             </td>
                                             <td class="py-4 px-6 text-right">
                                                 <div class="inline-flex items-center gap-2">

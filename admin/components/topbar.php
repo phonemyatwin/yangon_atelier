@@ -1,22 +1,8 @@
 <?php
-
-/**
- * ============================================================================
- * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - ADMIN TOPBAR
- * ============================================================================
- * FILE: admin/components/topbar.php
- * PURPOSE: Global sticky admin top navigation bar, quick link to public storefront,
- *          and active logged-in administrator status display.
- * 
- * BACKEND LOGIC REQUIREMENTS:
- * 1. Admin Session Details:
- *    - Check $_SESSION['admin'] to render current logged-in administrator name.
- * ============================================================================
- */
-
+require_once __DIR__ . '/../../components/function.php';
 $admin_name = $_SESSION['admin']['name'] ?? 'Senior Curator';
 $admin_role = $_SESSION['admin']['role'] ?? 'Atelier Administrator';
-$admin_initials = strtoupper(substr($admin_name, 0, 2));
+$admin_initials = get_initial_name($admin_name);
 ?>
 <header class="sticky top-0 z-30 h-20 bg-[#F6F3EE]/95 backdrop-blur-md border-b border-[#C9C0B3] px-4 sm:px-6 lg:px-8 flex items-center justify-between transition-all">
     <div class="flex items-center gap-4">
@@ -45,7 +31,7 @@ $admin_initials = strtoupper(substr($admin_name, 0, 2));
 
         <!-- Admin Profile Chip -->
         <div class="flex items-center gap-2.5 pl-3 border-l border-[#C9C0B3]">
-            <div class="w-9 h-9 rounded-full bg-[#8A5A44] text-[#F6F3EE] font-bold flex items-center justify-center font-serif text-xs font-semibold shadow-xs">
+            <div class="w-9 h-9 rounded-full bg-[#8A5A44] text-[#F6F3EE] font-bold flex items-center justify-center font-serif text-xs  shadow-xs">
                 <?= htmlspecialchars($admin_initials) ?>
             </div>
             <div class="hidden sm:flex flex-col text-left">
