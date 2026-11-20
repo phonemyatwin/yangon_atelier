@@ -14,24 +14,14 @@ require_once __DIR__ . '/components/connection.php';
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
-    $username = trim($_POST['username'] ?? '');
+    $name = trim($_POST['name'] ?? '');
     $email = strtolower(trim($_POST['email'] ?? ''));
     $password = $_POST['password'] ?? '';
     $confirm_password = $_POST['confirm_password'] ?? '';
 
-    // Check username
-    if (empty($username)) {
-        $errors['username'] = 'Username is required.';
-    } else if (mb_strlen($username) < 3 || mb_strlen($username) > 30) {
-        $errors['username'] = 'Username must be at least 3 to 30 characters.';
-    }
-    if (!isset($errors['username'])) {
-        $sql = 'SELECT 1 FROM users WHERE username = :username LIMIT 1';
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute(['username' => $username]);
-        if ($stmt->fetch()) {
-            $errors['username'] = 'This username is already registered.';
-        }
+    // Check name
+    if (empty($name)) {
+        $errors['name'] = 'Name is required.';
     }
 
     // Check email
@@ -67,10 +57,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
     if (empty($errors)) {
         try {
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-            $sql = 'INSERT INTO users(username, email, password) VALUES(:username, :email, :password)';
+            $sql = 'INSERT INTO users(name, email, password) VALUES(:name, :email, :password)';
             $stmt = $pdo->prepare($sql);
             $stmt->execute([
-                ':username' => $username,
+                ':name' => $name,
                 ':email' => $email,
                 ':password' => $hashed_password
             ]);
@@ -133,14 +123,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
 
                 <form action="" method="POST" class="space-y-4">
 
-                    <!-- Username Field -->
+                    <!-- Name Field -->
                     <div class="space-y-1.5">
-                        <label for="username" class="block text-xs font-semibold uppercase tracking-wider text-[#362F2A]">
-                            Username / Full Name <span class="text-rose-600">*</span>
+                        <label for="name" class="block text-xs font-semibold uppercase tracking-wider text-[#362F2A]">
+                            Full Name <span class="text-rose-600">*</span>
                         </label>
                         <div class="relative">
                             <i class="ri-user-line absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base"></i>
-                            <input type="text" id="username" name="username" value="<?= htmlspecialchars($username ?? '') ?>" placeholder="Choose a username" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                            <input type="text" id="name" name="name" value="<?= htmlspecialchars($name ?? '') ?>" placeholder="Enter a full name" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                         </div>
                     </div>
 
@@ -151,7 +141,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
                         </label>
                         <div class="relative">
                             <i class="ri-mail-line absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base"></i>
-                            <input type="email" id="email" name="email" value="<?= htmlspecialchars($email ?? '') ?>" placeholder="client@example.com" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                            <input type="email" id="email" name="email" value="<?= htmlspecialchars($email ?? '') ?>" placeholder="client@domain.com" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                         </div>
                     </div>
 

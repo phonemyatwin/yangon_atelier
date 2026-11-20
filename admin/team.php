@@ -95,14 +95,20 @@ try {
                                             <td class="py-4 px-6 font-semibold text-[#362F2A] text-sm"><?= htmlspecialchars($member['name']); ?></td>
                                             <td class="py-4 px-6 text-[#6E6359]"><?= htmlspecialchars($member['position']); ?></td>
                                             <td class="py-4 px-6 text-right">
-                                                <div class="inline-flex items-center gap-2">
-                                                    <a href="team_update.php?id=<?= (int)$member['id']; ?>" class="px-2.5 py-1 rounded-lg border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-[#8A5A44] font-semibold transition-colors flex items-center gap-1">
-                                                        <i class="ri-pencil-line"></i> Edit
-                                                    </a>
-                                                    <a href="team_delete.php?id=<?= (int)$member['id']; ?>" class="px-2.5 py-1 rounded-lg border border-[#DFC8C8] bg-[#EFE0E0] hover:bg-[#E5D0D0] text-[#8C3B3B] font-semibold transition-colors flex items-center gap-1">
-                                                        <i class="ri-delete-bin-line"></i> Delete
-                                                    </a>
-                                                </div>
+                                                <?php if ($_SESSION['admin']['id'] === $member['id']): ?>
+                                                    <div class="inline-flex items-center gap-2">
+                                                        <a href="team_update.php?id=<?= (int)$member['id']; ?>" class="px-2.5 py-1 rounded-lg border border-[#C9C0B3] bg-[#DFD8CD] hover:bg-[#D5CDC1] text-[#8A5A44] font-semibold transition-colors flex items-center gap-1">
+                                                            <i class="ri-pencil-line"></i> Edit
+                                                        </a>
+                                                        <a href="team_delete.php?id=<?= (int)$member['id']; ?>" class="px-2.5 py-1 rounded-lg border border-[#DFC8C8] bg-[#EFE0E0] hover:bg-[#E5D0D0] text-[#8C3B3B] font-semibold transition-colors flex items-center gap-1">
+                                                            <i class="ri-delete-bin-line"></i> Delete
+                                                        </a>
+                                                    </div>
+                                                <?php else: ?>
+                                                    <span class="inline-flex items-center gap-1 text-xs text-[#6E6359] italic">
+                                                        <i class="ri-lock-line text-xs"></i> View only
+                                                    </span>
+                                                <?php endif; ?>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

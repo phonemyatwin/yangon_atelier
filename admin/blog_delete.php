@@ -15,8 +15,6 @@ if (empty($id) || !filter_var($id, FILTER_VALIDATE_INT)) {
     exit;
 }
 
-$errors = [];
-
 try {
     $sql = 'SELECT * FROM blogs WHERE id = :id LIMIT 1';
     $stmt = $pdo->prepare($sql);
@@ -36,12 +34,13 @@ if (!$blog) {
 }
 
 // This is the tricky part. This page can be accessed only if your session id is equal with the author id of the blog. Which means only the author can have the access to his own blogs and no one else can. 
-if (!$blog || $_SESSION['admin']['id'] !== $blog['author_id']) {
+if ($_SESSION['admin']['id'] !== $blog['author_id']) {
     $_SESSION['error'] = 'You do not have permission to delete this article.';
     header('Location: blog.php');
     exit;
 }
 
+$errors = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'])) {
     try {
         $sql = 'DELETE FROM blogs WHERE id = :id AND author_id = :author_id';
@@ -58,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'])) {
         exit;
     } catch (PDOException $e) {
         error_log('Blog delete error: ' . $e->getMessage() . "\n", 3, __DIR__ . '/../error.log');
-        $errors['delete'] = 'Your article cannot be deleted at this moment. Please try again later.';
+        $error = 'Your article cannot be deleted at this moment. Please try again later.';
     }
 }
 ?>
@@ -141,12 +140,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'])) {
 
     <script src="js/script.js"></script>
     <script src="../js/script.js"></script>
-    <?php if (!empty($errors)): ?>
+    <?php if (!empty($error)): ?>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                <?php foreach ($errors as $error): ?>
-                    showToast(<?= json_encode($error); ?>, 'error');
-                <?php endforeach; ?>
+                showToast(<?= json_encode($error); ?>, 'error');
             });
         </script>
     <?php endif; ?>

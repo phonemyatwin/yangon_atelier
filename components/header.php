@@ -22,6 +22,8 @@
  */
 
 $current_page = basename($_SERVER['PHP_SELF'] ?? 'index.php');
+
+require_once __DIR__ . '/function.php';
 ?>
 <!-- Announcement / Top Atelier Bar (Smoked Walnut) -->
 <div class="bg-[#4A4038] text-[#F6F3EE] text-[11px] py-2 px-4 sm:px-6 lg:px-8 border-b border-[#3A322B]">
@@ -79,15 +81,15 @@ $current_page = basename($_SERVER['PHP_SELF'] ?? 'index.php');
             $is_authenticated = isset($_SESSION['user']) || isset($_SESSION['user_id']);
             if ($is_authenticated): 
                 $client_info = $_SESSION['user'] ?? [];
-                $client_username = $client_info['username'] ?? $_SESSION['username'] ?? 'Client';
+                $client_name = $client_info['name'] ?? $_SESSION['name'] ?? 'Client';
                 $client_email = $client_info['email'] ?? $_SESSION['email'] ?? '';
                 
                 // Formulate 1-2 letter monogram initials
-                $name_words = preg_split('/\s+/', trim($client_username));
+                $name_words = preg_split('/\s+/', trim($client_name));
                 if (count($name_words) >= 2) {
                     $client_monogram = strtoupper(mb_substr($name_words[0], 0, 1) . mb_substr($name_words[count($name_words) - 1], 0, 1));
                 } else {
-                    $client_monogram = strtoupper(mb_substr($client_username, 0, 2));
+                    $client_monogram = strtoupper(mb_substr($client_name, 0, 2));
                 }
                 if (empty($client_monogram)) $client_monogram = 'YA';
             ?>
@@ -97,7 +99,7 @@ $current_page = basename($_SERVER['PHP_SELF'] ?? 'index.php');
                     <button type="button" id="user-menu-btn" aria-expanded="false" aria-haspopup="true" aria-label="Client Account Menu" class="flex items-center gap-2.5 p-1 sm:pl-1.5 sm:pr-3.5 rounded-full bg-[#F6F3EE] hover:bg-[#DFD8CD]/60 border border-[#C9C0B3] hover:border-[#8A5A44]/60 transition-all duration-300 shadow-xs hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[#8A5A44]/30 cursor-pointer">
                         <!-- Terracotta Monogram Seal with Soft Gold/Linen Border -->
                         <span class="w-8 h-8 rounded-full bg-gradient-to-br from-[#8A5A44] to-[#704735] text-[#F6F3EE] font-serif text-xs font-semibold flex items-center justify-center shadow-inner ring-1 ring-[#8A5A44]/40 ring-offset-1 ring-offset-[#F6F3EE] flex-shrink-0">
-                            <?= htmlspecialchars($client_monogram) ?>
+                            <?= htmlspecialchars(get_initial_name($client_name)) ?>
                         </span>
                         
                         <!-- Client Name & Tier (Hidden on ultra-compact screens) -->
@@ -107,7 +109,7 @@ $current_page = basename($_SERVER['PHP_SELF'] ?? 'index.php');
                                 <span>Sanctuary Patron</span>
                             </span>
                             <span class="font-serif text-xs font-semibold text-[#362F2A] truncate max-w-[110px]">
-                                <?= htmlspecialchars($client_username) ?>
+                                <?= htmlspecialchars($client_name) ?>
                             </span>
                         </div>
 
@@ -129,7 +131,7 @@ $current_page = basename($_SERVER['PHP_SELF'] ?? 'index.php');
                             <div class="flex-1 min-w-0">
                                 <span class="text-[9px] uppercase tracking-[0.22em] text-[#8A5A44] font-semibold block leading-none mb-1">Authenticated Patron</span>
                                 <h4 class="font-serif text-sm font-semibold text-[#362F2A] truncate leading-snug">
-                                    <?= htmlspecialchars($client_username) ?>
+                                    <?= htmlspecialchars($client_name) ?>
                                 </h4>
                                 <?php if (!empty($client_email)): ?>
                                     <p class="text-[11px] text-[#6E6359] truncate mt-0.5" title="<?= htmlspecialchars($client_email) ?>">

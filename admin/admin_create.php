@@ -19,10 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create'])) {
     // Check name
     if (empty($name)) {
         $errors['name'] = 'name is required.';
-    } else if (mb_strlen($name) < 3 || mb_strlen($name) > 30) {
-        $errors['name'] = 'name must be at least 3 to 30 characters.';
-    }
-
+    } 
+    
     // Check email
     if (empty($email)) {
         $errors['email'] = 'Email is required.';

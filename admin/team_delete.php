@@ -32,6 +32,12 @@ if (!$member) {
     exit;
 }
 
+if ((int)$_SESSION['admin']['id'] !== (int)$member['id']) {
+    $_SESSION['error'] = 'You do not have permission to delete this team member.';
+    header('Location: team.php');
+    exit;
+}
+
 $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'])) {
     try {

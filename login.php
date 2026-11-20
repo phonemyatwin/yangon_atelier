@@ -50,11 +50,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
         }
         $_SESSION['user'] = [
             'id' => $user['id'],
-            'username' => $user['username'],
+            'name' => $user['name'],
             'email' => $user['email']
         ];
 
-        $_SESSION['success'] = 'Welcome back! ' . $_SESSION['user']['username'];
+        $_SESSION['success'] = 'Welcome back! ' . $_SESSION['user']['name'];
         header('Location: index.php');
         exit;
     } else {

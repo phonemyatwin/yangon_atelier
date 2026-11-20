@@ -32,6 +32,12 @@ if (!$member) {
     exit;
 }
 
+if ((int)$_SESSION['admin']['id'] !== (int)$member['id']) {
+    $_SESSION['error'] = 'You do not have permission to update this team member.';
+    header('Location: team.php');
+    exit;
+}
+
 $errors = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
     $name = trim($_POST['name'] ?? $member['name']);
