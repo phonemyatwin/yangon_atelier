@@ -44,7 +44,7 @@ $current_page = basename($_SERVER['PHP_SELF'] ?? 'index.php');
                 <span>Design Team</span>
                 <i class="ri-arrow-right-s-line text-[#6E6359]"></i>
             </a>
-            <a href="blog.php" class="flex items-center justify-between py-3 px-4 rounded-xl <?= ($current_page == 'blog.php' || $current_page == 'blog_detail.php') ? 'bg-[#DFD8CD] text-[#362F2A] font-semibold' : 'text-[#6E6359]' ?> hover:bg-[#DFD8CD] hover:text-[#362F2A] text-base font-medium transition-colors">
+            <a href="blog.php" class="flex items-center justify-between py-3 px-4 rounded-xl <?= str_contains($current_page, 'blog') ? 'bg-[#DFD8CD] text-[#362F2A] font-semibold' : 'text-[#6E6359]' ?> hover:bg-[#DFD8CD] hover:text-[#362F2A] text-base font-medium transition-colors">
                 <span>Journal</span>
                 <i class="ri-arrow-right-s-line text-[#6E6359]"></i>
             </a>

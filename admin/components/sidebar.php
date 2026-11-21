@@ -1,21 +1,7 @@
 <?php
-/**
- * ============================================================================
- * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - ADMIN SIDEBAR
- * ============================================================================
- * FILE: admin/components/sidebar.php
- * PURPOSE: Administrative panel navigation menu with dynamic active link states.
- * 
- * BACKEND LOGIC REQUIREMENTS:
- * 1. Current Script Detection:
- *    $current_admin_page = basename($_SERVER['PHP_SELF'] ?? 'dashboard.php');
- * 
- * 2. Dynamic Active Class:
- *    Apply 'bg-[#3A322B] text-[#F6F3EE]' when the link matches the active page
- *    or related subpages (e.g. products.php, product_create.php, product_update.php).
- * ============================================================================
- */
-$current_admin_page = basename($_SERVER['PHP_SELF'] ?? 'dashboard.php');
+
+$current_page = basename($_SERVER['PHP_SELF'] ?? 'dashboard.php');
+
 ?>
 <!-- Admin Sidebar in Smoked Walnut (#4A4038) -->
 <aside id="admin__sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-[#4A4038] text-[#F6F3EE] flex flex-col justify-between border-r border-[#3A322B] transition-transform duration-300 ease-in-out -translate-x-full lg:translate-x-0">
@@ -37,16 +23,16 @@ $current_admin_page = basename($_SERVER['PHP_SELF'] ?? 'dashboard.php');
             <div>
                 <span class="px-3 text-[10px] uppercase tracking-[0.2em] text-[#C9C0B3] font-semibold block mb-2">Operations</span>
                 <div class="space-y-1">
-                    <a href="dashboard.php" class="flex items-center gap-3 px-3 py-2.5 rounded-xl <?= ($current_admin_page == 'dashboard.php') ? 'bg-[#3A322B] text-[#F6F3EE] font-semibold shadow-xs' : 'text-[#DFD8CD] hover:bg-[#3A322B]/70 hover:text-[#F6F3EE]' ?> transition-colors">
-                        <i class="ri-dashboard-line text-base <?= ($current_admin_page == 'dashboard.php') ? 'text-[#8A5A44]' : 'text-[#C9C0B3]' ?>"></i>
+                    <a href="dashboard.php" class="flex items-center gap-3 px-3 py-2.5 rounded-xl <?= ($current_page == 'dashboard.php') ? 'bg-[#3A322B] text-[#F6F3EE] font-semibold shadow-xs' : 'text-[#DFD8CD] hover:bg-[#3A322B]/70 hover:text-[#F6F3EE]' ?> transition-colors">
+                        <i class="ri-dashboard-line text-base <?= ($current_page == 'dashboard.php') ? 'text-[#8A5A44]' : 'text-[#C9C0B3]' ?>"></i>
                         <span>Dashboard</span>
                     </a>
-                    <a href="products.php" class="flex items-center gap-3 px-3 py-2.5 rounded-xl <?= (strpos($current_admin_page, 'product') !== false) ? 'bg-[#3A322B] text-[#F6F3EE] font-semibold shadow-xs' : 'text-[#DFD8CD] hover:bg-[#3A322B]/70 hover:text-[#F6F3EE]' ?> transition-colors">
-                        <i class="ri-shopping-bag-3-line text-base <?= (strpos($current_admin_page, 'product') !== false) ? 'text-[#8A5A44]' : 'text-[#C9C0B3]' ?>"></i>
+                    <a href="products.php" class="flex items-center gap-3 px-3 py-2.5 rounded-xl <?= str_contains($current_page, 'product') ? 'bg-[#3A322B] text-[#F6F3EE] font-semibold shadow-xs' : 'text-[#DFD8CD] hover:bg-[#3A322B]/70 hover:text-[#F6F3EE]' ?> transition-colors">
+                        <i class="ri-shopping-bag-3-line text-base <?= str_contains($current_page, 'product') ? 'text-[#8A5A44]' : 'text-[#C9C0B3]' ?>"></i>
                         <span>Products</span>
                     </a>
-                    <a href="admins.php" class="flex items-center gap-3 px-3 py-2.5 rounded-xl <?= (strpos($current_admin_page, 'user') !== false) ? 'bg-[#3A322B] text-[#F6F3EE] font-semibold shadow-xs' : 'text-[#DFD8CD] hover:bg-[#3A322B]/70 hover:text-[#F6F3EE]' ?> transition-colors">
-                        <i class="ri-user-3-line text-base <?= (strpos($current_admin_page, 'user') !== false) ? 'text-[#8A5A44]' : 'text-[#C9C0B3]' ?>"></i>
+                    <a href="admins.php" class="flex items-center gap-3 px-3 py-2.5 rounded-xl <?= str_contains($current_page, 'admin') ? 'bg-[#3A322B] text-[#F6F3EE] font-semibold shadow-xs' : 'text-[#DFD8CD] hover:bg-[#3A322B]/70 hover:text-[#F6F3EE]' ?> transition-colors">
+                        <i class="ri-user-3-line text-base <?= str_contains($current_page, 'admin') ? 'text-[#8A5A44]' : 'text-[#C9C0B3]' ?>"></i>
                         <span>Admins</span>
                     </a>
                 </div>
@@ -56,20 +42,20 @@ $current_admin_page = basename($_SERVER['PHP_SELF'] ?? 'dashboard.php');
             <div>
                 <span class="px-3 text-[10px] uppercase tracking-[0.2em] text-[#C9C0B3] font-semibold block mb-2">Editorial &amp; CRM</span>
                 <div class="space-y-1">
-                    <a href="blog.php" class="flex items-center gap-3 px-3 py-2.5 rounded-xl <?= (strpos($current_admin_page, 'blog') !== false) ? 'bg-[#3A322B] text-[#F6F3EE] font-semibold shadow-xs' : 'text-[#DFD8CD] hover:bg-[#3A322B]/70 hover:text-[#F6F3EE]' ?> transition-colors">
-                        <i class="ri-article-line text-base <?= (strpos($current_admin_page, 'blog') !== false) ? 'text-[#8A5A44]' : 'text-[#C9C0B3]' ?>"></i>
+                    <a href="blog.php" class="flex items-center gap-3 px-3 py-2.5 rounded-xl <?= str_contains($current_page, 'blog') ? 'bg-[#3A322B] text-[#F6F3EE] font-semibold shadow-xs' : 'text-[#DFD8CD] hover:bg-[#3A322B]/70 hover:text-[#F6F3EE]' ?> transition-colors">
+                        <i class="ri-article-line text-base <?= str_contains($current_page, 'blog') ? 'text-[#8A5A44]' : 'text-[#C9C0B3]' ?>"></i>
                         <span>Journal / Blog</span>
                     </a>
-                    <a href="team.php" class="flex items-center gap-3 px-3 py-2.5 rounded-xl <?= (strpos($current_admin_page, 'team') !== false) ? 'bg-[#3A322B] text-[#F6F3EE] font-semibold shadow-xs' : 'text-[#DFD8CD] hover:bg-[#3A322B]/70 hover:text-[#F6F3EE]' ?> transition-colors">
-                        <i class="ri-team-line text-base <?= (strpos($current_admin_page, 'team') !== false) ? 'text-[#8A5A44]' : 'text-[#C9C0B3]' ?>"></i>
+                    <a href="team.php" class="flex items-center gap-3 px-3 py-2.5 rounded-xl <?= str_contains($current_page, 'team') ? 'bg-[#3A322B] text-[#F6F3EE] font-semibold shadow-xs' : 'text-[#DFD8CD] hover:bg-[#3A322B]/70 hover:text-[#F6F3EE]' ?> transition-colors">
+                        <i class="ri-team-line text-base <?= str_contains($current_page, 'team') ? 'text-[#8A5A44]' : 'text-[#C9C0B3]' ?>"></i>
                         <span>Design Team</span>
                     </a>
-                    <a href="contacts.php" class="flex items-center gap-3 px-3 py-2.5 rounded-xl <?= (strpos($current_admin_page, 'contact') !== false) ? 'bg-[#3A322B] text-[#F6F3EE] font-semibold shadow-xs' : 'text-[#DFD8CD] hover:bg-[#3A322B]/70 hover:text-[#F6F3EE]' ?> transition-colors">
-                        <i class="ri-mail-line text-base <?= (strpos($current_admin_page, 'contact') !== false) ? 'text-[#8A5A44]' : 'text-[#C9C0B3]' ?>"></i>
+                    <a href="contacts.php" class="flex items-center gap-3 px-3 py-2.5 rounded-xl <?= str_contains($current_page, 'contact') ? 'bg-[#3A322B] text-[#F6F3EE] font-semibold shadow-xs' : 'text-[#DFD8CD] hover:bg-[#3A322B]/70 hover:text-[#F6F3EE]' ?> transition-colors">
+                        <i class="ri-mail-line text-base <?= str_contains($current_page, 'contact') ? 'text-[#8A5A44]' : 'text-[#C9C0B3]' ?>"></i>
                         <span>Inquiries</span>
                     </a>
-                    <a href="subscribers.php" class="flex items-center gap-3 px-3 py-2.5 rounded-xl <?= (strpos($current_admin_page, 'subscriber') !== false) ? 'bg-[#3A322B] text-[#F6F3EE] font-semibold shadow-xs' : 'text-[#DFD8CD] hover:bg-[#3A322B]/70 hover:text-[#F6F3EE]' ?> transition-colors">
-                        <i class="ri-mail-add-line text-base <?= (strpos($current_admin_page, 'subscriber') !== false) ? 'text-[#8A5A44]' : 'text-[#C9C0B3]' ?>"></i>
+                    <a href="subscribers.php" class="flex items-center gap-3 px-3 py-2.5 rounded-xl <?= str_contains($current_page, 'subscriber') ? 'bg-[#3A322B] text-[#F6F3EE] font-semibold shadow-xs' : 'text-[#DFD8CD] hover:bg-[#3A322B]/70 hover:text-[#F6F3EE]' ?> transition-colors">
+                        <i class="ri-mail-add-line text-base <?= str_contains($current_page, 'subscriber') ? 'text-[#8A5A44]' : 'text-[#C9C0B3]' ?>"></i>
                         <span>Subscribers</span>
                     </a>
                 </div>
