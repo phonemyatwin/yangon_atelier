@@ -163,27 +163,27 @@ require_once __DIR__ . '/components/connection.php';
                         Material Chapters
                     </h3>
                     <nav class="space-y-1 text-xs">
-                        <a href="#care-wood" class="block py-2.5 px-3 rounded-xl font-medium text-[#6E6359] hover:text-[#362F2A] hover:bg-[#DFD8CD] transition-colors flex items-center gap-2">
+                        <a href="#care-wood" class=" py-2.5 px-3 rounded-xl font-medium text-[#6E6359] hover:text-[#362F2A] hover:bg-[#DFD8CD] transition-colors flex items-center gap-2">
                             <i class="ri-hammer-line text-[#8A5A44]"></i>
                             <span>Solid Woods &amp; Plant Oils</span>
                         </a>
-                        <a href="#care-textiles" class="block py-2.5 px-3 rounded-xl font-medium text-[#6E6359] hover:text-[#362F2A] hover:bg-[#DFD8CD] transition-colors flex items-center gap-2">
+                        <a href="#care-textiles" class=" py-2.5 px-3 rounded-xl font-medium text-[#6E6359] hover:text-[#362F2A] hover:bg-[#DFD8CD] transition-colors flex items-center gap-2">
                             <i class="ri-t-shirt-air-line text-[#8A5A44]"></i>
                             <span>Bouclé &amp; Belgian Linens</span>
                         </a>
-                        <a href="#care-leather" class="block py-2.5 px-3 rounded-xl font-medium text-[#6E6359] hover:text-[#362F2A] hover:bg-[#DFD8CD] transition-colors flex items-center gap-2">
+                        <a href="#care-leather" class=" py-2.5 px-3 rounded-xl font-medium text-[#6E6359] hover:text-[#362F2A] hover:bg-[#DFD8CD] transition-colors flex items-center gap-2">
                             <i class="ri-pantone-line text-[#8A5A44]"></i>
                             <span>Full-Grain Vegetable Leather</span>
                         </a>
-                        <a href="#care-stone" class="block py-2.5 px-3 rounded-xl font-medium text-[#6E6359] hover:text-[#362F2A] hover:bg-[#DFD8CD] transition-colors flex items-center gap-2">
+                        <a href="#care-stone" class=" py-2.5 px-3 rounded-xl font-medium text-[#6E6359] hover:text-[#362F2A] hover:bg-[#DFD8CD] transition-colors flex items-center gap-2">
                             <i class="ri-shape-line text-[#8A5A44]"></i>
                             <span>Honed Marble &amp; Travertine</span>
                         </a>
-                        <a href="#care-rattan" class="block py-2.5 px-3 rounded-xl font-medium text-[#6E6359] hover:text-[#362F2A] hover:bg-[#DFD8CD] transition-colors flex items-center gap-2">
+                        <a href="#care-rattan" class=" py-2.5 px-3 rounded-xl font-medium text-[#6E6359] hover:text-[#362F2A] hover:bg-[#DFD8CD] transition-colors flex items-center gap-2">
                             <i class="ri-grid-line text-[#8A5A44]"></i>
                             <span>Natural Woven Rattan &amp; Cane</span>
                         </a>
-                        <a href="#care-monsoon" class="block py-2.5 px-3 rounded-xl font-medium text-[#6E6359] hover:text-[#362F2A] hover:bg-[#DFD8CD] transition-colors flex items-center gap-2">
+                        <a href="#care-monsoon" class=" py-2.5 px-3 rounded-xl font-medium text-[#6E6359] hover:text-[#362F2A] hover:bg-[#DFD8CD] transition-colors flex items-center gap-2">
                             <i class="ri-drop-line text-[#8A5A44]"></i>
                             <span>Tropical Climate &amp; Monsoon Care</span>
                         </a>

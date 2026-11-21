@@ -135,7 +135,7 @@ $blogs = $stmt->fetchAll();
 
                     <?php for ($i = 1; $i <= $total_pages; $i++): ?>
                         <?php if ($i === $page): ?>
-                            <span class="w-10 h-10 rounded-xl bg-[#8A5A44] text-[#F6F3EE] shadow-sm font-semibold flex items-center justify-center font-medium shadow-xs"><?= $i ?></span>
+                            <span class="w-10 h-10 rounded-xl bg-[#8A5A44] text-[#F6F3EE] shadow-sm font-semibold flex items-center justify-center shadow-xs"><?= $i ?></span>
                         <?php else: ?>
                             <a href="blog.php?page=<?= $i ?>" class="w-10 h-10 rounded-xl border border-[#C9C0B3] text-[#6E6359] hover:bg-[#DFD8CD] hover:text-[#362F2A] bg-[#F6F3EE] flex items-center justify-center font-medium transition-colors"><?= $i ?></a>
                         <?php endif; ?>
