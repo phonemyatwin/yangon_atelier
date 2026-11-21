@@ -9,7 +9,7 @@ require_once __DIR__ . '/components/session_check.php';
 require_once __DIR__ . '/../components/connection.php';
 
 // Function
-require_once __DIR__ . '/../components/function.php';
+require_once __DIR__ . '/../components/functions.php';
 
 $blogs = [];
 $error = '';

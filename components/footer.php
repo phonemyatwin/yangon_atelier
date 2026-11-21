@@ -1,21 +1,27 @@
 <?php
 
-/**
- * ============================================================================
- * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - GLOBAL STOREFRONT FOOTER
- * ============================================================================
- * FILE: components/footer.php
- * 
- * BACKEND LOGIC REQUIREMENTS:
- * 1. Newsletter Subscription Handler:
- *    - Triggered by POST submission of input 'subscriber_email'.
- *    - Validate email format with filter_var($email, FILTER_VALIDATE_EMAIL).
- *    - Check for duplicates before inserting into 'subscribers' table:
- *      $stmt = $pdo->prepare("INSERT IGNORE INTO subscribers (email) VALUES (?)");
- *      $stmt->execute([$email]);
- *    - Provide user feedback via toast or session flash message.
- * ============================================================================
- */
+$errors = [];
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['subscribe'])) {
+    $email = strtolower(trim($_POST['email']));
+
+    if (empty($email)) {
+        $errors['email'] = 'Email is required.';
+    } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors['email'] = 'Please enter a valid email address.';
+    }
+
+    if (empty($errors)) {
+        try {
+            $sql = "INSERT INTO subscribers(email) VALUES(:email)";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([':email' => $email]);
+        } catch (PDOException $e) {
+            error_log('User subscribe error: ' . $e->getMessage() . "\n", 3, __DIR__ . '/../error.log');
+            $errors['email'] = 'You cannot subscribe the newsletter at the moment. Please try again later.';
+        }
+    }
+}
+
 ?>
 <!-- GLOBAL STOREFRONT FOOTER (Smoked Walnut) -->
 <footer class="bg-[#4A4038] border-t border-[#3A322B] pt-16 pb-12 text-[#F6F3EE]">
@@ -87,11 +93,11 @@
                 <p class="text-xs sm:text-sm text-[#DFD8CD] leading-relaxed mb-4">
                     Subscribe for seasonal lookbooks, tactile wood release previews, and invitations to private showroom vernissages.
                 </p>
-                <form action="" method="POST" data-toast-success="Thank you for subscribing to our journal." class="space-y-3">
+                <form action="" method="POST" class="space-y-3">
                     <div class="relative">
-                        <input type="email" name="subscriber_email" placeholder="Enter your email address" class="w-full px-4 py-3 bg-[#3A322B] border border-[#5C5046] rounded-xl text-[#F6F3EE] placeholder-[#C9C0B3] text-xs sm:text-sm focus:outline-none focus:border-[#8A5A44] focus:ring-1 focus:ring-[#8A5A44] transition-all">
+                        <input type="email" name="email" placeholder="Enter your email address" class="w-full px-4 py-3 bg-[#3A322B] border border-[#5C5046] rounded-xl text-[#F6F3EE] placeholder-[#C9C0B3] text-xs sm:text-sm focus:outline-none focus:border-[#8A5A44] focus:ring-1 focus:ring-[#8A5A44] transition-all">
                     </div>
-                    <button type="submit" name="subscribe_newsletter" class="w-full py-3 px-4 rounded-xl bg-[#8A5A44] hover:bg-[#704735] text-[#F6F3EE] font-semibold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 shadow-sm">
+                    <button type="submit" name="subscribe" class="w-full py-3 px-4 rounded-xl bg-[#8A5A44] hover:bg-[#704735] text-[#F6F3EE] font-semibold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 shadow-sm">
                         <span>Subscribe</span>
                         <i class="ri-arrow-right-line"></i>
                     </button>

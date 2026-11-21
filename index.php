@@ -586,6 +586,16 @@ require_once __DIR__ . '/components/connection.php';
         </script>
         <?php unset($_SESSION['success']); ?>
     <?php endif; ?>
+
+    <?php if (!empty($errors)): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                <?php foreach ($errors as $error): ?>
+                    showToast(<?= json_encode($error); ?>, 'error');
+                <?php endforeach; ?>
+            });
+        </script>
+    <?php endif; ?>
 </body>
 
 </html>

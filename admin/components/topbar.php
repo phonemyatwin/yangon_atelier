@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../components/function.php';
+require_once __DIR__ . '/../../components/functions.php';
 $admin_name = $_SESSION['admin']['name'] ?? 'Senior Curator';
 $admin_role = $_SESSION['admin']['role'] ?? 'Atelier Administrator';
 $admin_initials = get_initial_name($admin_name);
@@ -37,7 +37,7 @@ $admin_initials = get_initial_name($admin_name);
             <div class="hidden sm:flex flex-col text-left">
                 <span class="text-xs font-semibold text-[#362F2A] leading-none"><?= htmlspecialchars($admin_name) ?></span>
                 <span class="text-[10px] text-[#3F624D] font-medium mt-0.5 flex items-center gap-1">
-                    <span class="w-1.5 h-1.5 rounded-full bg-[#3F624D]"></span> Online
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#3F624D] animate-pulse"></span> Online
                 </span>
             </div>
         </div>

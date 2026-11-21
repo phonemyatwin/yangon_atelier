@@ -21,10 +21,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
     $sql = 'SELECT * FROM users WHERE email = :email LIMIT 1';
     $stmt = $pdo->prepare($sql);
     $stmt->execute([':email' => $email]);
-    $user = $stmt->fetch();
+    $_SESSION['user'] = $stmt->fetch();
 
     // I check all of the credentials in a single if statement and output only one error information as I've learnt that it is the industry standard to prevent the malicious attack called User Enumeration(Account Harvesting).
-    if ($user && !empty($password) && password_verify($password, $user['password'])) {
+    if ($_SESSION['user'] && !empty($password) && password_verify($password, $_SESSION['user']['password'])) {
 
         // Regenerate new session id to prevent malicious attack called Session Fixation(session hijacking).
         session_regenerate_id(true);
@@ -49,9 +49,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
             ]);
         }
         $_SESSION['user'] = [
-            'id' => $user['id'],
-            'name' => $user['name'],
-            'email' => $user['email']
+            'id' => $_SESSION['user']['id'],
+            'name' => $_SESSION['user']['name'],
+            'email' => $_SESSION['user']['email']
         ];
 
         $_SESSION['success'] = 'Welcome back! ' . $_SESSION['user']['name'];

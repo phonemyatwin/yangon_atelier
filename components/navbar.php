@@ -1,20 +1,10 @@
 <?php
-/**
- * ============================================================================
- * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - MOBILE NAVIGATION DRAWER
- * ============================================================================
- * FILE: components/navbar.php
- * 
- * BACKEND LOGIC REQUIREMENTS:
- * 1. Active Navigation Indicator:
- *    - Compare basename($_SERVER['PHP_SELF']) to highlight current active link.
- * 
- * 2. Mobile User Auth Button:
- *    - If $_SESSION['user_id'] is set, display client name and 'Sign Out' (logout.php).
- *    - If not set, display 'Client Sign In' linking to login.php.
- * ============================================================================
- */
+
+// $_SERVER['PHP_SELF'] returns the current path that the user visited. 
+// For example if you visited https://localhost/yangon_atelier/shop.php, it would return /yangon_atelier/shop.php.
+// basename() is the built-in function that strips away all folder paths and give you the final filename which is shop.php in the above example.
 $current_page = basename($_SERVER['PHP_SELF'] ?? 'index.php');
+
 ?>
 <!-- Mobile Drawer Backdrop Overlay -->
 <div id="mobile-backdrop" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300"></div>
@@ -73,10 +63,10 @@ $current_page = basename($_SERVER['PHP_SELF'] ?? 'index.php');
             <p class="text-xs text-[#6E6359] mt-1 font-medium">Daily 09:30 AM — 06:30 PM</p>
         </div>
 
-        <?php if (isset($_SESSION['user_id'])): ?>
+        <?php if (isset($_SESSION['user'])): ?>
             <div class="space-y-2">
                 <div class="text-xs text-[#362F2A] text-center font-medium">
-                    Signed in as <span class="text-[#8A5A44] font-semibold"><?= htmlspecialchars($_SESSION['username'] ?? 'Client') ?></span>
+                    Signed in as <span class="text-[#8A5A44] font-semibold"><?= htmlspecialchars($_SESSION['user']['name'] ?? 'Client') ?></span>
                 </div>
                 <a href="logout.php" class="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#EFE0E0] hover:bg-[#DFC8C8] text-[#8C3B3B] text-sm font-semibold transition-all">
                     <i class="ri-logout-box-r-line"></i>

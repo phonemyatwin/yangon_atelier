@@ -8,24 +8,27 @@ require_once __DIR__ . '/components/session_check.php';
 // Connect database
 require_once __DIR__ . '/components/connection.php';
 
+// Functions
+require_once __DIR__ . '/components/functions.php';
+
 $errors = [];
 $success = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['send'])) {
     $name = trim($_POST['name'] ?? '');
-    $number = trim($_POST['number'] ?? '');
+    $raw_number = trim($_POST['number'] ?? '');
+    $number = '';
     $email = strtolower(trim($_POST['email'] ?? ''));
     $message = trim($_POST['message'] ?? '');
 
     // Form check
-    if (empty($name) || empty($number) || empty($email) || empty($message)) {
+    if (empty($name) || empty($raw_number) || empty($email) || empty($message)) {
         $errors['contact_form'] = 'All fields are required. Please complete the form.';
     } else {
         // Phone number check
-        // if (!filter_var($number, FILTER_VALIDATE_INT)) {
-        // I use regular expression(regex) pattern here cuz the above one doesn't work. 
-        if (!preg_match('/^[0-9+\-\s()]{7,20}$/', $number)) {
-            $errors['number'] = 'Please enter a valid phone number.';
+        $number = phone_number($raw_number);
+        if (!$number) {
+            $errors['number'] = 'Please enter a valid phone number (e.g. 09 973 383 719).';
         }
 
         // Check email
@@ -46,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['send'])) {
             ]);
             $name = htmlspecialchars($name);
             $success = "Thank you {$name}. Your inquiry has been received. Our concierge will reach out promptly.";
-            $name = $number = $email = $message = '';
+            $name = $raw_number = $number = $email = $message = '';
         } catch (PDOException $e) {
             error_log('Contact form error: ' . $e->getMessage() . '\n', 3, __DIR__ . '/error.log');
             $errors['contact'] = 'Unable to send your inquiry at this moment. Please try again later.';
@@ -192,7 +195,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['send'])) {
                                 </label>
                                 <div class="relative">
                                     <i class="ri-phone-line absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6359] text-base"></i>
-                                    <input type="tel" id="number" name="number" value="<?= htmlspecialchars($number ?? '') ?>" placeholder="09 973 383 719" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
+                                    <input type="tel" id="number" name="number" value="<?= htmlspecialchars($raw_number ?? $number ?? '') ?>" placeholder="09 973 383 719" class="w-full pl-11 pr-4 py-3 bg-[#EDE8E0] border border-[#C9C0B3] rounded-xl text-[#362F2A] text-sm placeholder-[#8C7D6B] focus:outline-none focus:ring-1 focus:ring-[#8A5A44] focus:border-[#8A5A44] transition-all">
                                 </div>
                             </div>
 

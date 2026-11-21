@@ -2,6 +2,17 @@
 // Initialize session
 require_once __DIR__ . '/../components/session_start.php';
 
+// Clear presence in database upon explicit sign out
+if (isset($_SESSION['admin']['id'])) {
+    require_once __DIR__ . '/../components/connection.php';
+    try {
+        $stmt = $pdo->prepare("UPDATE admins SET last_activity = NULL WHERE id = :id");
+        $stmt->execute([':id' => $_SESSION['admin']['id']]);
+    } catch (PDOException $e) {
+        // Silently ignore
+    }
+}
+
 // Clear all session values
 $_SESSION = [];
 

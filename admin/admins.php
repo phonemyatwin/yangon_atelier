@@ -9,7 +9,7 @@ require_once __DIR__ . '/components/session_check.php';
 require_once __DIR__ . '/../components/connection.php';
 
 // Connect function
-require_once __DIR__ . '/../components/function.php';
+require_once __DIR__ . '/../components/functions.php';
 
 $admins = [];
 $error = '';
@@ -104,13 +104,18 @@ try {
                                             <td class="py-4 px-6">
                                                 <?php if ((int)$_SESSION['admin']['id'] === (int)$admin['id']): ?>
                                                     <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold text-[#3F624D] bg-[#DCE5DF] border border-[#C6D6CB]">
-                                                        <span class="w-1.5 h-1.5 rounded-full bg-[#3F624D]"></span>
+                                                        <span class="w-1.5 h-1.5 rounded-full bg-[#3F624D] animate-pulse"></span>
                                                         You (Active)
                                                     </span>
-                                                <?php else: ?>
+                                                <?php elseif (!empty($admin['last_activity']) && strtotime($admin['last_activity']) > (time() - (60 * 5))): ?>
                                                     <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold text-[#3F624D] bg-[#DCE5DF] border border-[#C6D6CB]">
-                                                        <span class="w-1.5 h-1.5 rounded-full bg-[#3F624D]"></span>
+                                                        <span class="w-1.5 h-1.5 rounded-full bg-[#3F624D] animate-pulse"></span>
                                                         Active
+                                                    </span>
+                                                <?php else: ?>
+                                                    <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold text-[#6E6359] bg-[#EDE8E0] border border-[#C9C0B3]">
+                                                        <span class="w-1.5 h-1.5 rounded-full bg-[#8C7D6B]"></span>
+                                                        Offline
                                                     </span>
                                                 <?php endif; ?>
                                             </td>

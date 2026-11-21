@@ -7,7 +7,7 @@ require_once __DIR__ . '/components/session_check.php';
 
 // Connect database
 require_once __DIR__ . '/../components/connection.php';
-require_once __DIR__ . '/../components/function.php';
+require_once __DIR__ . '/../components/functions.php';
 
 $id = $_GET['id'] ?? '';
 

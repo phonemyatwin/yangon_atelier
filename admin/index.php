@@ -51,6 +51,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
             'role' => $admin['role']
         ];
 
+        // Mark active timestamp
+        try {
+            $stmt = $pdo->prepare("UPDATE admins SET last_activity = NOW() WHERE id = :id");
+            $stmt->execute([':id' => $admin['id']]);
+        } catch (PDOException $e) {
+            // Silently ignore
+        }
+
         $_SESSION['success'] = 'Welcome back! ' . $_SESSION['admin']['name'];
         header('Location: dashboard.php');
         exit;

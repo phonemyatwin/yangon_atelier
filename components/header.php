@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ============================================================================
  * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - GLOBAL STOREFRONT HEADER
@@ -20,10 +21,12 @@
  *    - Query parameter is 'search' (e.g., shop.php?search=walnut).
  * ============================================================================
  */
+require_once __DIR__ . '/functions.php';
 
-$current_page = basename($_SERVER['PHP_SELF'] ?? 'index.php');
-
-require_once __DIR__ . '/function.php';
+// $_SERVER['PHP_SELF'] returns the current path that the user visited. 
+// For example if you visited https://localhost/yangon_atelier/shop.php, it would return /yangon_atelier/shop.php.
+// basename() is the built-in function that strips away all folder paths and give you the final filename which is shop.php in the above example.
+$current_page = basename($_SERVER['PHP_SELF']) ?? 'index.php';
 ?>
 <!-- Announcement / Top Atelier Bar (Smoked Walnut) -->
 <div class="bg-[#4A4038] text-[#F6F3EE] text-[11px] py-2 px-4 sm:px-6 lg:px-8 border-b border-[#3A322B]">
@@ -77,21 +80,10 @@ require_once __DIR__ . '/function.php';
             </button>
 
             <!-- Dynamic Authentication Indicator -->
-            <?php 
-            $is_authenticated = isset($_SESSION['user']) || isset($_SESSION['user_id']);
-            if ($is_authenticated): 
-                $client_info = $_SESSION['user'] ?? [];
-                $client_name = $client_info['name'] ?? $_SESSION['name'] ?? 'Client';
-                $client_email = $client_info['email'] ?? $_SESSION['email'] ?? '';
-                
-                // Formulate 1-2 letter monogram initials
-                $name_words = preg_split('/\s+/', trim($client_name));
-                if (count($name_words) >= 2) {
-                    $client_monogram = strtoupper(mb_substr($name_words[0], 0, 1) . mb_substr($name_words[count($name_words) - 1], 0, 1));
-                } else {
-                    $client_monogram = strtoupper(mb_substr($client_name, 0, 2));
-                }
-                if (empty($client_monogram)) $client_monogram = 'YA';
+            <?php
+            if (isset($_SESSION['user'])):
+                $name = $_SESSION['user']['name'] ?? 'Client';
+                $email = $_SESSION['user']['email'] ?? '';
             ?>
                 <!-- Grand Atelier Client Sanctuary Pill & Flyout Menu -->
                 <div class="relative group" id="user-menu-container">
@@ -99,17 +91,17 @@ require_once __DIR__ . '/function.php';
                     <button type="button" id="user-menu-btn" aria-expanded="false" aria-haspopup="true" aria-label="Client Account Menu" class="flex items-center gap-2.5 p-1 sm:pl-1.5 sm:pr-3.5 rounded-full bg-[#F6F3EE] hover:bg-[#DFD8CD]/60 border border-[#C9C0B3] hover:border-[#8A5A44]/60 transition-all duration-300 shadow-xs hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[#8A5A44]/30 cursor-pointer">
                         <!-- Terracotta Monogram Seal with Soft Gold/Linen Border -->
                         <span class="w-8 h-8 rounded-full bg-gradient-to-br from-[#8A5A44] to-[#704735] text-[#F6F3EE] font-serif text-xs font-semibold flex items-center justify-center shadow-inner ring-1 ring-[#8A5A44]/40 ring-offset-1 ring-offset-[#F6F3EE] flex-shrink-0">
-                            <?= htmlspecialchars(get_initial_name($client_name)) ?>
+                            <?= htmlspecialchars(get_initial_name($name)) ?>
                         </span>
-                        
+
                         <!-- Client Name & Tier (Hidden on ultra-compact screens) -->
                         <div class="hidden sm:flex flex-col text-left leading-tight pr-0.5">
                             <span class="text-[9px] uppercase tracking-[0.2em] text-[#8A5A44] font-semibold flex items-center gap-1">
-                                <span class="w-1.5 h-1.5 rounded-full bg-[#3F624D]"></span>
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#3F624D] animate-pulse"></span>
                                 <span>Sanctuary Patron</span>
                             </span>
                             <span class="font-serif text-xs font-semibold text-[#362F2A] truncate max-w-[110px]">
-                                <?= htmlspecialchars($client_name) ?>
+                                <?= htmlspecialchars($name) ?>
                             </span>
                         </div>
 
@@ -119,23 +111,23 @@ require_once __DIR__ . '/function.php';
 
                     <!-- Floating Grand Dropdown Card -->
                     <div id="user-dropdown" class="absolute right-0 top-full mt-2.5 w-72 bg-[#F6F3EE] border border-[#C9C0B3] rounded-3xl shadow-2xl p-5 transition-all duration-200 z-50 invisible opacity-0 translate-y-2 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:visible group-focus-within:opacity-100 group-focus-within:translate-y-0">
-                        
+
                         <!-- Top Beak Arrow Accent -->
                         <div class="absolute -top-1.5 right-6 w-3 h-3 bg-[#F6F3EE] border-t border-l border-[#C9C0B3] rotate-45"></div>
 
                         <!-- Card Header: Monogram Avatar & Client Persona -->
                         <div class="flex items-start gap-3 pb-4 border-b border-[#C9C0B3]/70">
                             <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-[#8A5A44] to-[#704735] text-[#F6F3EE] font-serif text-base font-bold flex items-center justify-center shadow-md ring-2 ring-[#8A5A44]/30 ring-offset-2 ring-offset-[#F6F3EE] flex-shrink-0">
-                                <?= htmlspecialchars($client_monogram) ?>
+                                <?= htmlspecialchars(get_initial_name($name)) ?>
                             </div>
                             <div class="flex-1 min-w-0">
                                 <span class="text-[9px] uppercase tracking-[0.22em] text-[#8A5A44] font-semibold block leading-none mb-1">Authenticated Patron</span>
                                 <h4 class="font-serif text-sm font-semibold text-[#362F2A] truncate leading-snug">
-                                    <?= htmlspecialchars($client_name) ?>
+                                    <?= htmlspecialchars($name) ?>
                                 </h4>
-                                <?php if (!empty($client_email)): ?>
-                                    <p class="text-[11px] text-[#6E6359] truncate mt-0.5" title="<?= htmlspecialchars($client_email) ?>">
-                                        <?= htmlspecialchars($client_email) ?>
+                                <?php if (!empty($email)): ?>
+                                    <p class="text-[11px] text-[#6E6359] truncate mt-0.5" title="<?= htmlspecialchars($email) ?>">
+                                        <?= htmlspecialchars($email) ?>
                                     </p>
                                 <?php endif; ?>
                             </div>
