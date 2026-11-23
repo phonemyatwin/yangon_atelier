@@ -27,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
 
         $thirty_days = time() + (60 * 60 * 24 * 30);
 
+        // For cookie
         setcookie('admin_email_cookie', $remember ? $email : '', [
             'expires' => $remember ? $thirty_days : time() - 3600,
             'path' => '/',
@@ -34,6 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
             'samesite' => 'Lax'
         ]);
 
+        
         if ($remember) {
             $params = session_get_cookie_params();
             setcookie(session_name(), session_id(), [
