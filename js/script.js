@@ -1,8 +1,3 @@
-/**
- * Yangon Atelier — Main Frontend Scripts
- * Luxury Warm Travertine & Smoked Clay Atelier Interactions
- */
-
 // Prevent mouse wheel from inadvertently changing number inputs
 document.addEventListener(
   "wheel",

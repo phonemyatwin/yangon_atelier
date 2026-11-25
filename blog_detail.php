@@ -7,47 +7,39 @@ require_once __DIR__ . '/components/session_check.php';
 
 // Connect database
 require_once __DIR__ . '/components/connection.php';
+
+// Functions
 require_once __DIR__ . '/components/functions.php';
 
-// Validate GET Parameter 'id'
-$id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
-if ($id <= 0) {
+$id = $_GET['id'] ?? '';
+if (empty($id) || !filter_var($id, FILTER_VALIDATE_INT)) {
+    header("Location: blog.php");
+}
+
+try {
+    $sql = "SELECT * FROM blogs WHERE id = :id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([":id" => $id]);
+    $blog = $stmt->fetch();
+} catch (PDOException $e) {
+    error_log("Blog fetch error: " . $e->getMessage() . "\n", 3, __DIR__ . "/error.log");
+    $_SESSION['error'] = "Unable to retrieve journal essay details. Please try again later.";
     header("Location: blog.php");
     exit;
 }
 
-// Query Single Article from 'blogs' table
-$stmt = $pdo->prepare("SELECT * FROM blogs WHERE id = ? LIMIT 1");
-$stmt->execute([$id]);
-$blog = $stmt->fetch();
-
 if (!$blog) {
-    header("Location: blog.php?error=article_not_found");
+    $_SESSION['error'] = "Blog not found.";
+    header("Location: blog.php");
     exit;
 }
-
-// Compute reading time
-$reading_time = get_reading_time($blog['content'] ?? '');
-
-// Author name and initials
-$author_name = trim($blog['author'] ?? 'Atelier Editorial');
-$words = preg_split('/\s+/', $author_name);
-$initials = '';
-foreach ($words as $w) {
-    if (!empty($w)) {
-        $initials .= strtoupper(mb_substr($w, 0, 1));
-    }
-}
-$initials = mb_substr($initials, 0, 2) ?: 'YA';
-
-// Image resolver
-$img_src = resolve_blog_image($blog['image'] ?? '');
 
 // Paragraph parsing
 $paragraphs = array_filter(array_map('trim', explode("\n\n", $blog['content'] ?? '')));
 if (empty($paragraphs) && !empty($blog['content'])) {
     $paragraphs = [trim($blog['content'])];
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
@@ -87,19 +79,19 @@ if (empty($paragraphs) && !empty($blog['content'])) {
                 </h1>
                 <div class="flex items-center gap-4 text-xs text-[#6E6359] pt-2 border-b border-[#C9C0B3] pb-6">
                     <div class="flex items-center gap-2">
-                        <span class="w-8 h-8 rounded-full bg-[#8A5A44] text-[#F6F3EE] flex items-center justify-center font-serif text-xs font-semibold"><?= htmlspecialchars($initials) ?></span>
-                        <span class="font-medium text-[#362F2A]"><?= htmlspecialchars($author_name) ?></span>
+                        <span class="w-8 h-8 rounded-full bg-[#8A5A44] text-[#F6F3EE] flex items-center justify-center font-serif text-xs font-semibold"><?= get_initial_name($blog['author']); ?></span>
+                        <span class="font-medium text-[#362F2A]"><?= htmlspecialchars($blog['author']) ?></span>
                     </div>
                     <span class="w-1 h-1 rounded-full bg-[#C9C0B3]"></span>
-                    <time datetime="<?= date('Y-m-d', strtotime($blog['created_at'])) ?>"><?= date("F j, Y", strtotime($blog['created_at'])) ?></time>
+                    <time datetime="<?= get_created_time($blog['created_at']); ?>"><?= get_created_time($blog['created_at']); ?></time>
                     <span class="w-1 h-1 rounded-full bg-[#C9C0B3]"></span>
-                    <span><?= htmlspecialchars($reading_time) ?></span>
+                    <span><?= get_reading_time($blog['content']); ?></span>
                 </div>
             </div>
 
             <!-- Featured Image -->
             <div class="rounded-3xl overflow-hidden aspect-[16/10] bg-[#EDE8E0] border border-[#C9C0B3] shadow-lg mb-12">
-                <img src="<?= htmlspecialchars($img_src) ?>" alt="<?= htmlspecialchars($blog['title']) ?>" class="w-full h-full object-cover">
+                <img src="media/<?= htmlspecialchars($blog['image']); ?>" alt="<?= htmlspecialchars($blog['title']) ?>" class="w-full h-full object-cover">
             </div>
 
             <!-- Reading Body Layout -->
@@ -120,10 +112,10 @@ if (empty($paragraphs) && !empty($blog['content'])) {
             <!-- Author Bio Box -->
             <div class="max-w-3xl mx-auto mt-14 p-6 sm:p-8 rounded-3xl bg-[#F6F3EE] border border-[#C9C0B3] shadow-md flex flex-col sm:flex-row items-center sm:items-start gap-6">
                 <span class="w-16 h-16 rounded-2xl bg-[#8A5A44] text-[#F6F3EE] flex items-center justify-center font-serif text-xl font-medium flex-shrink-0">
-                    <?= htmlspecialchars($initials) ?>
+                    <?= get_initial_name($blog['author']); ?>
                 </span>
                 <div class="space-y-2 text-center sm:text-left">
-                    <h3 class="font-serif text-lg font-semibold text-[#362F2A]"><?= htmlspecialchars($author_name) ?></h3>
+                    <h3 class="font-serif text-lg font-semibold text-[#362F2A]"><?= htmlspecialchars($blog['author']); ?></h3>
                     <p class="text-xs text-[#6E6359] leading-relaxed">
                         Curator and resident craft practitioner at Yangon Atelier. Documenting material studies, sustainable forestry reports, and spatial interior philosophy for contemporary sanctuaries.
                     </p>

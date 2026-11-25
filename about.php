@@ -1,26 +1,4 @@
 <?php
-
-/**
- * ============================================================================
- * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - ABOUT ATELIER
- * ============================================================================
- * FILE: about.php
- * PURPOSE: Brand heritage narrative, master workshop timeline, and sustainability
- *          commitments.
- * 
- * STEP-BY-STEP IMPLEMENTATION GUIDE:
- * 1. Initialize Session & Database Connection:
- *    if (session_status() === PHP_SESSION_NONE) { session_start(); }
- *    require_once "components/connection.php";
- * 
- * 2. Optional Dynamic Metrics:
- *    You can query dynamic metrics from the database (e.g. total bespoke commissions,
- *    active artisans in `team`, total catalog pieces in `products`):
- *    $stat_products = $pdo->query("SELECT COUNT(*) FROM products")->fetchColumn() ?? 0;
- *    $stat_artisans = $pdo->query("SELECT COUNT(*) FROM team")->fetchColumn() ?? 0;
- * ============================================================================
- */
-
 // Initialize session
 require_once __DIR__ . '/components/session_start.php';
 

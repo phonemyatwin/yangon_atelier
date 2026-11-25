@@ -10,20 +10,35 @@ require_once __DIR__ . '/components/connection.php';
 require_once __DIR__ . '/components/functions.php';
 
 // Pagination setup
+$error = '';
 $limit = 6;
-$page = max(1, (int)($_GET['page'] ?? 1));
-$total = (int)$pdo->query("SELECT COUNT(*) FROM blogs")->fetchColumn();
-$total_pages = max(1, (int)ceil($total / $limit));
-if ($page > $total_pages) {
-    $page = $total_pages;
-}
-$offset = ($page - 1) * $limit;
+$page = max(1, (int)($_GET['page'] ?? ''));
 
-$stmt = $pdo->prepare("SELECT * FROM blogs ORDER BY id DESC LIMIT :limit OFFSET :offset");
-$stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
-$stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
-$stmt->execute();
-$blogs = $stmt->fetchAll();
+$blogs = [];
+
+
+try {
+    $sql = "SELECT COUNT(*) FROM blogs";
+    $stmt = $pdo->query($sql);
+    $total_blogs = (int)$stmt->fetchColumn();
+    $total_pages = max(1, (int)ceil($total_blogs / $limit));
+    if ($page > $total_pages) {
+        $page = $total_pages;
+    }
+
+    $offset = ($page - 1) * $limit;
+    $sql = "SELECT * FROM blogs ORDER BY id DESC LIMIT :limit OFFSET :offset";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([
+        ":limit" => $limit,
+        ":offset" => $offset
+    ]);
+    $blogs = $stmt->fetchAll();
+} catch (PDOException $e) {
+    error_log("Blog fetch error: " . $e->getMessage() . "\n", 3, __DIR__ . "/error.log");
+    $error = 'Unable to retrieve journal essays. Please try again later.';
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
@@ -64,56 +79,33 @@ $blogs = $stmt->fetchAll();
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         <?php if (!empty($blogs)): ?>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
-                <?php foreach ($blogs as $blog):
-                    $img_src = __DIR__ . '/media/' . $blog['image'];
-
-                    // Reading time
-                    $reading_time = get_reading_time($blog['content'] ?? '');
-
-                    // Author initials
-                    $author_name = trim($blog['author'] ?? 'Atelier Editorial');
-                    $words = preg_split('/\s+/', $author_name);
-                    $initials = '';
-                    foreach ($words as $w) {
-                        if (!empty($w)) {
-                            $initials .= strtoupper(mb_substr($w, 0, 1));
-                        }
-                    }
-                    $initials = mb_substr($initials, 0, 2) ?: 'YA';
-
-                    // Excerpt
-                    $clean_content = strip_tags($blog['content'] ?? '');
-                    $excerpt = mb_substr($clean_content, 0, 140);
-                    if (mb_strlen($clean_content) > 140) {
-                        $excerpt .= '...';
-                    }
-                ?>
+                <?php foreach ($blogs as $blog): ?>
                     <article class="group bg-[#F6F3EE] rounded-3xl border border-[#C9C0B3] overflow-hidden shadow-sm hover:shadow-xl hover:border-[#8A5A44] transition-all duration-500 flex flex-col justify-between">
                         <div>
                             <a href="blog_detail.php?id=<?= (int)$blog['id'] ?>" class="relative aspect-[16/10] overflow-hidden bg-[#EDE8E0] border-b border-[#C9C0B3] block">
-                                <img src="<?= htmlspecialchars($img_src) ?>" alt="<?= htmlspecialchars($blog['title']) ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                                <img src="media/<?= htmlspecialchars($blog['image']); ?>" alt="<?= htmlspecialchars($blog['title']) ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                                 <span class="absolute top-4 left-4 inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold bg-[#F6F3EE]/95 backdrop-blur-md text-[#8A5A44] border border-[#C9C0B3] shadow-xs">
                                     <?= htmlspecialchars($blog['category'] ?? 'Philosophy') ?>
                                 </span>
                             </a>
                             <div class="p-6">
                                 <div class="flex items-center gap-3 text-xs text-[#6E6359] mb-3">
-                                    <span class="flex items-center gap-1"><i class="ri-calendar-line text-[#8A5A44]"></i> <?= date("M d, Y", strtotime($blog['created_at'])) ?></span>
+                                    <span class="flex items-center gap-1"><i class="ri-calendar-line text-[#8A5A44]"></i> <?= get_created_time($blog['created_at']); ?></span>
                                     <span class="w-1 h-1 rounded-full bg-[#C9C0B3]"></span>
-                                    <span><?= htmlspecialchars($reading_time) ?></span>
+                                    <span><?= htmlspecialchars(get_reading_time($blog['content'])) ?></span>
                                 </div>
                                 <h2 class="font-serif text-xl font-normal text-[#362F2A] group-hover:text-[#8A5A44] transition-colors leading-snug">
                                     <a href="blog_detail.php?id=<?= (int)$blog['id'] ?>"><?= htmlspecialchars($blog['title']) ?></a>
                                 </h2>
                                 <p class="text-sm text-[#6E6359] line-clamp-3 mt-3 leading-relaxed">
-                                    <?= htmlspecialchars($excerpt) ?>
+                                    <?= htmlspecialchars($blog['content']) ?>
                                 </p>
                             </div>
                         </div>
                         <div class="px-6 pb-6 pt-4 border-t border-[#C9C0B3] flex items-center justify-between">
                             <div class="flex items-center gap-2">
-                                <span class="w-7 h-7 rounded-full bg-[#EFE9DF] text-[#8A5A44] flex items-center justify-center text-xs font-semibold"><?= htmlspecialchars($initials) ?></span>
-                                <span class="text-xs font-medium text-[#6E6359]"><?= htmlspecialchars($author_name) ?></span>
+                                <span class="w-7 h-7 rounded-full bg-[#EFE9DF] text-[#8A5A44] flex items-center justify-center text-xs font-semibold"><?= htmlspecialchars(get_initial_name($blog['author'])) ?></span>
+                                <span class="text-xs font-medium text-[#6E6359]"><?= htmlspecialchars($blog['author']) ?></span>
                             </div>
                             <a href="blog_detail.php?id=<?= (int)$blog['id'] ?>" class="text-xs font-semibold text-stone-900 hover:text-[#8A5A44] inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
                                 <span>Read</span>
@@ -127,25 +119,34 @@ $blogs = $stmt->fetchAll();
             <!-- JOURNAL PAGINATION -->
             <?php if ($total_pages > 1): ?>
                 <div class="mt-16 flex items-center justify-center gap-2 text-sm">
+
+                    <!-- Previous Button -->
+                    <!-- This will appear as long as the current page is not the first page. -->
                     <?php if ($page > 1): ?>
                         <a href="blog.php?page=<?= $page - 1 ?>" aria-label="Previous Page" class="w-10 h-10 rounded-xl border border-[#C9C0B3] text-[#6E6359] hover:bg-[#DFD8CD] hover:text-[#362F2A] bg-[#F6F3EE] flex items-center justify-center font-medium transition-colors">
                             <i class="ri-arrow-left-s-line text-lg"></i>
                         </a>
                     <?php endif; ?>
+                    <!-- Previous Button -->
 
-                    <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-                        <?php if ($i === $page): ?>
-                            <span class="w-10 h-10 rounded-xl bg-[#8A5A44] text-[#F6F3EE] shadow-sm font-semibold flex items-center justify-center shadow-xs"><?= $i ?></span>
+                    <!--  -->
+                    <?php for ($num = 1; $num <= $total_pages; $num++): ?>
+                        <?php if ($num === $page): ?>
+                            <span class="w-10 h-10 rounded-xl bg-[#8A5A44] text-[#F6F3EE] shadow-sm font-semibold flex items-center justify-center shadow-xs"><?= $num ?></span>
                         <?php else: ?>
-                            <a href="blog.php?page=<?= $i ?>" class="w-10 h-10 rounded-xl border border-[#C9C0B3] text-[#6E6359] hover:bg-[#DFD8CD] hover:text-[#362F2A] bg-[#F6F3EE] flex items-center justify-center font-medium transition-colors"><?= $i ?></a>
+                            <a href="blog.php?page=<?= $num ?>" class="w-10 h-10 rounded-xl border border-[#C9C0B3] text-[#6E6359] hover:bg-[#DFD8CD] hover:text-[#362F2A] bg-[#F6F3EE] flex items-center justify-center font-medium transition-colors"><?= $num ?></a>
                         <?php endif; ?>
                     <?php endfor; ?>
+                    <!--  -->
 
+                    <!-- Next Button -->
+                    <!-- This will appear as long as the current page is not the last page -->
                     <?php if ($page < $total_pages): ?>
                         <a href="blog.php?page=<?= $page + 1 ?>" aria-label="Next Page" class="w-10 h-10 rounded-xl border border-[#C9C0B3] text-[#6E6359] hover:bg-[#DFD8CD] hover:text-[#362F2A] bg-[#F6F3EE] flex items-center justify-center font-medium transition-colors">
                             <i class="ri-arrow-right-s-line text-lg"></i>
                         </a>
                     <?php endif; ?>
+                    <!-- Next Button -->
                 </div>
             <?php endif; ?>
         <?php else: ?>
@@ -157,6 +158,23 @@ $blogs = $stmt->fetchAll();
 
     <?php include "components/footer.php"; ?>
     <script src="js/script.js"></script>
+
+    <?php if (!empty($_SESSION['error'])): ?>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                showToast(<?= json_encode($_SESSION['error']); ?>, "error");
+            })
+        </script>
+        <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
+
+    <?php if (!empty($error)): ?>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                showToast(<?= json_encode($error); ?>, "error");
+            })
+        </script>
+    <?php endif; ?>
 </body>
 
 </html>

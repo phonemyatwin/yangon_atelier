@@ -1,27 +1,4 @@
 <?php
-
-/**
- * ============================================================================
- * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - DESIGN COLLECTIVE & TEAM
- * ============================================================================
- * FILE: team.php
- * PURPOSE: Queries and showcases the master artisans, spatial curators, and
- *          architects from the 'team' table.
- * 
- * STEP-BY-STEP IMPLEMENTATION GUIDE:
- * 1. Initialize Session & Database:
- *    if (session_status() === PHP_SESSION_NONE) { session_start(); }
- *    require_once "components/connection.php";
- * 
- * 2. Execute Query to Retrieve Team Members:
- *    $stmt = $pdo->query("SELECT id, name, position, image FROM team ORDER BY id ASC");
- *    $team = $stmt ? $stmt->fetchAll() : [];
- * 
- * 3. Render Dynamic Artisan Dossiers:
- *    Loop through $team to render name, position/title, and portrait photo.
- * ============================================================================
- */
-
 // Initialize session
 require_once __DIR__ . '/components/session_start.php';
 
@@ -30,6 +7,7 @@ require_once __DIR__ . '/components/session_check.php';
 
 // Connect database
 require_once __DIR__ . '/components/connection.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">

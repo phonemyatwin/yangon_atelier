@@ -7,12 +7,7 @@
  * FILE: index.php
  * PURPOSE: Showcases featured hero lookbooks, curated product masterpieces,
  *          craftsmanship narratives, and recent journal editorial essays.
- * 
- * STEP-BY-STEP IMPLEMENTATION GUIDE:
- * 1. Initialize Session & Database Connection:
- *    if (session_status() === PHP_SESSION_NONE) { session_start(); }
- *    require_once "components/connection.php";
- * 
+
  * 2. Query Curated Masterpiece Products:
  *    $product_stmt = $pdo->query("SELECT id, name, price, stock, image, category FROM products ORDER BY id DESC LIMIT 4");
  *    $featured_products = $product_stmt ? $product_stmt->fetchAll() : [];
@@ -30,6 +25,18 @@ require_once __DIR__ . '/components/session_check.php';
 
 // Connect database
 require_once __DIR__ . '/components/connection.php';
+
+
+$errors = [];
+$products = [];
+try {
+    $sql = "SELECT * FROM products LIMIT 4";
+    $stmt = $pdo->query($sql);
+    $products = $stmt->fetchAll();
+} catch (PDOException $e) {
+    error_log("Product fetch error: " . $e->getMessage() . "\n", 3, __DIR__ . "/error.log");
+    $errors['product'] = "Unable to retrieve products. Please try again later.";
+}
 
 ?>
 <!DOCTYPE html>
@@ -305,7 +312,7 @@ require_once __DIR__ . '/components/connection.php';
                 </div>
                 <div class="flex items-center gap-4">
                     <a href="shop.php" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#F6F3EE] hover:bg-[#EDE8E0] text-[#362F2A] text-xs font-semibold border border-[#C9C0B3] transition-colors shadow-xs">
-                        <span>Browse Entire Catalog (29 Pieces)</span>
+                        <span>Browse Entire Catalog (<?= htmlspecialchars(count($products)); ?> Pieces)</span>
                         <i class="ri-arrow-right-line text-[#8A5A44]"></i>
                     </a>
                 </div>
