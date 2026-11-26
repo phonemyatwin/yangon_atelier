@@ -12,21 +12,19 @@ require_once __DIR__ . '/components/functions.php';
 // Pagination setup
 $error = '';
 $limit = 6;
-$page = max(1, (int)($_GET['page'] ?? ''));
-
+$current_page = max(1, (int)($_GET['page'] ?? ''));
 $blogs = [];
-
 
 try {
     $sql = "SELECT COUNT(*) FROM blogs";
     $stmt = $pdo->query($sql);
     $total_blogs = (int)$stmt->fetchColumn();
     $total_pages = max(1, (int)ceil($total_blogs / $limit));
-    if ($page > $total_pages) {
-        $page = $total_pages;
+    if ($current_page > $total_pages) {
+        $current_page = $total_pages;
     }
 
-    $offset = ($page - 1) * $limit;
+    $offset = ($current_page - 1) * $limit;
     $sql = "SELECT * FROM blogs ORDER BY id DESC LIMIT :limit OFFSET :offset";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
@@ -122,8 +120,8 @@ try {
 
                     <!-- Previous Button -->
                     <!-- This will appear as long as the current page is not the first page. -->
-                    <?php if ($page > 1): ?>
-                        <a href="blog.php?page=<?= $page - 1 ?>" aria-label="Previous Page" class="w-10 h-10 rounded-xl border border-[#C9C0B3] text-[#6E6359] hover:bg-[#DFD8CD] hover:text-[#362F2A] bg-[#F6F3EE] flex items-center justify-center font-medium transition-colors">
+                    <?php if ($current_page > 1): ?>
+                        <a href="blog.php?page=<?= $current_page - 1 ?>" aria-label="Previous Page" class="w-10 h-10 rounded-xl border border-[#C9C0B3] text-[#6E6359] hover:bg-[#DFD8CD] hover:text-[#362F2A] bg-[#F6F3EE] flex items-center justify-center font-medium transition-colors">
                             <i class="ri-arrow-left-s-line text-lg"></i>
                         </a>
                     <?php endif; ?>
@@ -131,7 +129,7 @@ try {
 
                     <!--  -->
                     <?php for ($num = 1; $num <= $total_pages; $num++): ?>
-                        <?php if ($num === $page): ?>
+                        <?php if ($num === $current_page): ?>
                             <span class="w-10 h-10 rounded-xl bg-[#8A5A44] text-[#F6F3EE] shadow-sm font-semibold flex items-center justify-center shadow-xs"><?= $num ?></span>
                         <?php else: ?>
                             <a href="blog.php?page=<?= $num ?>" class="w-10 h-10 rounded-xl border border-[#C9C0B3] text-[#6E6359] hover:bg-[#DFD8CD] hover:text-[#362F2A] bg-[#F6F3EE] flex items-center justify-center font-medium transition-colors"><?= $num ?></a>
@@ -141,8 +139,8 @@ try {
 
                     <!-- Next Button -->
                     <!-- This will appear as long as the current page is not the last page -->
-                    <?php if ($page < $total_pages): ?>
-                        <a href="blog.php?page=<?= $page + 1 ?>" aria-label="Next Page" class="w-10 h-10 rounded-xl border border-[#C9C0B3] text-[#6E6359] hover:bg-[#DFD8CD] hover:text-[#362F2A] bg-[#F6F3EE] flex items-center justify-center font-medium transition-colors">
+                    <?php if ($current_page < $total_pages): ?>
+                        <a href="blog.php?page=<?= $current_page + 1 ?>" aria-label="Next Page" class="w-10 h-10 rounded-xl border border-[#C9C0B3] text-[#6E6359] hover:bg-[#DFD8CD] hover:text-[#362F2A] bg-[#F6F3EE] flex items-center justify-center font-medium transition-colors">
                             <i class="ri-arrow-right-s-line text-lg"></i>
                         </a>
                     <?php endif; ?>

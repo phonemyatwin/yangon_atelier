@@ -9,31 +9,51 @@ require_once __DIR__ . '/components/session_check.php';
 require_once __DIR__ . '/components/connection.php';
 
 // Validate GET Parameter 'id'
-$id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
-if ($id <= 0) {
-    $id = 1;
+$id = $_GET['id'] ?? '';
+if (empty($id) || !filter_var($id, FILTER_VALIDATE_INT)) {
+    header("Location: shop.php");
+    exit;
 }
 
 // Query Single Product Record
-$stmt = $pdo->prepare("SELECT * FROM products WHERE id = ? LIMIT 1");
-$stmt->execute([$id]);
-$product = $stmt->fetch();
+try {
+    $sql = "SELECT * FROM products WHERE id = :id LIMIT 1";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([":id" => $id]);
+    $product = $stmt->fetch();
+} catch (PDOException $e) {
+    error_log("Product fetch error: " . $e->getMessage() . "\n", 3, __DIR__ . "/error.log");
+    $_SESSION['error'] = "Unable to retrieve product details. Please try again later.";
+    header("Location: shop.php");
+    exit;
+}
 
 if (!$product) {
-    header("Location: shop.php?error=not_found");
+    $_SESSION['error'] = 'Product not found.';
+    header("Location: shop.php");
     exit;
 }
 
 // Query Related Products (same category, excluding current)
 $category = $product['category'] ?? 'chairs';
-$rel_stmt = $pdo->prepare("SELECT * FROM products WHERE category = ? AND id != ? ORDER BY id DESC LIMIT 4");
-$rel_stmt->execute([$category, $product['id']]);
-$related_products = $rel_stmt->fetchAll();
+$related_products = [];
+try {
+    $sql = "SELECT * FROM products WHERE category = :category AND id != :id ORDER BY id DESC LIMIT 4";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([
+        ":id" => $id,
+        ":category" => $category
+    ]);
+    $related_products = $stmt->fetchAll();
 
-if (empty($related_products)) {
-    $rel_stmt = $pdo->prepare("SELECT * FROM products WHERE id != ? ORDER BY id DESC LIMIT 4");
-    $rel_stmt->execute([$product['id']]);
-    $related_products = $rel_stmt->fetchAll();
+    if (empty($related_products)) {
+        $sql = "SELECT * FROM products WHERE id != :id ORDER BY id DESC LIMIT 4";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([":id" => $product['id']]);
+        $related_products = $stmt->fetchAll();
+    }
+} catch (PDOException $e) {
+    error_log("Related products fetch error: " . $e->getMessage() . "\n", 3, __DIR__ . "/error.log");
 }
 
 // Category display mapping
@@ -49,15 +69,23 @@ $sku = 'YA-' . strtoupper(substr($product['category'] ?? 'PR', 0, 2)) . '-' . st
 
 // Gallery perspectives
 $gallery_images = [
-    'images/' . $product['image'],
+    'media/' . $product['image'],
 ];
 foreach ($related_products as $rel) {
     if (count($gallery_images) < 3 && !empty($rel['image'])) {
-        $gallery_images[] = 'images/' . $rel['image'];
+        $gallery_images[] = 'media/' . $rel['image'];
     }
 }
 $gallery_images[] = 'images/about/about2.jpg';
 $gallery_images = array_slice($gallery_images, 0, 4);
+
+$categories = [
+    'chairs'  => 'Chairs & Seating',
+    'sofas'   => 'Sofas & Lounge',
+    'tables'  => 'Tables & Desks',
+    'beds'    => 'Beds & Tatami',
+    'objects' => 'Lighting & Objects'
+];
 ?>
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
@@ -83,7 +111,7 @@ $gallery_images = array_slice($gallery_images, 0, 4);
                 <span class="text-[#C9C0B3]">/</span>
                 <a href="shop.php" class="hover:text-[#362F2A] transition-colors">Shop</a>
                 <span class="text-[#C9C0B3]">/</span>
-                <a href="shop.php?category=<?= urlencode($product['category']) ?>" class="hover:text-[#362F2A] transition-colors"><?= htmlspecialchars($category_name) ?></a>
+                <a href="shop.php?category=<?= urlencode($product['category']) ?>" class="hover:text-[#362F2A] transition-colors"><?= htmlspecialchars($categories[$product['category']]) ?></a>
                 <span class="text-[#C9C0B3]">/</span>
                 <span class="text-[#8A5A44] font-semibold"><?= htmlspecialchars($product['name']) ?></span>
             </nav>
@@ -102,7 +130,7 @@ $gallery_images = array_slice($gallery_images, 0, 4);
                         <span class="w-1.5 h-1.5 rounded-full bg-[#3F624D]"></span>
                         <span><?= ($product['stock'] > 0) ? 'In Stock & Ready for White-Glove Delivery' : 'Crafted to Order' ?></span>
                     </span>
-                    <img id="main-product-img" src="images/<?= htmlspecialchars($product['image']) ?>" alt="<?= htmlspecialchars($product['name']) ?>" class="w-full h-full object-cover transition-all duration-300" loading="eager">
+                    <img id="main-product-img" src="media/<?= htmlspecialchars($product['image']) ?>" alt="<?= htmlspecialchars($product['name']) ?>" class="w-full h-full object-cover transition-all duration-300" loading="eager">
                 </div>
 
                 <!-- Gallery Thumbnails (Atelier Perspectives) -->
@@ -132,14 +160,14 @@ $gallery_images = array_slice($gallery_images, 0, 4);
             <div class="lg:col-span-5 lg:sticky lg:top-28 space-y-8">
                 <div>
                     <div class="flex items-center justify-between mb-2">
-                        <span class="text-xs uppercase tracking-[0.2em] text-[#8A5A44] font-semibold"><?= htmlspecialchars($category_name) ?></span>
+                        <span class="text-xs uppercase tracking-[0.2em] text-[#8A5A44] font-semibold"><?= htmlspecialchars($categories[$product['category']]) ?></span>
                         <span class="text-xs text-[#6E6359]">SKU: <?= htmlspecialchars($sku) ?></span>
                     </div>
                     <h1 class="font-serif text-3xl sm:text-4xl font-normal tracking-tight text-[#362F2A]">
                         <?= htmlspecialchars($product['name']) ?>
                     </h1>
                     <div class="mt-4 flex items-baseline gap-3">
-                        <span class="text-2xl sm:text-3xl font-semibold text-[#362F2A] font-serif"><?= number_format($product['price']) ?> MMK</span>
+                        <span class="text-2xl sm:text-3xl font-semibold text-[#362F2A] font-serif"><?= number_format((int)$product['price']) ?> MMK</span>
                         <span class="text-xs text-[#6E6359] font-normal">Taxes &amp; 5-year structural warranty included</span>
                     </div>
                 </div>
@@ -147,7 +175,7 @@ $gallery_images = array_slice($gallery_images, 0, 4);
                 <!-- Tactile Editorial Description -->
                 <div class="prose text-sm text-[#6E6359] leading-relaxed border-t border-b border-[#C9C0B3] py-6 space-y-3">
                     <p>
-                        <?= nl2br(htmlspecialchars($product['description'] ?? 'An architectural design piece sculpted with meticulous attention to proportion, natural grain flow, and ergonomic comfort.')) ?>
+                        <?= !empty($product['description']) ? nl2br(htmlspecialchars($product['description'])) : 'An architectural design piece sculpted with meticulous attention to proportion, natural grain flow, and ergonomic comfort.' ?>
                     </p>
                     <p>
                         Finished with non-toxic, matte plant oils that protect the wood while allowing the natural breath and silky tactile warmth of the grain to be felt.
@@ -162,9 +190,15 @@ $gallery_images = array_slice($gallery_images, 0, 4);
                     <div class="space-y-2">
                         <div class="flex items-center justify-between text-xs">
                             <span class="font-medium text-[#362F2A]">Quantity</span>
-                            <span class="text-[#3F624D] font-medium flex items-center gap-1">
-                                <i class="ri-checkbox-circle-fill"></i> <?= (int)$product['stock'] ?> pieces in Yangon warehouse
-                            </span>
+                            <?php if ((int)$product['stock'] > 0): ?>
+                                <span class="text-[#3F624D] font-medium flex items-center gap-1">
+                                    <i class="ri-checkbox-circle-fill"></i> <?= (int)$product['stock'] ?> pieces in Yangon warehouse
+                                </span>
+                            <?php else: ?>
+                                <span class="text-[#8A5A44] font-medium flex items-center gap-1">
+                                    <i class="ri-time-line"></i> Crafted to order (4–6 weeks)
+                                </span>
+                            <?php endif; ?>
                         </div>
 
                         <div class="flex items-center gap-4">
@@ -262,7 +296,7 @@ $gallery_images = array_slice($gallery_images, 0, 4);
                     <div class="group bg-[#F6F3EE] rounded-3xl border border-[#C9C0B3] overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-[#8A5A44] flex flex-col justify-between">
                         <div class="relative w-full aspect-[4/3] bg-[#EDE8E0] border-b border-[#C9C0B3] overflow-hidden flex items-center justify-center">
                             <a href="product_detail.php?id=<?= (int)$rel['id'] ?>" class="w-full h-full block">
-                                <img src="images/<?= htmlspecialchars($rel['image']) ?>" alt="<?= htmlspecialchars($rel['name']) ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                                <img src="media/<?= htmlspecialchars($rel['image']) ?>" alt="<?= htmlspecialchars($rel['name']) ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
                             </a>
                         </div>
                         <div class="p-4">

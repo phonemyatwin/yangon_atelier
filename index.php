@@ -1,22 +1,4 @@
 <?php
-
-/**
- * ============================================================================
- * YANGON ATELIER BACKEND INSTRUCTION GUIDELINE - STOREFRONT HOMEPAGE
- * ============================================================================
- * FILE: index.php
- * PURPOSE: Showcases featured hero lookbooks, curated product masterpieces,
- *          craftsmanship narratives, and recent journal editorial essays.
-
- * 2. Query Curated Masterpiece Products:
- *    $product_stmt = $pdo->query("SELECT id, name, price, stock, image, category FROM products ORDER BY id DESC LIMIT 4");
- *    $featured_products = $product_stmt ? $product_stmt->fetchAll() : [];
- * 
- * 3. Query Recent Journal Articles:
- *    $blog_stmt = $pdo->query("SELECT id, title, author, image, content, category, created_at FROM blogs ORDER BY id DESC LIMIT 4");
- *    $recent_blogs = $blog_stmt ? $blog_stmt->fetchAll() : [];
- * ============================================================================
- */
 // Initialize session
 require_once __DIR__ . '/components/session_start.php';
 
@@ -29,13 +11,32 @@ require_once __DIR__ . '/components/connection.php';
 
 $errors = [];
 $products = [];
+$total_products = 0;
+$blogs = [];
+
+$categories = [
+    'chairs'  => 'Chairs & Seating',
+    'sofas'   => 'Sofas & Lounge',
+    'tables'  => 'Tables & Desks',
+    'beds'    => 'Beds & Tatami',
+    'objects' => 'Lighting & Objects'
+];
+
 try {
-    $sql = "SELECT * FROM products LIMIT 4";
-    $stmt = $pdo->query($sql);
+    $total_products = (int)$pdo->query("SELECT COUNT(*) FROM products")->fetchColumn();
+    $stmt = $pdo->query("SELECT * FROM products ORDER BY id DESC LIMIT 4");
     $products = $stmt->fetchAll();
 } catch (PDOException $e) {
     error_log("Product fetch error: " . $e->getMessage() . "\n", 3, __DIR__ . "/error.log");
     $errors['product'] = "Unable to retrieve products. Please try again later.";
+}
+
+try {
+    $blog_stmt = $pdo->query("SELECT * FROM blogs ORDER BY id DESC LIMIT 5");
+    $blogs = $blog_stmt->fetchAll();
+} catch (PDOException $e) {
+    error_log("Blog fetch error: " . $e->getMessage() . "\n", 3, __DIR__ . "/error.log");
+    $errors['blog'] = "Unable to retrieve journal articles. Please try again later.";
 }
 
 ?>
@@ -171,7 +172,7 @@ try {
                             Stained glass daylight illuminating carved walnut writing desks and woven damask armchairs engineered for contemplative grace.
                         </p>
                         <div class="flex flex-wrap items-center gap-4 pt-4">
-                            <a href="shop.php?category=workspace" class="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-[#8A5A44] hover:bg-[#704735] text-[#F6F3EE] font-semibold text-sm transition-all shadow-md hover:shadow-lg">
+                            <a href="shop.php?category=tables" class="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-[#8A5A44] hover:bg-[#704735] text-[#F6F3EE] font-semibold text-sm transition-all shadow-md hover:shadow-lg">
                                 <span>Explore Workspace</span>
                                 <i class="ri-arrow-right-line"></i>
                             </a>
@@ -213,8 +214,6 @@ try {
                     </div>
                 </div>
             </div>
-
-        </div>
 
         </div>
 
@@ -286,7 +285,7 @@ try {
             </a>
 
             <!-- Space 3: Workspace -->
-            <a href="shop.php?category=workspace" class="group relative rounded-3xl overflow-hidden aspect-[4/5] bg-[#F6F3EE] block shadow-md hover:shadow-xl transition-all duration-500 border border-[#C9C0B3] hover:border-[#8A5A44]">
+            <a href="shop.php?category=tables" class="group relative rounded-3xl overflow-hidden aspect-[4/5] bg-[#F6F3EE] block shadow-md hover:shadow-xl transition-all duration-500 border border-[#C9C0B3] hover:border-[#8A5A44]">
                 <img src="images/about/workshop1.jpg" alt="Workspace & Studio Architecture" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" loading="lazy">
                 <div class="absolute inset-0 bg-gradient-to-t from-[#362F2A]/90 via-[#362F2A]/30 to-transparent"></div>
                 <div class="absolute bottom-0 inset-x-0 p-8 text-white space-y-2">
@@ -312,139 +311,112 @@ try {
                 </div>
                 <div class="flex items-center gap-4">
                     <a href="shop.php" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#F6F3EE] hover:bg-[#EDE8E0] text-[#362F2A] text-xs font-semibold border border-[#C9C0B3] transition-colors shadow-xs">
-                        <span>Browse Entire Catalog (<?= htmlspecialchars(count($products)); ?> Pieces)</span>
+                        <span>Browse Entire Catalog (<?= (int)$total_products; ?> Pieces)</span>
                         <i class="ri-arrow-right-line text-[#8A5A44]"></i>
                     </a>
                 </div>
             </div>
 
-            <!-- PART A: HEROIC MASTERPIECE SPOTLIGHT -->
-            <div class="rounded-3xl bg-[#F6F3EE] border border-[#C9C0B3] overflow-hidden shadow-lg p-6 sm:p-10 lg:p-14">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-                    <!-- Masterpiece Image Bay -->
-                    <div class="lg:col-span-7 relative aspect-[4/3] rounded-2xl overflow-hidden bg-[#EDE8E0] border border-[#C9C0B3]">
-                        <img src="images/chairs/chair1.jpg" alt="Nordic Solid Wood Armchair" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="eager">
-                        <span class="absolute top-4 left-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-[#DCE5DF] text-[#3F624D] border border-[#C6D6CB] shadow-xs">
-                            <span class="w-1.5 h-1.5 rounded-full bg-[#3F624D]"></span>
-                            <span>Flagship Atelier Piece</span>
-                        </span>
-                    </div>
-
-                    <!-- Curatorial Dossier & Direct Acquisition -->
-                    <div class="lg:col-span-5 space-y-6">
-                        <div class="flex items-center gap-3">
-                            <span class="font-serif text-xs uppercase tracking-widest text-[#8A5A44] font-semibold">Acquisition № 01</span>
-                            <span class="h-px flex-1 bg-[#C9C0B3]"></span>
-                        </div>
-
-                        <h3 class="font-serif text-3xl sm:text-4xl font-normal text-[#362F2A] tracking-tight">
-                            <a href="product_detail.php?id=1" class="hover:text-[#8A5A44] transition-colors">Nordic Solid Wood Armchair</a>
-                        </h3>
-
-                        <p class="text-sm text-[#6E6359] leading-relaxed">
-                            A sculptural meditation in Danish ergonomics and Japanese joint assembly. Shaped from certified American walnut, with curved continuous armrests hand-planed to invite the palm's natural resting curvature.
-                        </p>
-
-                        <!-- Material Provenance Spec Ledger -->
-                        <div class="space-y-2 py-3 border-y border-[#C9C0B3] text-xs">
-                            <div class="flex items-center justify-between">
-                                <span class="text-[#6E6359]">Timber Species</span>
-                                <span class="text-[#362F2A] font-medium">American Walnut / Golden Teak</span>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <span class="text-[#6E6359]">Joinery Technique</span>
-                                <span class="text-[#362F2A] font-medium">Blind Mortise &amp; Tenon (Zero Fasteners)</span>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <span class="text-[#6E6359]">Upholstery</span>
-                                <span class="text-[#362F2A] font-medium">Natural Flax Linen Weave</span>
-                            </div>
-                        </div>
-
-                        <div class="flex items-baseline justify-between pt-2">
-                            <div>
-                                <span class="text-2xl font-serif font-semibold text-[#362F2A]">420,000 MMK</span>
-                                <span class="text-xs text-[#6E6359] block">White-glove Yangon installation included</span>
-                            </div>
-                            <a href="product_detail.php?id=1" class="px-6 py-3 rounded-xl bg-[#8A5A44] hover:bg-[#704735] text-[#F6F3EE] font-semibold text-xs transition-all shadow-sm hover:shadow-md">
-                                Acquire Piece
+            <?php if (!empty($products)): ?>
+                <?php
+                $spotlight = $products[0];
+                $spotlight_category = $categories[$spotlight['category']] ?? ucfirst($spotlight['category']);
+                $triptych_products = array_slice($products, 1, 3);
+                ?>
+                <!-- PART A: HEROIC MASTERPIECE SPOTLIGHT -->
+                <div class="rounded-3xl bg-[#F6F3EE] border border-[#C9C0B3] overflow-hidden shadow-lg p-6 sm:p-10 lg:p-14">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                        <!-- Masterpiece Image Bay -->
+                        <div class="lg:col-span-7 relative aspect-[4/3] rounded-2xl overflow-hidden bg-[#EDE8E0] border border-[#C9C0B3]">
+                            <a href="product_detail.php?id=<?= (int)$spotlight['id']; ?>" class="block w-full h-full">
+                                <img src="media/<?= htmlspecialchars($spotlight['image']); ?>" alt="<?= htmlspecialchars($spotlight['name']); ?>" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="eager">
                             </a>
+                            <span class="absolute top-4 left-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-[#DCE5DF] text-[#3F624D] border border-[#C6D6CB] shadow-xs">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#3F624D]"></span>
+                                <span><?= (int)$spotlight['stock'] > 0 ? 'Flagship Atelier Piece' : 'Crafted to Order' ?></span>
+                            </span>
+                        </div>
+
+                        <!-- Curatorial Dossier & Direct Acquisition -->
+                        <div class="lg:col-span-5 space-y-6">
+                            <div class="flex items-center gap-3">
+                                <span class="font-serif text-xs uppercase tracking-widest text-[#8A5A44] font-semibold">Acquisition № 01</span>
+                                <span class="h-px flex-1 bg-[#C9C0B3]"></span>
+                            </div>
+
+                            <h3 class="font-serif text-3xl sm:text-4xl font-normal text-[#362F2A] tracking-tight">
+                                <a href="product_detail.php?id=<?= (int)$spotlight['id']; ?>" class="hover:text-[#8A5A44] transition-colors"><?= htmlspecialchars($spotlight['name']); ?></a>
+                            </h3>
+
+                            <p class="text-sm text-[#6E6359] leading-relaxed line-clamp-4">
+                                <?= !empty($spotlight['description']) ? htmlspecialchars($spotlight['description']) : 'An architectural design piece sculpted with meticulous attention to proportion, natural grain flow, and ergonomic comfort.'; ?>
+                            </p>
+
+                            <!-- Material Provenance Spec Ledger -->
+                            <div class="space-y-2 py-3 border-y border-[#C9C0B3] text-xs">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-[#6E6359]">Collection</span>
+                                    <span class="text-[#362F2A] font-medium"><?= htmlspecialchars($spotlight_category); ?></span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-[#6E6359]">Joinery Technique</span>
+                                    <span class="text-[#362F2A] font-medium">Blind Mortise &amp; Tenon (Zero Fasteners)</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-[#6E6359]">Availability</span>
+                                    <span class="text-[#362F2A] font-medium"><?= (int)$spotlight['stock'] > 0 ? (int)$spotlight['stock'] . ' pieces in warehouse' : 'Made to order'; ?></span>
+                                </div>
+                            </div>
+
+                            <div class="flex items-baseline justify-between pt-2">
+                                <div>
+                                    <span class="text-2xl font-serif font-semibold text-[#362F2A]"><?= number_format((int)$spotlight['price']); ?> MMK</span>
+                                    <span class="text-xs text-[#6E6359] block">White-glove Yangon installation included</span>
+                                </div>
+                                <a href="product_detail.php?id=<?= (int)$spotlight['id']; ?>" class="px-6 py-3 rounded-xl bg-[#8A5A44] hover:bg-[#704735] text-[#F6F3EE] font-semibold text-xs transition-all shadow-sm hover:shadow-md">
+                                    Acquire Piece
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- PART B: CURATED SALON TRIPTYCH -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Companion 1: Curved Bouclé Lounge Chair -->
-                <article class="group rounded-2xl bg-[#F6F3EE] border border-[#C9C0B3] p-5 hover:border-[#8A5A44] transition-all duration-300 shadow-sm hover:shadow-md flex flex-col justify-between">
-                    <div>
-                        <div class="relative aspect-[4/3] rounded-xl overflow-hidden bg-[#EDE8E0] border border-[#C9C0B3] mb-5">
-                            <img src="images/chairs/chair2.jpg" alt="Curved Bouclé Lounge Chair" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
-                            <span class="absolute top-3 left-3 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-[#DFD8CD] text-[#362F2A] border border-[#C9C0B3]">
-                                Companion Piece
-                            </span>
-                        </div>
-                        <span class="text-[10px] uppercase tracking-wider text-[#8A5A44] font-semibold block mb-1">Salon Seating</span>
-                        <h4 class="font-serif text-lg font-normal text-[#362F2A] group-hover:text-[#8A5A44] transition-colors">
-                            <a href="product_detail.php?id=2">Curved Bouclé Lounge Chair</a>
-                        </h4>
+                <!-- PART B: CURATED SALON TRIPTYCH -->
+                <?php if (!empty($triptych_products)): ?>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <?php foreach ($triptych_products as $item): ?>
+                            <?php $item_category = $categories[$item['category']] ?? ucfirst($item['category']); ?>
+                            <article class="group rounded-2xl bg-[#F6F3EE] border border-[#C9C0B3] p-5 hover:border-[#8A5A44] transition-all duration-300 shadow-sm hover:shadow-md flex flex-col justify-between">
+                                <div>
+                                    <div class="relative aspect-[4/3] rounded-xl overflow-hidden bg-[#EDE8E0] border border-[#C9C0B3] mb-5">
+                                        <a href="product_detail.php?id=<?= (int)$item['id']; ?>" class="block w-full h-full">
+                                            <img src="media/<?= htmlspecialchars($item['image']); ?>" alt="<?= htmlspecialchars($item['name']); ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                                        </a>
+                                        <span class="absolute top-3 left-3 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-[#DFD8CD] text-[#362F2A] border border-[#C9C0B3]">
+                                            <?= (int)$item['stock'] > 0 ? 'In Stock' : 'Crafted to Order' ?>
+                                        </span>
+                                    </div>
+                                    <span class="text-[10px] uppercase tracking-wider text-[#8A5A44] font-semibold block mb-1"><?= htmlspecialchars($item_category); ?></span>
+                                    <h4 class="font-serif text-lg font-normal text-[#362F2A] group-hover:text-[#8A5A44] transition-colors">
+                                        <a href="product_detail.php?id=<?= (int)$item['id']; ?>"><?= htmlspecialchars($item['name']); ?></a>
+                                    </h4>
+                                </div>
+                                <div class="pt-4 border-t border-[#C9C0B3] mt-4 flex items-center justify-between text-xs">
+                                    <span class="font-serif font-medium text-[#362F2A]"><?= number_format((int)$item['price']); ?> MMK</span>
+                                    <a href="product_detail.php?id=<?= (int)$item['id']; ?>" class="text-[#8A5A44] hover:text-[#704735] font-medium flex items-center gap-1">
+                                        <span>Details</span>
+                                        <i class="ri-arrow-right-line"></i>
+                                    </a>
+                                </div>
+                            </article>
+                        <?php endforeach; ?>
                     </div>
-                    <div class="pt-4 border-t border-[#C9C0B3] mt-4 flex items-center justify-between text-xs">
-                        <span class="font-serif font-medium text-[#362F2A]">550,000 MMK</span>
-                        <a href="product_detail.php?id=2" class="text-[#8A5A44] hover:text-[#704735] font-medium flex items-center gap-1">
-                            <span>Details</span>
-                            <i class="ri-arrow-right-line"></i>
-                        </a>
-                    </div>
-                </article>
-
-                <!-- Companion 2: Organic Bouclé Modular Sofa -->
-                <article class="group rounded-2xl bg-[#F6F3EE] border border-[#C9C0B3] p-5 hover:border-[#8A5A44] transition-all duration-300 shadow-sm hover:shadow-md flex flex-col justify-between">
-                    <div>
-                        <div class="relative aspect-[4/3] rounded-xl overflow-hidden bg-[#EDE8E0] border border-[#C9C0B3] mb-5">
-                            <img src="images/couches/couch1.jpg" alt="Organic Bouclé Modular Sofa" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
-                            <span class="absolute top-3 left-3 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-[#DFD8CD] text-[#362F2A] border border-[#C9C0B3]">
-                                Living Hearth
-                            </span>
-                        </div>
-                        <span class="text-[10px] uppercase tracking-wider text-[#8A5A44] font-semibold block mb-1">Sofas &amp; Sectionals</span>
-                        <h4 class="font-serif text-lg font-normal text-[#362F2A] group-hover:text-[#8A5A44] transition-colors">
-                            <a href="product_detail.php?id=7">Organic Bouclé Modular Sofa</a>
-                        </h4>
-                    </div>
-                    <div class="pt-4 border-t border-[#C9C0B3] mt-4 flex items-center justify-between text-xs">
-                        <span class="font-serif font-medium text-[#362F2A]">1,850,000 MMK</span>
-                        <a href="product_detail.php?id=7" class="text-[#8A5A44] hover:text-[#704735] font-medium flex items-center gap-1">
-                            <span>Details</span>
-                            <i class="ri-arrow-right-line"></i>
-                        </a>
-                    </div>
-                </article>
-
-                <!-- Companion 3: Sculptural Teak Credenza -->
-                <article class="group rounded-2xl bg-[#F6F3EE] border border-[#C9C0B3] p-5 hover:border-[#8A5A44] transition-all duration-300 shadow-sm hover:shadow-md flex flex-col justify-between">
-                    <div>
-                        <div class="relative aspect-[4/3] rounded-xl overflow-hidden bg-[#EDE8E0] border border-[#C9C0B3] mb-5">
-                            <img src="images/tables/table1.jpg" alt="Sculptural Teak Credenza" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
-                            <span class="absolute top-3 left-3 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-[#DFD8CD] text-[#362F2A] border border-[#C9C0B3]">
-                                Dining Centerpiece
-                            </span>
-                        </div>
-                        <span class="text-[10px] uppercase tracking-wider text-[#8A5A44] font-semibold block mb-1">Cabinetry &amp; Credenzas</span>
-                        <h4 class="font-serif text-lg font-normal text-[#362F2A] group-hover:text-[#8A5A44] transition-colors">
-                            <a href="product_detail.php?id=8">Sculptural Teak Credenza</a>
-                        </h4>
-                    </div>
-                    <div class="pt-4 border-t border-[#C9C0B3] mt-4 flex items-center justify-between text-xs">
-                        <span class="font-serif font-medium text-[#362F2A]">1,450,000 MMK</span>
-                        <a href="product_detail.php?id=8" class="text-[#8A5A44] hover:text-[#704735] font-medium flex items-center gap-1">
-                            <span>Details</span>
-                            <i class="ri-arrow-right-line"></i>
-                        </a>
-                    </div>
-                </article>
-            </div>
+                <?php endif; ?>
+            <?php else: ?>
+                <div class="text-center py-16 bg-[#F6F3EE] rounded-3xl border border-[#C9C0B3]">
+                    <p class="text-[#6E6359] text-sm">Curated atelier pieces will be unveiled shortly.</p>
+                </div>
+            <?php endif; ?>
 
         </div>
     </section>
@@ -498,88 +470,85 @@ try {
             </a>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
+        <?php if (!empty($blogs)): ?>
+            <?php
+            $lead_blog = $blogs[0];
+            $recent_dispatches = array_slice($blogs, 1, 4);
+            $lead_date = !empty($lead_blog['created_at']) ? date('M j, Y', strtotime($lead_blog['created_at'])) : 'Atelier Dispatch';
+            $word_count = str_word_count(strip_tags($lead_blog['content'] ?? ''));
+            $read_mins = max(1, (int)ceil($word_count / 200));
+            ?>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
 
-            <!-- LEFT: FEATURED LEAD EDITORIAL STORY -->
-            <article class="lg:col-span-7 rounded-3xl bg-[#F6F3EE] border border-[#C9C0B3] overflow-hidden shadow-md hover:shadow-xl hover:border-[#8A5A44] transition-all flex flex-col justify-between group">
-                <a href="blog_detail.php?id=1" class="relative aspect-[16/10] overflow-hidden bg-[#EDE8E0] block border-b border-[#C9C0B3]">
-                    <img src="images/blogs/blog1.jpg" alt="The Philosophy of Wabi-Sabi in Modern Interiors" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
-                    <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-[11px] font-semibold bg-[#DFD8CD] text-[#362F2A] border border-[#C9C0B3]">
-                        Lead Editorial Essay
-                    </span>
-                </a>
-                <div class="p-8 space-y-4">
-                    <div class="flex items-center gap-3 text-xs text-[#6E6359]">
-                        <span>May 21, 2026</span>
-                        <span class="w-1 h-1 rounded-full bg-[#C9C0B3]"></span>
-                        <span>4 min read</span>
-                        <span class="w-1 h-1 rounded-full bg-[#C9C0B3]"></span>
-                        <span class="text-[#8A5A44] font-medium">Atelier Editorial</span>
+                <!-- LEFT: FEATURED LEAD EDITORIAL STORY -->
+                <article class="lg:col-span-7 rounded-3xl bg-[#F6F3EE] border border-[#C9C0B3] overflow-hidden shadow-md hover:shadow-xl hover:border-[#8A5A44] transition-all flex flex-col justify-between group">
+                    <a href="blog_detail.php?id=<?= (int)$lead_blog['id']; ?>" class="relative aspect-[16/10] overflow-hidden bg-[#EDE8E0] block border-b border-[#C9C0B3]">
+                        <img src="media/<?= htmlspecialchars($lead_blog['image']); ?>" alt="<?= htmlspecialchars($lead_blog['title']); ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                        <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-[11px] font-semibold bg-[#DFD8CD] text-[#362F2A] border border-[#C9C0B3]">
+                            Lead Editorial Essay
+                        </span>
+                    </a>
+                    <div class="p-8 space-y-4">
+                        <div class="flex items-center gap-3 text-xs text-[#6E6359]">
+                            <span><?= htmlspecialchars($lead_date); ?></span>
+                            <span class="w-1 h-1 rounded-full bg-[#C9C0B3]"></span>
+                            <span><?= $read_mins; ?> min read</span>
+                            <span class="w-1 h-1 rounded-full bg-[#C9C0B3]"></span>
+                            <span class="text-[#8A5A44] font-medium"><?= htmlspecialchars($lead_blog['category'] ?? 'Atelier Editorial'); ?></span>
+                        </div>
+                        <h3 class="font-serif text-2xl sm:text-3xl font-normal text-[#362F2A] group-hover:text-[#8A5A44] transition-colors leading-snug">
+                            <a href="blog_detail.php?id=<?= (int)$lead_blog['id']; ?>"><?= htmlspecialchars($lead_blog['title']); ?></a>
+                        </h3>
+                        <p class="text-sm text-[#6E6359] leading-relaxed line-clamp-3">
+                            <?= htmlspecialchars(mb_substr(trim(strip_tags($lead_blog['content'] ?? '')), 0, 220)) ?>...
+                        </p>
+                        <div class="pt-4 border-t border-[#C9C0B3] flex items-center justify-between">
+                            <a href="blog_detail.php?id=<?= (int)$lead_blog['id']; ?>" class="text-xs font-semibold uppercase tracking-wider text-[#8A5A44] hover:text-[#704735] inline-flex items-center gap-1.5 transition-colors">
+                                <span>Read Full Essay</span>
+                                <i class="ri-arrow-right-line"></i>
+                            </a>
+                        </div>
                     </div>
-                    <h3 class="font-serif text-2xl sm:text-3xl font-normal text-[#362F2A] group-hover:text-[#8A5A44] transition-colors leading-snug">
-                        <a href="blog_detail.php?id=1">The Philosophy of Wabi-Sabi in Modern Domestic Interiors</a>
-                    </h3>
-                    <p class="text-sm text-[#6E6359] leading-relaxed line-clamp-3">
-                        How embracing natural grain knots, textured unbleached linens, and imperfect clay forms fosters an enduring sanctuary within contemporary urban homes.
-                    </p>
-                    <div class="pt-4 border-t border-[#C9C0B3] flex items-center justify-between">
-                        <a href="blog_detail.php?id=1" class="text-xs font-semibold uppercase tracking-wider text-[#8A5A44] hover:text-[#704735] inline-flex items-center gap-1.5 transition-colors">
-                            <span>Read Full Essay</span>
+                </article>
+
+                <!-- RIGHT: CHRONOLOGICAL DISPATCHES LEDGER -->
+                <div class="lg:col-span-5 rounded-3xl bg-[#F6F3EE] border border-[#C9C0B3] p-8 shadow-md flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs uppercase tracking-widest text-[#8A5A44] font-semibold block mb-6">Recent Atelier Dispatches</span>
+
+                        <?php if (!empty($recent_dispatches)): ?>
+                            <div class="divide-y divide-[#C9C0B3]">
+                                <?php foreach ($recent_dispatches as $dispatch): ?>
+                                    <?php $dispatch_date = !empty($dispatch['created_at']) ? date('M j, Y', strtotime($dispatch['created_at'])) : 'Atelier'; ?>
+                                    <article class="py-5 first:pt-0 last:pb-0 group">
+                                        <span class="text-[10px] text-[#6E6359] uppercase tracking-wider block mb-1">
+                                            <?= htmlspecialchars($dispatch_date); ?> &bull; By <?= htmlspecialchars($dispatch['author'] ?? 'Atelier Editorial'); ?>
+                                        </span>
+                                        <h4 class="font-serif text-base font-normal text-[#362F2A] group-hover:text-[#8A5A44] transition-colors">
+                                            <a href="blog_detail.php?id=<?= (int)$dispatch['id']; ?>"><?= htmlspecialchars($dispatch['title']); ?></a>
+                                        </h4>
+                                    </article>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php else: ?>
+                            <p class="text-xs text-[#6E6359]">More dispatches coming soon.</p>
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="pt-6 border-t border-[#C9C0B3] mt-6">
+                        <a href="blog.php" class="text-xs uppercase tracking-wider text-[#8A5A44] hover:text-[#704735] font-semibold flex items-center justify-between transition-colors">
+                            <span>Explore All Journal Archives</span>
                             <i class="ri-arrow-right-line"></i>
                         </a>
                     </div>
                 </div>
-            </article>
 
-            <!-- RIGHT: CHRONOLOGICAL DISPATCHES LEDGER -->
-            <div class="lg:col-span-5 rounded-3xl bg-[#F6F3EE] border border-[#C9C0B3] p-8 shadow-md flex flex-col justify-between">
-                <div>
-                    <span class="text-xs uppercase tracking-widest text-[#8A5A44] font-semibold block mb-6">Recent Atelier Dispatches</span>
-
-                    <div class="divide-y divide-[#C9C0B3]">
-                        <!-- Dispatch 1 -->
-                        <article class="py-5 first:pt-0 group">
-                            <span class="text-[10px] text-[#6E6359] uppercase tracking-wider block mb-1">Apr 28, 2026 • By Su Thinzar Htet</span>
-                            <h4 class="font-serif text-base font-normal text-[#362F2A] group-hover:text-[#8A5A44] transition-colors">
-                                <a href="blog_detail.php?id=2">Sustainable Forestry: Sourcing Reclaimed Teak &amp; Oak</a>
-                            </h4>
-                        </article>
-
-                        <!-- Dispatch 2 -->
-                        <article class="py-5 group">
-                            <span class="text-[10px] text-[#6E6359] uppercase tracking-wider block mb-1">Apr 14, 2026 • By Thae Nay Nwe Soe</span>
-                            <h4 class="font-serif text-base font-normal text-[#362F2A] group-hover:text-[#8A5A44] transition-colors">
-                                <a href="blog_detail.php?id=3">Lighting Architecture: Sculpting Shadow and Warmth</a>
-                            </h4>
-                        </article>
-
-                        <!-- Dispatch 3 -->
-                        <article class="py-5 group">
-                            <span class="text-[10px] text-[#6E6359] uppercase tracking-wider block mb-1">Mar 30, 2026 • By Phone Myat Win</span>
-                            <h4 class="font-serif text-base font-normal text-[#362F2A] group-hover:text-[#8A5A44] transition-colors">
-                                <a href="blog_detail.php?id=6">The Palette of Quietude: Earth Pigments in Living Spaces</a>
-                            </h4>
-                        </article>
-
-                        <!-- Dispatch 4 -->
-                        <article class="py-5 last:pb-0 group">
-                            <span class="text-[10px] text-[#6E6359] uppercase tracking-wider block mb-1">Mar 18, 2026 • By Nyi Nyi Aung</span>
-                            <h4 class="font-serif text-base font-normal text-[#362F2A] group-hover:text-[#8A5A44] transition-colors">
-                                <a href="blog_detail.php?id=5">Botanical Plant Waxes: Caring for Solid Wood</a>
-                            </h4>
-                        </article>
-                    </div>
-                </div>
-
-                <div class="pt-6 border-t border-[#C9C0B3] mt-6">
-                    <a href="blog.php" class="text-xs uppercase tracking-wider text-[#8A5A44] hover:text-[#704735] font-semibold flex items-center justify-between transition-colors">
-                        <span>Explore All Journal Archives</span>
-                        <i class="ri-arrow-right-line"></i>
-                    </a>
-                </div>
             </div>
-
-        </div>
+        <?php else: ?>
+            <div class="text-center py-16 bg-[#F6F3EE] rounded-3xl border border-[#C9C0B3]">
+                <p class="text-[#6E6359] text-sm">Journal essays will be published shortly.</p>
+            </div>
+        <?php endif; ?>
     </section>
 
     <?php include "components/footer.php"; ?>
