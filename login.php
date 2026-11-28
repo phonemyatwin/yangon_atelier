@@ -11,7 +11,7 @@ if (isset($_SESSION['user'])) {
 // Connect database
 require_once __DIR__ . '/components/connection.php';
 
-$errors = [];
+$error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
     $email = strtolower(trim($_POST['email'] ?? ''));
@@ -21,10 +21,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
     $sql = 'SELECT * FROM users WHERE email = :email LIMIT 1';
     $stmt = $pdo->prepare($sql);
     $stmt->execute([':email' => $email]);
-    $_SESSION['user'] = $stmt->fetch();
+    $user = $stmt->fetch();
 
     // I check all of the credentials in a single if statement and output only one error information as I've learnt that it is the industry standard to prevent the malicious attack called User Enumeration(Account Harvesting).
-    if ($_SESSION['user'] && !empty($password) && password_verify($password, $_SESSION['user']['password'])) {
+    if ($user && !empty($password) && password_verify($password, $user['password'])) {
 
         // Regenerate new session id to prevent malicious attack called Session Fixation(session hijacking).
         session_regenerate_id(true);
@@ -49,16 +49,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
             ]);
         }
         $_SESSION['user'] = [
-            'id' => $_SESSION['user']['id'],
-            'name' => $_SESSION['user']['name'],
-            'email' => $_SESSION['user']['email']
+            'id' => $user['id'],
+            'name' => $user['name'],
+            'email' => $user['email']
         ];
 
         $_SESSION['success'] = 'Welcome back! ' . $_SESSION['user']['name'];
         header('Location: index.php');
         exit;
     } else {
-        $errors['login'] = 'The login information you entered is incorrect. Please try again.';
+        $error = 'The login information you entered is incorrect. Please try again.';
     }
 }
 
@@ -178,10 +178,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
     <?php endif; ?>
 
     <!-- Errors -->
-    <?php if (!empty($errors)): ?>
+    <?php if (!empty($error)): ?>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                showToast(<?= json_encode($errors['login']); ?>, 'error');
+                showToast(<?= json_encode($error); ?>, 'error');
             });
         </script>
     <?php endif; ?>
